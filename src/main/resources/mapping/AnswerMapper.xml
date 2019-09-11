@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mac.demo.mapper.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.mac.demo.model.Answer" >
+    <id column="answer_id" property="answerId" jdbcType="INTEGER" />
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="paper_id" property="paperId" jdbcType="INTEGER" />
+    <result column="select_answer" property="selectAnswer" jdbcType="VARCHAR" />
+    <result column="completion_answer" property="completionAnswer" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    answer_id, student_id, paper_id, select_answer, completion_answer, state, score, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mac.demo.model.Answer" >
+    insert into answer (answer_id, student_id, paper_id, 
+      select_answer, completion_answer, state, 
+      score, create_time)
+    values (#{answerId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, 
+      #{selectAnswer,jdbcType=VARCHAR}, #{completionAnswer,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{score,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mac.demo.model.Answer" >
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="answerId != null" >
+        answer_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="paperId != null" >
+        paper_id,
+      </if>
+      <if test="selectAnswer != null" >
+        select_answer,
+      </if>
+      <if test="completionAnswer != null" >
+        completion_answer,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="answerId != null" >
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null" >
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="selectAnswer != null" >
+        #{selectAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="completionAnswer != null" >
+        #{completionAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mac.demo.model.Answer" >
+    update answer
+    <set >
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null" >
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="selectAnswer != null" >
+        select_answer = #{selectAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="completionAnswer != null" >
+        completion_answer = #{completionAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mac.demo.model.Answer" >
+    update answer
+    set student_id = #{studentId,jdbcType=INTEGER},
+      paper_id = #{paperId,jdbcType=INTEGER},
+      select_answer = #{selectAnswer,jdbcType=VARCHAR},
+      completion_answer = #{completionAnswer,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+</mapper>
