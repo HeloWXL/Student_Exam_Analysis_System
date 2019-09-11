@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Paper;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface PaperMapper {
+@Mapper
+public interface PaperMapper extends BaseMapper<Paper> {
     int deleteByPrimaryKey(Integer paperId);
-
-    int insert(Paper record);
 
     int insertSelective(Paper record);
 

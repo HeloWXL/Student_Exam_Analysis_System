@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Test;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface TestMapper {
+@Mapper
+public interface TestMapper extends BaseMapper<Test> {
     int deleteByPrimaryKey(Integer testId);
-
-    int insert(Test record);
 
     int insertSelective(Test record);
 

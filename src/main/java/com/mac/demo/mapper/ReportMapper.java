@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Report;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface ReportMapper {
+@Mapper
+public interface ReportMapper extends BaseMapper<Report> {
     int deleteByPrimaryKey(Integer reportId);
-
-    int insert(Report record);
 
     int insertSelective(Report record);
 

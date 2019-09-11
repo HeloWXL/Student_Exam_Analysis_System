@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Type;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface TypeMapper {
+@Mapper
+public interface TypeMapper extends BaseMapper<Type> {
     int deleteByPrimaryKey(Integer typeId);
-
-    int insert(Type record);
 
     int insertSelective(Type record);
 

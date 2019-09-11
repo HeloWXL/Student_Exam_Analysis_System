@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Admin;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface AdminMapper {
+@Mapper
+public interface AdminMapper extends BaseMapper<Admin> {
     int deleteByPrimaryKey(Integer adminId);
-
-    int insert(Admin record);
 
     int insertSelective(Admin record);
 

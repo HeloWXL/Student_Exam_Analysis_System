@@ -1,7 +1,13 @@
 package com.mac.demo.model;
 
+import lombok.Data;
+
 import java.util.Date;
 
+/**
+ * 考试实体类
+ */
+@Data
 public class Test {
     private Integer testId;
 
@@ -13,43 +19,4 @@ public class Test {
 
     private Date createTime;
 
-    public Integer getTestId() {
-        return testId;
-    }
-
-    public void setTestId(Integer testId) {
-        this.testId = testId;
-    }
-
-    public String getTestName() {
-        return testName;
-    }
-
-    public void setTestName(String testName) {
-        this.testName = testName == null ? null : testName.trim();
-    }
-
-    public Integer getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public void setTime(Integer time) {
-        this.time = time;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

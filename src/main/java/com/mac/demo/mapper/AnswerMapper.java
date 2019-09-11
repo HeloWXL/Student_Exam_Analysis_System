@@ -1,11 +1,13 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.mac.demo.model.Admin;
 import com.mac.demo.model.Answer;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface AnswerMapper {
+@Mapper
+public interface AnswerMapper extends BaseMapper<Answer> {
     int deleteByPrimaryKey(Integer answerId);
-
-    int insert(Answer record);
 
     int insertSelective(Answer record);
 

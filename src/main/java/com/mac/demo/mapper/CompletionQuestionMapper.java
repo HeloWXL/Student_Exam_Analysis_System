@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.CompletionQuestion;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface CompletionQuestionMapper {
+@Mapper
+public interface CompletionQuestionMapper extends BaseMapper<CompletionQuestion> {
     int deleteByPrimaryKey(Integer completionId);
-
-    int insert(CompletionQuestion record);
 
     int insertSelective(CompletionQuestion record);
 

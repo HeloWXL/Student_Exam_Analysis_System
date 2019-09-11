@@ -1,7 +1,13 @@
 package com.mac.demo.model;
 
+import lombok.Data;
+
 import java.util.Date;
 
+/**
+ * 学生实体类
+ */
+@Data
 public class Student {
     private Integer studentId;
 
@@ -12,44 +18,4 @@ public class Student {
     private String studentPassword;
 
     private Date createTime;
-
-    public Integer getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getStudentPhone() {
-        return studentPhone;
-    }
-
-    public void setStudentPhone(String studentPhone) {
-        this.studentPhone = studentPhone == null ? null : studentPhone.trim();
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName == null ? null : studentName.trim();
-    }
-
-    public String getStudentPassword() {
-        return studentPassword;
-    }
-
-    public void setStudentPassword(String studentPassword) {
-        this.studentPassword = studentPassword == null ? null : studentPassword.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

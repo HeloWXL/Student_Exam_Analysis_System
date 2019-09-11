@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.SelectQuestion;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface SelectQuestionMapper {
+@Mapper
+public interface SelectQuestionMapper extends BaseMapper<SelectQuestion> {
     int deleteByPrimaryKey(Integer selectId);
-
-    int insert(SelectQuestion record);
 
     int insertSelective(SelectQuestion record);
 

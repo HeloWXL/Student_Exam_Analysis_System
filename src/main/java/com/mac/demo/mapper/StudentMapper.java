@@ -1,11 +1,12 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Student;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface StudentMapper {
+@Mapper
+public interface StudentMapper extends BaseMapper<Student> {
     int deleteByPrimaryKey(Integer studentId);
-
-    int insert(Student record);
 
     int insertSelective(Student record);
 
