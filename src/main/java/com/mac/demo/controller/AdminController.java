@@ -2,6 +2,7 @@ package com.mac.demo.controller;
 
 import com.mac.demo.service.AdminService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,4 +20,17 @@ import javax.annotation.Resource;
 public class AdminController {
     @Resource
     private AdminService adminService;
+
+    @ApiOperation("教师首页")
+    @RequestMapping("/toIndex")
+    public String toIndex(){
+        return "admin/index";
+    }
+
+    @ApiOperation("教师登录页面")
+    @RequestMapping("/toLogin")
+    public String toLogin(){
+        return "admin/login";
+    }
+
 }
