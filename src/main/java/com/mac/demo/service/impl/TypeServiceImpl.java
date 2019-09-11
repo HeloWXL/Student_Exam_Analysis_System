@@ -1,6 +1,5 @@
 package com.mac.demo.service.impl;
 
-import com.mac.demo.mapper.TypeMapper;
 import com.mac.demo.service.TypeService;
 import org.springframework.stereotype.Service;
 

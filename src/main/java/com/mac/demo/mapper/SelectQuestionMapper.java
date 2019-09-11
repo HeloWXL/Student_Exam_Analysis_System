@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SelectQuestionMapper extends BaseMapper<SelectQuestion> {
     int deleteByPrimaryKey(Integer selectId);
 
+
     int insertSelective(SelectQuestion record);
 
     SelectQuestion selectByPrimaryKey(Integer selectId);

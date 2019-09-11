@@ -4,11 +4,10 @@
   <resultMap id="BaseResultMap" type="com.mac.demo.model.Type" >
     <id column="type_id" property="typeId" jdbcType="INTEGER" />
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
-    <result column="level" property="level" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    type_id, type_name, level, create_time
+    type_id, type_name, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -21,10 +20,10 @@
     where type_id = #{typeId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mac.demo.model.Type" >
-    insert into type (type_id, type_name, level, 
-      create_time)
-    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP})
+    insert into type (type_id, type_name, create_time
+      )
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.mac.demo.model.Type" >
     insert into type
@@ -34,9 +33,6 @@
       </if>
       <if test="typeName != null" >
         type_name,
-      </if>
-      <if test="level != null" >
-        level,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -49,9 +45,6 @@
       <if test="typeName != null" >
         #{typeName,jdbcType=VARCHAR},
       </if>
-      <if test="level != null" >
-        #{level,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -63,9 +56,6 @@
       <if test="typeName != null" >
         type_name = #{typeName,jdbcType=VARCHAR},
       </if>
-      <if test="level != null" >
-        level = #{level,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -75,7 +65,6 @@
   <update id="updateByPrimaryKey" parameterType="com.mac.demo.model.Type" >
     update type
     set type_name = #{typeName,jdbcType=VARCHAR},
-      level = #{level,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>

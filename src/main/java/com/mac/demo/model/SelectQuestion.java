@@ -3,10 +3,6 @@ package com.mac.demo.model;
 import lombok.Data;
 
 import java.util.Date;
-
-/**
- * 选择题实体类
- */
 @Data
 public class SelectQuestion {
     private Integer selectId;
@@ -28,4 +24,9 @@ public class SelectQuestion {
     private String answer;
 
     private Date createTime;
+
+    private String knowledge;
+
+    private Integer level;
+
 }

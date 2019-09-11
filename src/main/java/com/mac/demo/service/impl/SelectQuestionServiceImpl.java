@@ -1,6 +1,5 @@
 package com.mac.demo.service.impl;
 
-import com.mac.demo.mapper.SelectQuestionMapper;
 import com.mac.demo.service.SelectQuestionService;
 import org.springframework.stereotype.Service;
 

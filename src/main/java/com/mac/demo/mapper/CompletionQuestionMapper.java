@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CompletionQuestionMapper extends BaseMapper<CompletionQuestion> {
     int deleteByPrimaryKey(Integer completionId);
 
+
     int insertSelective(CompletionQuestion record);
 
     CompletionQuestion selectByPrimaryKey(Integer completionId);
