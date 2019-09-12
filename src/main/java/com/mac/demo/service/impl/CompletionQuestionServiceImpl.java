@@ -1,5 +1,6 @@
 package com.mac.demo.service.impl;
 
+import com.mac.demo.mapper.CompletionQuestionMapper;
 import com.mac.demo.service.CompletionQuestionService;
 import org.springframework.stereotype.Service;
 

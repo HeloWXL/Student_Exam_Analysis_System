@@ -1,11 +1,13 @@
 package com.mac.demo.controller;
 
+import com.mac.demo.service.CompletionQuestionService;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.util.concurrent.CompletionService;
+
+
 
 /**
  * @Classname CompletionQuestionController
@@ -18,5 +20,5 @@ import java.util.concurrent.CompletionService;
 @Controller
 public class CompletionQuestionController {
     @Resource
-    private CompletionService completionService;
+    private CompletionQuestionService completionQuestionService;
 }

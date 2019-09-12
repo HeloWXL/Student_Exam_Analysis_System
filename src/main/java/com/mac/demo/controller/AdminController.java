@@ -1,12 +1,15 @@
 package com.mac.demo.controller;
 
+import com.mac.demo.model.Admin;
+import com.mac.demo.model.Student;
 import com.mac.demo.service.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Classname AdminController
@@ -21,16 +24,79 @@ public class AdminController {
     @Resource
     private AdminService adminService;
 
-    @ApiOperation("教师首页")
-    @RequestMapping("/toIndex")
+    @ApiOperation("管理员首页")
+    @GetMapping("/toIndex")
     public String toIndex(){
         return "admin/index";
     }
 
-    @ApiOperation("教师登录页面")
-    @RequestMapping("/toLogin")
+    @ApiOperation("管理员登录页面")
+    @GetMapping("/toLogin")
     public String toLogin(){
         return "admin/login";
     }
+
+
+    /**
+     * 修改管理员密码
+     * @param passWord
+     * @return
+     */
+    @ApiOperation("管理员修改密码")
+    @PostMapping("/changePassWord")
+    @ResponseBody
+    public int changePassWord(@RequestParam("passWord") String passWord,HttpServletRequest request) {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        return adminService.changePassWord(passWord,admin.getAdminId());
+    }
+
+    /**
+     * 管理员登录
+     * @param adminName
+     * @return
+     */
+    @ApiOperation("管理员登录")
+    @PostMapping("/checkLogin")
+    @ResponseBody
+    public String checkLogin(@RequestParam("adminName") String adminName, @RequestParam("password") String password,
+                            HttpServletRequest request) {
+        if(adminService.checkLogin(adminName).getAdminPassword().equals(password)){
+            Admin admin = adminService.checkLogin(password);
+            request.getSession().setAttribute("admin",admin);
+            return "success";
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * 从session中获取管理员对象
+     * @param request
+     * @param adminBean
+     * @return
+     */
+    @ApiOperation(value = "获取管理员的session对象")
+    @PostMapping("/getStudentSession")
+    public Admin getStudentSession(HttpServletRequest request, @RequestParam("adminBean") String adminBean){
+        Admin admin = (Admin) request.getSession().getAttribute(adminBean);
+        if (admin == null) {
+            return null;
+        } else {
+            return admin;
+        }
+    }
+
+    /**
+     * 添加管理员
+     * @param admin
+     * @return
+     */
+    @ApiOperation("添加管理员")
+    @PostMapping("/insertAdmin")
+    @ResponseBody
+    public int insertSelective(@RequestBody Admin admin) {
+        return adminService.insertSelective(admin);
+    }
+
 
 }

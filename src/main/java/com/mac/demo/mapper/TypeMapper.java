@@ -14,5 +14,4 @@ public interface TypeMapper extends BaseMapper<Type> {
 
     int updateByPrimaryKeySelective(Type record);
 
-    int updateByPrimaryKey(Type record);
 }
