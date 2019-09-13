@@ -23,12 +23,17 @@ public class StudentController {
     @Resource
     private StudentService studentService;
 
-    @ApiOperation("学生登录页面")
+    @ApiOperation("学生未登录首页页面")
+    @GetMapping("/toNoIndex")
+    public String toNoIndex(){
+        return "student/no_index";
+    }
+
+    @ApiOperation("学生首页页面")
     @GetMapping("/toIndex")
     public String toIndex(){
         return "student/index";
     }
-
 
     @ApiOperation("学生登录页面")
     @GetMapping("/toLogin")
@@ -50,13 +55,14 @@ public class StudentController {
 
     /**
      * 学生注册
-     * @param record
+     * @param student
      * @return
      */
     @ApiOperation("学生注册")
     @PostMapping("/insertStudent")
-    public int insertSelective(@RequestBody Student record) {
-        return studentService.insertSelective(record);
+    @ResponseBody
+    public int insertSelective(@RequestBody Student student) {
+        return studentService.insertSelective(student);
     }
 
     /**
@@ -66,14 +72,15 @@ public class StudentController {
      * @param request
      * @return
      */
-    @ApiOperation("学生注册")
+    @ApiOperation("学生登录")
     @PostMapping("/checkLogin")
+    @ResponseBody
     public String checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
             HttpServletRequest request) {
         if(studentService.checkLogin(phone).getStudentPassword().equals(password)){
             Student student = studentService.checkLogin(password);
             request.getSession().setAttribute("student",student);
-            return "success";
+            return "1";
         }else{
             return null;
         }
@@ -87,6 +94,7 @@ public class StudentController {
      */
     @ApiOperation(value = "获取学生的session对象")
     @PostMapping("/getStudentSession")
+    @ResponseBody
     public Student getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean){
         Student student = (Student) request.getSession().getAttribute(studentBean);
         if (student == null) {
@@ -103,6 +111,7 @@ public class StudentController {
      */
     @ApiOperation(value = "修改学生密码")
     @PostMapping("/updateStudentPassword")
+    @ResponseBody
     public int changePassWord(@RequestParam("password") String passWord,HttpServletRequest request) {
         Student student = (Student) request.getSession().getAttribute("student");
         return studentService.changePassWord(passWord,student.getStudentId());
