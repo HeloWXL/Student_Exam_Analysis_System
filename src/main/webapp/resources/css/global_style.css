@@ -1,0 +1,125 @@
+/*全局配色样式
+* 命名规则：
+* -n nav -h header -l logo
+*/
+.nav-child-item *{
+	color: #666 !important;
+}
+
+/*暗黑*/
+.tpl-black-n .tpl-left-sidebar{
+	background: #20222a !important;
+}
+.tpl-black-n .tpl-left-sidebar *{
+	color: #fff !important;
+}
+
+.tpl-black-hn .tpl-left-sidebar{
+	background: #20222a !important;
+}
+.tpl-black-hn .tpl-left-sidebar *{
+	color: #fff !important;
+}
+.tpl-black-hn .tpl-black-fluid{
+	background: #393D49 !important;
+}
+.tpl-black-hn .tpl-black-fluid *{
+	color: #fff !important;
+}
+
+/*黑红*/
+.tpl-blackred-hn .tpl-left-sidebar{
+	background: #20222a !important;
+}
+.tpl-blackred-hn .tpl-left-sidebar *{
+	color: #fff !important;
+}
+.tpl-blackred-hn .tpl-header-fluid{
+	background: #c15352 !important;
+}
+.tpl-blackred-hn .tpl-header-fluid *{
+	color: #fff !important;
+}
+.black{
+	background: #20222a !important;
+}
+.black-child{
+	background: #393D49 !important;
+}
+/*红*/
+.tpl-red-n .tpl-left-sidebar{
+	background: #AA3130 !important;
+}
+.tpl-red-n .tpl-left-sidebar *{
+	color: #fff !important;
+}
+
+/*中国红*/
+.tpl-red-hn .tpl-left-sidebar{
+	background: #AA3130 !important;
+}
+.tpl-red-hn .tpl-left-sidebar *{
+	color: #fff !important;
+}
+.tpl-red-hn .tpl-header-fluid{
+	background: #c15352 !important;
+}
+.tpl-red-hn .tpl-header-fluid *{
+	color: #fff !important;
+}
+.red{
+	background: #AA3130 !important;
+}
+.red-child{
+	background: #c15352 !important;
+}
+/*黑左绿顶*/
+.tpl-blackgreen-hn .tpl-left-sidebar{
+	background: #20222a !important;
+}
+.tpl-blackgreen-hn .tpl-left-sidebar *{
+	color: #fff !important;
+}
+.tpl-blackgreen-hn .tpl-header-fluid{
+	background: #009688 !important;
+}
+.tpl-blackgreen-hn .tpl-header-fluid *{
+	color: #fff !important;
+}
+.green{
+	background: #009688 !important;
+}
+.green-child{
+	background: #15a497 !important;
+}
+/*绿的发光*/
+.tpl-green-hn .tpl-left-sidebar{
+	background: #009688 !important;
+}
+.tpl-green-hn .tpl-left-sidebar *{
+	color: #fff !important;
+}
+.tpl-green-hn .tpl-header-fluid{
+	background: #15a497 !important;
+}
+.tpl-green-hn .tpl-header-fluid *{
+	color: #fff !important;
+}
+
+/*绿的发光*/
+.tpl-green-n .tpl-left-sidebar{
+	background: #009688 !important;
+}
+.tpl-green-n .tpl-left-sidebar *{
+	color: #fff !important;
+}
+/*纯白*/
+.tpl-white-hn .tpl-left-sidebar{
+	background: #fff !important;
+}
+.tpl-white-hn .tpl-left-sidebar *{
+	color: #444 !important;
+}
+.white{
+	background: #fff !important;
+}

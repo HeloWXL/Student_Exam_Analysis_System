@@ -36,6 +36,55 @@ public class AdminController {
         return "admin/login";
     }
 
+    @ApiOperation("学生管理页面")
+    @GetMapping("/toStudent")
+    public String toStudent(){
+        return "admin/student";
+    }
+
+    @ApiOperation("选择题管理页面")
+    @GetMapping("/toSelectQuestion")
+    public String toSelectQuestion(){
+        return "admin/selectQuestion";
+    }
+
+
+    @ApiOperation("填空题管理页面")
+    @GetMapping("/toCompletionQuestion")
+    public String toCompletionQuestion(){
+        return "admin/completionQuestion";
+    }
+
+
+    @ApiOperation("题目类型管理页面")
+    @GetMapping("/toType")
+    public String toType(){
+        return "admin/type";
+    }
+
+    @ApiOperation("试卷管理页面")
+    @GetMapping("/toPaper")
+    public String toPaper(){
+        return "admin/paper";
+    }
+
+    @ApiOperation("考试管理页面")
+    @GetMapping("/toTest")
+    public String toTest(){
+        return "admin/test";
+    }
+
+    @ApiOperation("课程管理页面")
+    @GetMapping("/toCourse")
+    public String toCourse(){
+        return "admin/course";
+    }
+
+    @ApiOperation("系统配置")
+    @GetMapping("/toSystem")
+    public String toSystem(){
+        return "admin/system";
+    }
 
     /**
      * 修改管理员密码
