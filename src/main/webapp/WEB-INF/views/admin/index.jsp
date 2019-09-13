@@ -41,25 +41,25 @@
                 <a class="a-item" id="student"><i class="fa fa-fire nav-icon" ></i><span>学生管理</span></a>
             </li>
             <li class="nav-item">
-                <a class="a-item"><i class="fa fa-users nav-icon"></i><span>题库管理</span></a>
+                <a class="a-item" name="select"><i class="fa fa-users nav-icon"></i><span>题库管理</span></a>
                 <ul class="nav-child-item has-child">
                     <div class="nav-child-list">
-                        <li><a href="" id="select"><i class="fa fa-user-secret" aria-hidden="true"></i>选择题题库</a></li>
-                        <li><a href="" id="completion"><i class="fa fa-users" aria-hidden="true"></i>填空题题库</a></li>
+                        <li><a  name="select"><i class="fa fa-user-secret" aria-hidden="true"></i>选择题题库</a></li>
+                        <li><a  id="completion"><i class="fa fa-users" aria-hidden="true"></i>填空题题库</a></li>
                     </div>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="" class="a-item" id="test"><i class="fa fa-users nav-icon"></i><span>考试管理</span></a>
+                <a class="a-item" id="test"><i class="fa fa-users nav-icon"></i><span>考试管理</span></a>
             </li>
             <li class="nav-item">
-                <a href="" class="a-item" id="course"><i class="fa fa-users nav-icon"></i><span>课程管理</span></a>
+                <a class="a-item" id="course"><i class="fa fa-users nav-icon"></i><span>课程管理</span></a>
             </li>
             <li class="nav-item">
-                <a href="" class="a-item" id="paper"><i class="fa fa-users nav-icon"></i><span>试卷管理</span></a>
+                <a class="a-item" id="paper"><i class="fa fa-users nav-icon"></i><span>试卷管理</span></a>
             </li>
             <li class="nav-item">
-                <a href="" class="a-item"><i class="fa fa-users nav-icon"></i><span>学生报告管理</span></a>
+                <a  class="a-item"><i class="fa fa-users nav-icon"></i><span>学生报告管理</span></a>
             </li>
             <div class="sidebar-footer">
                 <ul class="clearfix">
@@ -209,7 +209,7 @@
                 $("iframe").attr("src","/admin/toStudent")
             })
             // 选择题管理
-            $("#select").click(function(){
+            $("a[name='select']").click(function(){
                 $("iframe").attr("src","/admin/toSelectQuestion")
             })
             // 填空题管理

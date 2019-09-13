@@ -3,6 +3,9 @@ package com.mac.demo.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Course;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface CourseMapper extends BaseMapper<Course> {
@@ -14,5 +17,9 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     int updateByPrimaryKeySelective(Course record);
 
-    int updateByPrimaryKey(Course record);
+    @Select("select * from course limit #{page},#{limit}")
+    List<Course> getCourse(int page,int limit);
+
+    @Select("select count(1) from course ")
+    int getCourseCount();
 }
