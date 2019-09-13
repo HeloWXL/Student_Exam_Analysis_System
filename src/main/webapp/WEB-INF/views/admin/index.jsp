@@ -59,6 +59,9 @@
                 <a class="a-item" id="paper"><i class="fa fa-users nav-icon"></i><span>试卷管理</span></a>
             </li>
             <li class="nav-item">
+                <a class="a-item" id="type"><i class="fa fa-users nav-icon"></i><span>题目类型管理</span></a>
+            </li>
+            <li class="nav-item">
                 <a  class="a-item"><i class="fa fa-users nav-icon"></i><span>学生报告管理</span></a>
             </li>
             <div class="sidebar-footer">
@@ -227,6 +230,10 @@
             // 课程管理
             $("#course").click(function(){
                 $("iframe").attr("src","/admin/toCourse")
+            })
+            // 题目类型管理
+            $("#type").click(function(){
+                $("iframe").attr("src","/admin/toType")
             })
         })
     </script>
