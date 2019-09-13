@@ -21,16 +21,42 @@ public class CourseServiceImpl implements CourseService {
     @Resource
     private CourseMapper courseMapper;
 
+    /**
+     * 添加课程
+     * @param record
+     * @return
+     */
     @Override
     public int insertSelective(Course record) {
         return courseMapper.insertSelective(record);
     }
 
+    /**
+     * 根据ID修改课程
+     * @param record
+     * @return
+     */
     @Override
     public int updateByPrimaryKeySelective(Course record) {
         return courseMapper.updateByPrimaryKeySelective(record);
     }
 
+    /**
+     * 根据ID删除课程
+     * @param courseId
+     * @return
+     */
+    @Override
+    public int deleteByPrimaryKey(Integer courseId) {
+        return courseMapper.deleteByPrimaryKey(courseId);
+    }
+
+    /**
+     * 获取课程列表
+     * @param page
+     * @param limit
+     * @return
+     */
     @Override
     public Map<String, Object> getCourse(Integer page, Integer limit) {
         Map<String, Object> map = new HashMap<>();

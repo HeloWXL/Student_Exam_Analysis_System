@@ -1,5 +1,6 @@
 package com.mac.demo.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -20,6 +21,7 @@ public class CompletionCourseVo {
 
     private Integer typeId;
 
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private Integer level;
@@ -29,5 +31,7 @@ public class CompletionCourseVo {
     private Integer courseId;
 
     private String courseName;
+
+    private String typeName;
 
 }

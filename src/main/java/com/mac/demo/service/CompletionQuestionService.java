@@ -20,4 +20,26 @@ public interface CompletionQuestionService {
      * @return
      */
     Map<String,Object> getCompletionQuestion(Integer page, Integer limit);
+
+    /**
+     * 添加填空题
+     * @param record
+     * @return
+     */
+    int insertSelective(CompletionQuestion record);
+
+
+    /**
+     * 根据填空题的ID修改填空题
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(CompletionQuestion record);
+
+    /**
+     * 根据ID删除填空题
+     * @param completionId
+     * @return
+     */
+    int deleteByPrimaryKey(Integer completionId);
 }

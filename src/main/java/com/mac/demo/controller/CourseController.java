@@ -48,4 +48,11 @@ public class CourseController {
     public int updateCourseById(@RequestBody Course course) {
         return courseService.updateByPrimaryKeySelective(course);
     }
+
+    @ApiOperation("删除课程")
+    @GetMapping("/deleteCourseById")
+    @ResponseBody
+    public int deleteCourseById(@RequestParam("courseId") Integer courseId) {
+        return courseService.deleteByPrimaryKey(courseId);
+    }
 }

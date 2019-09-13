@@ -9,6 +9,11 @@ import java.util.List;
 
 @Mapper
 public interface CourseMapper extends BaseMapper<Course> {
+    /**
+     * 根据ID删除课程
+     * @param courseId
+     * @return
+     */
     int deleteByPrimaryKey(Integer courseId);
 
     int insertSelective(Course record);

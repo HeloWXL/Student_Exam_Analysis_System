@@ -26,6 +26,18 @@ public interface CourseService {
      */
     int updateByPrimaryKeySelective(Course record);
 
+    /**
+     * 根据ID删除课程
+     * @param courseId
+     * @return
+     */
+    int deleteByPrimaryKey(Integer courseId);
 
+    /**
+     * 获取课程列表
+     * @param page
+     * @param limit
+     * @return
+     */
     Map<String,Object> getCourse(Integer page, Integer limit);
 }
