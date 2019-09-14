@@ -1,6 +1,10 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.Student;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname Studentservice
@@ -16,6 +20,12 @@ public interface StudentService {
      */
     int insertSelective(Student record);
 
+    /**
+     * 根据ID删除学生
+     * @param studentId
+     * @return
+     */
+    int deleteByPrimaryKey(Integer studentId);
 
     /**
      * 学生登录
@@ -25,10 +35,15 @@ public interface StudentService {
     Student checkLogin(String phone);
 
     /**
-     * 修改学生密码
-     * @param passWord
-     * @param studentId
+     * 根据ID修改学生
+     * @param record
      * @return
      */
-    int changePassWord(String passWord ,int studentId);
+    int updateByPrimaryKeySelective(Student record);
+
+    /**
+     * 获取学生列表
+     */
+    Map<String,Object> getStudent(Integer page, Integer limit);
+
 }

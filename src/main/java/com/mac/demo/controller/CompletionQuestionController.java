@@ -2,7 +2,6 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.service.CompletionQuestionService;
-import com.mac.demo.vo.CompletionCourseVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;

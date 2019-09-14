@@ -6,6 +6,9 @@ import com.mac.demo.service.StudentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname StudentServiceImpl
@@ -24,12 +27,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int deleteByPrimaryKey(Integer studentId) {
+        return studentMapper.deleteByPrimaryKey(studentId);
+    }
+
+    @Override
     public Student checkLogin(String phone) {
         return studentMapper.checkLogin(phone);
     }
 
     @Override
-    public int changePassWord(String passWord, int studentId) {
-        return studentMapper.changePassWord(passWord,studentId);
+    public int updateByPrimaryKeySelective(Student record) {
+        return studentMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public Map<String, Object> getStudent(Integer page, Integer limit) {
+        Map<String, Object> map = new HashMap<>();
+        List<Student> list = studentMapper.getStudent((page-1)*limit,limit);
+        map.put("data",list);
+        int count = studentMapper.getStudentCount();
+        map.put("count",count);
+        return map;
     }
 }

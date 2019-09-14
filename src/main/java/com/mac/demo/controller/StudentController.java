@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @Classname StudentController
@@ -109,12 +110,38 @@ public class StudentController {
      * @param passWord
      * @return
      */
-    @ApiOperation(value = "修改学生密码")
-    @PostMapping("/updateStudentPassword")
+    @ApiOperation(value = "学生修改密码")
+    @PostMapping("/updateStudentPasswordByStudent")
     @ResponseBody
-    public int changePassWord(@RequestParam("password") String passWord,HttpServletRequest request) {
+    public int updateStudentPasswordByStudent(@RequestParam("password") String passWord,HttpServletRequest request) {
         Student student = (Student) request.getSession().getAttribute("student");
-        return studentService.changePassWord(passWord,student.getStudentId());
+        student.setStudentPassword(passWord);
+        return studentService.updateByPrimaryKeySelective(student);
+    }
+
+    @ApiOperation(value = "管理员修改学生密码")
+    @PostMapping("/updateStudentPasswordByAdmin")
+    @ResponseBody
+    public int updateStudentPasswordByAdmin(@RequestBody Student student) {
+        return studentService.updateByPrimaryKeySelective(student);
+    }
+
+
+    @ApiOperation(value = "获取学生列表")
+    @GetMapping("/getStudent")
+    @ResponseBody
+    public Map<String, Object> getStudent(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        Map<String,Object> map = studentService.getStudent(page,limit);
+        map.put("code",0);
+        map.put("msg","");
+        return map;
+    }
+
+    @ApiOperation(value = "删除学生")
+    @GetMapping("/deleteStudent")
+    @ResponseBody
+    public int deleteStudent(@RequestParam("studentId")  Integer studentId) {
+        return studentService.deleteByPrimaryKey(studentId);
     }
 
 }

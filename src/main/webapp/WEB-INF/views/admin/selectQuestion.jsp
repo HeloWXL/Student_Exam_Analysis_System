@@ -50,7 +50,7 @@
 
             <%--            表格--%>
             <div class="center">
-                <table id="demo" lay-filter="test"></table>
+                <table id="demo" lay-filter="selectQuestionfilter"></table>
             </div>
         </div>
     </div>
@@ -75,34 +75,5 @@
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
-<script>
-    layui.use('table', function(){
-        var table = layui.table;
-
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            , toolbar: '#toolbars'
-            , defaultToolbar: []
-            ,height: 312
-            ,url: 'https://www.layui.com/demo/table/user/' //数据接口
-            ,page: true //开启分页
-            ,cols: [[ //表头
-                {field: 'id', title: 'ID', width:80,  fixed: 'left'}
-                ,{field: 'username', title: '用户名', width:80}
-                ,{field: 'sex', title: '性别', width:80}
-                ,{field: 'city', title: '城市', width:80}
-                ,{field: 'sign', title: '签名', width: 177}
-                ,{field: 'experience', title: '积分', width: 80}
-                ,{field: 'score', title: '评分', width: 80}
-                ,{field: 'classify', title: '职业', width: 80}
-                ,{field: 'wealth', title: '财富', width: 135}
-            ]]
-        });
-
-    });
-
-
-
-</script>
+<script src="${ctx}/resources/js/selectQuestion.js" type="application/javascript"></script>
 </html>

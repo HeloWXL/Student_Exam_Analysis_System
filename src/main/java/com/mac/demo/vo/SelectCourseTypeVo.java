@@ -6,32 +6,35 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @Classname CompletionCourseVo
+ * @Classname SelectCourseType
  * @Description TODO
- * @Date 2019/9/13 7:54 下午
+ * @Date 2019/9/14 8:37 上午
  * @Created by wangxianlin
  */
 @Data
-public class CompletionCourseVo {
-    private Integer completionId;
+public class SelectCourseTypeVo {
+    private Integer selectId;
 
     private String text;
 
-    private String answer;
+    private String optionA;
 
-    private Integer typeId;
+    private String optionB;
+
+    private String optionC;
+
+    private String optionD;
+
+    private String answer;
 
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    private Integer level;
-
     private String knowledge;
 
-    private Integer courseId;
-
-    private String courseName;
+    private Integer level;
 
     private String typeName;
 
+    private String courseName;
 }

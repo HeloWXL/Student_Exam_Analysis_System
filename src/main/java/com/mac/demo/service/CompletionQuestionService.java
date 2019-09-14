@@ -1,9 +1,7 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.CompletionQuestion;
-import com.mac.demo.vo.CompletionCourseVo;
 
-import java.util.List;
 import java.util.Map;
 
 /**

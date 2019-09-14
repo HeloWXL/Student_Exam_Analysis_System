@@ -10,15 +10,28 @@ import java.util.List;
 
 @Mapper
 public interface StudentMapper extends BaseMapper<Student> {
+    /**
+     * 根据ID删除学生
+     * @param studentId
+     * @return
+     */
     int deleteByPrimaryKey(Integer studentId);
 
+    /**
+     * 添加学生
+     * @param record
+     * @return
+     */
     int insertSelective(Student record);
 
     Student selectByPrimaryKey(Integer studentId);
 
+    /**
+     * 根据ID修改学生
+     * @param record
+     * @return
+     */
     int updateByPrimaryKeySelective(Student record);
-
-    int updateByPrimaryKey(Student record);
 
     /**
      * 学生登录
@@ -28,17 +41,18 @@ public interface StudentMapper extends BaseMapper<Student> {
     @Select("select * from student where student_phone = #{phone}")
     Student checkLogin(String phone);
 
-    /**
-     * 修改学生密码
-     * @param passWord
-     * @param studentId
-     * @return
-     */
-    @Update("update student set student_password=#{password} where student_id = #{studentId}")
-    int changePassWord(String passWord ,int studentId);
 
     /**
-     * 获取学生列表---xml
+     * 获取学生列表
      */
+    @Select("select * from student limit #{page},#{limit}")
+    List<Student> getStudent(Integer page,Integer limit);
+
+    /**
+     * 获取学生数量
+     * @return
+     */
+    @Select("select count(1) from student")
+    int getStudentCount();
 
 }
