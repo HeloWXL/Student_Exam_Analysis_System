@@ -1,5 +1,6 @@
 package com.mac.demo.model;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,5 +20,13 @@ public class Paper {
 
     private String paperName;
 
+    /**
+     * 试卷状态
+     */
+    private Integer state;
+
+    @TableField(exist = false)
     private int isAuto;
+
+
 }

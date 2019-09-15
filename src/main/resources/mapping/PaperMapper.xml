@@ -9,9 +9,10 @@
     <result column="completion_list" property="completionList" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    paper_id, test_id, admin_id, select_list, completion_list, create_time, paper_name
+    paper_id, test_id, admin_id, select_list, completion_list, create_time, paper_name,state
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,14 +24,6 @@
     delete from paper
     where paper_id = #{paperId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mac.demo.model.Paper" >
-    insert into paper (paper_id, test_id, admin_id, 
-      select_list, completion_list, create_time, 
-      paper_name)
-    values (#{paperId,jdbcType=INTEGER}, #{testId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, 
-      #{selectList,jdbcType=VARCHAR}, #{completionList,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{paperName,jdbcType=VARCHAR})
-  </insert>
   <insert id="insertSelective" parameterType="com.mac.demo.model.Paper" >
     insert into paper
     <trim prefix="(" suffix=")" suffixOverrides="," >

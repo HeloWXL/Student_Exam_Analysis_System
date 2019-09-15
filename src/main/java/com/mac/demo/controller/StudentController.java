@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Map;
 
 /**
@@ -48,10 +50,16 @@ public class StudentController {
         return "student/report";
     }
 
-    @ApiOperation("学生注册页面")
+    @ApiOperation("学生")
     @GetMapping("/toRegister")
     public String toRegister(){
         return "student/register";
+    }
+
+    @ApiOperation("考试声明页面")
+    @GetMapping("/toDeclaer")
+    public String toDeclaer(){
+        return "student/declare";
     }
 
     /**
@@ -78,6 +86,20 @@ public class StudentController {
     @ResponseBody
     public String checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
             HttpServletRequest request) {
+
+        /**
+         * 获取登录用户IP地址
+         */
+        InetAddress ia = null;
+        try {
+            ia = InetAddress.getLocalHost();
+            System.out.println(ia.toString());//wangxianlindeMacBook-Pro.local/192.168.0.100
+            System.out.println(ia.getHostAddress());//ip地址           例如：192.168.201.254
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+
         if(studentService.checkLogin(phone).getStudentPassword().equals(password)){
             Student student = studentService.checkLogin(password);
             request.getSession().setAttribute("student",student);
