@@ -80,23 +80,25 @@
 
         //第一个实例
         table.render({
+            id:'paperfilter',
             elem: '#demo'
             , toolbar: '#toolbars'
             , defaultToolbar: []
-            ,height: 312
-            ,url: 'https://www.layui.com/demo/table/user/' //数据接口
+            ,url: ctx+'/paper/getPaper' //数据接口
             ,page: true //开启分页
             ,cols: [[ //表头
-                {field: 'id', title: 'ID', width:80,  fixed: 'left'}
-                ,{field: 'username', title: '用户名', width:80}
-                ,{field: 'sex', title: '性别', width:80}
-                ,{field: 'city', title: '城市', width:80}
-                ,{field: 'sign', title: '签名', width: 177}
-                ,{field: 'experience', title: '积分', width: 80}
-                ,{field: 'score', title: '评分', width: 80}
-                ,{field: 'classify', title: '职业', width: 80}
-                ,{field: 'wealth', title: '财富', width: 135}
+                {field: 'checkbox', type: 'checkbox'}
+                ,{field: 'number', title: '序号', type: 'numbers'}
+                ,{field: 'paperName', title: '试卷名称', width: 200}
+                ,{field: 'testName', title: '考试名称', width: 200}
+                ,{field: 'time', title: '考试时间', width: 120}
+                ,{field: 'adminName', title: '发布人', width: 80}
+                ,{field: 'createTime', title: '创建时间', width: 200}
             ]]
+            ,skin: 'line,row' //表格风格
+            ,even: true
+            ,limits: [5, 10, 15]
+            ,limit: 10 //每页默认显示的数量
         });
 
         table.on('toolbar(paperfilter)', function(obj) {
@@ -107,7 +109,7 @@
                     layer.open({
                         id: 1,
                         type: 1,
-                        title: ['快捷操作添加'],
+                        title: ['添加试卷'],
                         skin: 'layui-layer-molv',
                         area: '500px',
                         offset: 'auto',
@@ -115,61 +117,64 @@
                             '    <div class="layui-col-md10">' +
                             '        <form class="layui-form">' +
                             '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">操作名称:</label>' +
+                            '                <label class="layui-form-label" style="padding-left:-50px;">试卷名称:</label>' +
                             '                <div class="layui-input-block">' +
-                            '                    <input type="text" placeholder="请输入操作名称" lay-verify="questionnaireName" name="optName" id="optName" class="layui-input">\n' +
+                            '                    <input type="text" placeholder="请输入考试名称"  name="paperName" id="paperName" class="layui-input">\n' +
                             '                </div>' +
                             '            </div>' +
-                            '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">支持产品编码:</label>\n' +
-                            '                <div class="layui-input-block">\n' +
-                            '                    <input type="text" placeholder="请输入支持产品编码" lay-verify="questionnaireName" name="supPdtCode" id="supPdtCode" class="layui-input">\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">参数使用情况:</label>\n' +
-                            '                <div class="layui-input-block">\n' +
-                            '                    <input type="text"  lay-verify="questionnaireName" placeholder="0：无参数操作 1：有参数操作 2：复杂操作" name="paraUse" id="paraUse" class="layui-input">\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">HTML片段:</label>\n' +
-                            '                <div class="layui-input-block">\n' +
-                            '                    <input type="text"  lay-verify="questionnaireName" placeholder="请输入HTML片段" name="paraHtml" id="paraHtml" class="layui-input">\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
-                            '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">显示顺序:</label>\n' +
-                            '                <div class="layui-input-block">\n' +
-                            '                    <input type="text" placeholder="请输入显示顺序" lay-verify="questionnaireName" name="disOrder" id="disOrder" class="layui-input">\n' +
-                            '                </div>\n' +
-                            '            </div>\n' +
+                            '<div class="layui-form-item">\n' +
+                            '    <label class="layui-form-label">考试名称：</label>\n' +
+                            '    <div class="layui-input-block">\n' +
+                            '      <select name="testId" >\n' +
+                            '        <option value=""></option>\n' +
+                            '        <option value="1">数学考试</option>\n' +
+                            '        <option value="2">语文考试</option>\n' +
+                            '        <option value="3">英语考试</option>\n' +
+                            '      </select>\n' +
+                            '    </div>\n' +
+                            '  </div>'+
+                                ' <div class="layui-form-item">\n' +
+                            '    <label class="layui-form-label">组卷：</label>\n' +
+                            '    <div class="layui-input-block">\n' +
+                            '      <input type="radio" name="paper" value="1" title="手动组卷" checked="">\n' +
+                            '      <input type="radio" name="paper" value="2" title="自动组卷">\n' +
+                            '    </div>\n' +
+                            '  </div>'+
                             '        </form>\n' +
                             '    </div>\n' +
                             '</div>\n',
                         btn: ['提交', '取消']
                         , success: function(layero) {
+                            var forms = layui.form;
+                            forms.render();
                             layero.find('.layui-layer-btn').css('text-align', 'center');
                         },
                         btn1: function(index) {
                             // 提交
-                            var shortCutConfDto={
-                                optName:  $.trim($('#optName').val()),
-                                supPdtCode : $.trim($('#supPdtCode').val()),
-                                paraUse : $.trim($('#paraUse').val()),
-                                paraHtml : $.trim($('#paraHtml').val()),
-                                disOrder : $.trim($('#disOrder').val())
+                            var paper={
+                                testId:  $.trim($("select[name='testId']").val()),
+                                paperName : $.trim($("#paperName").val()),
+                                isAuto : $.trim($('#paraUse').val())
                             };
-                            console.log(shortCutConfDto);
+                            console.log(paper)
 
                             $.ajax({
-                                url: ctx+'/shortcutconf/insertShortCutConf.do',
-                                data:JSON.stringify(shortCutConfDto),
+                                url: ctx+'/paper/insertPaper',
+                                data:JSON.stringify(paper),
                                 dataType:'json',
                                 type:'post',
                                 contentType: 'application/json; charset=utf-8',
                                 success: function(data) {
-                                    layer.msg('添加成功');
+                                    if(data==1){
+                                        layer.alert('添加成功',function () {
+                                            //关闭弹窗
+                                            layer.closeAll();
+                                            // 重新刷新表格
+                                            table.reload('paperTable');
+                                        });
+                                    }else{
+                                        layer.alert("添加失败")
+                                    }
                                 }
                             });
                         },

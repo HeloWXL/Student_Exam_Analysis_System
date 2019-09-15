@@ -12,7 +12,7 @@ layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 	var error = "错误~";
 	
 	// 初始化页面
-	msg("LeoAdmin 欢迎你");
+	msg("欢迎 王咸林");
 	// 初始化提示消息
 	function msg(str,icon,offset){
 		str = str == null ? "没有内容" : str;
@@ -82,9 +82,6 @@ layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 		dom.append(html);
 		return true;
 	}
-	bf($(".test1"),function(){
-		l("郭敏是傻子");
-	},"click");
 	// 收放导航列表
 	bf($(".switch-list"),function(){
 		var ans = "";
@@ -94,26 +91,27 @@ layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 		}else{
 			$(this).children("i").removeClass("fa-hand-o-right");
 			$(this).children("i").addClass("fa-hand-o-left");
+
 		}
-		if ($(".tm-tpl").hasClass("small-item")){
-			$(".tm-tpl").removeClass("small-item");
-			ans = 2;
-		} else {
+		if (!$(".tm-tpl").hasClass("small-item")){
 			$(".tm-tpl").addClass("small-item");
 			ans = 1;
+		} else {
+			$(".tm-tpl").removeClass("small-item");
+			ans = 2;
 		}
-		// 保持操作状态
-		$.ajax({ 
-			url:"../index/view",
-			type:"post",
-			datatype:"json",
-			data:{
-				left_item:ans
-			},
-			success:function(data){
-				l(data);
-			}
-		})
+		// // 保持操作状态
+		// $.ajax({
+		// 	url:"../index/view",
+		// 	type:"post",
+		// 	datatype:"json",
+		// 	data:{
+		// 		left_item:ans
+		// 	},
+		// 	success:function(data){
+		// 		l(data);
+		// 	}
+		// })
 	});
 	// 刷新页面
 	bf($(".refresh"),function(){
@@ -129,6 +127,7 @@ layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 				$("."+bar).css("right",0);
 				$(".tpl-body").css("overflow","hidden");
 			} else {
+
 				$("."+bar).css("right","-1500px");
 				$(".tpl-body").css("overflow","auto");
 			}
@@ -177,22 +176,6 @@ layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 			}
 		})
 	})
-	// 轮播图实例
-	carousel.render({
-	    elem: '#carousel_1',
-	    width: '100%', //设置容器宽度
-	    arrow: 'always' //始终显示箭头 详细请参考layui文档
-	});
-	// 点击播放
-	bf($(".play"),function(){
-		do_play($(this).attr("data-src"),$(".tm-tpl"));//获取视频地址，弹出窗口准备播放
-	});
-	// 关闭播放
-	bf($(".tm-tpl"),function(){
-		// l(this);
-		remove_dom($(".tpl-layer"),$(".tpl-shade"));//删除播放窗口和遮罩层
-	},"click","#close");
-	
 	// 左侧工具栏
 	bf($(".sidebar-footer a"),function(){
 		var title = $(this).attr("data-title");
@@ -211,124 +194,6 @@ layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 	// 通用的返回上一页方法
 	bf($(".back"),function(){
 		window.history.back();
-	});
-	// 删除权限规则
-	bf($(".auth_delete"),function(){
-		var id = $(this).parent().attr("data-id"),tag = $(this);
-		layer.load(1);
-		$.ajax({
-			url:"../auth/delete",
-			type:"post",
-			data:{
-				del_id:id
-			},
-			success:function(data){
-				layer.closeAll("loading");
-				if(data.status == 1){
-					window.location.reload();
-				}
-				msg(data.msg);
-			},
-			error:function(){
-				layer.closeAll("loading");
-				l(error);
-			}
-		})
-	});
-	// 删除权限组
-	bf($(".delrule"),function(){
-		var id = $(this).parent().attr("data-id"),tag = $(this);
-		layer.load(1);
-		$.ajax({
-			url:"../auth/delrule",
-			type:"post",
-			data:{
-				delid:id
-			},
-			success:function(data){
-				layer.closeAll("loading");
-				if(data.status == 1){
-					remove_dom(tag.parent().parent());
-				}
-				msg(data.msg);
-			},
-			error:function(){
-				layer.closeAll("loading");
-				msg(error);
-			}
-		})
-	});
-	bf($(".update-password"),function(){
-		$(this).hide();
-		$(".dit-update-password").show();
-		$(this).parent().children("input[name='password']").removeAttr("disabled");
-		$(this).parent().children("input[name='password']").attr("required","");
-		$(".pwd1").find("input[name='password1']").removeAttr("disabled");
-		$(".pwd1").find("input[name='password1']").attr("required","");
-		$(this).parent().children("input[name='password']").removeClass("layui-disabled");
-		$(".pwd1").show();
-	});
-	bf($(".dit-update-password"),function(){
-		$(this).hide();
-		$(".update-password").show();
-		$(".pwd1").find("input[name='password1']").attr("disabled","");
-		$(this).parent().children("input[name='password']").attr("disabled","");
-		$(this).parent().children("input[name='password']").val("");
-		$(this).parent().children("input[name='password']").addClass("layui-disabled");
-		$(".pwd1").find("input[name='password1']").removeAttr("required");
-		$(this).parent().children("input[name='password']").removeAttr("required");
-		$(".pwd1").hide();
-	});
-	// 删除用户
-	bf($(".delete-user"),function(){
-		var id = $(this).parent().attr("data-id"),tag = $(this);
-		$.ajax({
-			url:"../auth/delete_user",
-			type:"post",
-			datatype:"json",
-			data:{
-				id:id
-			},
-			success:function(data){
-				layer.closeAll("loading");
-				if(data.status == 1){
-					remove_dom(tag.parent().parent());
-				}
-				msg(data.msg);
-			},
-			error:function(){
-				layer.closeAll("loading");
-			}
-		})
-	});
-	var old_img = null;
-	bf($(".user-upload"),function(){
-		old_img = "";
-		old_img += $(this).attr("src");
-	});
-	var userImg = upload.render({
-		elem: '.user-upload', //绑定元素
-		url: '../upload/user_upload', //上传接口
-		accept: 'file',
-		exts: 'jpg|png|jpeg|gif', //只允许上传压缩文件
-		choose: function(obj){
-			shade($(".user-bar").find(".right-bar-fluid"),true);
-		},
-		done: function(res){
-			$(".user-upload").attr("src",res.data);
-			$.ajax({
-				url: '../user/save_img', //上传接口
-				type:"post",
-				datatype:"json",
-				data:{
-					img:res.data,
-					old_img:old_img
-				},
-				success:function(data){
-					remove_dom($(".right-bar").find($(".tpl-shade")));
-				}
-			})
-		}
 	});
 })
 	

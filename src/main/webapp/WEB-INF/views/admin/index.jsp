@@ -21,7 +21,7 @@
     </script>
 </head>
 <body>
-<div class="tm-tpl tpl-white-hn small-item" style-name="tpl-white-hn">
+<div class="tm-tpl tpl-white-hn" style-name="tpl-white-hn">
     <!--导航栏-->
     <div class="tpl-left-sidebar">
         <ul>
@@ -81,9 +81,6 @@
                 <div class="tpl-header-fluid">
                     <div class="tpl-button switch-list">
                         <i class="fa fa-hand-o-left"></i>
-                    </div>
-                    <div class="tpl-button refresh" title="刷新">
-                        <i class="fa fa-refresh"></i>
                     </div>
                     <div class="tpl-button text">
                         <a href=""><i class="fa fa-home"></i> 首页</a>

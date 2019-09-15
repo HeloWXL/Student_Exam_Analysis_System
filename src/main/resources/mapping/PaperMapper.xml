@@ -8,9 +8,10 @@
     <result column="select_list" property="selectList" jdbcType="VARCHAR" />
     <result column="completion_list" property="completionList" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    paper_id, test_id, admin_id, select_list, completion_list, create_time
+    paper_id, test_id, admin_id, select_list, completion_list, create_time, paper_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,11 +25,11 @@
   </delete>
   <insert id="insert" parameterType="com.mac.demo.model.Paper" >
     insert into paper (paper_id, test_id, admin_id, 
-      select_list, completion_list, create_time
-      )
+      select_list, completion_list, create_time, 
+      paper_name)
     values (#{paperId,jdbcType=INTEGER}, #{testId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, 
-      #{selectList,jdbcType=VARCHAR}, #{completionList,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{selectList,jdbcType=VARCHAR}, #{completionList,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{paperName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mac.demo.model.Paper" >
     insert into paper
@@ -51,6 +52,9 @@
       <if test="createTime != null" >
         create_time,
       </if>
+      <if test="paperName != null" >
+        paper_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="paperId != null" >
@@ -70,6 +74,9 @@
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paperName != null" >
+        #{paperName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -91,6 +98,9 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="paperName != null" >
+        paper_name = #{paperName,jdbcType=VARCHAR},
+      </if>
     </set>
     where paper_id = #{paperId,jdbcType=INTEGER}
   </update>
@@ -100,7 +110,8 @@
       admin_id = #{adminId,jdbcType=INTEGER},
       select_list = #{selectList,jdbcType=VARCHAR},
       completion_list = #{completionList,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      paper_name = #{paperName,jdbcType=VARCHAR}
     where paper_id = #{paperId,jdbcType=INTEGER}
   </update>
 </mapper>
