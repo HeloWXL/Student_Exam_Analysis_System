@@ -26,7 +26,7 @@ public class TestController {
     private TestService testService;
 
 
-    @ApiOperation("删除考死")
+    @ApiOperation("删除考试")
     @GetMapping("/deleteByTest")
     @ResponseBody
     public int deleteByTest(@RequestParam("testId") Integer testId) {

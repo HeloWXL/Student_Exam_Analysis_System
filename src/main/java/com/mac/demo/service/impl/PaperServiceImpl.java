@@ -46,4 +46,9 @@ public class PaperServiceImpl implements PaperService {
         map.put("count",count);
         return map;
     }
+
+    @Override
+    public List<PaperTestAdminVo> getPaperByTestId(Integer testId) {
+        return paperMapper.getPaperByTestId(testId);
+    }
 }

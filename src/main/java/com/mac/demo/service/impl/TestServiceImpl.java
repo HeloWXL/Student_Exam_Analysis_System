@@ -1,5 +1,6 @@
 package com.mac.demo.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mac.demo.mapper.TestMapper;
 import com.mac.demo.model.Test;
 import com.mac.demo.service.TestService;
@@ -45,5 +46,12 @@ public class TestServiceImpl implements TestService {
         int count = testMapper.getTestCount();
         map.put("count",count);
         return map;
+    }
+
+    @Override
+    public List<Test> getTest() {
+        EntityWrapper entityWrapper  = new EntityWrapper();
+        List<Test> list = testMapper.selectList(entityWrapper);
+        return list;
     }
 }

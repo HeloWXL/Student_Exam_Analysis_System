@@ -1,16 +1,22 @@
 package com.mac.demo.controller;
 
 import com.mac.demo.model.Student;
+import com.mac.demo.model.Test;
+import com.mac.demo.service.PaperService;
 import com.mac.demo.service.StudentService;
+import com.mac.demo.service.TestService;
+import com.mac.demo.vo.PaperTestAdminVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +31,10 @@ import java.util.Map;
 public class StudentController {
     @Resource
     private StudentService studentService;
+    @Resource
+    private TestService testService;
+    @Resource
+    private PaperService paperService;
 
     @ApiOperation("学生未登录首页页面")
     @GetMapping("/toNoIndex")
@@ -34,7 +44,9 @@ public class StudentController {
 
     @ApiOperation("学生首页页面")
     @GetMapping("/toIndex")
-    public String toIndex(){
+    public String toIndex(Model model){
+        List<Test> list =testService.getTest();
+        model.addAttribute("testList",list);
         return "student/index";
     }
 
@@ -60,6 +72,20 @@ public class StudentController {
     @GetMapping("/toDeclaer")
     public String toDeclaer(){
         return "student/declare";
+    }
+
+    @ApiOperation("试卷页面")
+    @GetMapping("/toPaperList/{testId}")
+    public String toPaperList(Model model,@PathVariable("testId") Integer testId){
+        List<PaperTestAdminVo> list =paperService.getPaperByTestId(testId);
+        model.addAttribute("paperList",list);
+        return "student/paperList";
+    }
+
+    @ApiOperation("试卷页面")
+    @GetMapping("/toPaper")
+    public String toPaper(){
+        return "student/paper";
     }
 
     /**

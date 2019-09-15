@@ -43,4 +43,11 @@ public interface PaperService {
      * @return
      */
     Map<String,Object> getPaper(Integer page, Integer limit);
+
+    /**
+     * 学生获取考试列表
+     * @param testId
+     * @return
+     */
+    List<PaperTestAdminVo> getPaperByTestId(Integer testId);
 }

@@ -33,7 +33,7 @@ public interface PaperMapper {
      */
     int updateByPrimaryKeySelective(Paper record);
 
-    @Select("select p.paper_name , p.create_time ,a.admin_name ,t.test_name,t.time\n" +
+    @Select("select p.paper_name , p.create_time , p.paper_id ,a.admin_name ,t.test_name,t.time\n" +
             "from paper p , admin a , test t\n" +
             "where p.admin_id = a.admin_id and t.test_id = p.test_id \n" +
             "limit #{page},#{limit}")
@@ -42,5 +42,12 @@ public interface PaperMapper {
     @Select("select count(1) from paper")
     int getPaperCount();
 
-
+    /**
+     * 学生获取试卷列表
+     * @return
+     */
+    @Select("select p.paper_name , p.paper_id ,p.create_time ,a.admin_name ,t.test_name,t.time\n" +
+            "from paper p , admin a , test t\n" +
+            "where p.admin_id = a.admin_id and t.test_id = p.test_id  and p.state = 1 and t.test_id = #{testId}\n")
+    List<PaperTestAdminVo> getPaperByTestId(Integer testId);
 }
