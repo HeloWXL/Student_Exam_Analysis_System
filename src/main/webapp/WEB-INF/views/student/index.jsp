@@ -24,7 +24,7 @@
         }
         .test{
             width: 45%;
-            height: 50%;
+            height: 40%;
             margin: 1% 2%;
             float: left;
             background-color: #FFFFFF;
@@ -34,13 +34,16 @@
         .test img{
             margin: 6% 7%;
             width: 85%;
-            height: 20%;
+            height: 62%;
         }
         p{
             margin-left: 5px;
         }
         .test:hover{
             background-color: #DDDDDD;
+        }
+        p{
+            font-size: 13px;
         }
     </style>
 </head>
