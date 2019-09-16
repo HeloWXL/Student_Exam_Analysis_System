@@ -46,4 +46,7 @@ public interface CompletionQuestionMapper extends BaseMapper<CompletionQuestion>
     @Select("select count(1) from completionquestion")
     int getCompletionQuestionCount();
 
+
+    @Select("select * from completionquestion where type_id = #{typeId}")
+    List<CompletionQuestion> getSelectByTypeId(Integer typeId);
 }

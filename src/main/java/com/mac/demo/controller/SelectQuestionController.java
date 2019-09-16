@@ -1,6 +1,5 @@
 package com.mac.demo.controller;
 
-import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.model.SelectQuestion;
 import com.mac.demo.service.SelectQuestionService;
 import io.swagger.annotations.Api;

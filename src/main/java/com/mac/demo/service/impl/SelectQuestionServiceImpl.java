@@ -47,5 +47,4 @@ public class SelectQuestionServiceImpl implements SelectQuestionService {
         return selectQuestionMapper.updateByPrimaryKeySelective(record);
     }
 
-
 }

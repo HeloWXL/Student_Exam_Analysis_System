@@ -2,7 +2,6 @@ package com.mac.demo.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.SelectQuestion;
-import com.mac.demo.model.Student;
 import com.mac.demo.vo.SelectCourseTypeVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -52,4 +51,8 @@ public interface SelectQuestionMapper extends BaseMapper<SelectQuestion> {
      */
     @Select("select count(1) from selectquestion")
     int getSelectQuestionCount();
+
+    @Select("select * from selectquestion where type_id=#{typeId}")
+    List<SelectQuestion> getSelectByTypeId(Integer typeId);
+
 }

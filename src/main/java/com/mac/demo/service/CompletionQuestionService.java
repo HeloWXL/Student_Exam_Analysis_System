@@ -40,4 +40,5 @@ public interface CompletionQuestionService {
      * @return
      */
     int deleteByPrimaryKey(Integer completionId);
+
 }
