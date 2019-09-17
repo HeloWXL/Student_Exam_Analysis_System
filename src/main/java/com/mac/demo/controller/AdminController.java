@@ -106,15 +106,18 @@ public class AdminController {
      */
     @ApiOperation("管理员登录")
     @PostMapping("/checkLogin")
-    @ResponseBody
     public String checkLogin(@RequestParam("adminName") String adminName, @RequestParam("password") String password,
                             HttpServletRequest request) {
+        String msg="";
         if(adminService.checkLogin(adminName).getAdminPassword().equals(password)){
-            Admin admin = adminService.checkLogin(password);
+            Admin admin = adminService.checkLogin(adminName);
             request.getSession().setAttribute("admin",admin);
-            return "success";
+            request.getSession().removeAttribute("msg");
+            return "redirect:/admin/toIndex";
         }else{
-            return null;
+            msg="密码错误";
+            request.getSession().setAttribute("msg",msg);
+            return "admin/login";
         }
     }
 
