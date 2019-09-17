@@ -3,6 +3,7 @@ package com.mac.demo.service.impl;
 import com.mac.demo.mapper.StudentMapper;
 import com.mac.demo.model.Student;
 import com.mac.demo.service.StudentService;
+import com.mac.demo.vo.QueryStudentVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,11 +43,22 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Map<String, Object> getStudent(Integer page, Integer limit) {
+    public Map<String, Object> getStudent(QueryStudentVo queryStudentVo) {
         Map<String, Object> map = new HashMap<>();
-        List<Student> list = studentMapper.getStudent((page-1)*limit,limit);
+        queryStudentVo.setPage((queryStudentVo.getPage()-1)*queryStudentVo.getLimit());
+        List<Student> list = studentMapper.getStudentByCondition(queryStudentVo);
         map.put("data",list);
-        int count = studentMapper.getStudentCount();
+        int count = studentMapper.getStudentByConditionCount(queryStudentVo);
+        map.put("count",count);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> getStudentByCondition(QueryStudentVo queryStudentVo) {
+        Map<String, Object> map = new HashMap<>();
+        List<Student> list = studentMapper.getStudentByCondition(queryStudentVo);
+        map.put("data",list);
+        int count = studentMapper.getStudentByConditionCount(queryStudentVo);
         map.put("count",count);
         return map;
     }

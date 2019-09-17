@@ -1,27 +1,48 @@
 layui.use('table', function(){
     var table = layui.table;
 
-    //第一个实例
-    table.render({
-        id:'studentTable',
-        elem: '#demo'
-        , toolbar: '#toolbars'
-        , defaultToolbar: []
-        ,url: ctx+'/student/getStudent' //数据接口
-        ,page: true //开启分页
-        ,cols: [[ //表头
-            {field: 'checkbox', type: 'checkbox'}
-            ,{field: 'number', title: '序号', type: 'numbers'}
-            ,{field: 'studentName', title: '学生姓名', width:200}
-            ,{field: 'studentPhone', title: '手机号码', width:200}
-            ,{field: 'studentPassword', title: '学生密码', width: 177}
-            ,{field: 'createTime', title: '创建时间', width: 200}
-        ]]
-        ,skin: 'line,row' //表格风格
-        ,even: true
-        ,limits: [5, 10, 15]
-        ,limit: 10 //每页默认显示的数量
+    var queryStudentVo = {
+        studentName:'',
+        studentPhone:''
+    };
+
+    // 加载表格数据
+    loadData(table,queryStudentVo);
+    // 查询
+    $('#query').click(function() {
+
+        var queryStudentVo = {
+            studentName:$("input[name='userName']").val(),
+            studentPhone:$("input[name='phone']").val()
+        };
+        loadData(table,queryStudentVo);
     });
+        //加载列表数据
+        function loadData(table,queryStudentVo) {
+            table.render({
+                id: 'studentTable',
+                elem: '#demo'
+                , toolbar: '#toolbars'
+                , method:'post'
+                ,contentType: 'application/json; charset=utf-8'
+                , defaultToolbar: []
+                ,where:queryStudentVo
+                , url: ctx + '/student/getStudent' //数据接口
+                , page: true //开启分页
+                , cols: [[ //表头
+                    {field: 'checkbox', type: 'checkbox'}
+                    , {field: 'number', title: '序号', type: 'numbers'}
+                    , {field: 'studentName', title: '学生姓名', width: 200}
+                    , {field: 'studentPhone', title: '手机号码', width: 200}
+                    , {field: 'studentPassword', title: '学生密码', width: 177}
+                    , {field: 'createTime', title: '创建时间', width: 200}
+                ]]
+                , skin: 'line,row' //表格风格
+                , even: true
+                , limits: [5, 10, 15]
+                , limit: 10 //每页默认显示的数量
+            });
+        }
     table.on('toolbar(studentfilter)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id);
         var  data = checkStatus.data; //获取选中的数据

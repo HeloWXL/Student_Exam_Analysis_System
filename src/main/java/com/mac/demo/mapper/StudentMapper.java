@@ -2,11 +2,13 @@ package com.mac.demo.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Student;
+import com.mac.demo.vo.QueryStudentVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface StudentMapper extends BaseMapper<Student> {
@@ -46,7 +48,7 @@ public interface StudentMapper extends BaseMapper<Student> {
      * 获取学生列表
      */
     @Select("select * from student limit #{page},#{limit}")
-    List<Student> getStudent(Integer page,Integer limit);
+    Map<String, Object> getStudent(QueryStudentVo queryStudentVo);
 
     /**
      * 获取学生数量
@@ -55,4 +57,9 @@ public interface StudentMapper extends BaseMapper<Student> {
     @Select("select count(1) from student")
     int getStudentCount();
 
+
+    List<Student> getStudentByCondition(QueryStudentVo queryStudentVo);
+
+
+    int getStudentByConditionCount(QueryStudentVo queryStudentVo);
 }

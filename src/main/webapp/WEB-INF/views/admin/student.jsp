@@ -76,4 +76,6 @@
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/student.js" type="application/javascript"></script>
+
+
 </html>

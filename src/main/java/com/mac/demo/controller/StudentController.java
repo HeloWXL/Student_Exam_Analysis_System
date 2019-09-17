@@ -2,6 +2,7 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.Student;
 import com.mac.demo.service.StudentService;
+import com.mac.demo.vo.QueryStudentVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -150,10 +151,10 @@ public class StudentController {
 
 
     @ApiOperation(value = "获取学生列表")
-    @GetMapping("/getStudent")
+    @PostMapping("/getStudent")
     @ResponseBody
-    public Map<String, Object> getStudent(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
-        Map<String,Object> map = studentService.getStudent(page,limit);
+    public Map<String, Object> getStudent(@RequestBody QueryStudentVo queryStudentVo){
+        Map<String,Object> map = studentService.getStudent(queryStudentVo);
         map.put("code",0);
         map.put("msg","");
         return map;
@@ -165,5 +166,6 @@ public class StudentController {
     public int deleteStudent(@RequestParam("studentId")  Integer studentId) {
         return studentService.deleteByPrimaryKey(studentId);
     }
+
 
 }

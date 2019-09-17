@@ -90,4 +90,40 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
+
+  <select id="getStudentByCondition" parameterType="com.mac.demo.vo.QueryStudentVo"
+          resultType="com.mac.demo.model.Student">
+
+    SELECT
+    P2.student_id	as	studentId
+    ,P2.student_phone as studentPhone
+    ,P2.student_name as studentName
+    ,P2.student_password as studentPassword
+    ,P2.create_time as createTime
+
+    FROM student  P2
+    WHERE 1=1
+
+    <if test="studentName != null and studentName != ''">
+      and P2.student_name like concat('%',#{studentName}, '%')
+    </if>
+    <if test="studentPhone != null and studentPhone != ''">
+      and P2.student_phone like concat('%',#{studentPhone}, '%')
+    </if>
+    LIMIT #{page},#{limit}
+  </select>
+
+  <select id="getStudentByConditionCount" resultType="java.lang.Integer">
+     select
+     count(1)
+    FROM student  P2
+    WHERE 1=1
+    <if test="studentName != null and studentName != ''">
+      and P2.student_name like concat('%',#{studentName}, '%')
+    </if>
+    <if test="studentPhone != null and studentPhone != ''">
+      and P2.student_phone like concat('%',#{studentPhone}, '%')
+    </if>
+
+  </select>
 </mapper>

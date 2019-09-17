@@ -1,6 +1,7 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.Student;
+import com.mac.demo.vo.QueryStudentVo;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public interface StudentService {
     /**
      * 获取学生列表
      */
-    Map<String,Object> getStudent(Integer page, Integer limit);
+    Map<String,Object> getStudent(QueryStudentVo queryStudentVo);
 
+    Map<String, Object> getStudentByCondition(QueryStudentVo queryStudentVo);
 }
