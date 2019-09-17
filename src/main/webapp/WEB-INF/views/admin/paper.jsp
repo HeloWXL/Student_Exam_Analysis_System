@@ -71,13 +71,31 @@
         </div>
     </div>
 </script>
+
+<script type="text/html" id="barDemo">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+<%--                {{#  if(d.state ==1){ }}--%>
+<%--                <input type="checkbox" checked="false" lay-skin="switch">--%>
+<%--                {{# }else {  }}--%>
+<%--                <input type="checkbox"  checked="true" lay-skin="switch">--%>
+<%--                {{#  }  }}--%>
+            </div>
+        </div>
+    </form>
+
+</script>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script>
-    layui.use('table', function(){
+    layui.use(['table','form'], function(){
         var table = layui.table;
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
 
+        form.render();
         //第一个实例
         table.render({
             id:'paperTable',
@@ -88,12 +106,20 @@
             ,page: true //开启分页
             ,cols: [[ //表头
                 {field: 'checkbox', type: 'checkbox'}
-                ,{field: 'number', title: '序号', type: 'numbers'}
-                ,{field: 'paperName', title: '试卷名称', width: 200}
-                ,{field: 'testName', title: '考试名称', width: 200}
-                ,{field: 'time', title: '考试时间', width: 120}
-                ,{field: 'adminName', title: '发布人', width: 150}
-                ,{field: 'createTime', title: '创建时间', width: 200}
+                ,{field: 'number', title: '序号', type: 'numbers', align:'center'}
+                ,{field: 'paperName', title: '试卷名称', width: 200, align:'center'}
+                ,{field: 'testName', title: '考试名称', width: 200, align:'center'}
+                ,{field: 'time', title: '考试时间', width: 120, align:'center'}
+                ,{field: 'adminName', title: '发布人', width: 150, align:'center'}
+                ,{field: 'createTime', title: '创建时间', width: 200, align:'center'}
+                ,{field: 'state', title: '试卷状态', width: 120 , templet: function(d){
+                    if(d.state==1){
+                        return '<span style="color: green;">已启用</span>'
+                    }else{
+                        return '<span style="color: red;">未启用</span>'
+                    }
+                    }}
+                ,{ title: '开关', width: 120, align:'center', toolbar: '#barDemo'}
             ]]
             ,skin: 'line,row' //表格风格
             ,even: true
@@ -101,7 +127,7 @@
             ,limit: 10 //每页默认显示的数量
         });
 
-        table.on('toolbar(paperfilter)', function(obj) {
+        table.on('toolbar(paperTable)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var  data = checkStatus.data; //获取选中的数据
             switch (obj.event) {

@@ -7,6 +7,7 @@ import com.mac.demo.vo.PaperTestAdminVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -64,7 +65,7 @@ public class PaperController {
     @ApiOperation("随机组卷")
     @GetMapping("/getPaperByAuto")
     @ResponseBody
-    public Integer getPaperByAuto(@RequestParam("selectNum")Integer selectNum,
+    public Integer getPaperByAuto(@RequestParam("selectNum") Integer selectNum,
                                       @RequestParam("completionNum") Integer completionNum,
                                       @RequestParam("paperName") String paperName,
                                         @RequestParam("testId") Integer testId,

@@ -59,4 +59,11 @@ public class TestController {
         map.put("msg","");
         return map;
     }
+
+    @ApiOperation("获取考试列表")
+    @GetMapping("/getTestAdmin")
+    @ResponseBody
+    public List<Test> getTest(){
+        return testService.getTest();
+    }
 }

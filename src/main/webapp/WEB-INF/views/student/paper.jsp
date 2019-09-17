@@ -14,4 +14,9 @@
     试卷界面
     <a href="/student/toReport">学生报告页面</a>
 </body>
+<script>
+    if('${student}'==""){
+        location.href="/student/toLogin";
+    }
+</script>
 </html>
