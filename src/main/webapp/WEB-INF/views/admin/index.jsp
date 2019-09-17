@@ -197,42 +197,17 @@
             </div>
         </div>
     </div>
+</div>
     <script type="text/javascript" src="${ctx}/resources/plugins/layui/layui.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/admin.js"></script>
 
-    <script>
-        $(function(){
-            // 学生管理
-            $("#student").click(function(){
-                $("iframe").attr("src","/admin/toStudent")
-            })
-            // 选择题管理
-            $("a[name='select']").click(function(){
-                $("iframe").attr("src","/admin/toSelectQuestion")
-            })
-            // 填空题管理
-            $("#completion").click(function(){
-                $("iframe").attr("src","/admin/toCompletionQuestion")
-            })
-            // 考试管理
-            $("#test").click(function(){
-                $("iframe").attr("src","/admin/toTest")
-            })
-            // 试卷管理
-            $("#paper").click(function(){
-                $("iframe").attr("src","/admin/toPaper")
-            })
-            // 课程管理
-            $("#course").click(function(){
-                $("iframe").attr("src","/admin/toCourse")
-            })
-            // 题目类型管理
-            $("#type").click(function(){
-                $("iframe").attr("src","/admin/toType")
-            })
-        })
-    </script>
+<script>
+    if('${admin}'==""){
+        location.href="/admin/toLogin";
+    }
+
+</script>
 </body>
 </html>

@@ -78,33 +78,39 @@ public class PaperServiceImpl implements PaperService {
 
 
     @Override
-    public Map<Object,Object> getPaperByAuto(Integer typeId, Integer selectNum, Integer completionNum) {
+    public Integer getPaperByAuto(Paper paper ,Integer selectNum, Integer completionNum) {
+        //类型集合
+        int[] typeArray = new int[]{1,2,3,4,5};
+
         //该map用于存放随机的各类型题号
         Map<Object,Object> map=new HashMap();
-        //试题总分
-        double score=0.0;
-        //返回信息
-        StringBuilder message=new StringBuilder();
-        //获取随机选择题id的集合
-        List<Integer> sqids=new ArrayList<>();
-        for(SelectQuestion selectQuestion:selectQuestionMapper.getSelectByTypeId(typeId)){
-            sqids.add(selectQuestion.getSelectId());
-        }
-        map.put("sds",getIds(sqids,selectNum));
 
-        List<Integer> cqids=new ArrayList<>();
-        for(CompletionQuestion completionQuestion:completionQuestionMapper.getSelectByTypeId(typeId)){
-            cqids.add(completionQuestion.getTypeId());
-        }
-        map.put("cds",getIds(cqids,completionNum));
+        //存放选择题 ID
+        StringBuilder selectString = new StringBuilder();
+        //存放填空题ID
+        StringBuilder completionString = new StringBuilder();
+        //遍历题目类型ID 获取随机选择题和填空题数量
+        for(int i = 0 ;i<typeArray.length;i++){
+            //获取随机选择题id的集合
+            List<Integer> sqids=new ArrayList<>();
+            for(SelectQuestion selectQuestion:selectQuestionMapper.getSelectByTypeId(typeArray[i])){
+                sqids.add(selectQuestion.getSelectId());
+            }
 
-        Paper paper = new Paper();
-        paper.setAdminId(1);
-        paper.setCompletionList(getIds(cqids,completionNum));
-        paper.setPaperName("入学考试");
-        paper.setTestId(1);
-        paper.setSelectList(getIds(sqids,selectNum));
-        paperMapper.insertSelective(paper);
-        return map;
+            List<Integer> cqids=new ArrayList<>();
+            for(CompletionQuestion completionQuestion:completionQuestionMapper.getSelectByTypeId(typeArray[i])){
+                cqids.add(completionQuestion.getTypeId());
+            }
+            selectString.append(getIds(sqids,selectNum));
+            completionString.append(getIds(cqids,completionNum));
+        }
+        map.put("sds",selectString.substring(0,selectString.length()-1));
+        map.put("cds",completionString.substring(0,completionString.length()-1));
+
+        //添加到数据库中
+        paper.setCompletionList(completionString.toString());
+        paper.setSelectList(selectString.toString());
+        Integer i = paperMapper.insertSelective(paper);
+        return i;
     }
 }

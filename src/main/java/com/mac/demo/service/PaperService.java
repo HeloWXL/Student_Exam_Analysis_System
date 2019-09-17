@@ -53,10 +53,9 @@ public interface PaperService {
 
     /**
      * 自动组卷
-     * @param typeId
      * @param selectNum
      * @param completionNum
      * @return
      */
-    Map<Object,Object> getPaperByAuto(Integer typeId, Integer selectNum, Integer completionNum);
+    Integer getPaperByAuto(Paper paper ,Integer selectNum, Integer completionNum);
 }
