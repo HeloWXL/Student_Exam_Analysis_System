@@ -58,4 +58,12 @@ public class PaperController {
         map.put("msg","");
         return map;
     }
+
+    @ApiOperation("----")
+    @GetMapping("/getPaperByAuto")
+    @ResponseBody
+    Map<Object,Object> getPaperByAuto(@RequestParam("typeId") Integer typeId, @RequestParam("selectNum")Integer selectNum,
+                                      @RequestParam("completionNum") Integer completionNum){
+        return  paperService.getPaperByAuto(typeId,selectNum,completionNum);
+    }
 }

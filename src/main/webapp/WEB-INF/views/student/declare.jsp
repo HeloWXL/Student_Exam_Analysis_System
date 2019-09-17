@@ -60,7 +60,7 @@
     });
     $("#comfirm").click(function(){
         mui.alert("我已阅读考试声明，如有违反，后果自负",function(){
-            location.href="paper.html"
+            location.href="/student/toPaper"
         })
     })
 

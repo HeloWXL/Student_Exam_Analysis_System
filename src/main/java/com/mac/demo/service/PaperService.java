@@ -2,7 +2,7 @@ package com.mac.demo.service;
 
 import com.mac.demo.model.Paper;
 import com.mac.demo.vo.PaperTestAdminVo;
-import org.apache.ibatis.annotations.Select;
+
 
 import java.util.List;
 import java.util.Map;
@@ -43,4 +43,20 @@ public interface PaperService {
      * @return
      */
     Map<String,Object> getPaper(Integer page, Integer limit);
+
+    /**
+     * 学生获取考试列表
+     * @param testId
+     * @return
+     */
+    List<PaperTestAdminVo> getPaperByTestId(Integer testId);
+
+    /**
+     * 自动组卷
+     * @param typeId
+     * @param selectNum
+     * @param completionNum
+     * @return
+     */
+    Map<Object,Object> getPaperByAuto(Integer typeId, Integer selectNum, Integer completionNum);
 }

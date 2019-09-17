@@ -36,10 +36,16 @@ public interface TestService {
     int updateByTest(Test record);
 
     /**
-     * 获取考试列表
+     * 获取考试列表  -分页
      * @param page
      * @param limit
      * @return
      */
     Map<String,Object> getTest(Integer page, Integer limit);
+
+    /**
+     * 学生端展示考试列表
+     * @return
+     */
+    List<Test> getTest();
 }

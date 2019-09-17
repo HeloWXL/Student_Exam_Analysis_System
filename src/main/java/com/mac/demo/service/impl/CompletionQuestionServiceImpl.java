@@ -61,4 +61,5 @@ public class CompletionQuestionServiceImpl implements CompletionQuestionService 
     public int deleteByPrimaryKey(Integer completionId) {
         return completionQuestionMapper.deleteByPrimaryKey(completionId);
     }
+
 }

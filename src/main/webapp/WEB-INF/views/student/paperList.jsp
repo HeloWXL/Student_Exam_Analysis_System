@@ -24,7 +24,7 @@
         }
         .test{
             width: 96%;
-            height: 43%;
+            height: 42%;
             margin: 1% 2%;
             float: left;
             background-color: #FFFFFF;
@@ -32,18 +32,17 @@
         }
 
         .test img{
-            margin: 6% 27%;
-            width: 47%;
-            height: 62%;
+            margin: 6% 28%;
+            width: 45%;
+            height: 56%;
         }
-
         .test:hover{
             background-color: #DDDDDD;
         }
         p{
             margin-left: 5px;
-            font-size: 13px;
             margin-bottom: -2px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -53,12 +52,13 @@
 </header>
 <div class="mui-content">
     <div id="content">
-        <c:forEach var="test" items="${testList}">
+        <c:forEach var="paper" items="${paperList}">
             <div class="test">
-                <a href="/student/toPaperList/${test.testId}">
+                <a href="/student/toDeclaer">
                     <img src="${ctx}/resources/images/logo.png" />
-                    <p>考试名称：<span style="color: #000000;">${test.testName}</span></p>
-                    <p>发布人：<span>admin</span></p>
+                    <p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p>
+                    <p>考试名称：<span>${paper.testName}</span></p>
+                    <p>发布人：<span>${paper.adminName}</span></p>
                 </a>
             </div>
         </c:forEach>
@@ -66,29 +66,4 @@
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
-<script>
-    //时间转换函数
-    Date.prototype.format = function(fmt) {
-        var o = {
-            "M+" : this.getMonth()+1,                 //月份
-            "d+" : this.getDate(),                    //日
-            "h+" : this.getHours(),                   //小时
-            "m+" : this.getMinutes(),                 //分
-            "s+" : this.getSeconds(),                 //秒
-            "q+" : Math.floor((this.getMonth()+3)/3), //季度
-            "S"  : this.getMilliseconds()             //毫秒
-        };
-        if(/(y+)/.test(fmt)) {
-            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-        }
-        for(var k in o) {
-            if(new RegExp("("+ k +")").test(fmt)){
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-            }
-        }
-        return fmt;
-    }
-
-    var time = $(".time").val();
-</script>
 </html>
