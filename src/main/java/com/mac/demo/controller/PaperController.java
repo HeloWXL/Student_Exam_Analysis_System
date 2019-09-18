@@ -76,7 +76,15 @@ public class PaperController {
         paper.setAdminId(admin.getAdminId());
         paper.setPaperName(paperName);
         paper.setTestId(testId);
-
         return  paperService.getPaperByAuto(paper,selectNum,completionNum);
     }
+
+    @ApiOperation("试卷详细信息")
+    @GetMapping("/selectPaperInfo/{paperId}")
+    public String selectPaper(@PathVariable("paperId") Integer paperId,Model model){
+        Map<String,Object> map = paperService.selectPaper(paperId);
+        model.addAttribute("test",map);
+        return "/student/test";
+    }
+
 }

@@ -24,6 +24,11 @@ public interface CompletionQuestionMapper extends BaseMapper<CompletionQuestion>
      */
     int insertSelective(CompletionQuestion record);
 
+    /**
+     * 跟填空题的ID获取填空题的详细信息
+     * @param completionId
+     * @return
+     */
     CompletionQuestion selectByPrimaryKey(Integer completionId);
 
     int updateByPrimaryKeySelective(CompletionQuestion record);

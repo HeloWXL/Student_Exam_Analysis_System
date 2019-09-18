@@ -24,6 +24,11 @@ public interface PaperMapper {
      */
     int insertSelective(Paper record);
 
+    /**
+     * 根据试卷的ID查询试卷信息
+     * @param paperId
+     * @return
+     */
     Paper selectByPrimaryKey(Integer paperId);
 
     /**

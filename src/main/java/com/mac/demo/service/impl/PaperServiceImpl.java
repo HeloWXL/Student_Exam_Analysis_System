@@ -10,6 +10,7 @@ import com.mac.demo.service.PaperService;
 import com.mac.demo.utils.PaperUtils;
 import com.mac.demo.vo.PaperTestAdminVo;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSInput;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -112,5 +113,19 @@ public class PaperServiceImpl implements PaperService {
         paper.setSelectList(selectString.toString());
         Integer i = paperMapper.insertSelective(paper);
         return i;
+    }
+
+    @Override
+    public Map<String,Object> selectPaper(Integer paperId) {
+        //根据试卷的ID查询试卷的相信信息
+        Paper p = paperMapper.selectByPrimaryKey(paperId);
+        Map<String,Object> map = new HashMap<>();
+        //遍历试卷中存放的选择题ID并根据ID查询选择题的详细信息存放在list中
+        List<SelectQuestion> selectQuestionList = selectQuestionMapper.selectBatchIds(PaperUtils.getQuestionIds(p.getSelectList()));
+        //遍历试卷中存放的填空题ID并根据ID查询填空题的详细信息存放在list中
+        List<CompletionQuestion> completionQuestionList = completionQuestionMapper.selectBatchIds(PaperUtils.getQuestionIds(p.getCompletionList()));
+        map.put("select",selectQuestionList);
+        map.put("complete",completionQuestionList);
+        return map;
     }
 }

@@ -69,6 +69,12 @@ public class StudentController {
         return "student/declare";
     }
 
+    @ApiOperation("考试页面")
+    @GetMapping("/toTest")
+    public String toTest(){
+        return "student/test";
+    }
+
     @ApiOperation("跳转到学生试卷列表页面")
     @GetMapping("/getPaperByList/{testId}")
     public String getPaperByList(@PathVariable("testId") Integer testId, Model model){

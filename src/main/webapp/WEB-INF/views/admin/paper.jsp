@@ -127,7 +127,7 @@
             ,limit: 10 //每页默认显示的数量
         });
 
-        table.on('toolbar(paperTable)', function(obj) {
+        table.on('toolbar(paperfilter)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var  data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
@@ -235,7 +235,7 @@
                                             table.reload('paperTable');
                                         });
                                     }else{
-                                        layer.alert("添加失败")
+                                        layer.alert("删除失败")
                                     }
                                 }
                             });
@@ -259,33 +259,31 @@
                                 '    <div class="layui-col-md10">' +
                                 '        <form class="layui-form">' +
                                 '            <div class="layui-form-item">\n' +
-                                '                <label class="layui-form-label" style="padding-left:-50px;">操作名称:</label>' +
+                                '                <label class="layui-form-label" style="padding-left:-50px;">试卷名称:</label>' +
                                 '                <div class="layui-input-block">' +
-                                '                    <input type="text" placeholder="请输入操作名称" lay-verify="questionnaireName" name="optName" id="optName" class="layui-input">\n' +
+                                '                    <input type="text" placeholder="请输入考试名称" lay-verify="questionnaireName" name="paperName" id="paperName" class="layui-input">\n' +
                                 '                </div>' +
                                 '            </div>' +
+                                '<div class="layui-form-item">\n' +
+                                '    <label class="layui-form-label">考试名称：</label>\n' +
+                                '    <div class="layui-input-block">\n' +
+                                '      <select name="testId" >\n' +
+                                '        <option value=""></option>\n' +
+                                '        <option value="1">数学考试</option>\n' +
+                                '        <option value="2">语文考试</option>\n' +
+                                '        <option value="3">英语考试</option>\n' +
+                                '      </select>\n' +
+                                '    </div>\n'+
                                 '            <div class="layui-form-item">\n' +
-                                '                <label class="layui-form-label" style="padding-left:-50px;">支持产品编码:</label>\n' +
+                                '                <label class="layui-form-label" style="padding-left:-50px;">选择题数量:</label>\n' +
                                 '                <div class="layui-input-block">\n' +
-                                '                    <input type="text" placeholder="请输入支持产品编码" lay-verify="questionnaireName" name="supPdtCode" id="supPdtCode" class="layui-input">\n' +
+                                '                    <input type="text"  lay-verify="questionnaireName" name="selectNum" id="selectNum" class="layui-input">\n' +
                                 '                </div>\n' +
                                 '            </div>\n' +
                                 '            <div class="layui-form-item">\n' +
-                                '                <label class="layui-form-label" style="padding-left:-50px;">参数使用情况:</label>\n' +
+                                '                <label class="layui-form-label" style="padding-left:-50px;">填空题数量:</label>\n' +
                                 '                <div class="layui-input-block">\n' +
-                                '                    <input type="text"  lay-verify="questionnaireName" placeholder="0：无参数操作 1：有参数操作 2：复杂操作" name="paraUse" id="paraUse" class="layui-input">\n' +
-                                '                </div>\n' +
-                                '            </div>\n' +
-                                '            <div class="layui-form-item">\n' +
-                                '                <label class="layui-form-label" style="padding-left:-50px;">HTML片段:</label>\n' +
-                                '                <div class="layui-input-block">\n' +
-                                '                    <input type="text"  lay-verify="questionnaireName" placeholder="请输入HTML片段" name="paraHtml" id="paraHtml" class="layui-input">\n' +
-                                '                </div>\n' +
-                                '            </div>\n' +
-                                '            <div class="layui-form-item">\n' +
-                                '                <label class="layui-form-label" style="padding-left:-50px;">显示顺序:</label>\n' +
-                                '                <div class="layui-input-block">\n' +
-                                '                    <input type="text" placeholder="请输入显示顺序" lay-verify="questionnaireName" name="disOrder" id="disOrder" class="layui-input">\n' +
+                                '                    <input type="text"  lay-verify="questionnaireName" placeholder="请输入HTML片段" name="completionNum" id="completionNum" class="layui-input">\n' +
                                 '                </div>\n' +
                                 '            </div>\n' +
                                 '        </form>\n' +
@@ -295,33 +293,35 @@
                             , success: function(layero) {
                                 layero.find('.layui-layer-btn').css('text-align', 'center');
                                 // 展示在弹出层里面
-                                $('#optName').val(data[0].optName);
-                                $('#supPdtCode').val(data[0].supPdtCode);
-                                $('#paraUse').val(data[0].paraUse);
-                                $('#paraHtml').val(data[0].paraHtml);
-                                $('#disOrder').val(data[0].disOrder);
+                                $('#paperName').val(data[0].paperName);
+                                $('select[name="testId"]').val(data[0].testId);
+                                var form  = layui.form;
+                                form.render('select');
                             },
                             btn1: function(index) {
                                 // 提交
-                                var shortCutConfDto={
-                                    shortCutId:data[0].shortCutId,
-                                    optName:  $.trim($('#optName').val()),
-                                    supPdtCode : $.trim($('#supPdtCode').val()),
-                                    paraUse : $.trim($('#paraUse').val()),
-                                    paraHtml : $.trim($('#paraHtml').val()),
-                                    disOrder : $.trim($('#disOrder').val())
+                                var paper={
+                                    paperId:data[0].paperId,
+                                    paperName:  $.trim($('#paperName').val()),
+                                    testId : $.trim($('select[name="testId"]').val())
                                 };
                                 $.ajax({
-                                    url: ctx+'/shortcutconf/updateShortCutConfById.do',
-                                    data:JSON.stringify(shortCutConfDto),
+                                    url: ctx+'/paper/updatePaper',
+                                    data:JSON.stringify(paper),
                                     dataType:'json',
                                     type:'post',
                                     contentType: 'application/json; charset=utf-8',
                                     success: function(data) {
-                                        console.log(data);
-                                        layer.alert('添加成功',function() {
-                                            layer.close(index);
-                                        });
+                                        if(data==1){
+                                            layer.alert('修改成功',function () {
+                                                //关闭弹窗
+                                                layer.closeAll();
+                                                // 重新刷新表格
+                                                table.reload('paperTable');
+                                            });
+                                        }else{
+                                            layer.alert("修改失败")
+                                        }
 
                                     }
                                 });

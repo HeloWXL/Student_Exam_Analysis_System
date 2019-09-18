@@ -31,6 +31,11 @@ public interface SelectQuestionMapper extends BaseMapper<SelectQuestion> {
      */
     int updateByPrimaryKeySelective(SelectQuestion record);
 
+    /**
+     * 根据选择题的ID查询选择题的详细信息
+     * @param selectId
+     * @return
+     */
     SelectQuestion selectByPrimaryKey(Integer selectId);
 
     /**
