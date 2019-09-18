@@ -1,17 +1,21 @@
 package com.mac.demo.controller;
 
 import com.mac.demo.model.Student;
+import com.mac.demo.service.PaperService;
 import com.mac.demo.service.StudentService;
+import com.mac.demo.vo.PaperTestAdminVo;
 import com.mac.demo.vo.QueryStudentVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +30,8 @@ import java.util.Map;
 public class StudentController {
     @Resource
     private StudentService studentService;
+    @Resource
+    private PaperService paperService;
 
     @ApiOperation("学生未登录首页页面")
     @GetMapping("/toNoIndex")
@@ -63,6 +69,14 @@ public class StudentController {
         return "student/declare";
     }
 
+    @ApiOperation("跳转到学生试卷列表页面")
+    @GetMapping("/getPaperByList/{testId}")
+    public String getPaperByList(@PathVariable("testId") Integer testId, Model model){
+        List<PaperTestAdminVo> list =paperService.getPaperByTestId(testId);
+        model.addAttribute("paperList",list);
+        return "student/paperList";
+    }
+
     /**
      * 学生注册
      * @param student
@@ -87,20 +101,6 @@ public class StudentController {
     @ResponseBody
     public String checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
             HttpServletRequest request) {
-
-        /**
-         * 获取登录用户IP地址
-         */
-        InetAddress ia = null;
-        try {
-            ia = InetAddress.getLocalHost();
-            System.out.println(ia.toString());//wangxianlindeMacBook-Pro.local/192.168.0.100
-            System.out.println(ia.getHostAddress());//ip地址           例如：192.168.201.254
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-
-
         if(studentService.checkLogin(phone).getStudentPassword().equals(password)){
             Student student = studentService.checkLogin(password);
             request.getSession().setAttribute("student",student);

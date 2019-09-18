@@ -27,9 +27,6 @@
   <insert id="insertSelective" parameterType="com.mac.demo.model.Paper" >
     insert into paper
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="paperId != null" >
-        paper_id,
-      </if>
       <if test="testId != null" >
         test_id,
       </if>
@@ -42,17 +39,12 @@
       <if test="completionList != null" >
         completion_list,
       </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
       <if test="paperName != null" >
         paper_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="paperId != null" >
-        #{paperId,jdbcType=INTEGER},
-      </if>
+
       <if test="testId != null" >
         #{testId,jdbcType=INTEGER},
       </if>
@@ -64,9 +56,6 @@
       </if>
       <if test="completionList != null" >
         #{completionList,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="paperName != null" >
         #{paperName,jdbcType=VARCHAR},

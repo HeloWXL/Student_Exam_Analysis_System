@@ -25,4 +25,7 @@ public class PaperTestAdminVo {
     private String paperName;
 
     private String adminName;
+
+    private Integer state;
+
 }

@@ -1,14 +1,17 @@
 package com.mac.demo.controller;
 
+import com.mac.demo.model.Admin;
 import com.mac.demo.model.Paper;
 import com.mac.demo.service.PaperService;
 import com.mac.demo.vo.PaperTestAdminVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +33,7 @@ public class PaperController {
     @ApiOperation("删除试卷")
     @GetMapping("/deletePaper")
     @ResponseBody
-    public int deletePaper(Integer paperId) {
+    public int deletePaper(@RequestParam("paperId") Integer paperId) {
         return paperService.deleteByPrimaryKey(paperId);
     }
 
@@ -59,11 +62,21 @@ public class PaperController {
         return map;
     }
 
-    @ApiOperation("----")
+    @ApiOperation("随机组卷")
     @GetMapping("/getPaperByAuto")
     @ResponseBody
-    Map<Object,Object> getPaperByAuto(@RequestParam("typeId") Integer typeId, @RequestParam("selectNum")Integer selectNum,
-                                      @RequestParam("completionNum") Integer completionNum){
-        return  paperService.getPaperByAuto(typeId,selectNum,completionNum);
+    public Integer getPaperByAuto(@RequestParam("selectNum") Integer selectNum,
+                                      @RequestParam("completionNum") Integer completionNum,
+                                      @RequestParam("paperName") String paperName,
+                                        @RequestParam("testId") Integer testId,
+                                      HttpServletRequest request){
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        Paper paper =new Paper();
+        //添加管理员ID
+        paper.setAdminId(admin.getAdminId());
+        paper.setPaperName(paperName);
+        paper.setTestId(testId);
+
+        return  paperService.getPaperByAuto(paper,selectNum,completionNum);
     }
 }

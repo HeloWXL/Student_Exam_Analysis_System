@@ -53,42 +53,34 @@
 </header>
 <div class="mui-content">
     <div id="content">
-        <c:forEach var="test" items="${testList}">
-            <div class="test">
-                <a href="/student/toPaperList/${test.testId}">
-                    <img src="${ctx}/resources/images/logo.png" />
-                    <p>考试名称：<span style="color: #000000;">${test.testName}</span></p>
-                    <p>发布人：<span>admin</span></p>
-                </a>
-            </div>
-        </c:forEach>
+
     </div>
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
 <script>
-    //时间转换函数
-    Date.prototype.format = function(fmt) {
-        var o = {
-            "M+" : this.getMonth()+1,                 //月份
-            "d+" : this.getDate(),                    //日
-            "h+" : this.getHours(),                   //小时
-            "m+" : this.getMinutes(),                 //分
-            "s+" : this.getSeconds(),                 //秒
-            "q+" : Math.floor((this.getMonth()+3)/3), //季度
-            "S"  : this.getMilliseconds()             //毫秒
-        };
-        if(/(y+)/.test(fmt)) {
-            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    $(function () {
+        if('${student}'!=""){
+            $.ajax({
+                url:ctx+'/test/getTestAdmin',
+                dataType:'json',
+                type:'get',
+                success:function (data) {
+                    for(var i = 0 ;i<data.length;i++){
+                        $node = $('<div class="test">\n' +
+                            '                <a href="/student/getPaperByList/'+data[i].testId+'">\n' +
+                            '                    <img src="${ctx}/resources/images/logo.png" />\n' +
+                            '                    <p>考试名称：<span style="color: #000000;">'+data[i].testName+'</span></p>\n' +
+                            '                    <p>发布时间：<span>'+data[i].createTime+'</span></p>\n' +
+                            '                </a>\n' +
+                            '            </div>');
+                        $("#content").append($node);
+                    }
+                }
+            })
+        }else{
+            location.href="/student/toLogin";
         }
-        for(var k in o) {
-            if(new RegExp("("+ k +")").test(fmt)){
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-            }
-        }
-        return fmt;
-    }
-
-    var time = $(".time").val();
+    })
 </script>
 </html>

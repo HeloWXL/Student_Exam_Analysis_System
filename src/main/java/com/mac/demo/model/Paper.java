@@ -21,12 +21,7 @@ public class Paper {
     private String paperName;
 
     /**
-     * 试卷状态
+     * 试卷状态 1为启用 ， 0 为未启用
      */
     private Integer state;
-
-    @TableField(exist = false)
-    private int isAuto;
-
-
 }

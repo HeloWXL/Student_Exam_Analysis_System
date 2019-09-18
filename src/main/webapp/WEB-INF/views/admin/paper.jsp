@@ -71,16 +71,34 @@
         </div>
     </div>
 </script>
+
+<script type="text/html" id="barDemo">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+<%--                {{#  if(d.state ==1){ }}--%>
+<%--                <input type="checkbox" checked="false" lay-skin="switch">--%>
+<%--                {{# }else {  }}--%>
+<%--                <input type="checkbox"  checked="true" lay-skin="switch">--%>
+<%--                {{#  }  }}--%>
+            </div>
+        </div>
+    </form>
+
+</script>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script>
-    layui.use('table', function(){
+    layui.use(['table','form'], function(){
         var table = layui.table;
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
 
+        form.render();
         //第一个实例
         table.render({
-            id:'paperfilter',
+            id:'paperTable',
             elem: '#demo'
             , toolbar: '#toolbars'
             , defaultToolbar: []
@@ -88,12 +106,20 @@
             ,page: true //开启分页
             ,cols: [[ //表头
                 {field: 'checkbox', type: 'checkbox'}
-                ,{field: 'number', title: '序号', type: 'numbers'}
-                ,{field: 'paperName', title: '试卷名称', width: 200}
-                ,{field: 'testName', title: '考试名称', width: 200}
-                ,{field: 'time', title: '考试时间', width: 120}
-                ,{field: 'adminName', title: '发布人', width: 80}
-                ,{field: 'createTime', title: '创建时间', width: 200}
+                ,{field: 'number', title: '序号', type: 'numbers', align:'center'}
+                ,{field: 'paperName', title: '试卷名称', width: 200, align:'center'}
+                ,{field: 'testName', title: '考试名称', width: 200, align:'center'}
+                ,{field: 'time', title: '考试时间', width: 120, align:'center'}
+                ,{field: 'adminName', title: '发布人', width: 150, align:'center'}
+                ,{field: 'createTime', title: '创建时间', width: 200, align:'center'}
+                ,{field: 'state', title: '试卷状态', width: 120 , templet: function(d){
+                    if(d.state==1){
+                        return '<span style="color: green;">已启用</span>'
+                    }else{
+                        return '<span style="color: red;">未启用</span>'
+                    }
+                    }}
+                ,{ title: '开关', width: 120, align:'center', toolbar: '#barDemo'}
             ]]
             ,skin: 'line,row' //表格风格
             ,even: true
@@ -101,7 +127,7 @@
             ,limit: 10 //每页默认显示的数量
         });
 
-        table.on('toolbar(paperfilter)', function(obj) {
+        table.on('toolbar(paperTable)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var  data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
@@ -133,17 +159,22 @@
                             '      </select>\n' +
                             '    </div>\n' +
                             '  </div>'+
-                                ' <div class="layui-form-item">\n' +
-                            '    <label class="layui-form-label">组卷：</label>\n' +
-                            '    <div class="layui-input-block">\n' +
-                            '      <input type="radio" name="paper" value="1" title="手动组卷" checked="">\n' +
-                            '      <input type="radio" name="paper" value="2" title="自动组卷">\n' +
-                            '    </div>\n' +
-                            '  </div>'+
+                            '            <div class="layui-form-item">\n' +
+                            '                <label class="layui-form-label" style="padding-left:-50px;">选择题数量:</label>' +
+                            '                <div class="layui-input-block">' +
+                            '                    <input type="text" placeholder="请输入考试名称"  name="selectNum" id="selectNum" class="layui-input">\n' +
+                            '                </div>' +
+                            '            </div>' +
+                            '            <div class="layui-form-item">\n' +
+                            '                <label class="layui-form-label" style="padding-left:-50px;">填空题数量:</label>' +
+                            '                <div class="layui-input-block">' +
+                            '                    <input type="text" placeholder="请输入考试名称"  name="completionNum" id="completionNum" class="layui-input">\n' +
+                            '                </div>' +
+                            '            </div>' +
                             '        </form>\n' +
                             '    </div>\n' +
                             '</div>\n',
-                        btn: ['提交', '取消']
+                        btn: ['随机组卷', '取消']
                         , success: function(layero) {
                             var forms = layui.form;
                             forms.render();
@@ -151,18 +182,17 @@
                         },
                         btn1: function(index) {
                             // 提交
-                            var paper={
-                                testId:  $.trim($("select[name='testId']").val()),
-                                paperName : $.trim($("#paperName").val()),
-                                isAuto : $.trim($('#paraUse').val())
-                            };
-                            console.log(paper)
 
                             $.ajax({
-                                url: ctx+'/paper/insertPaper',
-                                data:JSON.stringify(paper),
+                                url: ctx+'/paper/getPaperByAuto',
+                                data:{
+                                    testId:  $.trim($("select[name='testId']").val()),
+                                    paperName : $.trim($("#paperName").val()),
+                                    completionNum : $.trim($("#completionNum").val()),
+                                    selectNum : $.trim($("#completionNum").val())
+                                },
                                 dataType:'json',
-                                type:'post',
+                                type:'get',
                                 contentType: 'application/json; charset=utf-8',
                                 success: function(data) {
                                     if(data==1){
@@ -188,17 +218,24 @@
                     if (data.length == 0) {
                         layer.alert('请选择一行');
                     } else {
-                        var shorCutCondId = data[0].shortCutId;
+                        var paperId = data[0].paperId;
                         layer.confirm('是否删除？',{title:'提示'},function(index) {
                             $.ajax({
-                                url: ctx+'/shortcutconf/deleteShortCutConfById.do',
-                                data:{shortCutConfId:shorCutCondId},
+                                url: ctx+'/paper/deletePaper',
+                                data:{paperId:paperId},
                                 dataType:'json',
                                 type:'get',
                                 contentType: 'application/json; charset=utf-8',
                                 success: function(data) {
-                                    if(data.returnMap.status=="success"){
-                                        layer.msg('删除成功');
+                                    if(data==1){
+                                        layer.alert('删除成功',function () {
+                                            //关闭弹窗
+                                            layer.closeAll();
+                                            // 重新刷新表格
+                                            table.reload('paperTable');
+                                        });
+                                    }else{
+                                        layer.alert("添加失败")
                                     }
                                 }
                             });
@@ -212,9 +249,9 @@
                         layer.alert('只能选择一行');
                     }else{
                         layer.open({
-                            id: 1,
+                            id: 2,
                             type: 1,
-                            title: ['快捷操作配置修改'],
+                            title: ['修改试卷'],
                             skin: 'layui-layer-molv',
                             area: '500px',
                             offset: 'auto',

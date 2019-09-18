@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>首页</title>
+    <title>试卷列表</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
     <script>
@@ -22,7 +22,7 @@
             width: 100%;
             height: 100%;
         }
-        .test{
+        .paper{
             width: 96%;
             height: 42%;
             margin: 1% 2%;
@@ -31,12 +31,12 @@
             border-radius: 15px;
         }
 
-        .test img{
+        .paper img{
             margin: 6% 28%;
             width: 45%;
             height: 56%;
         }
-        .test:hover{
+        .paper:hover{
             background-color: #DDDDDD;
         }
         p{
@@ -48,12 +48,12 @@
 </head>
 <body>
 <header class="mui-bar mui-bar-nav">
-    <h1 class="mui-title">学生考试首页</h1>
+    <h1 class="mui-title">学生考试列表</h1>
 </header>
 <div class="mui-content">
     <div id="content">
         <c:forEach var="paper" items="${paperList}">
-            <div class="test">
+            <div class="paper">
                 <a href="/student/toDeclaer">
                     <img src="${ctx}/resources/images/logo.png" />
                     <p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p>
@@ -66,4 +66,9 @@
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
+<script>
+    if('${student}'==""){
+        location.href="/student/toLogin";
+    }
+</script>
 </html>
