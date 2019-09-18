@@ -1,35 +1,56 @@
 layui.use('table', function(){
     var table = layui.table;
 
-    //第一个实例
-    table.render({
-        id:'selectQuestionTable',
-        elem: '#demo'
-        , toolbar: '#toolbars'
-        , defaultToolbar: []
-        ,url: ctx+'/selectquestion/getSelectQuestion' //数据接口
-        ,page: true //开启分页
-        ,cols: [[ //表头
-            {field: 'checkbox', type: 'checkbox'}
-            ,{field: 'number', title: '序号', type: 'numbers'}
-            ,{field: 'text', title: '题目', width:200,  align: 'center'}
-            ,{field: 'optionA', title: 'A选项', width:100,  align: 'center'}
-            ,{field: 'optionB', title: 'B选项', width:100,  align: 'center'}
-            ,{field: 'optionC', title: 'C选项', width:100,  align: 'center'}
-            ,{field: 'optionD', title: 'D选项', width:100,  align: 'center'}
-            ,{field: 'answer', title: '答案', width:100,  align: 'center'}
-            ,{field: 'courseName', title: '课程名', width:120,  align: 'center'}
-            ,{field: 'level', title: '难度等级', width:100 ,align: 'center'}
-            ,{field: 'typeName', title: '题目类型', width:120,align: 'center'}
-            ,{field: 'knowledge', title: '知识点', width:180,align: 'center'}
-            ,{field: 'createTime', title: '创建时间', width: 200,align: 'center'}
-        ]]
-        ,skin: 'line,row' //表格风格
-        ,even: true
-        ,limits: [5, 10, 15]
-        ,limit: 10 //每页默认显示的数量
+    var querySelectQuestionVo = {
+        courseName:'',
+        level:''
+    };
+
+    // 加载表格数据
+    loadData(table,querySelectQuestionVo);
+    // 查询
+    $('#query').click(function() {
+
+        var querySelectQuestionVo = {
+            courseName:$("input[name='courseName']").val(),
+            level:$("input[name='level']").val()
+        };
+        loadData(table,querySelectQuestionVo);
     });
 
+
+    function loadData(table,querySelectQuestionVo) {
+        table.render({
+            id: 'selectQuestionTable',
+            elem: '#demo'
+            , toolbar: '#toolbars'
+            , defaultToolbar: []
+            , url: ctx + '/selectquestion/getSelectQuestion' //数据接口
+            , method:'post'
+            ,contentType: 'application/json; charset=utf-8'
+            , page: true //开启分页
+            ,where:querySelectQuestionVo
+            , cols: [[ //表头
+                {field: 'checkbox', type: 'checkbox'}
+                , {field: 'number', title: '序号', type: 'numbers'}
+                , {field: 'text', title: '题目', width: 200, align: 'center'}
+                , {field: 'optionA', title: 'A选项', width: 100, align: 'center'}
+                , {field: 'optionB', title: 'B选项', width: 100, align: 'center'}
+                , {field: 'optionC', title: 'C选项', width: 100, align: 'center'}
+                , {field: 'optionD', title: 'D选项', width: 100, align: 'center'}
+                , {field: 'answer', title: '答案', width: 100, align: 'center'}
+                , {field: 'courseName', title: '课程名', width: 120, align: 'center'}
+                , {field: 'level', title: '难度等级', width: 100, align: 'center'}
+                , {field: 'typeName', title: '题目类型', width: 120, align: 'center'}
+                , {field: 'knowledge', title: '知识点', width: 180, align: 'center'}
+                , {field: 'createTime', title: '创建时间', width: 200, align: 'center'}
+            ]]
+            , skin: 'line,row' //表格风格
+            , even: true
+            , limits: [5, 10, 15]
+            , limit: 10 //每页默认显示的数量
+        });
+    }
     table.on('toolbar(selectQuestionfilter)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id);
         var  data = checkStatus.data; //获取选中的数据

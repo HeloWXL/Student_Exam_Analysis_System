@@ -125,4 +125,42 @@
       knowledge = #{knowledge,jdbcType=VARCHAR}
     where completion_id = #{completionId,jdbcType=INTEGER}
   </update>
+
+  <select id="getCompletionQuestion" parameterType="com.mac.demo.vo.QueryCompletionQuestionVo"
+          resultType="com.mac.demo.vo.QueryCompletionQuestionVo">
+
+    select
+    completions.completion_id as completionId
+    ,completions.text as text
+    ,completions.answer as answer
+    ,completions.`level` as level
+    ,completions.knowledge as knowledge
+    ,completions.create_time as createTime
+    ,c.course_name as courseName
+    ,t.type_name as typeName
+    from completionquestion completions ,course c ,type t
+    where c.course_id = completions.course_id and t.type_id = completions.type_id
+    <if test="courseName != null and courseName != ''">
+      and c.course_name like concat('%',#{courseName}, '%')
+    </if>
+    <if test="level != null and level != ''">
+      and completions.`level` like concat('%',#{level}, '%')
+    </if>
+    LIMIT #{page},#{limit}
+  </select>
+
+  <select id="getCompletionQuestionCount" resultType="java.lang.Integer">
+    select
+    count(1)
+    from completionquestion completions ,course c ,type t
+    where c.course_id = completions.course_id and t.type_id = completions.type_id
+    <if test="courseName != null and courseName != ''">
+      and c.course_name like concat('%',#{courseName}, '%')
+    </if>
+    <if test="level != null and level != ''">
+      and completions.`level` like concat('%',#{level}, '%')
+    </if>
+
+  </select>
+
 </mapper>

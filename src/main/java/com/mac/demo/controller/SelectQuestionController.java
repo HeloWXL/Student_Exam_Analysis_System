@@ -2,6 +2,7 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.SelectQuestion;
 import com.mac.demo.service.SelectQuestionService;
+import com.mac.demo.vo.QuerySelectQuestionVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,10 @@ public class SelectQuestionController {
     private SelectQuestionService selectQuestionService;
 
     @ApiOperation("获取选择题列表-分页")
-    @GetMapping("/getSelectQuestion")
+    @PostMapping("/getSelectQuestion")
     @ResponseBody
-    public Map<String,Object> getSelectQuestion(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
-        Map<String,Object> map = selectQuestionService.getSelectQuestion(page,limit);
+    public Map<String,Object> getSelectQuestion(@RequestBody QuerySelectQuestionVo querySelectQuestionVo){
+        Map<String,Object> map = selectQuestionService.getSelectQuestion(querySelectQuestionVo);
         map.put("msg","");
         map.put("code","0");
         return map;

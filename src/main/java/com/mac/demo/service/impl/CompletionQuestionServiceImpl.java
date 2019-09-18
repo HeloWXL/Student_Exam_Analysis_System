@@ -4,6 +4,7 @@ import com.mac.demo.mapper.CompletionQuestionMapper;
 import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.service.CompletionQuestionService;
 import com.mac.demo.vo.CompletionCourseTypeVo;
+import com.mac.demo.vo.QueryCompletionQuestionVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,9 +24,10 @@ public class CompletionQuestionServiceImpl implements CompletionQuestionService 
     private CompletionQuestionMapper completionQuestionMapper;
 
     @Override
-    public Map<String,Object> getCompletionQuestion(Integer page, Integer limit) {
+    public Map<String,Object> getCompletionQuestion(QueryCompletionQuestionVo queryCompletionQuestionVo) {
         Map<String,Object> map = new HashMap<>();
-        List<CompletionCourseTypeVo> list = completionQuestionMapper.getCompletionQuestion((page-1)*limit,limit);
+        queryCompletionQuestionVo.setPage((queryCompletionQuestionVo.getPage()-1)*(queryCompletionQuestionVo.getLimit()));
+        List<QueryCompletionQuestionVo> list = completionQuestionMapper.getCompletionQuestion(queryCompletionQuestionVo);
         map.put("data",list);
         int count = completionQuestionMapper.getCompletionQuestionCount();
         map.put("count",count);

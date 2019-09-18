@@ -174,4 +174,46 @@
       level = #{level,jdbcType=INTEGER}
     where select_id = #{selectId,jdbcType=INTEGER}
   </update>
+
+  <select id="getSelectQuestion" parameterType="com.mac.demo.vo.QuerySelectQuestionVo"
+          resultType="com.mac.demo.vo.QuerySelectQuestionVo">
+
+    select s.select_id as selectId
+    ,s.text as text
+    ,s.answer as answer
+    ,s.option_a as optionA
+    ,s.option_b as optionB
+    ,s.option_c as optionC
+    ,s.create_time as createTime
+    , s.option_d as optionD
+    ,s.knowledge as knowledge
+    ,s.`level` as level
+    ,t.type_name as typeName
+    ,c.course_name as courseName
+    from selectquestion s ,course c ,type t
+    where s.course_id = c.course_id
+    and s.type_id = t.type_id
+    <if test="courseName != null and courseName != ''">
+      and c.course_name like concat('%',#{courseName}, '%')
+    </if>
+    <if test="level != null and level != ''">
+      and s.`level` like concat('%',#{level}, '%')
+    </if>
+    LIMIT #{page},#{limit}
+  </select>
+
+  <select id="getSelectQuestionCount" resultType="java.lang.Integer">
+    select
+    count(1)
+    FROM selectquestion s ,course c ,type t
+    where s.course_id = c.course_id
+    and s.type_id = t.type_id
+    <if test="courseName != null and courseName != ''">
+      and c.course_name like concat('%',#{courseName}, '%')
+    </if>
+    <if test="level != null and level != ''">
+      and s.`level` like concat('%',#{level}, '%')
+    </if>
+
+  </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.service.CompletionQuestionService;
+import com.mac.demo.vo.QueryCompletionQuestionVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,10 @@ public class CompletionQuestionController {
     private CompletionQuestionService completionQuestionService;
 
     @ApiOperation("获取填空题列表-分页")
-    @GetMapping("/getCompletionQuestion")
+    @PostMapping("/getCompletionQuestion")
     @ResponseBody
-    public Map<String,Object> getCompletionQuestion(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
-        Map<String,Object> map = completionQuestionService.getCompletionQuestion(page,limit);
+    public Map<String,Object> getCompletionQuestion(@RequestBody QueryCompletionQuestionVo queryCompletionQuestionVo){
+        Map<String,Object> map = completionQuestionService.getCompletionQuestion(queryCompletionQuestionVo);
         map.put("msg","");
         map.put("code","0");
         return map;

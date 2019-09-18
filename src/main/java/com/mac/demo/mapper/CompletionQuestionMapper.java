@@ -3,6 +3,7 @@ package com.mac.demo.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.vo.CompletionCourseTypeVo;
+import com.mac.demo.vo.QueryCompletionQuestionVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -30,20 +31,17 @@ public interface CompletionQuestionMapper extends BaseMapper<CompletionQuestion>
 
     /**
      * 分页查询填空题
-     * @param page
-     * @param limit
+     *
      * @return
      */
-    @Select("select completion.completion_id,completion.text,completion.answer,completion.level,completion.knowledge,completion.create_time,c.course_name,t.type_name " +
-            "from completionquestion completion ,course c ,type t where c.course_id = completion.course_id and t.type_id = completion.type_id " +
-            "limit #{page},#{limit}")
-    List<CompletionCourseTypeVo> getCompletionQuestion(Integer page, Integer limit);
+
+    List<QueryCompletionQuestionVo> getCompletionQuestion(QueryCompletionQuestionVo queryCompletionQuestionVo);
 
     /**
      * 统计填空题数量
      * @return
      */
-    @Select("select count(1) from completionquestion")
+
     int getCompletionQuestionCount();
 
 
