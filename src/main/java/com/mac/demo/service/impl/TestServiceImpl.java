@@ -39,9 +39,10 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public Map<String, Object> getTest(Integer page, Integer limit) {
+    public Map<String, Object> getTest(TestAdminVo testAdminVo) {
         Map<String, Object> map = new HashMap<>();
-        List<TestAdminVo> list = testMapper.getTest((page-1)*limit,limit);
+        testAdminVo.setPage((testAdminVo.getPage()-1)*(testAdminVo.getLimit()));
+        List<TestAdminVo> list = testMapper.getTest(testAdminVo);
         map.put("data",list);
         int count = testMapper.getTestCount();
         map.put("count",count);

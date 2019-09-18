@@ -90,4 +90,32 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where test_id = #{testId,jdbcType=INTEGER}
   </update>
+
+  <select id="getTest" parameterType="com.mac.demo.vo.TestAdminVo"
+          resultType="com.mac.demo.vo.TestAdminVo">
+
+    select t.test_id as testId
+    ,t.test_name as testName
+    , t.time as time
+    , t.create_time as createTime
+    ,a.admin_name as adminName
+    from test t , admin a
+    where t.admin_id = a.admin_id
+    <if test="testName != null and testName != ''">
+      and t.test_name like concat('%',#{testName}, '%')
+    </if>
+
+    LIMIT #{page},#{limit}
+  </select>
+
+  <select id="getTestCount" resultType="java.lang.Integer">
+    select
+    count(1)
+    from test t , admin a
+    where t.admin_id = a.admin_id
+    <if test="testName != null and testName != ''">
+      and t.test_name like concat('%',#{testName}, '%')
+    </if>
+
+  </select>
 </mapper>

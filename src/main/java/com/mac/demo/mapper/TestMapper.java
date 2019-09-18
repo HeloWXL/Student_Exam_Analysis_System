@@ -39,7 +39,7 @@ public interface TestMapper extends BaseMapper<Test> {
      * @return
      */
     @Select("select t.test_id ,t.test_name , t.time , t.create_time ,a.admin_name from test t , admin a where t.admin_id = a.admin_id limit #{page},#{limit}")
-    List<TestAdminVo> getTest(Integer page, Integer limit);
+    List<TestAdminVo> getTest(TestAdminVo testAdminVo);
 
     /**
      * 获取考试数量

@@ -26,17 +26,12 @@
             <div class="top">
                 <form class="layui-form" action="">
                     <div class="layui-inline">
-                        <label class="layui-form-label">姓名：</label>
+                        <label class="layui-form-label">考试名称：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userName" autocomplete="off" class="layui-input">
+                            <input type="text" name="testName" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">手机号码：</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="phone" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
+
                     <div class="layui-inline" id="btn">
                         <div class="layui-inline">
                             <button type="button" class="layui-btn layui-btn-primary" id="query">查询</button>
@@ -78,26 +73,46 @@
 <script>
     layui.use('table', function(){
         var table = layui.table;
-        table.render({
-            id:'testTable',
-            elem: '#demo'
-            , toolbar: '#toolbars'
-            , defaultToolbar: []
-            ,url: ctx+'/test/getTest' //数据接口
-            ,page: true //开启分页
-            ,cols: [[ //表头
-                {field: 'checkbox', type: 'checkbox'}
-                ,{field: 'number', title: '序号', type: 'numbers'}
-                ,{field: 'testName', title: '考试名称', width:200}
-                ,{field: 'time', title: '考试时间', width:150}
-                ,{field: 'adminName', title: '发布人', width: 150}
-                ,{field: 'createTime', title: '创建时间', width: 200}
-            ]]
-            ,skin: 'line,row' //表格风格
-            ,even: true
-            ,limits: [5, 10, 15]
-            ,limit: 10 //每页默认显示的数量
+        var testAdminVo = {
+            testName:''
+        };
+
+        // 加载表格数据
+        loadData(table,testAdminVo);
+        // 查询
+        $('#query').click(function() {
+
+            var testAdminVo = {
+                testName:$("input[name='testName']").val()
+            };
+            loadData(table,testAdminVo);
         });
+
+        function loadData(table,testAdminVo) {
+            table.render({
+                id: 'testTable',
+                elem: '#demo'
+                , toolbar: '#toolbars'
+                , defaultToolbar: []
+                , url: ctx + '/test/getTest' //数据接口
+                , page: true //开启分页
+                ,method:'post'
+                ,contentType: 'application/json; charset=utf-8'
+                ,where:testAdminVo
+                , cols: [[ //表头
+                    {field: 'checkbox', type: 'checkbox'}
+                    , {field: 'number', title: '序号', type: 'numbers'}
+                    , {field: 'testName', title: '考试名称', width: 200}
+                    , {field: 'time', title: '考试时间', width: 150}
+                    , {field: 'adminName', title: '发布人', width: 150}
+                    , {field: 'createTime', title: '创建时间', width: 200}
+                ]]
+                , skin: 'line,row' //表格风格
+                , even: true
+                , limits: [5, 10, 15]
+                , limit: 10 //每页默认显示的数量
+            });
+        }
 
         table.on('toolbar(testfilter)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);

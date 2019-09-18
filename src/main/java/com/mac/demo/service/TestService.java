@@ -1,6 +1,7 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.Test;
+import com.mac.demo.vo.TestAdminVo;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public interface TestService {
      * @param limit
      * @return
      */
-    Map<String,Object> getTest(Integer page, Integer limit);
+    Map<String,Object> getTest(TestAdminVo testAdminVo);
 
     /**
      * 学生端展示考试列表
