@@ -24,4 +24,8 @@ public class TestAdminVo {
 
     private String adminName;
 
+    private Integer page;
+
+    private Integer limit;
+
 }

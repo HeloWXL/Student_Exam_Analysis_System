@@ -2,6 +2,7 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.Test;
 import com.mac.demo.service.TestService;
+import com.mac.demo.vo.TestAdminVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -51,10 +52,10 @@ public class TestController {
 
 
     @ApiOperation("获取考试列表-分页")
-    @GetMapping("/getTest")
+    @PostMapping("/getTest")
     @ResponseBody
-    public Map<String, Object> getTest(Integer page, Integer limit) {
-        Map<String, Object> map = testService.getTest(page,limit);
+    public Map<String, Object> getTest(@RequestBody TestAdminVo testAdminVo ) {
+        Map<String, Object> map = testService.getTest(testAdminVo);
         map.put("code",0);
         map.put("msg","");
         return map;

@@ -1,6 +1,7 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.SelectQuestion;
+import com.mac.demo.vo.QuerySelectQuestionVo;
 
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public interface SelectQuestionService {
      * @param limit
      * @return
      */
-    Map<String,Object> getSelectQuestion(Integer page, Integer limit);
+    Map<String,Object> getSelectQuestion(QuerySelectQuestionVo querySelectQuestionVo);
 
     /**
      * 根据ID删除选择题

@@ -26,15 +26,15 @@
             <div class="top">
                 <form class="layui-form" action="">
                     <div class="layui-inline">
-                        <label class="layui-form-label">姓名：</label>
+                        <label class="layui-form-label">课程名：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userName" autocomplete="off" class="layui-input">
+                            <input type="text" name="courseName" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">手机号码：</label>
+                        <label class="layui-form-label">难度等级：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="phone" autocomplete="off" class="layui-input">
+                            <input type="text" name="level" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline" id="btn">

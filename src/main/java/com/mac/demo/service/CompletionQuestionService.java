@@ -1,6 +1,7 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.CompletionQuestion;
+import com.mac.demo.vo.QueryCompletionQuestionVo;
 
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public interface CompletionQuestionService {
      * @param limit
      * @return
      */
-    Map<String,Object> getCompletionQuestion(Integer page, Integer limit);
+    Map<String,Object> getCompletionQuestion(QueryCompletionQuestionVo queryCompletionQuestionVo);
 
     /**
      * 添加填空题

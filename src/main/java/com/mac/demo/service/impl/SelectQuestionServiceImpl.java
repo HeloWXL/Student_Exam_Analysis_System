@@ -3,6 +3,7 @@ package com.mac.demo.service.impl;
 import com.mac.demo.mapper.SelectQuestionMapper;
 import com.mac.demo.model.SelectQuestion;
 import com.mac.demo.service.SelectQuestionService;
+import com.mac.demo.vo.QuerySelectQuestionVo;
 import com.mac.demo.vo.SelectCourseTypeVo;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +24,10 @@ public class SelectQuestionServiceImpl implements SelectQuestionService {
     private SelectQuestionMapper selectQuestionMapper;
 
     @Override
-    public Map<String, Object> getSelectQuestion(Integer page, Integer limit) {
+    public Map<String, Object> getSelectQuestion(QuerySelectQuestionVo querySelectQuestionVo) {
         Map<String, Object> map = new HashMap<>();
-        List<SelectCourseTypeVo> list = selectQuestionMapper.getSelectQuestion((page-1)*limit,limit);
+        querySelectQuestionVo.setPage((querySelectQuestionVo.getPage()-1)*(querySelectQuestionVo.getLimit()));
+        List<QuerySelectQuestionVo> list = selectQuestionMapper.getSelectQuestion(querySelectQuestionVo);
         map.put("data",list);
         int count = selectQuestionMapper.getSelectQuestionCount();
         map.put("count",count);
