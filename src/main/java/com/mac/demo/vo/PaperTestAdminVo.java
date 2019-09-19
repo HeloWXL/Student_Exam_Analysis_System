@@ -28,4 +28,8 @@ public class PaperTestAdminVo {
 
     private Integer state;
 
+    private Integer page;
+
+    private Integer limit;
+
 }

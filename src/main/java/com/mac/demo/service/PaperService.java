@@ -42,7 +42,7 @@ public interface PaperService {
      * @param limit
      * @return
      */
-    Map<String,Object> getPaper(Integer page, Integer limit);
+    Map<String,Object> getPaper(PaperTestAdminVo paperTestAdminVo);
 
     /**
      * 学生获取考试列表

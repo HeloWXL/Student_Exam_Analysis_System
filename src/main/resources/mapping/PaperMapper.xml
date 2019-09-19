@@ -96,4 +96,35 @@
       paper_name = #{paperName,jdbcType=VARCHAR}
     where paper_id = #{paperId,jdbcType=INTEGER}
   </update>
+
+  <select id="getPaper" parameterType="com.mac.demo.vo.PaperTestAdminVo"
+          resultType="com.mac.demo.vo.PaperTestAdminVo">
+
+    select p.state as state
+    ,p.paper_name as paperName
+    , p.create_time as createTime
+    , p.paper_id as paperId
+    ,a.admin_name as adminName
+    ,t.test_name as testName
+    ,t.time as time
+    from paper p , admin a , test t
+    where p.admin_id = a.admin_id and t.test_id = p.test_id
+    <if test="paperName != null and paperName != ''">
+      and p.paper_name like concat('%',#{paperName}, '%')
+    </if>
+    LIMIT #{page},#{limit}
+  </select>
+
+  <select id="getPaperCount" resultType="java.lang.Integer">
+    select
+    count(1)
+    from paper p , admin a , test t
+    where p.admin_id = a.admin_id and t.test_id = p.test_id
+    <if test="paperName != null and paperName != ''">
+      and p.paper_name like concat('%',#{paperName}, '%')
+    </if>
+
+  </select>
+
+
 </mapper>

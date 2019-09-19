@@ -23,7 +23,7 @@
             <!-- 模块名 -->
             <blockquote class="layui-elem-quote">题目类型管理</blockquote>
             <%--            操作--%>
-            <div class="top">
+            <%--<div class="top">
                 <form class="layui-form" action="">
                     <div class="layui-inline">
                         <label class="layui-form-label">姓名：</label>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div>--%>
 
             <%--            表格--%>
             <div class="center">

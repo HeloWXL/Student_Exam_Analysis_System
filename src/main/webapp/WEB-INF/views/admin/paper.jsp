@@ -26,17 +26,12 @@
             <div class="top">
                 <form class="layui-form" action="">
                     <div class="layui-inline">
-                        <label class="layui-form-label">姓名：</label>
+                        <label class="layui-form-label">试卷名称：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userName" autocomplete="off" class="layui-input">
+                            <input type="text" name="paperName" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">手机号码：</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="phone" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
+
                     <div class="layui-inline" id="btn">
                         <div class="layui-inline">
                             <button type="button" class="layui-btn layui-btn-primary" id="query">查询</button>
@@ -95,37 +90,59 @@
         var table = layui.table;
         var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
 
-        form.render();
-        //第一个实例
-        table.render({
-            id:'paperTable',
-            elem: '#demo'
-            , toolbar: '#toolbars'
-            , defaultToolbar: []
-            ,url: ctx+'/paper/getPaper' //数据接口
-            ,page: true //开启分页
-            ,cols: [[ //表头
-                {field: 'checkbox', type: 'checkbox'}
-                ,{field: 'number', title: '序号', type: 'numbers', align:'center'}
-                ,{field: 'paperName', title: '试卷名称', width: 200, align:'center'}
-                ,{field: 'testName', title: '考试名称', width: 200, align:'center'}
-                ,{field: 'time', title: '考试时间', width: 120, align:'center'}
-                ,{field: 'adminName', title: '发布人', width: 150, align:'center'}
-                ,{field: 'createTime', title: '创建时间', width: 200, align:'center'}
-                ,{field: 'state', title: '试卷状态', width: 120 , templet: function(d){
-                    if(d.state==1){
-                        return '<span style="color: green;">已启用</span>'
-                    }else{
-                        return '<span style="color: red;">未启用</span>'
-                    }
-                    }}
-                ,{ title: '开关', width: 120, align:'center', toolbar: '#barDemo'}
-            ]]
-            ,skin: 'line,row' //表格风格
-            ,even: true
-            ,limits: [5, 10, 15]
-            ,limit: 10 //每页默认显示的数量
+        var paperTestAdminVo = {
+            paperName:''
+        };
+
+        // 加载表格数据
+        loadData(table,paperTestAdminVo);
+        // 查询
+        $('#query').click(function() {
+
+            var paperTestAdminVo = {
+                paperName:$("input[name='paperName']").val()
+
+            };
+            loadData(table,paperTestAdminVo);
         });
+
+        form.render();
+        function loadData(table,paperTestAdminVo) {
+            table.render({
+                id: 'paperTable',
+                elem: '#demo'
+                , toolbar: '#toolbars'
+                , defaultToolbar: []
+                , url: ctx + '/paper/getPaper' //数据接口
+                , page: true //开启分页
+                , method:'post'
+                ,contentType: 'application/json; charset=utf-8'
+                ,where:paperTestAdminVo
+                , cols: [[ //表头
+                    {field: 'checkbox', type: 'checkbox'}
+                    , {field: 'number', title: '序号', type: 'numbers', align: 'center'}
+                    , {field: 'paperName', title: '试卷名称', width: 200, align: 'center'}
+                    , {field: 'testName', title: '考试名称', width: 200, align: 'center'}
+                    , {field: 'time', title: '考试时间', width: 120, align: 'center'}
+                    , {field: 'adminName', title: '发布人', width: 150, align: 'center'}
+                    , {field: 'createTime', title: '创建时间', width: 200, align: 'center'}
+                    , {
+                        field: 'state', title: '试卷状态', width: 120, templet: function (d) {
+                            if (d.state == 1) {
+                                return '<span style="color: green;">已启用</span>'
+                            } else {
+                                return '<span style="color: red;">未启用</span>'
+                            }
+                        }
+                    }
+                    , {title: '开关', width: 120, align: 'center', toolbar: '#barDemo'}
+                ]]
+                , skin: 'line,row' //表格风格
+                , even: true
+                , limits: [5, 10, 15]
+                , limit: 10 //每页默认显示的数量
+            });
+        }
 
         table.on('toolbar(paperfilter)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);

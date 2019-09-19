@@ -38,13 +38,15 @@ public interface PaperMapper {
      */
     int updateByPrimaryKeySelective(Paper record);
 
-    @Select("select p.state ,p.paper_name , p.create_time , p.paper_id ,a.admin_name ,t.test_name,t.time\n" +
-            "from paper p , admin a , test t\n" +
-            "where p.admin_id = a.admin_id and t.test_id = p.test_id \n" +
-            "limit #{page},#{limit}")
-    List<PaperTestAdminVo> getPaper(Integer page,Integer limit);
+    /**
+     * 页面加载与条件查询
+     * @authtor: yechengchao
+     * @param paperTestAdminVo
+     * @return
+     */
 
-    @Select("select count(1) from paper")
+    List<PaperTestAdminVo> getPaper(PaperTestAdminVo paperTestAdminVo);
+
     int getPaperCount();
 
     /**

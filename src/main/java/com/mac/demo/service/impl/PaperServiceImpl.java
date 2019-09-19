@@ -51,9 +51,10 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Map<String, Object> getPaper(Integer page, Integer limit) {
+    public Map<String, Object> getPaper(PaperTestAdminVo paperTestAdminVo) {
         Map<String, Object> map = new HashMap<>();
-        List<PaperTestAdminVo>  list = paperMapper.getPaper((page-1)*limit,limit);
+        paperTestAdminVo.setPage((paperTestAdminVo.getPage()-1)*(paperTestAdminVo.getLimit()));
+        List<PaperTestAdminVo>  list = paperMapper.getPaper(paperTestAdminVo);
         map.put("data",list);
         int count = paperMapper.getPaperCount();
         map.put("count",count);

@@ -53,10 +53,10 @@ public class PaperController {
 
 
     @ApiOperation("获取试卷列表-分页")
-    @GetMapping("/getPaper")
+    @PostMapping("/getPaper")
     @ResponseBody
-    public Map<String, Object> getPaper(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
-        Map<String, Object> map = paperService.getPaper(page,limit);
+    public Map<String, Object> getPaper(@RequestBody PaperTestAdminVo paperTestAdminVo) {
+        Map<String, Object> map = paperService.getPaper(paperTestAdminVo);
         map.put("code",0);
         map.put("msg","");
         return map;
