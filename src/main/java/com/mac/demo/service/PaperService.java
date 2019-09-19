@@ -65,4 +65,8 @@ public interface PaperService {
      * @return
      */
     Map<String,Object>  selectPaper(Integer paperId);
+
+    Integer setPaperStateOpen(Integer paperId);
+
+    Integer setPaperStateClose(Integer paperId);
 }

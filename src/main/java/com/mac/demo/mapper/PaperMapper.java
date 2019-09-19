@@ -57,4 +57,10 @@ public interface PaperMapper {
             "from paper p , admin a , test t\n" +
             "where p.admin_id = a.admin_id and t.test_id = p.test_id  and p.state = 1 and t.test_id = #{testId}\n")
     List<PaperTestAdminVo> getPaperByTestId(Integer testId);
+
+    @Select("update paper set state = 1 where paper_id = #{paperId}")
+    Integer setPaperStateOpen(Integer paperId);
+
+    @Select("update paper set state = 0 where paper_id = #{paperId}")
+    Integer setPaperStateClose(Integer paperId);
 }

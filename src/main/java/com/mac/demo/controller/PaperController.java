@@ -87,4 +87,29 @@ public class PaperController {
         return "/student/test";
     }
 
+    /**
+     * @authod:叶程超
+     * 启用试卷
+     * @param paperId
+     * @return
+     */
+    @ApiOperation("试卷状态修改-设置启用状态")
+    @GetMapping("/setPaperStateOpen/{paperId}")
+    @ResponseBody
+    public Integer setPaperStateOpen(@PathVariable("paperId") Integer paperId){
+        return paperService.setPaperStateOpen(paperId);
+    }
+
+    /**
+     * @authod:叶程超
+     * 启用试卷
+     * @param paperId
+     * @return
+     */
+    @ApiOperation("试卷状态修改-设置关闭状态")
+    @GetMapping("/setPaperStateClose/{paperId}")
+    @ResponseBody
+    public Integer setPaperStateClose(@PathVariable("paperId") Integer paperId){
+        return paperService.setPaperStateClose(paperId);
+    }
 }

@@ -129,4 +129,14 @@ public class PaperServiceImpl implements PaperService {
         map.put("complete",completionQuestionList);
         return map;
     }
+
+    @Override
+    public Integer setPaperStateOpen(Integer paperId) {
+        return paperMapper.setPaperStateOpen(paperId);
+    }
+
+    @Override
+    public Integer setPaperStateClose(Integer paperId) {
+        return paperMapper.setPaperStateClose(paperId);
+    }
 }
