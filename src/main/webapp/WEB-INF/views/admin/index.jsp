@@ -88,7 +88,7 @@
                     <div class="tpl-userbar">
                         <ul>
                             <li><a href="javascript:;" class="dashboard" tag="style-bar"><i class="fa fa-dashboard"></i></a></li>
-                            <li><a href="">欢迎你，admin</a></li>
+                            <li><a href="">欢迎你，${admin.adminName}</a></li>
                             <li><a href="javascript:;" class="logout"><i class="fa fa-power-off"></i>退出登录</a></li>
                         </ul>
                     </div>

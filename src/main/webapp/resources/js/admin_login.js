@@ -1,4 +1,5 @@
 if($('#msg').val()!=""){
+
     tankuan();
 }
 
@@ -14,18 +15,19 @@ function tankuan(){
 
         //提示密码错误
         if($('#msg').val()!=""){
-            var str="${msg}";
+            var str='${msg}';
             msg(str);
         }
-        //设置弹框提示
-        function msg(str, icon, offset) {
-            str = str == null ? "没有内容" : str;
-            offset = offset == null ? "20px" : offset;
-            if (icon == null || icon == "") {
-                return layer.msg(str, {offset: offset});
-            } else {
-                return layer.msg(str, {icon: icon}, {offset: offset});
-            }
-        }
+
     })
+    //设置弹框提示
+    function msg(str, icon, offset) {
+        str = str == null ? "没有内容" : str;
+        offset = offset == null ? "20px" : offset;
+        if (icon == null || icon == "") {
+            return layer.msg(str, {offset: offset});
+        } else {
+            return layer.msg(str, {icon: icon}, {offset: offset});
+        }
+    }
 }

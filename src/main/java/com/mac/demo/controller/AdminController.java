@@ -107,6 +107,7 @@ public class AdminController {
     @ResponseBody
     public int changePassWord(@RequestParam("passWord") String passWord,HttpServletRequest request) {
         Admin admin = (Admin) request.getSession().getAttribute("admin");
+       request.getSession().setAttribute("msg","密码修改成功，请重新登录");
         return adminService.changePassWord(passWord,admin.getAdminId());
     }
 

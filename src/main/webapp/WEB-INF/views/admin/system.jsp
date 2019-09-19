@@ -19,7 +19,7 @@
 <body>
 <div class="layui-col-md12">
     <!-- 模块名 -->
-    <blockquote class="layui-elem-quote">系统配置相关</blockquote>
+    <blockquote class="layui-elem-quote">管理员信息相关</blockquote>
     <div class="tpl-card">
         <div class="card-pannel">
             <table class="layui-table" style="margin:0">
@@ -29,17 +29,22 @@
                 </colgroup>
                 <tbody>
                 <tr>
-                    <td>当前版本</td>
-                    <td>s1.0 pro <a href="javascript:;" class="card-a">更新日志</a></td>
+                    <td>当前用户</td>
+                    <td>${admin.adminName}</td>
                 </tr>
                 <tr>
-                    <td>PHP环境</td>
-                    <td>php 7.0.12-nts + Apche</td>
+                    <td>修改密码</td>
+                    <td>
+                        <div class="layui-input-inline">
+                        <input type="password" name="password" autocomplete="off" class="layui-input" style="width: 100px">
+                        </div>
+                        <button type="button" class="layui-btn layui-btn-primary" id="changePassWord" >修改</button>
+
+                    </td>
+
+
                 </tr>
-                <tr>
-                    <td>数据库</td>
-                    <td>mySql</td>
-                </tr>
+
                 </tbody>
             </table>
         </div>
@@ -47,4 +52,26 @@
 
 </div>
 </body>
+<script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+<script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
+
+<script>
+
+
+    $("#changePassWord").click(function (){
+        var password=$("input[name='password']").val();
+        $.ajax({
+            url:'/admin/changePassWord',
+            data:{passWord:password},
+            dataType:'json',
+            type:'post',
+            success: function(data) {
+                parent.location.href="/admin/toLogin";
+            }
+
+        })
+    })
+
+
+</script>
 </html>
