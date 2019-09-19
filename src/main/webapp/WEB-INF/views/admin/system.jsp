@@ -27,7 +27,7 @@
                     <col width="100">
                     <col>
                 </colgroup>
-                <tbody>
+                <tbody id="tbody">
                 <tr>
                     <td>当前用户</td>
                     <td>${admin.adminName}</td>
@@ -41,9 +41,9 @@
                         <button type="button" class="layui-btn layui-btn-primary" id="changePassWord" >修改</button>
 
                     </td>
-
-
                 </tr>
+
+
 
                 </tbody>
             </table>
@@ -56,6 +56,53 @@
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 
 <script>
+
+    $(function(){
+       if('${admin.adminName}'=='admin'){
+           //先保存div中原来的html
+           var html = document.getElementById("tbody").innerHTML;
+           //再跟你想追加的代码加到一起插入div中
+           document.getElementById("tbody").innerHTML = html + " <tr>\n" +
+               "                    <td>添加用户</td>\n" +
+               "                    <td>\n" +
+               "\n" +
+               "                        <div class=\"layui-input-inline\">\n" +
+               "                            <label class=\"layui-form-label\" style='margin-left: -50px'>用户名：</label>\n" +
+               "                            <input type=\"password\" name=\"addAdminName\" autocomplete=\"off\" class=\"layui-input\" style=\"width: 100px\">\n" +
+               "                        </div>\n" +
+               "\n" +
+               "                        <div class=\"layui-input-inline\">\n" +
+               "                            <label class=\"layui-form-label\">密码：</label>\n" +
+               "                            <input type=\"password\" name=\"addPassword\" autocomplete=\"off\" class=\"layui-input\" style=\"width: 100px\">\n" +
+               "                        </div>\n" +
+               "                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n" +
+               "                        <button type=\"button\" class=\"layui-btn layui-btn-primary\" id=\"addAdmin\" >确定</button>\n" +
+               "\n" +
+               "                    </td>\n" +
+               "                </tr>\n";
+
+           $("#addAdmin").click(function () {
+
+               var addAdmin = {
+                  adminName:$("input[name='addAdminName']").val(),
+                  adminPassword:$("input[name='addPassword']").val()
+           };
+               var admin=JSON.stringify(addAdmin);
+               $.ajax({
+                   url:'/admin/insertAdmin',
+                   data:admin,
+                   dataType:'json',
+                   type:'post',
+                   contentType: 'application/json; charset=utf-8',
+                   success: function(data) {
+                       parent.location.href="/admin/toIndex";
+                   }
+               })
+
+           })
+        }
+    });
+
 
 
     $("#changePassWord").click(function (){
@@ -71,6 +118,7 @@
 
         })
     })
+
 
 
 </script>

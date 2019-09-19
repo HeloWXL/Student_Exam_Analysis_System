@@ -27,7 +27,7 @@
         <ul>
             <li class="logo">
                 <img class="user-upload" src="${ctx}/resources/images/4a251abe82900c79733daa753664f701.jpg" alt="admin" title="admin">
-                <span>王咸林</span>
+                <span>${admin.adminName}</span>
             </li>
             <!--<li class="nav-item active">
         <a href="index.html" class="a-item"><i class="fa fa-home nav-icon" aria-hidden="true"></i><span>首页</span></a>
@@ -207,6 +207,9 @@
     if('${admin}'==""){
         location.href="/admin/toLogin";
     }
+
+
+
 </script>
 </body>
 </html>

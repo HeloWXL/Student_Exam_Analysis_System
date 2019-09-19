@@ -26,7 +26,7 @@ public class AdminController {
 
     @ApiOperation("管理员首页")
     @GetMapping("/toIndex")
-    public String toIndex(){
+    public String toIndex(HttpServletRequest request){
         return "admin/index";
     }
 
@@ -158,7 +158,8 @@ public class AdminController {
     @ApiOperation("添加管理员")
     @PostMapping("/insertAdmin")
     @ResponseBody
-    public int insertSelective(@RequestBody Admin admin) {
+    public int insertSelective(@RequestBody Admin admin,HttpServletRequest request) {
+     
         return adminService.insertSelective(admin);
     }
 

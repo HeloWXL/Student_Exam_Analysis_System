@@ -40,7 +40,7 @@ $(function(){
 			var error = "错误~";
 
 			// 初始化页面
-			msg("欢迎 登录");
+			msg("${msg}");
 			// 初始化提示消息
 			function msg(str,icon,offset){
 				str = str == null ? "没有内容" : str;
