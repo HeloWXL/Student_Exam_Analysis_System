@@ -197,10 +197,10 @@ $(function(){
 			bf($(".logout"),function(){
 				msg("退出成功");
 				$.ajax({
-					url:"../user/logout",
+					url:"../admin/toLogout",
 					type:"post",
 					success:function(data){
-						window.location.href = "../user/login";
+						window.location.href = "../admin/toLogin";
 					}
 				})
 			})

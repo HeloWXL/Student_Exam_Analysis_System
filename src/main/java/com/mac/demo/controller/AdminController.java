@@ -30,6 +30,17 @@ public class AdminController {
         return "admin/index";
     }
 
+    /**
+     * @author: yechengchao
+     * @return
+     */
+    @ApiOperation("管理员退出登录页面")
+    @PostMapping("/toLogout")
+    public String toLogout(HttpServletRequest request){
+        request.getSession().setAttribute("admin","");
+        return "admin/login";
+    }
+
     @ApiOperation("管理员登录页面")
     @GetMapping("/toLogin")
     public String toLogin(){
