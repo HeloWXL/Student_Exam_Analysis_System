@@ -39,8 +39,13 @@ $(function(){
 			var upload = layui.upload;// 文件上传组件
 			var error = "错误~";
 
+			var message=$.cookie('message');
+			console.log(message);
 			// 初始化页面
-			msg("${msg}");
+			msg(message);
+
+			$.cookie("message", "false", { expires: -1 });
+
 			// 初始化提示消息
 			function msg(str,icon,offset){
 				str = str == null ? "没有内容" : str;
