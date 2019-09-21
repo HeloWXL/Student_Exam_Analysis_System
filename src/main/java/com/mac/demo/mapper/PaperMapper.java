@@ -1,5 +1,6 @@
 package com.mac.demo.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Paper;
 import com.mac.demo.vo.PaperTestAdminVo;
 import org.apache.ibatis.annotations.Select;
@@ -7,7 +8,7 @@ import org.omg.CORBA.INTERNAL;
 
 import java.util.List;
 
-public interface PaperMapper {
+public interface PaperMapper extends BaseMapper<Paper> {
 
 
     /**

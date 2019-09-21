@@ -67,20 +67,10 @@
     </div>
 </script>
 
-<script type="text/html" id="barDemo">
-    <form class="layui-form">
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-<%--                {{#  if(d.state ==1){ }}--%>
-<%--                <input type="checkbox" checked="false" lay-skin="switch">--%>
-<%--                {{# }else {  }}--%>
-<%--                <input type="checkbox"  checked="true" lay-skin="switch">--%>
-<%--                {{#  }  }}--%>
-            </div>
-        </div>
-    </form>
 
+<script type="text/html" id="barDemo">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="sex"  value="{{d.state}}" lay-skin="switch" lay-text="启用|未启用" lay-filter="sexDemo" {{ d.state == 1 ? 'checked' : '' }}>
 </script>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
@@ -89,7 +79,7 @@
     layui.use(['table','form'], function(){
         var table = layui.table;
         var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
-
+        form.render();
         var paperTestAdminVo = {
             paperName:''
         };
@@ -106,7 +96,7 @@
             loadData(table,paperTestAdminVo);
         });
 
-        form.render();
+
         function loadData(table,paperTestAdminVo) {
             table.render({
                 id: 'paperTable',
@@ -135,12 +125,18 @@
                             }
                         }
                     }
-                    , {title: '开关', width: 120, align: 'center', toolbar: '#barDemo'}
+                    , {title: '是否启用', width: 120, align: 'center', toolbar: '#barDemo'}
                 ]]
                 , skin: 'line,row' //表格风格
                 , even: true
                 , limits: [5, 10, 15]
                 , limit: 10 //每页默认显示的数量
+            });
+
+            //监听锁定操作
+            form.on('switch(sexDemo)', function(data){
+                layer.tips(this.value + ' ' + this.name + '：'+ data.elem.checked, data.othis);
+                console.log(this.value + ' ' + this.name + '：'+ data.elem.checked, data.othis)
             });
         }
 

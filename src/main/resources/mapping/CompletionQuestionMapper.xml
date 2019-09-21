@@ -137,7 +137,9 @@
     ,completions.knowledge as knowledge
     ,completions.create_time as createTime
     ,c.course_name as courseName
+    ,c.course_id as courseId
     ,t.type_name as typeName
+    ,t.type_id as typeId
     from completionquestion completions ,course c ,type t
     where c.course_id = completions.course_id and t.type_id = completions.type_id
     <if test="courseName != null and courseName != ''">

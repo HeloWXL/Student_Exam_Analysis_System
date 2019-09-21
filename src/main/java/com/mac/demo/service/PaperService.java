@@ -37,9 +37,13 @@ public interface PaperService {
     int updateByPrimaryKeySelective(Paper record);
 
     /**
+     * 根据试卷的ID获取试卷的信息
+     * @param paperId
+     * @return
+     */
+    Paper selectByPrimaryKey(Integer paperId);
+    /**
      * 获取试卷列表
-     * @param page
-     * @param limit
      * @return
      */
     Map<String,Object> getPaper(PaperTestAdminVo paperTestAdminVo);
@@ -64,7 +68,7 @@ public interface PaperService {
      * @param paperId
      * @return
      */
-    Map<String,Object>  selectPaper(Integer paperId);
+    Paper  selectPaper(Integer paperId);
 
     Integer setPaperStateOpen(Integer paperId);
 

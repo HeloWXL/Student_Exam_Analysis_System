@@ -35,10 +35,10 @@
     <div class="content">
         <div>
             <p>本次考试是在线考试，学生请自觉遵守考试纪律，不许抄袭,如有违反，将取消本次考试资格。</p>
-            <p>试卷：<span>数学</span></p>
+            <p>试卷：<span>${paper.paperName}</span></p>
             <p>考试时间：<span>60分钟</span></p>
             <p>总分：<span>100分</span></p>
-            <p>创建时间：<span>2019-09-10</span></p>
+            <input value="${paper.paperId}" type="hidden" id="paperId">
         </div>
         </span></span>
         <p style="margin: 10px 15px;">
@@ -59,8 +59,9 @@
         }
     });
     $("#comfirm").click(function(){
+        var paperId = $("#paperId").val();
         mui.alert("我已阅读考试声明，如有违反，后果自负",function(){
-            location.href="/student/toTest"
+            location.href="/paper/selectPaperInfo/"+paperId;
         })
     })
 

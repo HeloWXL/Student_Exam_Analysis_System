@@ -1,23 +1,20 @@
 layui.use('table', function(){
     var table = layui.table;
-
+    var form =layui.form;
     var queryCompletionQuestionVo = {
         courseName:'',
         level:''
     };
-
     // 加载表格数据
     loadData(table,queryCompletionQuestionVo);
     // 查询
     $('#query').click(function() {
-
         var queryCompletionQuestionVo = {
             courseName:$("input[name='courseName']").val(),
             level:$("input[name='level']").val()
         };
         loadData(table,queryCompletionQuestionVo);
     });
-
 
     function loadData(table,queryCompletionQuestionVo) {
         table.render({
@@ -257,8 +254,6 @@ layui.use('table', function(){
                             '</div>\n',
                         btn: ['提交', '取消']
                         , success: function(layero) {
-                            var forms = layui.form;
-                            forms.render();
                             layero.find('.layui-layer-btn').css('text-align', 'center');
                             // 展示在弹出层里面
                             $('#text').val(data[0].text);
@@ -267,7 +262,7 @@ layui.use('table', function(){
                             $('select[name="typeId"]').val(data[0].typeId);
                             $('#level').val(data[0].level);
                             $('#knowledge').val(data[0].knowledge);
-                            forms.render('select')
+                            form.render('select')
                         },
                         btn1: function(index) {
                             // 提交
@@ -308,6 +303,5 @@ layui.use('table', function(){
                 }
         }
     });
-
 
 });

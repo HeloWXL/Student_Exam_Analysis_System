@@ -16,8 +16,6 @@ public interface SelectQuestionService {
 
     /**
      * 获取选择题列表
-     * @param page
-     * @param limit
      * @return
      */
     Map<String,Object> getSelectQuestion(QuerySelectQuestionVo querySelectQuestionVo);

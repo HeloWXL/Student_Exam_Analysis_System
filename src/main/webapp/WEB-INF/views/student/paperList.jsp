@@ -54,7 +54,7 @@
     <div id="content">
         <c:forEach var="paper" items="${paperList}">
             <div class="paper">
-                <a href="/paper/selectPaperInfo/${paper.paperId}">
+                <a href="/student/toDeclaer/${paper.paperId}">
                     <img src="${ctx}/resources/images/logo.png" />
                     <p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p>
                     <p>考试名称：<span>${paper.testName}</span></p>

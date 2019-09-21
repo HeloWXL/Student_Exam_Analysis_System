@@ -17,45 +17,73 @@
     <script>
         var ctx = '${ctx}'
     </script>
+
+    <style>
+        .mui-navigate-right{
+            text-decoration: none!important;
+        }
+        .mui-table-view-cell>a:not(.mui-btn){
+            margin: 3px 18px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="mui-content">
-<%--<div class="banner"><img src="images/banner.png"/></div>--%>
-<div class="main">
-    <div class="warp">
+    <div class="main">
+      <div class="warp">
         <div class="issue" id="issue">
+            <h4>选择题</h4>
+            <c:forEach var="select" items="${paper.selectQuestionList}" varStatus="status">
+                <div class="cnt" id="id${status.count}">
+                    <h3>${status.count}、${select.text}</h3>
 
-<c:forEach var="t" items="${test}">
-    <%--                选择题列表--%>
-<%--    <p>${t.key}</p>--%>
-    <c:out value="${t[\"value\"][0]}"></c:out>
-    <c:out value="${t[\"value\"][1]}"></c:out>
-<%--    <c:forEach var="select" items="${t[\"value\"][0]}">--%>
-<%--            <div class="cnt">--%>
-<%--                <h3>${select.text}</h3>--%>
-<%--                <ul>--%>
-<%--                    <li><span>&nbsp;</span><label><input type="radio" name="select'+i+'" value="0" />${select.optionA}</label></li>--%>
-<%--                    <li><span>&nbsp;</span><label><input type="radio" name="select'+i+'" value="0" />${select.optionB}</label></li>--%>
-<%--                    <li><span>&nbsp;</span><label><input type="radio" name="select'+i+'" value="0" />${select.optionC}</label></li>--%>
-<%--                    <li><span>&nbsp;</span><label><input type="radio" name="select'+i+'" value="0" />${select.optionD}</label></li>--%>
-<%--                </ul>--%>
-<%--            </div>--%>
-<%--    </c:forEach>--%>
-    <%--                填空题列表--%>
-<%--    <c:forEach var="complete" items='${t[\"value\"][1]}'>--%>
-<%--            <div class="cnt">--%>
-<%--               <h3>${complete.text}</h3>--%>
-<%--                   <label><input type="text" class="mui-input-clear"></label>--%>
-<%--           </div>--%>
-<%--    </c:forEach>--%>
-</c:forEach>
-                <a href="/student/toReport">学生报告页面</a>
+                    <ul class="mui-table-view mui-table-view-radio">
+                        <li class="mui-table-view-cell" value="a">
+                            <a class="mui-navigate-right">A、${select.optionA}</a>
+                        </li>
+                        <li class="mui-table-view-cell" value="b">
+                           <a class="mui-navigate-right" > B、${select.optionB}</a>
+                        </li>
+                        <li class="mui-table-view-cell" value="c">
+                            <a class="mui-navigate-right">C、${select.optionC}</a>
+                        </li>
+                        <li class="mui-table-view-cell" value="d">
+                           <a class="mui-navigate-right"> D、${select.optionD}</a>
+                        </li>
+                    </ul>
+                </div>
+            </c:forEach>
+
+            <h4>填空题</h4>
+            <c:forEach var="completion" items="${paper.completionQuestionList}" varStatus="status">
+                <div class="cnt">
+                    <h3>${status.count}、${completion.text}</h3>
+                    <label><input type="text" class="mui-input-clear" name="c${completion.completionId}"></label>
+                </div>
+            </c:forEach>
+            <div style="position: relative;top: 10px">
+                <button type="button" class="mui-btn mui-btn-primary"  id="submit" style="width: 100%">绿色</button>
+            </div>
         </div>
+
     </div>
-</div>
+    </div>
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
-<%--<script src="${ctx}/resources/js/test.js" type="application/javascript"></script>--%>
+<script src="${ctx}/resources/js/mui.min.js" type="application/javascript"></script>
+<script>
+    $(function () {
+
+        $("#submit").click(function () {
+            getRadioRes()
+        })
+
+        function getRadioRes(className) {
+            var elem = document.getElementsByClassName('.cnt .mui-table-view-radio .mui-selected');
+            console.log(elem.length);
+        }
+    })
+</script>
 </html>

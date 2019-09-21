@@ -51,6 +51,11 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    public Paper selectByPrimaryKey(Integer paperId) {
+        return paperMapper.selectById(paperId);
+    }
+
+    @Override
     public Map<String, Object> getPaper(PaperTestAdminVo paperTestAdminVo) {
         Map<String, Object> map = new HashMap<>();
         paperTestAdminVo.setPage((paperTestAdminVo.getPage()-1)*(paperTestAdminVo.getLimit()));
@@ -117,17 +122,16 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Map<String,Object> selectPaper(Integer paperId) {
+    public Paper selectPaper(Integer paperId) {
         //根据试卷的ID查询试卷的相信信息
         Paper p = paperMapper.selectByPrimaryKey(paperId);
-        Map<String,Object> map = new HashMap<>();
         //遍历试卷中存放的选择题ID并根据ID查询选择题的详细信息存放在list中
         List<SelectQuestion> selectQuestionList = selectQuestionMapper.selectBatchIds(PaperUtils.getQuestionIds(p.getSelectList()));
         //遍历试卷中存放的填空题ID并根据ID查询填空题的详细信息存放在list中
         List<CompletionQuestion> completionQuestionList = completionQuestionMapper.selectBatchIds(PaperUtils.getQuestionIds(p.getCompletionList()));
-        map.put("select",selectQuestionList);
-        map.put("complete",completionQuestionList);
-        return map;
+        p.setSelectQuestionList(selectQuestionList);
+        p.setCompletionQuestionList(completionQuestionList);
+        return p;
     }
 
     @Override

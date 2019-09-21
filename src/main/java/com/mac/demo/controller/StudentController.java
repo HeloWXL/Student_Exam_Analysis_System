@@ -1,5 +1,6 @@
 package com.mac.demo.controller;
 
+import com.mac.demo.model.Paper;
 import com.mac.demo.model.Student;
 import com.mac.demo.service.PaperService;
 import com.mac.demo.service.StudentService;
@@ -64,8 +65,10 @@ public class StudentController {
     }
 
     @ApiOperation("考试声明页面")
-    @GetMapping("/toDeclaer")
-    public String toDeclaer(){
+    @GetMapping("/toDeclaer/{paperId}")
+    public String toDeclaer(@PathVariable("paperId") Integer paperId ,Model model){
+        Paper p = paperService.selectByPrimaryKey(paperId);
+        model.addAttribute("paper",p);
         return "student/declare";
     }
 

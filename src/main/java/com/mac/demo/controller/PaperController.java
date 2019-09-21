@@ -81,9 +81,10 @@ public class PaperController {
 
     @ApiOperation("试卷详细信息")
     @GetMapping("/selectPaperInfo/{paperId}")
+//    @ResponseBody
     public String selectPaper(@PathVariable("paperId") Integer paperId,Model model){
-        Map<String,Object> map = paperService.selectPaper(paperId);
-        model.addAttribute("test",map);
+        Paper p = paperService.selectPaper(paperId);
+        model.addAttribute("paper",p);
         return "/student/test";
     }
 

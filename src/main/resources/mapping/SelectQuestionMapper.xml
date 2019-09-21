@@ -189,7 +189,9 @@
     ,s.knowledge as knowledge
     ,s.`level` as level
     ,t.type_name as typeName
+    ,t.type_id as typeId
     ,c.course_name as courseName
+    ,c.course_id as courseId
     from selectquestion s ,course c ,type t
     where s.course_id = c.course_id
     and s.type_id = t.type_id

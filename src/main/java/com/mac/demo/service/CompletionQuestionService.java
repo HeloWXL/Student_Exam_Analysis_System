@@ -14,8 +14,6 @@ import java.util.Map;
 public interface CompletionQuestionService {
     /**
      * 分页查询填空题
-     * @param page
-     * @param limit
      * @return
      */
     Map<String,Object> getCompletionQuestion(QueryCompletionQuestionVo queryCompletionQuestionVo);
