@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Classname AdminController
@@ -26,7 +28,26 @@ public class AdminController {
 
     @ApiOperation("管理员首页")
     @GetMapping("/toIndex")
-    public String toIndex(HttpServletRequest request){
+    public String toIndex(HttpServletRequest request, HttpServletResponse response){
+        Cookie[] cookies=request.getCookies();
+
+            Cookie adminCookie=new Cookie("message","欢迎登陆");
+            adminCookie.setMaxAge(30*24*60*60);//存活期一个月
+            adminCookie.setPath("/");
+            response.addCookie(adminCookie);
+
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("messageid")){
+                    if(cookie.getValue().equals("2")){
+                        Cookie changerCookie=new Cookie("message","增加用户成功");
+                        changerCookie.setMaxAge(30*24*60*60);//存活期一个月
+                        changerCookie.setPath("/");
+                        response.addCookie(changerCookie);
+                    }
+                }
+            }
+
+
         return "admin/index";
     }
 
@@ -105,9 +126,9 @@ public class AdminController {
     @ApiOperation("管理员修改密码")
     @PostMapping("/changePassWord")
     @ResponseBody
-    public int changePassWord(@RequestParam("passWord") String passWord,HttpServletRequest request) {
-        Admin admin = (Admin) request.getSession().getAttribute("admin");
-       request.getSession().setAttribute("msg","密码修改成功，请重新登录");
+    public int changePassWord(@RequestParam("passWord") String passWord,HttpServletRequest request,HttpServletResponse response) {
+         Admin admin = (Admin) request.getSession().getAttribute("admin");
+         request.getSession().setAttribute("msg","密码修改成功，请重新登录！");
         return adminService.changePassWord(passWord,admin.getAdminId());
     }
 
@@ -158,8 +179,11 @@ public class AdminController {
     @ApiOperation("添加管理员")
     @PostMapping("/insertAdmin")
     @ResponseBody
-    public int insertSelective(@RequestBody Admin admin,HttpServletRequest request) {
-     
+    public int insertSelective(@RequestBody Admin admin,HttpServletRequest request,HttpServletResponse response) {
+        Cookie adminCookie=new Cookie("messageid","2");
+        adminCookie.setMaxAge(1);
+        adminCookie.setPath("/");
+        response.addCookie(adminCookie);
         return adminService.insertSelective(admin);
     }
 

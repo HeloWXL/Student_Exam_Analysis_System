@@ -101,23 +101,24 @@
 
            })
         }
+        $("#changePassWord").click(function (){
+            var password=$("input[name='password']").val();
+            $.ajax({
+                url:'/admin/changePassWord',
+                data:{passWord:password},
+                dataType:'json',
+                type:'post',
+                success: function(data) {
+                    parent.location.href="/admin/toLogin";
+                }
+
+            })
+        })
+
     });
 
 
 
-    $("#changePassWord").click(function (){
-        var password=$("input[name='password']").val();
-        $.ajax({
-            url:'/admin/changePassWord',
-            data:{passWord:password},
-            dataType:'json',
-            type:'post',
-            success: function(data) {
-                parent.location.href="/admin/toLogin";
-            }
-
-        })
-    })
 
 
 
