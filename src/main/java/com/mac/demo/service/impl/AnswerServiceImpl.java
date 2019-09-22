@@ -1,19 +1,14 @@
 package com.mac.demo.service.impl;
 
-import com.mac.demo.mapper.AnswerMapper;
-import com.mac.demo.mapper.CompletionQuestionMapper;
-import com.mac.demo.mapper.PaperMapper;
-import com.mac.demo.mapper.SelectQuestionMapper;
-import com.mac.demo.model.Answer;
-import com.mac.demo.model.CompletionQuestion;
-import com.mac.demo.model.Paper;
-import com.mac.demo.model.SelectQuestion;
+import com.mac.demo.mapper.*;
+import com.mac.demo.model.*;
 import com.mac.demo.service.AnswerService;
 import com.mac.demo.utils.PaperUtils;
 import com.mac.demo.vo.AnswerStudentPaperVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +33,9 @@ public class AnswerServiceImpl implements AnswerService {
     @Resource
     private CompletionQuestionMapper completionQuestionMapper;
 
+    @Resource
+    private ReportMapper reportMapper;
+
     @Override
     public Map<String,Object> getAnswerStudentPaperVo(Integer page, Integer limit) {
         List<AnswerStudentPaperVo> list = answerMapper.getAnswerStudentPaperVo((page-1)*limit,limit);
@@ -57,6 +55,10 @@ public class AnswerServiceImpl implements AnswerService {
         //试卷ID
         int paperId = answer.getPaperId();
 
+
+        List<String> correctSelect =new ArrayList<>();
+        List<String> correctCompletion = new ArrayList<>();
+
         //将字符串转换成集合
         List<String> selectList = PaperUtils.String2List(select.substring(0,select.length()-1));
         List<String> completionList = PaperUtils.String2List(completion.substring(0,completion.length()-1));
@@ -71,6 +73,7 @@ public class AnswerServiceImpl implements AnswerService {
 
         //计算考试分数
         for (int i = 0 ; i <selectList.size();i++){
+            correctSelect.add(selectQuestionList.get(i).getAnswer().toUpperCase()+",");
             if(selectList.get(i).toUpperCase().equals(selectQuestionList.get(i).getAnswer().toUpperCase())){
                 score+=10;
             }else{
@@ -78,6 +81,7 @@ public class AnswerServiceImpl implements AnswerService {
             }
         }
         for(int i =0 ;i<completionList.size();i++){
+            correctCompletion.add(completionQuestionList.get(i).getAnswer()+",");
             if(completionList.get(i).toUpperCase().equals(completionQuestionList.get(i).getAnswer())){
                 score+=20;
             }else{
@@ -86,6 +90,26 @@ public class AnswerServiceImpl implements AnswerService {
         }
         answer.setState(1);
         answer.setScore(score);
+
+        //将答案信息添加到我的报告中
+        //创建报告对象
+        Report report = new Report();
+
+        report.setPaperId(paperId);
+        report.setReportName(answer.getStudentName()+"的报告");
+        report.setStudentId(answer.getStudentId());
+        //我的答案
+        report.setSelectList(selectList);
+        report.setCompletionList(completionList);
+        //我的考试成绩
+        report.setScore(score);
+        //标准答案
+        report.setCompletionList(correctCompletion);
+        report.setSelectQuestionList(correctSelect);
+
+        //将我的答案信息添加到我的报告中
+        reportMapper.insertSelective(report);
+
         return answerMapper.insertSelective(answer);
     }
 }

@@ -1,5 +1,6 @@
 package com.mac.demo.model;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import lombok.Data;
 
 import java.util.Date;
@@ -24,4 +25,7 @@ public class Answer {
     private Integer score;
 
     private Date createTime;
+
+    @TableField(exist = false)
+    private String studentName;
 }

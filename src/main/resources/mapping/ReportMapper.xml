@@ -6,11 +6,16 @@
     <result column="report_name" property="reportName" jdbcType="VARCHAR" />
     <result column="student_id" property="studentId" jdbcType="INTEGER" />
     <result column="paper_id" property="paperId" jdbcType="INTEGER" />
-    <result column="answer_id" property="answerId" jdbcType="INTEGER" />
+    <result column="answer_select" property="answerSelect" jdbcType="VARCHAR" />
+    <result column="answer_completion" property="answerCompletion" jdbcType="VARCHAR" />
+    <result column="correct_select" property="correctSelect" jdbcType="VARCHAR" />
+    <result column="correct_completion" property="correctCompletion" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    report_id, report_name, student_id, paper_id, answer_id, create_time
+    report_id, report_name, student_id, paper_id, answer_select, answer_completion, correct_select, 
+    correct_completion, create_time, score
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,11 +29,13 @@
   </delete>
   <insert id="insert" parameterType="com.mac.demo.model.Report" >
     insert into report (report_id, report_name, student_id, 
-      paper_id, answer_id, create_time
-      )
+      paper_id, answer_select, answer_completion, 
+      correct_select, correct_completion, create_time, 
+      score)
     values (#{reportId,jdbcType=INTEGER}, #{reportName,jdbcType=VARCHAR}, #{studentId,jdbcType=INTEGER}, 
-      #{paperId,jdbcType=INTEGER}, #{answerId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{paperId,jdbcType=INTEGER}, #{answerSelect,jdbcType=VARCHAR}, #{answerCompletion,jdbcType=VARCHAR}, 
+      #{correctSelect,jdbcType=VARCHAR}, #{correctCompletion,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mac.demo.model.Report" >
     insert into report
@@ -45,11 +52,23 @@
       <if test="paperId != null" >
         paper_id,
       </if>
-      <if test="answerId != null" >
-        answer_id,
+      <if test="answerSelect != null" >
+        answer_select,
+      </if>
+      <if test="answerCompletion != null" >
+        answer_completion,
+      </if>
+      <if test="correctSelect != null" >
+        correct_select,
+      </if>
+      <if test="correctCompletion != null" >
+        correct_completion,
       </if>
       <if test="createTime != null" >
         create_time,
+      </if>
+      <if test="score != null" >
+        score,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -65,11 +84,23 @@
       <if test="paperId != null" >
         #{paperId,jdbcType=INTEGER},
       </if>
-      <if test="answerId != null" >
-        #{answerId,jdbcType=INTEGER},
+      <if test="answerSelect != null" >
+        #{answerSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="answerCompletion != null" >
+        #{answerCompletion,jdbcType=VARCHAR},
+      </if>
+      <if test="correctSelect != null" >
+        #{correctSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="correctCompletion != null" >
+        #{correctCompletion,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -85,11 +116,23 @@
       <if test="paperId != null" >
         paper_id = #{paperId,jdbcType=INTEGER},
       </if>
-      <if test="answerId != null" >
-        answer_id = #{answerId,jdbcType=INTEGER},
+      <if test="answerSelect != null" >
+        answer_select = #{answerSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="answerCompletion != null" >
+        answer_completion = #{answerCompletion,jdbcType=VARCHAR},
+      </if>
+      <if test="correctSelect != null" >
+        correct_select = #{correctSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="correctCompletion != null" >
+        correct_completion = #{correctCompletion,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
       </if>
     </set>
     where report_id = #{reportId,jdbcType=INTEGER}
@@ -99,8 +142,12 @@
     set report_name = #{reportName,jdbcType=VARCHAR},
       student_id = #{studentId,jdbcType=INTEGER},
       paper_id = #{paperId,jdbcType=INTEGER},
-      answer_id = #{answerId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      answer_select = #{answerSelect,jdbcType=VARCHAR},
+      answer_completion = #{answerCompletion,jdbcType=VARCHAR},
+      correct_select = #{correctSelect,jdbcType=VARCHAR},
+      correct_completion = #{correctCompletion,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER}
     where report_id = #{reportId,jdbcType=INTEGER}
   </update>
 </mapper>

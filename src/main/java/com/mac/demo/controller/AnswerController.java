@@ -2,6 +2,7 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.Answer;
 import com.mac.demo.model.Paper;
+import com.mac.demo.model.Student;
 import com.mac.demo.service.AnswerService;
 import com.mac.demo.service.PaperService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -44,7 +46,9 @@ public class AnswerController {
     @ApiOperation("提交答案")
     @PostMapping("/insertAnswer")
     @ResponseBody
-    public int insertAnswer(@RequestBody Answer answer ){
+    public int insertAnswer(@RequestBody Answer answer,HttpServletRequest request){
+        Student student = (Student) request.getSession().getAttribute("student");
+        answer.setStudentName(student.getStudentName());
         return answerService.insertAnswer(answer);
     }
 }
