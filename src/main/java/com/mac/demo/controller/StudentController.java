@@ -111,7 +111,7 @@ public class StudentController {
     public String checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
             HttpServletRequest request) {
         if(studentService.checkLogin(phone).getStudentPassword().equals(password)){
-            Student student = studentService.checkLogin(password);
+            Student student = studentService.checkLogin(phone);
             request.getSession().setAttribute("student",student);
             return "1";
         }else{

@@ -44,4 +44,10 @@ public interface AnswerMapper extends BaseMapper<Answer> {
     @Select("select count(1) from answer")
     int getAnswerCount ();
 
+
+
+
+
+
+
 }

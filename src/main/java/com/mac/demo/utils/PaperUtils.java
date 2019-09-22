@@ -71,4 +71,22 @@ public class PaperUtils {
         ids=ids.substring(0,ids.length()-1);
         return ids;
     }
+
+
+    /**
+     * 字符串转集合
+     * @return
+     */
+    public static List<String> String2List (String str){
+        List<String> _ids=new ArrayList<>();
+        String[] ids=str.split(",");
+        for(String id:ids){
+            String _id=id;
+            _ids.add(_id);
+        }
+        return _ids;
+    }
+
+
+
 }

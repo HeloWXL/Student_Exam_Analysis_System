@@ -10,7 +10,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>x学生在线考试</title>
+    <title>学生在线考试</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link type="text/css" href="${ctx}/resources/css/test.css" media="all" rel="stylesheet"  />
     <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
@@ -28,15 +28,20 @@
     </style>
 </head>
 <body>
-
 <div class="mui-content">
     <div class="main">
       <div class="warp">
         <div class="issue" id="issue">
+            <div>
+                <p>试卷：<span>${paper.paperName}</span></p>
+                <p>考试时间：<span>60分钟</span></p>
+                <p>总分：<span>100分</span></p>
+                <input value="${paper.paperId}" type="hidden" id="paperId">
+            </div>
             <h4>选择题</h4>
             <c:forEach var="select" items="${paper.selectQuestionList}" varStatus="status">
                 <div class="cnt" id="id${status.count}">
-                    <h3>${status.count}、${select.text}</h3>
+                    <h3 class="selectTitle">${status.count}、${select.text}</h3>
 
                     <ul class="mui-table-view mui-table-view-radio">
                         <li class="mui-table-view-cell" value="a">
@@ -54,7 +59,6 @@
                     </ul>
                 </div>
             </c:forEach>
-
             <h4>填空题</h4>
             <c:forEach var="completion" items="${paper.completionQuestionList}" varStatus="status">
                 <div class="cnt">
@@ -63,10 +67,9 @@
                 </div>
             </c:forEach>
             <div style="position: relative;top: 10px">
-                <button type="button" class="mui-btn mui-btn-primary"  id="submit" style="width: 100%">绿色</button>
+                <button type="button" class="mui-btn mui-btn-primary"  id="submit" style="width: 100%">交卷</button>
             </div>
         </div>
-
     </div>
     </div>
 </div>
@@ -76,13 +79,64 @@
 <script>
     $(function () {
 
-        $("#submit").click(function () {
-            getRadioRes()
-        })
+        if('${student}'!=""){
+            var studentId  ='${student.studentId}';
+            $("#submit").click(function () {
+                //获取试卷ID
+                var paperId =$("#paperId").val();
+                var completionString = "";
+                var selectString = "";
 
-        function getRadioRes(className) {
-            var elem = document.getElementsByClassName('.cnt .mui-table-view-radio .mui-selected');
-            console.log(elem.length);
+                //获取填空题的值 已经填入的值
+                var $input = $("input[type='text']");//这里遍历input不为button和hidden的以外的其他input内容
+                $.each($input, function (i, item) {
+                    var val = $(item).val();
+                    if (val == "" || val == null || val == undefined) {
+                        mui.alert("填空未完成")
+                        // $(item).siblings(".hint").css("visibility", "visible");
+                    } else {
+                        completionString+=val+",";
+                    }
+                });
+
+                //获取选择的总数量
+                var $selectTitle = $(".selectTitle");
+                //获取选择题 已经选择列表
+                var $li = $(".mui-table-view-cell.mui-selected");
+                if($selectTitle.length==$li.length){
+                    $.each($li, function (i, item) {
+                        var val = $(item).attr("value");
+                        selectString+=val+",";
+                    });
+                }else{
+                    mui.alert("选择未完成")
+                }
+
+                var answer = {
+                    selectAnswer:selectString,
+                    completionAnswer:completionString,
+                    studentId:studentId,
+                    paperId:paperId
+                }
+                $.ajax({
+                    url:ctx+'/answer/insertAnswer',
+                    data:JSON.stringify(answer),
+                    dataType:'json',
+                    type:'post',
+                    contentType: 'application/json; charset=utf-8',
+                    success:function (data) {
+                        if(data==1){
+                            mui.alert("提交成功",function () {
+                                location.href="/student/toReport"
+                            })
+                        }else{
+                            mui.alert("提交失败")
+                        }
+                    }
+                })
+            })
+        }else{
+            location.href="/student/toLogin";
         }
     })
 </script>

@@ -12,6 +12,7 @@
 <head>
     <title>学生成绩报告</title>
     <meta charset="utf-8">
+    <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet"/>
     <style>
         .table {
             border: 1px solid #cad9ea;
@@ -32,61 +33,96 @@
         .table tr.alter {
             background-color: #f5fafe;
         }
+        #info div{
+            width: 30%;
+            float: left;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
 <div>
+    <h2 style="margin: 0 auto">测评结果</h2>
+
+    <div id="info">
+        <div>平均得分<span style="color: green;font-weight: bold">88分</span></div>
+        <div>您的得分<span style="color: green;font-weight: bold">88分</span></div>
+        <div>推荐班型<span style="color: green;font-weight: bold">尖子班</span></div>
+    </div>
+
     <table width="100%" class="table" id="tablevalue">
         <tr>
-            <th width=10%>时间</th>
-            <th width=10%>温度</th>
-            <th width=10%>时间</th>
-            <th width=10%>温度</th>
-            <th width=10%>时间</th>
-            <th width=10%>温度</th>
+            <th width=10%>题目</th>
+            <th width=10%>你的答案</th>
+            <th width=10%>正确答案</th>
+            <th width=10%>能力</th>
+            <th width=10%>难易程度</th>
+            <th width=10%>知识点</th>
+
         </tr>
         <tr>
-            <td>1</td>
-            <td>3</td>
-            <td>1</td>
-            <td>3</td>
-            <td>1</td>
-            <td>3</td>
+            <td>第一题</td>
+            <td style="color: green;font-weight: bold">A</td>
+            <td>B</td>
+            <td>计算能力</td>
+            <td><div id="test"></div></td>
+            <td>分数计算</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td>3</td>
-            <td>1</td>
-            <td>3</td>
-            <td>1</td>
-            <td>3</td>
+            <td>第一题</td>
+            <td style="color: green;font-weight: bold">A</td>
+            <td>B</td>
+            <td>计算能力</td>
+            <td><div id="test1"></div></td>
+            <td>分数计算</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td>3</td>
-            <td>1</td>
-            <td>3</td>
-            <td>1</td>
-            <td>3</td>
+            <td>第一题</td>
+            <td style="color: green;font-weight: bold">A</td>
+            <td>B</td>
+            <td>计算能力</td>
+            <td><div id="test2"></div></td>
+            <td>分数计算</td>
         </tr>
-    </table>
-</div>
-<div id="container" style="height:45%"></div>
-<div id="container2" style="height:45%"></div>
-<script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
+        </table>
+        </div>
+        <div id="container" style="height:600px"></div>
+
+            <div id="container2" style="height:600px"></div>
+            <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+<script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/echarts.min.js" type="application/javascript"></script>
+<script>
+    layui.use(['rate'], function() {
+        var rate = layui.rate;
+        //只读
+        rate.render({
+            elem: '#test'
+            ,value: 3
+            ,readonly: true
+        });
+        rate.render({
+            elem: '#test1'
+            ,value: 2
+            ,readonly: true
+        });
+        rate.render({
+            elem: '#test2'
+            ,value: 4
+            ,readonly: true
+        });
+    })
+</script>
+
 <script type="text/javascript">
     var dom = document.getElementById("container");
-    var myChart = echarts.init(dom);
-    var app = {};
-    option = null;
-    option = {
+    var myChart = echarts.init(dom,'light');
+    option1 = null;
+    option1 = {
         title: {
-            text: '基础雷达图'
+            text: '能力分析'
         },
         tooltip: {},
-        legend: {
-            data: ['预算分配（Allocated Budget）', '实际开销（Actual Spending）']
-        },
         radar: {
             // shape: 'circle',
             name: {
@@ -98,108 +134,77 @@
                 }
             },
             indicator: [{
-                name: '销售（sales）',
-                max: 6500
+                name: '客观分析能力',
+                max: 10
             },
                 {
-                    name: '管理（Administration）',
-                    max: 16000
+                    name: '',
+                    max: 10
                 },
                 {
-                    name: '信息技术（Information Techology）',
-                    max: 30000
+                    name: '应用能力',
+                    max: 10
                 },
                 {
-                    name: '客服（Customer Support）',
-                    max: 38000
+                    name: '计算能力',
+                    max: 10
                 },
                 {
-                    name: '研发（Development）',
-                    max: 52000
+                    name: '动手能力',
+                    max: 10
                 },
                 {
-                    name: '市场（Marketing）',
-                    max: 25000
+                    name: '推理能力',
+                    max: 10
                 }
             ]
         },
         series: [{
-            name: '预算 vs 开销（Budget vs spending）',
+            name: '能力分析',
             type: 'radar',
             // areaStyle: {normal: {}},
-            data: [{
-                value: [4300, 10000, 28000, 35000, 50000, 19000],
-                name: '预算分配（Allocated Budget）'
-            },
+            data: [
                 {
-                    value: [5000, 14000, 28000, 31000, 42000, 21000],
-                    name: '实际开销（Actual Spending）'
+                    value: [3, 2, 4, 5, 6, 3],
+                    name: '我的能力'
                 }
             ]
         }]
-    };;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+    };
+    if (option1 && typeof option1 === "object") {
+        myChart.setOption(option1, true);
     }
 </script>
-
 <script type="text/javascript">
     var dom = document.getElementById("container2");
-    var myChart2 = echarts.init(dom);
-    var app = {};
-    option = null;
-    option = {
+    var myChart2 = echarts.init(dom,'light');
+    option2 = null;
+    option2 = {
         title: {
-            text: '某站点用户访问来源',
-            subtext: '纯属虚构',
-            x: 'center'
+            text: '成绩比较'
         },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        legend: {},
+        tooltip: {},
+        dataset: {
+            source: [
+                ['score', '平均成绩','我的考试成绩'],
+                ['平均成绩', 88,0],
+                ['我的考试成绩', 0,98],
+
+            ]
         },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-        },
-        series: [{
-            name: '访问来源',
-            type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
-            data: [{
-                value: 335,
-                name: '直接访问'
-            },
-                {
-                    value: 310,
-                    name: '邮件营销'
-                },
-                {
-                    value: 234,
-                    name: '联盟广告'
-                },
-                {
-                    value: 135,
-                    name: '视频广告'
-                },
-                {
-                    value: 1548,
-                    name: '搜索引擎'
-                }
-            ],
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        }]
-    };;
-    if (option && typeof option === "object") {
-        myChart2.setOption(option, true);
+        xAxis: {type: 'category'},
+        yAxis: {},
+        // Declare several bar series, each will be mapped
+        // to a column of dataset.source by default.
+        series: [
+            {type: 'bar'},
+            {type: 'bar'},
+
+        ]
+    };
+    if (option2 && typeof option2 === "object") {
+        myChart2.setOption(option2,true);
     }
 </script>
 </body>

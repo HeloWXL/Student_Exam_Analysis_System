@@ -1,5 +1,7 @@
 package com.mac.demo.service;
 
+import com.mac.demo.model.Answer;
+
 import java.util.Map;
 
 /**
@@ -16,5 +18,13 @@ public interface AnswerService {
      * @return
      */
     Map<String,Object> getAnswerStudentPaperVo(Integer page, Integer limit);
+
+
+    /**
+     * 添加学生的考试信息
+     * @param answer
+     * @return
+     */
+    int insertAnswer(Answer answer);
 
 }

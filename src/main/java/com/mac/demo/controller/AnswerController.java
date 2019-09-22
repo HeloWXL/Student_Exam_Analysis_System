@@ -1,10 +1,14 @@
 package com.mac.demo.controller;
 
+import com.mac.demo.model.Answer;
+import com.mac.demo.model.Paper;
 import com.mac.demo.service.AnswerService;
+import com.mac.demo.service.PaperService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,6 +28,9 @@ public class AnswerController {
     @Resource
     private AnswerService answerService;
 
+    @Resource
+    private PaperService paperService;
+
     @ApiOperation("获取答案列表")
     @PostMapping("/getAnswerStudentPaperVo")
     @ResponseBody
@@ -32,5 +39,12 @@ public class AnswerController {
         map.put("code",0);
         map.put("msg","");
         return map;
+    }
+
+    @ApiOperation("提交答案")
+    @PostMapping("/insertAnswer")
+    @ResponseBody
+    public int insertAnswer(@RequestBody Answer answer ){
+        return answerService.insertAnswer(answer);
     }
 }

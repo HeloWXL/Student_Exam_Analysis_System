@@ -63,6 +63,7 @@
             dataType:'json',
             type:'post',
             success:function (data) {
+                console.log(data)
                 if(data == 1){
 
                     location.href=ctx+'/student/toIndex';
