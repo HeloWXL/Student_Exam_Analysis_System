@@ -28,6 +28,8 @@ public class Report {
 
     private Integer score;
 
+    private String className;
+
 
     //正确答案 --选择题
     @TableField(exist = false)

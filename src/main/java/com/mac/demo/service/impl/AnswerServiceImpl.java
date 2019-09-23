@@ -94,18 +94,27 @@ public class AnswerServiceImpl implements AnswerService {
         //将答案信息添加到我的报告中
         //创建报告对象
         Report report = new Report();
-
+        String className;
         report.setPaperId(paperId);
         report.setReportName(answer.getStudentName()+"的报告");
         report.setStudentId(answer.getStudentId());
         //我的答案
-        report.setSelectList(selectList);
-        report.setCompletionList(completionList);
+        report.setAnswerSelect(select);
+        report.setAnswerCompletion(completion);
         //我的考试成绩
         report.setScore(score);
+
+        if(score>=80){
+            className="尖子班";
+        }else if(score>60 && score<80){
+            className="中级班";
+        }else{
+            className="普通班";
+        }
+        report.setClassName(className);
         //标准答案
-        report.setCompletionList(correctCompletion);
-        report.setSelectQuestionList(correctSelect);
+        report.setCorrectCompletion(correctCompletion.toString());
+        report.setCorrectSelect(correctSelect.toString());
 
         //将我的答案信息添加到我的报告中
         reportMapper.insertSelective(report);

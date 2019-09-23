@@ -118,6 +118,12 @@ public class AdminController {
         return "admin/system";
     }
 
+    @ApiOperation("报告页面")
+    @GetMapping("/toReport")
+    public String toReport() {
+        return "/admin/report";
+    }
+
     /**
      * 修改管理员密码
      * @param passWord

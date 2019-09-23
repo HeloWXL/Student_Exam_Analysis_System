@@ -30,6 +30,11 @@ $(function(){
 		$("#type").click(function(){
 			$("iframe").attr("src","/admin/toType")
 		})
+		// 报告管理
+		$("#report").click(function(){
+			$("iframe").attr("src","/admin/toReport")
+		})
+
 		layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 			var layer = layui.layer;//弹出层组件
 			var form = layui.form;//表单组件
