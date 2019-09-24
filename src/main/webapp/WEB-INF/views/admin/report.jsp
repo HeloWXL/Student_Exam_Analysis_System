@@ -26,15 +26,27 @@
             <div class="top">
                 <form class="layui-form" action="">
                     <div class="layui-inline">
-                        <label class="layui-form-label">姓名：</label>
+                        <label class="layui-form-label">报告名称：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userName" autocomplete="off" class="layui-input">
+                            <input type="text" name="reportName" autocomplete="off" class="layui-input" style="width: 80px">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">手机号码：</label>
+                        <label class="layui-form-label">学生姓名：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="phone" autocomplete="off" class="layui-input">
+                            <input type="text" name="studentName" autocomplete="off" class="layui-input" style="width: 80px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">试卷名称：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="paperName" autocomplete="off" class="layui-input" style="width: 80px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">推荐班级：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="className" autocomplete="off" class="layui-input" style="width: 80px">
                         </div>
                     </div>
                     <div class="layui-inline" id="btn">
@@ -63,19 +75,31 @@
 <script>
     layui.use('table', function(){
         var table = layui.table;
-        // 加载表格数据
-        loadData(table);
-        //监听工具条
-        table.on('tool(reporftilter)', function(obj){
-            var data = obj.data;
-            if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.studentId + ' 的查看操作');
-            }
-        });
-    })
+
+    var queryReportVo = {
+        reportName:'',
+        studentName:'',
+        paperName:'',
+        className:''
+    };
+
+    // 加载表格数据
+    loadData(table,queryReportVo);
+    // 查询
+    $('#query').click(function() {
+
+        var queryReportVo = {
+            reportName:$("input[name='reportName']").val(),
+            studentName:$("input[name='studentName']").val(),
+            paperName:$("input[name='paperName']").val(),
+            className:$("input[name='className']").val()
+        };
+        loadData(table,queryReportVo);
+    });
+
 
     //加载列表数据
-    function loadData(table,queryStudentVo) {
+    function loadData(table,queryReportVo) {
         table.render({
             id: 'reportTable',
             elem: '#demo'
@@ -83,10 +107,8 @@
             , method:'post'
             ,contentType: 'application/json; charset=utf-8'
             , defaultToolbar: []
-            ,where:{
-
-            }
-            , url: ctx + '/student/getStudent' //数据接口
+            ,where:queryReportVo
+            , url: ctx + '/report/getReport' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
                   {field: 'number', title: '序号', type: 'numbers'}
@@ -104,6 +126,14 @@
             , limit: 10 //每页默认显示的数量
         });
     }
+        //监听工具条
+        table.on('tool(reporftilter)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                layer.msg('ID：'+ data.studentId + ' 的查看操作');
+            }
+        });
+    })
 </script>
 
 </html>

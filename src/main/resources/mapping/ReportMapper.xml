@@ -102,4 +102,50 @@
       </if>
     </trim>
   </insert>
+
+  <select id="getReport" parameterType="com.mac.demo.vo.ReportVo"
+          resultType="com.mac.demo.vo.ReportVo">
+
+      SELECT r.report_name as reportName
+      ,s.student_name as studentName
+      ,p.paper_name as paperName
+      ,r.score as score
+      ,r.create_time as createTime
+      ,r.class_name as className
+      from report r,student s, paper p
+      where r.student_id=s.student_id and r.paper_id=p.paper_id
+      <if test="reportName != null and reportName != ''">
+      and r.report_name like concat('%',#{reportName}, '%')
+    </if>
+    <if test="paperName != null and paperName != ''">
+      and p.paper_name like concat('%',#{paperName}, '%')
+    </if>
+      <if test="studentName != null and studentName != ''">
+          and s.student_name like concat('%',#{studentName}, '%')
+      </if>
+      <if test="className != null and className != ''">
+          and r.class_name like concat('%',#{className}, '%')
+      </if>
+    LIMIT #{page},#{limit}
+  </select>
+
+  <select id="getReportCount" resultType="java.lang.Integer">
+    select
+    count(1)
+      from report r,student s, paper p
+      where r.student_id=s.student_id and r.paper_id=p.paper_id
+      <if test="reportName != null and reportName != ''">
+          and r.report_name like concat('%',#{reportName}, '%')
+      </if>
+      <if test="paperName != null and paperName != ''">
+          and p.paper_name like concat('%',#{paperName}, '%')
+      </if>
+      <if test="studentName != null and studentName != ''">
+          and s.student_name like concat('%',#{studentName}, '%')
+      </if>
+      <if test="className != null and className != ''">
+          and r.class_name like concat('%',#{className}, '%')
+      </if>
+
+  </select>
 </mapper>

@@ -1,5 +1,9 @@
 package com.mac.demo.service;
 
+import com.mac.demo.vo.ReportVo;
+
+import java.util.Map;
+
 /**
  * @Classname ReportService
  * @Description TODO
@@ -7,4 +11,5 @@ package com.mac.demo.service;
  * @Created by wangxianlin
  */
 public interface ReportService {
+    Map<String, Object> getReport(ReportVo reportVo);
 }

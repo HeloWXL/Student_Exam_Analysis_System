@@ -1,13 +1,15 @@
 package com.mac.demo.controller;
 
 import com.mac.demo.service.ReportService;
+import com.mac.demo.vo.QueryCompletionQuestionVo;
+import com.mac.demo.vo.ReportVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @Classname ReportController
@@ -22,5 +24,14 @@ public class ReportController {
     @Resource
     private ReportService reportService;
 
+    @ApiOperation("获取报告-分页")
+    @PostMapping("/getReport")
+    @ResponseBody
+    public Map<String,Object> getReport(@RequestBody ReportVo reportVo){
+        Map<String,Object> map = reportService.getReport(reportVo);
+        map.put("msg","");
+        map.put("code","0");
+        return map;
+    }
 
 }
