@@ -3,9 +3,11 @@ package com.mac.demo.controller;
 import com.mac.demo.model.Paper;
 import com.mac.demo.model.Student;
 import com.mac.demo.service.PaperService;
+import com.mac.demo.service.ReportService;
 import com.mac.demo.service.StudentService;
 import com.mac.demo.vo.PaperTestAdminVo;
 import com.mac.demo.vo.QueryStudentVo;
+import com.mac.demo.vo.ReportVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,9 @@ public class StudentController {
     @Resource
     private PaperService paperService;
 
+    @Resource
+    private ReportService reportService;
+
     @ApiOperation("学生未登录首页页面")
     @GetMapping("/toNoIndex")
     public String toNoIndex(){
@@ -53,8 +58,11 @@ public class StudentController {
     }
 
     @ApiOperation("学生成绩报告页面")
-    @GetMapping("/toReport")
-    public String toReport(){
+    @GetMapping("/toReport/{paperId}/{studentId}")
+    public String toReport(@PathVariable("studentId") Integer studentId,
+                           @PathVariable("paperId") Integer paperId,Model model){
+        ReportVo reportVo =  reportService.getReportIndex(studentId,paperId);
+        model.addAttribute("report",reportVo);
         return "student/report";
     }
 

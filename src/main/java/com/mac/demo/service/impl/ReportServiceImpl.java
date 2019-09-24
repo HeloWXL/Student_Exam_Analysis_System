@@ -2,6 +2,7 @@ package com.mac.demo.service.impl;
 
 import com.mac.demo.mapper.ReportMapper;
 import com.mac.demo.service.ReportService;
+import com.mac.demo.utils.PaperUtils;
 import com.mac.demo.vo.QuerySelectQuestionVo;
 import com.mac.demo.vo.ReportVo;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,12 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ReportVo getReportIndex(Integer studentId, Integer paperId) {
-        return reportMapper.getReportIndex(studentId,paperId);
+        ReportVo reportVo =reportMapper.getReportIndex(studentId,paperId);
+
+        //获取选择题 ---放入list集合中 ---我的答案
+        reportVo.setSelectList(PaperUtils.String2List(reportVo.getAnswerSelect()));
+        reportVo.setSelectQuestionList(PaperUtils.String22List(reportVo.getCorrectSelect().substring(1,reportVo.getCorrectSelect().length()-2)));
+
+        return reportVo;
     }
 }

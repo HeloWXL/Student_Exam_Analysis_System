@@ -127,7 +127,7 @@
                     success:function (data) {
                         if(data==1){
                             mui.alert("提交成功",function () {
-                                location.href="/student/toReport"
+                                location.href="/student/toReport/"+paperId+"/"+studentId;
                             })
                         }else{
                             mui.alert("提交失败")

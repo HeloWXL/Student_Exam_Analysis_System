@@ -46,8 +46,8 @@
 
     <div id="info">
         <div>平均得分<span style="color: green;font-weight: bold">88分</span></div>
-        <div>您的得分<span style="color: green;font-weight: bold">88分</span></div>
-        <div>推荐班型<span style="color: green;font-weight: bold">尖子班</span></div>
+        <div>您的得分<span style="color: green;font-weight: bold">${report.score}分</span></div>
+        <div>推荐班型<span style="color: green;font-weight: bold">${report.className}</span></div>
     </div>
 
     <table width="100%" class="table" id="tablevalue">
@@ -60,30 +60,16 @@
             <th width=10%>知识点</th>
 
         </tr>
-        <tr>
-            <td>第一题</td>
-            <td style="color: green;font-weight: bold">A</td>
-            <td>B</td>
-            <td>计算能力</td>
-            <td><div id="test"></div></td>
-            <td>分数计算</td>
-        </tr>
-        <tr>
-            <td>第一题</td>
-            <td style="color: green;font-weight: bold">A</td>
-            <td>B</td>
-            <td>计算能力</td>
-            <td><div id="test1"></div></td>
-            <td>分数计算</td>
-        </tr>
-        <tr>
-            <td>第一题</td>
-            <td style="color: green;font-weight: bold">A</td>
-            <td>B</td>
-            <td>计算能力</td>
-            <td><div id="test2"></div></td>
-            <td>分数计算</td>
-        </tr>
+        <c:forEach var="re" items="${report.selectList}" varStatus="i">
+            <tr>
+                <td>第一题</td>
+                <td style="color: green;font-weight: bold">${re}</td>
+                <td>${report.selectQuestionList[i.index]}</td>
+                <td>计算能力</td>
+                <td><div id="test"></div></td>
+                <td>分数计算</td>
+            </tr>
+        </c:forEach>
         </table>
         </div>
         <div id="container" style="height:600px"></div>
@@ -138,7 +124,7 @@
                 max: 10
             },
                 {
-                    name: '',
+                    name: '观察能力',
                     max: 10
                 },
                 {
@@ -199,7 +185,7 @@
         // to a column of dataset.source by default.
         series: [
             {type: 'bar'},
-            {type: 'bar'},
+            {type: 'bar'}
 
         ]
     };

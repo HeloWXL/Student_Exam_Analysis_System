@@ -87,6 +87,16 @@ public class PaperUtils {
         return _ids;
     }
 
+    public static List<String> String22List (String str){
+        List<String> _ids=new ArrayList<>();
+        String[] ids=str.split(",,");
+        for(String id:ids){
+            String _id=id;
+            _ids.add(_id);
+        }
+        return _ids;
+    }
+
 
 
 }
