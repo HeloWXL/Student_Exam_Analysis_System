@@ -16,4 +16,6 @@ public interface ReportMapper  extends BaseMapper<Report> {
     List<ReportVo> getReport(ReportVo reportVo);
 
     int getReportCount();
+
+    ReportVo getReportIndex(Integer studentId, Integer paperId);
 }

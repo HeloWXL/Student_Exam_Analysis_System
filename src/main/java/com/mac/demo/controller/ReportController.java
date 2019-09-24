@@ -24,6 +24,11 @@ public class ReportController {
     @Resource
     private ReportService reportService;
 
+    /**
+     * @author  yechengchao
+     * @param reportVo
+     * @return
+     */
     @ApiOperation("获取报告-分页")
     @PostMapping("/getReport")
     @ResponseBody
@@ -33,5 +38,19 @@ public class ReportController {
         map.put("code","0");
         return map;
     }
+
+    /**
+     * @author  yechengchao
+     * @param reportVo
+     * @return
+     */
+    @ApiOperation("获取报告参数填充报告页面")
+    @GetMapping("/getReportIndex")
+    @ResponseBody
+    public ReportVo getReportIndex(@RequestParam Integer studentId,@RequestParam Integer paperId ){
+        return reportService.getReportIndex(studentId,paperId);
+    }
+
+
 
 }

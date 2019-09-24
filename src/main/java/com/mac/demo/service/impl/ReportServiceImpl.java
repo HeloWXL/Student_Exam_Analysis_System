@@ -32,4 +32,9 @@ public class ReportServiceImpl implements ReportService {
         map.put("count",count);
         return map;
     }
+
+    @Override
+    public ReportVo getReportIndex(Integer studentId, Integer paperId) {
+        return reportMapper.getReportIndex(studentId,paperId);
+    }
 }
