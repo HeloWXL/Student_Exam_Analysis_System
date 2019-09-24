@@ -149,13 +149,13 @@
 
   </select>
 
-  <select id="getReportIndex"
-          resultType="com.mac.demo.vo.ReportVo">
+  <!--<select id="getReportIndex"-->
+          <!--resultType="com.mac.demo.vo.ReportVo">-->
 
-    SELECT *
-    from report r,student s, paper p
-    where r.student_id=s.student_id and r.paper_id=p.paper_id
-      and r.student_id=#{studentId} and r.paper_id=#{paperId}
+    <!--SELECT *-->
+    <!--from report r,student s, paper p-->
+    <!--where r.student_id=s.student_id and r.paper_id=p.paper_id-->
+      <!--and r.student_id=#{studentId} and r.paper_id=#{paperId}-->
 
-  </select>
+  <!--</select>-->
 </mapper>

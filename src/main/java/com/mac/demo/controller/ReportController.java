@@ -41,16 +41,13 @@ public class ReportController {
 
     /**
      * @author  yechengchao
-     * @param reportVo
      * @return
      */
     @ApiOperation("获取报告参数填充报告页面")
     @GetMapping("/getReportIndex")
     @ResponseBody
-    public ReportVo getReportIndex(@RequestParam Integer studentId,@RequestParam Integer paperId ){
+    public ReportVo getReportIndex(@RequestParam("studentId") Integer studentId,
+                                   @RequestParam("paperId") Integer paperId ){
         return reportService.getReportIndex(studentId,paperId);
     }
-
-
-
 }

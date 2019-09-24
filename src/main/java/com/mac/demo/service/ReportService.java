@@ -11,6 +11,7 @@ import java.util.Map;
  * @Created by wangxianlin
  */
 public interface ReportService {
+
     Map<String, Object> getReport(ReportVo reportVo);
 
     ReportVo getReportIndex(Integer studentId, Integer paperId);

@@ -12,6 +12,7 @@ public class Report {
 
     private String reportName;
 
+
     private Integer studentId;
 
     private Integer paperId;
