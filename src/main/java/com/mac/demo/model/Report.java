@@ -31,6 +31,10 @@ public class Report {
 
     private String className;
 
+    private String knowledge;
+
+    private String ability;
+
 
     //正确答案 --选择题
     @TableField(exist = false)
@@ -45,6 +49,8 @@ public class Report {
     //我的答案  --填空题
     @TableField(exist = false)
     List<String> completionList;
+
+
 
 
 }

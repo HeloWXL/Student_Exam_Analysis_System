@@ -34,6 +34,10 @@ public class ReportVo {
 
     private String paperName;
 
+    private String knowledge;
+
+    private String ability;
+
 
     //正确答案 --选择题
     @TableField(exist = false)
@@ -48,6 +52,15 @@ public class ReportVo {
     //我的答案  --填空题
     @TableField(exist = false)
     List<String> completionList;
+
+    //知识点 列表
+    List<String> knowledgeList;
+
+    //能力列表
+    List<String> abilityList;
+
+
+    double avgScore;
 
     private Integer page;
 

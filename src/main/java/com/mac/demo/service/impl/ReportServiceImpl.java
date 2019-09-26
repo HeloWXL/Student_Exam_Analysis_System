@@ -36,12 +36,19 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ReportVo getReportIndex(Integer studentId, Integer paperId) {
-        ReportVo reportVo =reportMapper.getReportIndex(studentId,paperId);
 
+        //得到该门试卷的平均分数
+        double avgScore = reportMapper.getAvgScoreByPaperId(paperId);
+
+        ReportVo reportVo =reportMapper.getReportIndex(studentId,paperId);
+        reportVo.setAvgScore(avgScore);
         //获取选择题 ---放入list集合中 ---我的答案
         reportVo.setSelectList(PaperUtils.String2List(reportVo.getAnswerSelect()));
-        reportVo.setSelectQuestionList(PaperUtils.String22List(reportVo.getCorrectSelect().substring(1,reportVo.getCorrectSelect().length()-2)));
-
+        reportVo.setSelectQuestionList(PaperUtils.String2List(reportVo.getCorrectSelect()));
+        reportVo.setAbilityList(PaperUtils.String2List(reportVo.getAbility()));
+        System.out.println(reportVo.getAbilityList());
+        reportVo.setKnowledgeList(PaperUtils.String2List(reportVo.getKnowledge()));
+        System.out.println(reportVo.getKnowledgeList());
         return reportVo;
     }
 }

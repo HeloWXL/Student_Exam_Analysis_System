@@ -45,57 +45,7 @@
     </div>
 </div>
 </body>
-<script src="${ctx}/resources/js/mui.min.js"></script>
-<script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
-<script type="text/javascript">
-    mui.init()
-    $(function () {
-      $("input[name='phone']").blur(function() {
-        var phone = $.trim($("input[name='phone']").val());
-        hasPhone(phone);
-      })
-    })
-
-    function hasPhone(phone) {
-      $.ajax({
-        url:'/student/selectStudentByPhone',
-        data:{phone:phone},
-        dataType:'json',
-        type:'post',
-        success:function (data) {
-          if(data == false){
-            mui.alert("该手机号码未注册")
-          }else{
-            $("#submit").click(function () {
-              var phone = $.trim($("input[name='phone']").val());
-              var password= $.trim($("input[name='password']").val());
-              checkLogin(phone,password);
-            })
-          }
-        },error:function (e) {
-          mui.alert("服务器内部错误")
-        }
-      })
-    }
-    function checkLogin(phone,password) {
-        $.ajax({
-            url:'/student/checkLogin',
-            data:{phone:phone,password:password},
-            dataType:'json',
-            type:'post',
-            success:function (data) {
-                if(data.data == true){
-                    location.href=ctx+'/student/toIndex';
-                }else{
-                    mui.alert("手机号码或密码错误",function() {
-                      $("input[name='password']").val("")
-                    });
-
-                }
-            },error:function (e) {
-                mui.alert("服务器内部错误")
-            }
-        })
-    }
-</script>
+<script src="${ctx}/resources/js/mui.min.js" type="text/javascript"></script>
+<script src="${ctx}/resources/js/jquery-2.1.4.js" type="text/javascript"></script>
+<script type="text/javascript" src="${ctx}/resources/js/stu_login.js"></script>
 </html>

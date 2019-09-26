@@ -21,6 +21,16 @@ public class TypeServiceImpl implements TypeService {
     @Resource
     private TypeMapper typeMapper;
 
+
+    /**
+     * 根据能力ID查询能力
+     * @param typeId
+     * @return
+     */
+    public Type getTypeById(Integer typeId){
+        return typeMapper.selectByPrimaryKey(typeId);
+    }
+
     /**
      * 添加题目类型
      * @param record

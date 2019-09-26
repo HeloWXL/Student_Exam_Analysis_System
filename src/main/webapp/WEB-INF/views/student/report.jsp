@@ -43,13 +43,11 @@
 <body>
 <div>
     <h2 style="margin: 0 auto">测评结果</h2>
-
     <div id="info">
-        <div>平均得分<span style="color: green;font-weight: bold">88分</span></div>
+        <div>平均得分<span style="color: green;font-weight: bold">${report.avgScore}分</span></div>
         <div>您的得分<span style="color: green;font-weight: bold">${report.score}分</span></div>
         <div>推荐班型<span style="color: green;font-weight: bold">${report.className}</span></div>
     </div>
-
     <table width="100%" class="table" id="tablevalue">
         <tr>
             <th width=10%>题目</th>
@@ -58,27 +56,30 @@
             <th width=10%>能力</th>
             <th width=10%>难易程度</th>
             <th width=10%>知识点</th>
-
         </tr>
         <c:forEach var="re" items="${report.selectList}" varStatus="i">
             <tr>
                 <td>第一题</td>
                 <td style="color: green;font-weight: bold">${re}</td>
                 <td>${report.selectQuestionList[i.index]}</td>
-                <td>计算能力</td>
+                <td>${report.abilityList[i.index]}</td>
                 <td><div id="test"></div></td>
-                <td>分数计算</td>
+                <td>${report.knowledgeList[i.index]}</td>
             </tr>
         </c:forEach>
-        </table>
-        </div>
-        <div id="container" style="height:600px"></div>
-
-            <div id="container2" style="height:600px"></div>
-            <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+    </table>
+</div>
+<div id="container" style="height:600px"></div>
+<div id="container2" style="height:600px"></div>
+<script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/echarts.min.js" type="application/javascript"></script>
 <script>
+    // 考试平均分
+    var avgScore = '${report.avgScore}';
+
+    var myScore =' ${report.score}';
+
     layui.use(['rate'], function() {
         var rate = layui.rate;
         //只读
@@ -174,8 +175,8 @@
         dataset: {
             source: [
                 ['score', '平均成绩','我的考试成绩'],
-                ['平均成绩', 88,0],
-                ['我的考试成绩', 0,98],
+                ['平均成绩', avgScore,0],
+                ['我的考试成绩', 0,myScore],
 
             ]
         },

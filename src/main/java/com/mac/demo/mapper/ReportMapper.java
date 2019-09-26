@@ -31,4 +31,10 @@ public interface ReportMapper  extends BaseMapper<Report> {
         "    where r.student_id=s.student_id and r.paper_id=p.paper_id\n" +
         "      and r.student_id=#{studentId} and r.paper_id=#{paperId}")
     ReportVo getReportIndex(@Param("studentId") Integer studentId, @Param("paperId")Integer paperId);
+
+    @Select("select avg(score)\n" +
+        "from report\n" +
+        "where paper_id = #{paperId}")
+    double getAvgScoreByPaperId(int PaperId);
+
 }

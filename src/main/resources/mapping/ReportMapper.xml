@@ -13,10 +13,12 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="score" property="score" jdbcType="INTEGER" />
     <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="knowledge" property="knowledge" jdbcType="VARCHAR" />
+    <result column="ability" property="ability" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     report_id, report_name, student_id, paper_id, answer_select, answer_completion, correct_select, 
-    correct_completion, create_time, score,class_name
+    correct_completion, create_time, score,class_name,knowledge,ability
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -65,6 +67,12 @@
       <if test="className != null" >
         class_name,
       </if>
+      <if test="knowledge != null" >
+        knowledge,
+      </if>
+      <if test="ability != null" >
+        ability,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="reportId != null" >
@@ -98,8 +106,15 @@
         #{score,jdbcType=INTEGER},
       </if>
       <if test="className != null" >
-        #{className,jdbcType=INTEGER},
+        #{className,jdbcType=VARCHAR},
       </if>
+      <if test="ability != null" >
+        #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="knowledge != null" >
+        #{knowledge,jdbcType=VARCHAR},
+      </if>
+
     </trim>
   </insert>
 
