@@ -6,6 +6,7 @@ import com.mac.demo.service.PaperService;
 import com.mac.demo.service.ReportService;
 import com.mac.demo.service.StudentService;
 import com.mac.demo.utils.ExcelUtil;
+import com.mac.demo.utils.Md5Utils;
 import com.mac.demo.vo.PaperTestAdminVo;
 import com.mac.demo.vo.QueryStudentVo;
 import com.mac.demo.vo.ReportVo;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,6 +115,19 @@ public class StudentController {
         return studentService.insertSelective(student);
     }
 
+    @ApiOperation("判断手机号码是否已经注册")
+    @PostMapping("/selectStudentByPhone")
+    @ResponseBody
+    public Boolean selectStudentByPhone(@RequestParam("phone") String phone) {
+
+        Student student  = studentService.selectStudentByPhone(phone);
+        if(student==null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     /**
      * 学生登录校验
      * @param phone
@@ -123,14 +138,17 @@ public class StudentController {
     @ApiOperation("学生登录")
     @PostMapping("/checkLogin")
     @ResponseBody
-    public String checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
+    public Map<String,Object> checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
             HttpServletRequest request) {
-        if(studentService.checkLogin(phone).getStudentPassword().equals(password)){
-            Student student = studentService.checkLogin(phone);
+        Map<String,Object> map = new HashMap<>();
+        if(Md5Utils.getSaltverifyMD5(password,studentService.selectStudentByPhone(phone).getStudentPassword())){
+            Student student = studentService.selectStudentByPhone(phone);
             request.getSession().setAttribute("student",student);
-            return "1";
+            map.put("data","true");
+            return map;
         }else{
-            return null;
+            map.put("data","false");
+            return map;
         }
     }
 
@@ -190,6 +208,8 @@ public class StudentController {
     public int deleteStudent(@RequestParam("studentId")  Integer studentId) {
         return studentService.deleteByPrimaryKey(studentId);
     }
+
+
 
 
     /**

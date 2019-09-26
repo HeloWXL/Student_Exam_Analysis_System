@@ -36,12 +36,12 @@ public interface StudentMapper extends BaseMapper<Student> {
     int updateByPrimaryKeySelective(Student record);
 
     /**
-     * 学生登录
+     * 学生登录  ---根据手机号查询学生信息
      * @param phone
      * @return
      */
     @Select("select * from student where student_phone = #{phone}")
-    Student checkLogin(String phone);
+    Student selectStudentByPhone(String phone);
 
 
     /**

@@ -33,7 +33,7 @@ public interface StudentService {
      * @param phone
      * @return
      */
-    Student checkLogin(String phone);
+    Student selectStudentByPhone(String phone);
 
     /**
      * 根据ID修改学生

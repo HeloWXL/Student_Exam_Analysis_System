@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="${ctx}/resources/css/common.css" />
     <link rel="stylesheet" href="${ctx}/resources/css/login.css" />
     <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <style>
         .login_bg{
             background: #ffffff;
@@ -27,7 +28,7 @@
 </head>
 <body>
     <div class="mui-content">
-        <div id="index"></div>
+        <div id="login"></div>
         <div class="login_bg">
             <div id="logo">
                 <img src="${ctx}/resources/images/logo.png" alt="logo" />

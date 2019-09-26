@@ -3,6 +3,7 @@ package com.mac.demo.service.impl;
 import com.mac.demo.mapper.StudentMapper;
 import com.mac.demo.model.Student;
 import com.mac.demo.service.StudentService;
+import com.mac.demo.utils.Md5Utils;
 import com.mac.demo.vo.QueryStudentVo;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int insertSelective(Student record) {
+        //设置注册密码为md5加密 + 加盐
+        record.setStudentPassword(Md5Utils.getSaltMD5(record.getStudentPassword()));
         return studentMapper.insertSelective(record);
     }
 
@@ -33,8 +36,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student checkLogin(String phone) {
-        return studentMapper.checkLogin(phone);
+    public Student selectStudentByPhone(String phone) {
+        return studentMapper.selectStudentByPhone(phone);
     }
 
     @Override
@@ -62,8 +65,6 @@ public class StudentServiceImpl implements StudentService {
         map.put("count",count);
         return map;
     }
-
-
 
     /**
      * 批量导入 暂时先放在这个

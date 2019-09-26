@@ -28,7 +28,7 @@ img{
 }
 form{
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto!important;
     text-align: left;
 }
 form div.userName,form div.passWord{
