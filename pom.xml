@@ -11,6 +11,7 @@
     <groupId>com.mac</groupId>
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
 
@@ -22,7 +23,22 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!-- 移除嵌入式tomcat插件 -->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.springframework.boot</groupId>-->
+                    <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--&lt;!&ndash;打包的时候可以不用包进去，别的设施会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。-->
+                <!--相当于compile，但是打包阶段做了exclude操作&ndash;&gt;-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,6 +95,8 @@
             <version>2.3</version>
         </dependency>
 
+
+        <!--redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -139,7 +157,15 @@
     </dependencies>
 
     <build>
+        <!-- 应与application.properties(或application.yml)中context-path保持一致 -->
+        <finalName>demo</finalName>
         <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
             <!--自动生成插件-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -158,5 +184,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

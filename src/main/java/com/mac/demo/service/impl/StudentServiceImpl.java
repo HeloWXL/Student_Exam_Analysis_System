@@ -62,4 +62,42 @@ public class StudentServiceImpl implements StudentService {
         map.put("count",count);
         return map;
     }
+
+
+
+    /**
+     * 批量导入 暂时先放在这个
+     * @param list
+     */
+    public void importStudentList(List<List<String>> list){
+        for ( int i = 0 ; i <list.size();i++){
+            Student student = new Student();
+
+            String sno = list.get(i).get(0);
+            int snolength = sno.length();
+
+//            if(sno.substring(snolength-2,snolength).equals(".0")){
+//                System.out.println(sno.substring(0,snolength-2));
+//                student.setStudentNo(sno.substring(0,snolength-2));
+//            }else{
+//                student.setStudentNo(sno);
+//            }
+//            student.setStudentName(list.get(i).get(1));
+////            密码默认为学号
+//            student.setStudentPassword("123456");
+//            student.setStudentClass(list.get(i).get(2));
+//            student.setStudentApartment(list.get(i).get(3));
+//            student.setSutdnetSex(list.get(i).get(4));
+//            student.setStudentProfession(list.get(i).get(5));
+//            String age = list.get(i).get(6);
+//
+//            int length = age.length();
+//            if(age.substring(length-2, length).equals(".0")){
+//                student.setStudentAge(Integer.parseInt(age.substring(0,length-2)));
+//            }else{
+//                student.setStudentAge(Integer.parseInt(age));
+//            }
+            studentMapper.insert(student);
+        }
+    }
 }

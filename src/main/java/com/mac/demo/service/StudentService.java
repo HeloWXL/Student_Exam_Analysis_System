@@ -48,4 +48,6 @@ public interface StudentService {
     Map<String,Object> getStudent(QueryStudentVo queryStudentVo);
 
     Map<String, Object> getStudentByCondition(QueryStudentVo queryStudentVo);
+
+    public void importStudentList(List<List<String>> list);
 }

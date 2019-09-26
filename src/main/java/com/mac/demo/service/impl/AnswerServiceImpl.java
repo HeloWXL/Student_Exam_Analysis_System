@@ -56,8 +56,8 @@ public class AnswerServiceImpl implements AnswerService {
         int paperId = answer.getPaperId();
 
 
-        List<String> correctSelect =new ArrayList<>();
-        List<String> correctCompletion = new ArrayList<>();
+        StringBuilder correctSelect =new StringBuilder();
+        StringBuilder correctCompletion = new StringBuilder();
 
         //将字符串转换成集合
         List<String> selectList = PaperUtils.String2List(select.substring(0,select.length()-1));
@@ -71,9 +71,10 @@ public class AnswerServiceImpl implements AnswerService {
         List<CompletionQuestion> completionQuestionList = completionQuestionMapper.selectBatchIds(PaperUtils.getQuestionIds(p.getCompletionList()));
         int score = 0;
 
+        StringBuilder selectStr = new StringBuilder();
         //计算考试分数
         for (int i = 0 ; i <selectList.size();i++){
-            correctSelect.add(selectQuestionList.get(i).getAnswer().toUpperCase()+",");
+            correctSelect.append(selectQuestionList.get(i).getAnswer().toUpperCase()+",");
             if(selectList.get(i).toUpperCase().equals(selectQuestionList.get(i).getAnswer().toUpperCase())){
                 score+=10;
             }else{
@@ -81,7 +82,7 @@ public class AnswerServiceImpl implements AnswerService {
             }
         }
         for(int i =0 ;i<completionList.size();i++){
-            correctCompletion.add(completionQuestionList.get(i).getAnswer()+",");
+            correctCompletion.append(completionQuestionList.get(i).getAnswer()+",");
             if(completionList.get(i).toUpperCase().equals(completionQuestionList.get(i).getAnswer())){
                 score+=20;
             }else{
@@ -104,6 +105,8 @@ public class AnswerServiceImpl implements AnswerService {
         //我的考试成绩
         report.setScore(score);
 
+
+        //按照成绩分配班级
         if(score>=80){
             className="尖子班";
         }else if(score>60 && score<80){
@@ -112,6 +115,8 @@ public class AnswerServiceImpl implements AnswerService {
             className="普通班";
         }
         report.setClassName(className);
+
+
         //标准答案
         report.setCorrectCompletion(correctCompletion.toString());
         report.setCorrectSelect(correctSelect.toString());

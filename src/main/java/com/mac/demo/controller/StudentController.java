@@ -5,19 +5,24 @@ import com.mac.demo.model.Student;
 import com.mac.demo.service.PaperService;
 import com.mac.demo.service.ReportService;
 import com.mac.demo.service.StudentService;
+import com.mac.demo.utils.ExcelUtil;
 import com.mac.demo.vo.PaperTestAdminVo;
 import com.mac.demo.vo.QueryStudentVo;
 import com.mac.demo.vo.ReportVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +36,13 @@ import java.util.Map;
 @RequestMapping("student")
 @Controller
 public class StudentController {
+
+    protected Logger logger = LoggerFactory.getLogger(StudentController.class);
+
     @Resource
     private StudentService studentService;
     @Resource
     private PaperService paperService;
-
     @Resource
     private ReportService reportService;
 
@@ -182,6 +189,44 @@ public class StudentController {
     @ResponseBody
     public int deleteStudent(@RequestParam("studentId")  Integer studentId) {
         return studentService.deleteByPrimaryKey(studentId);
+    }
+
+
+    /**
+     * 内容待定
+     * @param file
+     * @return
+     */
+    @ApiOperation("管理员导入学生实习名单")  //success
+    @PostMapping("importStudent")
+    public String importStudent(@RequestParam("file") MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
+        List<List<String>> listContent = new ArrayList<>();
+        String message = "导入成功";
+//        try {
+//            if (file != null) {
+//                //文件类型判断
+//                if (!ExcelUtil.isEXCEL(file)) {
+//                    logger.info("文件为空");
+//                    message="文件为空";
+//                }
+//                listContent = ExcelUtil.readExcelContents(file, pattern);
+//                //文件内容判断
+//                if (listContent.isEmpty()) {
+//                    logger.info("表格内容为空");
+//                    message="表格内容为空";
+//                }
+//                studentService.importStudentList(listContent);
+//            } else {
+//                logger.info("未选择文件");
+//                message="未选择文件";
+//            }
+//        } catch (Exception e) {
+//            logger.info("文件上传出现异常", e.getMessage(), e);
+//        }
+//        logger.info("导入成功");
+        return message;
     }
 
 
