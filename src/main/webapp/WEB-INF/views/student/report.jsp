@@ -13,6 +13,7 @@
     <title>学生成绩报告</title>
     <meta charset="utf-8">
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet"/>
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <style>
         .table {
             border: 1px solid #cad9ea;

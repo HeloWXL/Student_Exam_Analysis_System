@@ -14,6 +14,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="${ctx}/resources/css/common.css" />
     <link rel="stylesheet" href="${ctx}/resources/css/login.css" />
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
+
     <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
     <script>
         var ctx = '${ctx}'
