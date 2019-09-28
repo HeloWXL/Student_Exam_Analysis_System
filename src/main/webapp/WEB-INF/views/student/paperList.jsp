@@ -20,26 +20,19 @@
         var ctx = '${ctx}'
     </script>
     <style>
+        .mui-card{
+            border-radius: 5px;
+        }
+
+
         #content{
             width: 100%;
             height: 100%;
         }
-        .paper{
-            width: 96%;
-            height: 42%;
-            margin: 1% 2%;
-            float: left;
-            background-color: #FFFFFF;
-            border-radius: 15px;
-        }
-
-        .paper img{
-            margin: 6% 28%;
-            width: 45%;
-            height: 56%;
-        }
-        .paper:hover{
-            background-color: #DDDDDD;
+        img{
+            margin: 6% 27%;
+            width: 47%;
+            height: 30%;
         }
         p{
             margin-left: 5px;
@@ -55,14 +48,28 @@
 <div class="mui-content">
     <div id="content">
         <c:forEach var="paper" items="${paperList}">
-            <div class="paper">
-                <a href="/student/toDeclaer/${paper.paperId}">
-                    <img src="${ctx}/resources/images/logo.png" />
-                    <p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p>
-                    <p>考试名称：<span>${paper.testName}</span></p>
-                    <p>发布人：<span>${paper.adminName}</span></p>
-                </a>
-            </div>
+<%--            <div class="paper">--%>
+<%--                <a href="/student/toDeclaer/${paper.paperId}">--%>
+<%--                    <img src="${ctx}/resources/images/logo.png" />--%>
+<%--                    <p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p>--%>
+<%--                    <p>考试名称：<span>${paper.testName}</span></p>--%>
+<%--                    <p>发布人：<span>${paper.adminName}</span></p>--%>
+<%--                </a>--%>
+<%--            </div>--%>
+
+            <a href="/student/toDeclaer/${paper.paperId}">
+                <div class="mui-card">
+                    <!--页眉，放置标题-->
+                    <div class="mui-card-header"><p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p></div>
+                    <!--内容区-->
+                    <div class="mui-card-content"><img src="${ctx}/resources/images/logo.png" /></div>
+                    <!--页脚，放置补充信息或支持的操作-->
+                    <div class="mui-card-footer">
+                        <p>考试名称：<span>${paper.testName}</span></p>
+                        <p>发布人：<span>${paper.adminName}</span></p>
+                    </div>
+                </div>
+            </a>
         </c:forEach>
     </div>
 </div>

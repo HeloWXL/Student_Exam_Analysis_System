@@ -68,7 +68,7 @@
                "\n" +
                "                        <div class=\"layui-input-inline\">\n" +
                "                            <label class=\"layui-form-label\" style='margin-left: -50px'>用户名：</label>\n" +
-               "                            <input type=\"password\" name=\"addAdminName\" autocomplete=\"off\" class=\"layui-input\" style=\"width: 100px\">\n" +
+               "                            <input type=\"text\" name=\"addAdminName\" autocomplete=\"off\" class=\"layui-input\" style=\"width: 100px\">\n" +
                "                        </div>\n" +
                "\n" +
                "                        <div class=\"layui-input-inline\">\n" +

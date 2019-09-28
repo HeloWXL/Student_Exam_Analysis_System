@@ -27,24 +27,31 @@
         .mui-table-view-cell>a:not(.mui-btn){
             margin: 3px 18px;
         }
+        label{
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 <div class="mui-content">
+    <div class="mui-card">
+        <!--页眉，放置标题-->
+        <div class="mui-card-header">${paper.paperName}</div>
+        <!--页脚，放置补充信息或支持的操作-->
+        <div class="mui-card-footer">
+            <p>考试时间：<span>60分钟</span></p>
+            <p>总分：<span>100分</span></p>
+        </div>
+    </div>
     <div class="main">
       <div class="warp">
         <div class="issue" id="issue">
             <div>
-                <p>试卷：<span>${paper.paperName}</span></p>
-                <p>考试时间：<span>60分钟</span></p>
-                <p>总分：<span>100分</span></p>
-                <input value="${paper.paperId}" type="hidden" id="paperId">
+                <label>选择题</label>
             </div>
-            <h4>选择题</h4>
             <c:forEach var="select" items="${paper.selectQuestionList}" varStatus="status">
                 <div class="cnt" id="id${status.count}">
                     <h3 class="selectTitle">${status.count}、${select.text}</h3>
-
                     <ul class="mui-table-view mui-table-view-radio">
                         <li class="mui-table-view-cell" value="a">
                             <a class="mui-navigate-right">A、${select.optionA}</a>
@@ -61,7 +68,10 @@
                     </ul>
                 </div>
             </c:forEach>
-            <h4>填空题</h4>
+            <div style="margin-top: 10px;">
+                <label>填空题 </label>
+            </div>
+
             <c:forEach var="completion" items="${paper.completionQuestionList}" varStatus="status">
                 <div class="cnt">
                     <h3>${status.count}、${completion.text}</h3>
@@ -69,7 +79,7 @@
                 </div>
             </c:forEach>
             <div style="position: relative;top: 10px">
-                <button type="button" class="mui-btn mui-btn-primary"  id="submit" style="width: 100%">交卷</button>
+                <button type="button" class="mui-btn mui-btn-primary"  id="submit" style="width: 100%;margin-bottom: 10px">交卷</button>
             </div>
         </div>
     </div>

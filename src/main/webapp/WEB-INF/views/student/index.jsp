@@ -24,23 +24,10 @@
             width: 100%;
             height: 100%;
         }
-        .test{
-            width: 96%;
-            height: 43%;
-            margin: 1% 2%;
-            float: left;
-            background-color: #FFFFFF;
-            border-radius: 15px;
-        }
-
-        .test img{
+        img{
             margin: 6% 27%;
             width: 47%;
-            height: 62%;
-        }
-
-        .test:hover{
-            background-color: #DDDDDD;
+            height: 30%;
         }
         p{
             margin-left: 5px;
@@ -69,13 +56,23 @@
                 type:'get',
                 success:function (data) {
                     for(var i = 0 ;i<data.length;i++){
-                        $node = $('<div class="test">\n' +
-                            '                <a href="/student/getPaperByList/'+data[i].testId+'">\n' +
-                            '                    <img src="${ctx}/resources/images/logo.png" />\n' +
-                            '                    <p>考试名称：<span style="color: #000000;">'+data[i].testName+'</span></p>\n' +
-                            '                    <p>发布时间：<span>'+data[i].createTime+'</span></p>\n' +
-                            '                </a>\n' +
-                            '            </div>');
+                        <%--$node = $('<div class="test">\n' +--%>
+                        <%--    '                <a href="/student/getPaperByList/'+data[i].testId+'">\n' +--%>
+                        <%--    '                    <img src="${ctx}/resources/images/logo.png" />\n' +--%>
+                        <%--    '                    <p>考试名称：<span style="color: #000000;">'+data[i].testName+'</span></p>\n' +--%>
+                        <%--    '                    <p>发布时间：<span>'+data[i].createTime+'</span></p>\n' +--%>
+                        <%--    '                </a>\n' +--%>
+                        <%--    '            </div>');--%>
+                        $node = $('<a href="/student/getPaperByList/'+data[i].testId+'">\n' +
+                            '<div class="mui-card">\n' +
+                            '\t<!--页眉，放置标题-->\n' +
+                            '\t<div class="mui-card-header"><p>考试名称：<span style="color: #000000;">'+data[i].testName+'</span></p></div>\n' +
+                            '\t<!--内容区-->\n' +
+                            '\t<div class="mui-card-content"><img src="${ctx}/resources/images/logo.png" /></div>\n' +
+                            '\t<!--页脚，放置补充信息或支持的操作-->\n' +
+                            '\t<div class="mui-card-footer"><p>发布时间：<span>'+data[i].createTime+'</span></p></div>\n' +
+                            '</a>\n' +
+                            '</div>')
                         $("#content").append($node);
                     }
                 }
