@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Created by wangxianlin
  */
 @Api(tags = "管理员接口")
-@RequestMapping("admin")
+@RequestMapping("/admin")
 @Controller
 public class AdminController {
     @Resource

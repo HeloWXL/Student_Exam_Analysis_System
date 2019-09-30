@@ -23,7 +23,7 @@
 
 <div class='login-wrap'>
     <h2>管理员登录</h2>
-    <form action="/admin/checkLogin" class='login-container' method="post">
+    <form action="/demo/admin/checkLogin" class='login-container' method="post">
         <input type='text' placeholder='请输入用户名' name='adminName' >
         <input type='password' placeholder='请输入密码' name='password'>
         <input type="hidden" value="${msg}" id="msg">

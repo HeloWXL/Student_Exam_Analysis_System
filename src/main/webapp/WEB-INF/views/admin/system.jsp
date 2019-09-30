@@ -89,7 +89,7 @@
            };
                var admin=JSON.stringify(addAdmin);
                $.ajax({
-                   url:'/admin/insertAdmin',
+                   url:'/demo/admin/insertAdmin',
                    data:admin,
                    dataType:'json',
                    type:'post',
@@ -104,7 +104,7 @@
         $("#changePassWord").click(function (){
             var password=$("input[name='password']").val();
             $.ajax({
-                url:'/admin/changePassWord',
+                url:'/demo/admin/changePassWord',
                 data:{passWord:password},
                 dataType:'json',
                 type:'post',

@@ -205,7 +205,7 @@
 
 <script>
     if('${admin}'==""){
-        location.href="/admin/toLogin";
+        location.href="/demo/admin/toLogin";
     }
 </script>
 </body>

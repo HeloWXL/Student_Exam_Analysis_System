@@ -103,7 +103,7 @@
                 elem: '#demo'
                 , toolbar: '#toolbars'
                 , defaultToolbar: []
-                , url: ctx + '/paper/getPaper' //数据接口
+                , url: ctx + '/demo/paper/getPaper' //数据接口
                 , page: true //开启分页
                 , method:'post'
                 ,contentType: 'application/json; charset=utf-8'

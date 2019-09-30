@@ -94,7 +94,7 @@
                 elem: '#demo'
                 , toolbar: '#toolbars'
                 , defaultToolbar: []
-                , url: ctx + '/test/getTest' //数据接口
+                , url: ctx + '/demo/test/getTest' //数据接口
                 , page: true //开启分页
                 ,method:'post'
                 ,contentType: 'application/json; charset=utf-8'
@@ -109,7 +109,7 @@
                 ]]
                 , skin: 'line,row' //表格风格
                 , even: true
-                , limits: [5, 10, 15]
+                , limits: [10, 20, 30]
                 , limit: 10 //每页默认显示的数量
             });
         }
@@ -155,7 +155,7 @@
                                 time: $.trim($('#time').val()),
                             };
                             $.ajax({
-                                url: ctx+'/test/insertTest',
+                                url: ctx+'/demo/test/insertTest',
                                 data:JSON.stringify(test),
                                 dataType:'json',
                                 type:'post',
@@ -189,7 +189,7 @@
                         var testId = data[0].testId;
                         layer.confirm('是否删除？',{title:'提示'},function(index) {
                             $.ajax({
-                                url: ctx+'/test/deleteByTest',
+                                url: ctx+'/demo/test/deleteByTest',
                                 data:{testId:testId},
                                 dataType:'json',
                                 type:'get',
@@ -270,7 +270,7 @@
                                     time:$('#time').val()
                                 };
                                 $.ajax({
-                                    url: ctx+'/test/updateByTest',
+                                    url: ctx+'/demo/test/updateByTest',
                                     data:JSON.stringify(test),
                                     dataType:'json',
                                     type:'post',

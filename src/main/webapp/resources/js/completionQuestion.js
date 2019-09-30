@@ -22,7 +22,7 @@ layui.use('table', function(){
             elem: '#demo'
             , toolbar: '#toolbars'
             , defaultToolbar: []
-            , url: ctx + '/completionquestion/getCompletionQuestion' //数据接口
+            , url: ctx + '/demo/completionquestion/getCompletionQuestion' //数据接口
             , page: true //开启分页
             ,method:'post'
             ,contentType: 'application/json; charset=utf-8'
@@ -129,7 +129,7 @@ layui.use('table', function(){
                             knowledge:$.trim($('#knowledge').val()),
                         };
                         $.ajax({
-                            url: ctx+'/completionquestion/insertCompletionQuestion',
+                            url: ctx+'/demo/completionquestion/insertCompletionQuestion',
                             data:JSON.stringify(completionQuestion),
                             dataType:'json',
                             type:'post',
@@ -163,7 +163,7 @@ layui.use('table', function(){
                     var completionId = data[0].completionId;
                     layer.confirm('是否删除？',{title:'提示'},function(index) {
                         $.ajax({
-                            url: ctx+'/completionquestion/deleteCompletionQuestion',
+                            url: ctx+'/demo/completionquestion/deleteCompletionQuestion',
                             data:{completionId:completionId},
                             dataType:'json',
                             type:'get',
@@ -276,7 +276,7 @@ layui.use('table', function(){
                                 knowledge:$.trim($('#knowledge').val()),
                             };
                             $.ajax({
-                                url: ctx+'/completionquestion/updateCompletionQuestion',
+                                url: ctx+'/demo/completionquestion/updateCompletionQuestion',
                                 data:JSON.stringify(completionQuestion),
                                 dataType:'json',
                                 type:'post',

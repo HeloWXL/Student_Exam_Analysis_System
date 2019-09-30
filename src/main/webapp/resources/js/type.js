@@ -7,7 +7,7 @@ layui.use('table', function(){
         elem: '#demo'
         , toolbar: '#toolbars'
         , defaultToolbar: []
-        ,url: ctx+'/type/getType' //数据接口
+        ,url: ctx+'/demo/type/getType' //数据接口
         ,page: true //开启分页
         ,cols: [[ //表头
             {field: 'checkbox', type: 'checkbox'}
@@ -55,7 +55,7 @@ layui.use('table', function(){
                             typeName:  $.trim($('#typeName').val())
                         };
                         $.ajax({
-                            url: ctx+'/type/insertType',
+                            url: ctx+'/demo/type/insertType',
                             data:JSON.stringify(type),
                             dataType:'json',
                             type:'post',
@@ -89,7 +89,7 @@ layui.use('table', function(){
                     var typeId = data[0].typeId;
                     layer.confirm('是否删除？',{title:'提示'},function(index) {
                         $.ajax({
-                            url: ctx+'/type/deleteType',
+                            url: ctx+'/demo/type/deleteType',
                             data:{typeId:typeId},
                             dataType:'json',
                             type:'get',
@@ -162,7 +162,7 @@ layui.use('table', function(){
                                 typeName:  $.trim($('#typeName').val())
                             };
                             $.ajax({
-                                url: ctx+'/type/updateBType',
+                                url: ctx+'/demo/type/updateBType',
                                 data:JSON.stringify(type),
                                 dataType:'json',
                                 type:'post',

@@ -108,7 +108,7 @@
             ,contentType: 'application/json; charset=utf-8'
             , defaultToolbar: []
             ,where:queryReportVo
-            , url: ctx + '/report/getReport' //数据接口
+            , url: ctx + '/demo/report/getReport' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
                   {field: 'number', title: '序号', type: 'numbers'}
