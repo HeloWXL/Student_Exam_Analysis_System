@@ -57,7 +57,7 @@
 <%--                </a>--%>
 <%--            </div>--%>
 
-            <a href="/student/toDeclaer/${paper.paperId}">
+            <a href="/demo/student/toDeclaer/${paper.paperId}">
                 <div class="mui-card">
                     <!--页眉，放置标题-->
                     <div class="mui-card-header"><p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p></div>

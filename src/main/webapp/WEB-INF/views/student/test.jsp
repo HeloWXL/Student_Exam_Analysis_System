@@ -44,6 +44,7 @@
         </div>
     </div>
     <div class="main">
+        <input value="${paper.paperId}" type="hidden" id="paperId">
       <div class="warp">
         <div class="issue" id="issue">
             <div>
@@ -139,7 +140,7 @@
                     success:function (data) {
                         if(data==1){
                             mui.alert("提交成功",function () {
-                                location.href="/student/toReport/"+paperId+"/"+studentId;
+                                location.href=ctx+"/student/toReport/"+paperId+"/"+studentId;
                             })
                         }else{
                             mui.alert("提交失败")
@@ -148,7 +149,7 @@
                 })
             })
         }else{
-            location.href="/student/toLogin";
+            location.href=ctx+"/student/toLogin";
         }
     })
 </script>

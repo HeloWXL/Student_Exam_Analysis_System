@@ -33,8 +33,8 @@
             <div id="logo">
                 <img src="${ctx}/resources/images/logo.png" alt="logo" />
             </div>
-            <a class="login_btn" href="/student/toLogin">登&nbsp;&nbsp;录</a>
-            <a class="login_btn" href="/student/toRegister">注&nbsp;&nbsp;册</a>
+            <a class="login_btn" href="/demo/student/toLogin">登&nbsp;&nbsp;录</a>
+            <a class="login_btn" href="/demo/student/toRegister">注&nbsp;&nbsp;册</a>
         </div>
     </div>
     <div>

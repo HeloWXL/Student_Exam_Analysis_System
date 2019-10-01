@@ -37,6 +37,19 @@
                             <input type="text" name="level" autocomplete="off" class="layui-input">
                         </div>
                     </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">能力类型:</label>
+                        <div class="layui-input-inline">
+                              <select name="typeId">
+                                  <option value="">请选择能力类型</option>
+                                    <option value="1">客观分析能力</option>
+                                    <option value="2">推理能力</option>
+                                    <option value="3">动手能力</option>
+                                    <option value="4">计算能力</option>
+                                    <option value="5">应用能力</option>
+                              </select>
+                        </div>
+                     </div>
                     <div class="layui-inline" id="btn">
                         <div class="layui-inline">
                             <button type="button" class="layui-btn layui-btn-primary" id="query">查询</button>

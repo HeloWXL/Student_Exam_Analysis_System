@@ -12,10 +12,17 @@ $(function () {
         $('#query').click(function() {
             var querySelectQuestionVo = {
                 courseName:$("input[name='courseName']").val(),
-                level:$("input[name='level']").val()
+                level:$("input[name='level']").val(),
+                typeId:$("select[name='typeId']").val()
             };
             loadData(table,querySelectQuestionVo);
         });
+
+        $("#reset").click(function () {
+            $("select").val("");
+            $("input").val("");
+            table.reload('selectQuestionTable');
+        })
         table.on('toolbar(selectQuestionfilter)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var  data = checkStatus.data; //获取选中的数据
@@ -362,7 +369,7 @@ $(function () {
                 , {field: 'answer', title: '答案', width: 100, align: 'center'}
                 , {field: 'courseName', title: '课程名', width: 120, align: 'center'}
                 , {field: 'level', title: '难度等级', width: 100, align: 'center'}
-                , {field: 'typeName', title: '题目类型', width: 120, align: 'center'}
+                , {field: 'typeName', title: '能力类型', width: 120, align: 'center'}
                 , {field: 'knowledge', title: '知识点', width: 180, align: 'center'}
                 , {field: 'createTime', title: '创建时间', width: 200, align: 'center'}
             ]]

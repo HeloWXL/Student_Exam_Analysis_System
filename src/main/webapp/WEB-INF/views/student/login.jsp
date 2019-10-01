@@ -38,7 +38,7 @@
                 <input type="password" name="password" placeholder="请输入密码"  required />
             </div>
             <div class="choose_box">
-                <a href="/student/toRegister">没有账号？注册</a>
+                <a href="/demo/student/toRegister">没有账号？注册</a>
             </div>
             <button class="login_btn" type="button" id="submit">登&nbsp;&nbsp;录</button>
         </form>

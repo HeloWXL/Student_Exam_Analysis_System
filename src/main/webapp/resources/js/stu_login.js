@@ -10,7 +10,7 @@ $(function () {
 })
 function hasPhone(phone,password) {
     $.ajax({
-        url:'/student/selectStudentByPhone',
+        url:'/demo/student/selectStudentByPhone',
         data:{phone:phone},
         dataType:'json',
         type:'post',
@@ -27,7 +27,7 @@ function hasPhone(phone,password) {
 }
 function checkLogin(phone,password) {
     $.ajax({
-        url:'/student/checkLogin',
+        url:'/demo/student/checkLogin',
         data:{phone:phone,password:password},
         dataType:'json',
         type:'post',

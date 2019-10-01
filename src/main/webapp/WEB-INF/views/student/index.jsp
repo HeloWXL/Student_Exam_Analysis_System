@@ -63,7 +63,7 @@
                         <%--    '                    <p>发布时间：<span>'+data[i].createTime+'</span></p>\n' +--%>
                         <%--    '                </a>\n' +--%>
                         <%--    '            </div>');--%>
-                        $node = $('<a href="/student/getPaperByList/'+data[i].testId+'">\n' +
+                        $node = $('<a href=ctx+"/student/getPaperByList/'+data[i].testId+'">\n' +
                             '<div class="mui-card">\n' +
                             '\t<!--页眉，放置标题-->\n' +
                             '\t<div class="mui-card-header"><p>考试名称：<span style="color: #000000;">'+data[i].testName+'</span></p></div>\n' +
@@ -78,7 +78,7 @@
                 }
             })
         }else{
-            location.href="/student/toLogin";
+            location.href=ctx+"/student/toLogin";
         }
     })
 </script>

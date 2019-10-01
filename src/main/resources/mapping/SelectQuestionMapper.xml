@@ -201,6 +201,9 @@
     <if test="level != null and level != ''">
       and s.`level` like concat('%',#{level}, '%')
     </if>
+    <if test="typeId != null and typeId != ''">
+      and s.`type_id` = #{typeId}
+    </if>
     LIMIT #{page},#{limit}
   </select>
 

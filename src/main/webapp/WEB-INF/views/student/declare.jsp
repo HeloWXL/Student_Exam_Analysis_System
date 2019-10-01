@@ -63,7 +63,7 @@
     $("#comfirm").click(function(){
         var paperId = $("#paperId").val();
         mui.alert("我已阅读考试声明，如有违反，后果自负",function(){
-            location.href="/paper/selectPaperInfo/"+paperId;
+            location.href=ctx+"/paper/selectPaperInfo/"+paperId;
         })
     })
 
