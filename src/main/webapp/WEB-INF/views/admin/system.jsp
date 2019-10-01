@@ -95,7 +95,7 @@
                    type:'post',
                    contentType: 'application/json; charset=utf-8',
                    success: function(data) {
-                       parent.location.href="/admin/toIndex";
+                       parent.location.href="/demo/admin/toIndex";
                    }
                })
 
@@ -109,7 +109,7 @@
                 dataType:'json',
                 type:'post',
                 success: function(data) {
-                    parent.location.href="/admin/toLogin";
+                    parent.location.href="/demo/admin/toLogin";
                 }
 
             })

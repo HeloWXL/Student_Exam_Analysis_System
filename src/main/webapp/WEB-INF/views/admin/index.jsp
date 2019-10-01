@@ -98,7 +98,7 @@
             <div class="tpl-content">
 
                 <div class="content-pannel clearfix">
-                    <iframe align="center" width="100%" height="100%" src="/admin/toSystem" frameborder="no" border="0" marginwidth="0"
+                    <iframe align="center" width="100%" height="100%" src="/demo/admin/toSystem" frameborder="no" border="0" marginwidth="0"
                             marginheight="20px" scrolling="no" style="background-color: #FFFFFF;"></iframe>
                 </div>
 

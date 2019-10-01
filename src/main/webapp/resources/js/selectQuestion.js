@@ -129,7 +129,7 @@ $(function () {
                                 knowledge:$.trim($('#knowledge').val()),
                             };
                             $.ajax({
-                                url: ctx+'/demo/selectquestion/insertSelectQuestion',
+                                url: ctx+'/selectquestion/insertSelectQuestion',
                                 data:JSON.stringify(selectQuestion),
                                 dataType:'json',
                                 type:'post',
@@ -163,7 +163,7 @@ $(function () {
                         var selectId = data[0].selectId;
                         layer.confirm('是否删除？',{title:'提示'},function(index) {
                             $.ajax({
-                                url: ctx+'/demo/selectquestion/deleteSelectQuestion',
+                                url: ctx+'/selectquestion/deleteSelectQuestion',
                                 data:{selectId:selectId},
                                 dataType:'json',
                                 type:'get',
@@ -309,7 +309,7 @@ $(function () {
                                     knowledge:$.trim($('#knowledge').val())
                                 };
                                 $.ajax({
-                                    url: ctx+'/demo/selectquestion/updateSelectQuestion',
+                                    url: ctx+'/selectquestion/updateSelectQuestion',
                                     data:JSON.stringify(selectQuestion),
                                     dataType:'json',
                                     type:'post',
@@ -346,7 +346,7 @@ $(function () {
             elem: '#demo'
             , toolbar: '#toolbars'
             , defaultToolbar: []
-            , url: ctx + '/demo/selectquestion/getSelectQuestion' //数据接口
+            , url: ctx + '/selectquestion/getSelectQuestion' //数据接口
             , method:'post'
             ,contentType: 'application/json; charset=utf-8'
             , page: true //开启分页

@@ -27,7 +27,7 @@ layui.use('table', function(){
                 ,contentType: 'application/json; charset=utf-8'
                 , defaultToolbar: []
                 ,where:queryStudentVo
-                , url: ctx + '/demo/student/getStudent' //数据接口
+                , url: ctx + '/student/getStudent' //数据接口
                 , page: true //开启分页
                 , cols: [[ //表头
                     {field: 'checkbox', type: 'checkbox'}
@@ -91,7 +91,7 @@ layui.use('table', function(){
                             studentPassword:$.trim($('#studentPassword').val()),
                         };
                         $.ajax({
-                            url: ctx+'/demo/student/insertStudent',
+                            url: ctx+'/student/insertStudent',
                             data:JSON.stringify(student),
                             dataType:'json',
                             type:'post',
@@ -125,7 +125,7 @@ layui.use('table', function(){
                     var studentId = data[0].studentId;
                     layer.confirm('是否删除？',{title:'提示'},function(index) {
                         $.ajax({
-                            url: ctx+'/demo/student/deleteStudent',
+                            url: ctx+'/student/deleteStudent',
                             data:{studentId:studentId},
                             dataType:'json',
                             type:'get',
@@ -212,7 +212,7 @@ layui.use('table', function(){
                                 studentPassword:$('#studentPassword').val()
                             };
                             $.ajax({
-                                url: ctx+'/demo/student/updateStudentPasswordByAdmin',
+                                url: ctx+'/student/updateStudentPasswordByAdmin',
                                 data:JSON.stringify(student),
                                 dataType:'json',
                                 type:'post',

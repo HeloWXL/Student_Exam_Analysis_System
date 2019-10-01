@@ -4,35 +4,35 @@
 $(function(){
 		// 学生管理
 		$("#student").click(function(){
-			$("iframe").attr("src","/admin/toStudent")
+			$("iframe").attr("src","/demo/admin/toStudent")
 		})
 		// 选择题管理
 		$("a[name='select']").click(function(){
-			$("iframe").attr("src","/admin/toSelectQuestion")
+			$("iframe").attr("src","/demo/admin/toSelectQuestion")
 		})
 		// 填空题管理
 		$("#completion").click(function(){
-			$("iframe").attr("src","/admin/toCompletionQuestion")
+			$("iframe").attr("src","/demo/admin/toCompletionQuestion")
 		})
 		// 考试管理
 		$("#test").click(function(){
-			$("iframe").attr("src","/admin/toTest")
+			$("iframe").attr("src","/demo/admin/toTest")
 		})
 		// 试卷管理
 		$("#paper").click(function(){
-			$("iframe").attr("src","/admin/toPaper")
+			$("iframe").attr("src","/demo/admin/toPaper")
 		})
 		// 课程管理
 		$("#course").click(function(){
-			$("iframe").attr("src","/admin/toCourse")
+			$("iframe").attr("src","/demo/admin/toCourse")
 		})
 		// 题目类型管理
 		$("#type").click(function(){
-			$("iframe").attr("src","/admin/toType")
+			$("iframe").attr("src","/demo/admin/toType")
 		})
 		// 报告管理
 		$("#report").click(function(){
-			$("iframe").attr("src","/admin/toReport")
+			$("iframe").attr("src","/demo/admin/toReport")
 		})
 
 		layui.use(['layer','jquery','form','carousel','element','upload'],function(){

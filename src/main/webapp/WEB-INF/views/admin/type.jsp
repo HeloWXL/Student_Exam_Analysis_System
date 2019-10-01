@@ -22,32 +22,6 @@
         <div class="grid-demo grid-demo-bg1">
             <!-- 模块名 -->
             <blockquote class="layui-elem-quote">题目类型管理</blockquote>
-            <%--            操作--%>
-            <%--<div class="top">
-                <form class="layui-form" action="">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">姓名：</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="userName" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">手机号码：</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="phone" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline" id="btn">
-                        <div class="layui-inline">
-                            <button type="button" class="layui-btn layui-btn-primary" id="query">查询</button>
-                        </div>
-                        <div class="layui-inline">
-                            <button type="button" class="layui-btn layui-btn-primary" id="reset">重置</button>
-                        </div>
-                    </div>
-                </form>
-            </div>--%>
-
             <%--            表格--%>
             <div class="center">
                 <table id="demo" lay-filter="typefilter"></table>

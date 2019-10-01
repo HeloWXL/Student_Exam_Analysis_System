@@ -94,7 +94,7 @@
                 elem: '#demo'
                 , toolbar: '#toolbars'
                 , defaultToolbar: []
-                , url: ctx + '/demo/test/getTest' //数据接口
+                , url: ctx + '/test/getTest' //数据接口
                 , page: true //开启分页
                 ,method:'post'
                 ,contentType: 'application/json; charset=utf-8'
@@ -155,7 +155,7 @@
                                 time: $.trim($('#time').val()),
                             };
                             $.ajax({
-                                url: ctx+'/demo/test/insertTest',
+                                url: ctx+'/test/insertTest',
                                 data:JSON.stringify(test),
                                 dataType:'json',
                                 type:'post',
@@ -189,7 +189,7 @@
                         var testId = data[0].testId;
                         layer.confirm('是否删除？',{title:'提示'},function(index) {
                             $.ajax({
-                                url: ctx+'/demo/test/deleteByTest',
+                                url: ctx+'/test/deleteByTest',
                                 data:{testId:testId},
                                 dataType:'json',
                                 type:'get',
@@ -270,7 +270,7 @@
                                     time:$('#time').val()
                                 };
                                 $.ajax({
-                                    url: ctx+'/demo/test/updateByTest',
+                                    url: ctx+'/test/updateByTest',
                                     data:JSON.stringify(test),
                                     dataType:'json',
                                     type:'post',
