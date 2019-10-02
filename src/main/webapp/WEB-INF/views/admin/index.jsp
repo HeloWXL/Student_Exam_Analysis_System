@@ -12,6 +12,7 @@
 <head>
     <meta charset="utf-8">
     <title>教师首页</title>
+    <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/admin.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/plugins/layui/css/layui.css">

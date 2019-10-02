@@ -77,7 +77,7 @@
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
 <script>
     if('${student}'==""){
-        location.href="/student/toLogin";
+        location.href=ctx+"/student/toLogin";
     }
 </script>
 </html>

@@ -12,6 +12,8 @@
 <head>
     <title>选择题管理</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
+    <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
+
     <script>
         var ctx = '${ctx}'
     </script>

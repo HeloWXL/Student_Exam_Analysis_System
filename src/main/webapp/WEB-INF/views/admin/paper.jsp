@@ -11,6 +11,8 @@
 <html>
 <head>
     <title>试卷管理</title>
+    <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
+
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <script>
         var ctx = '${ctx}'
