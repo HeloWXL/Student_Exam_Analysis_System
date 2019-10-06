@@ -41,7 +41,7 @@ $(function () {
                             '            <div class="layui-form-item">\n' +
                             '                <label class="layui-form-label" style="padding-left:-50px;">填空题题目:</label>\n' +
                             '                <div class="layui-input-block">\n' +
-                            '                    <input type="text" placeholder="请输入课程名" name="text" id="text" class="layui-input">\n' +
+                            '                    <input type="text" placeholder="请输入填空题名称" name="text" id="text" class="layui-input">\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="layui-form-item">\n' +
@@ -78,7 +78,6 @@ $(function () {
                             '    <label class="layui-form-label">课程名：</label>\n' +
                             '    <div class="layui-input-block">\n' +
                             '      <select name="courseId" >\n' +
-                            '        <option value="">请选择课程名</option>\n' +
                             '        <option value="1">数学</option>\n' +
                             '        <option value="2">语文</option>\n' +
                             '        <option value="3">英语</option>\n' +

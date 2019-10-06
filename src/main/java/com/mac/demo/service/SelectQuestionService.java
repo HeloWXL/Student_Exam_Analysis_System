@@ -3,6 +3,7 @@ package com.mac.demo.service;
 import com.mac.demo.model.SelectQuestion;
 import com.mac.demo.vo.QuerySelectQuestionVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,4 +41,11 @@ public interface SelectQuestionService {
      * @return
      */
     int updateByPrimaryKeySelective(SelectQuestion record);
+
+
+    /**
+     * 批量增加选择题
+     * @return
+     */
+    int insertSelectQuestionList(List<List<String>> list);
 }

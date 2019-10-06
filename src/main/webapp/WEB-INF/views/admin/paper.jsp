@@ -141,7 +141,22 @@
                 console.log(this.value + ' ' + this.name + '：'+ data.elem.checked, data.othis)
             });
         }
-
+        //加载考试名称
+        function loadSTest(){
+            var selectStr = "";
+            $.ajax({
+                url:ctx+'/test/',
+                dataType:'json',
+                type:'get',
+                success:function (data) {
+                    for(var i = 0 ;i<data.length;i++){
+                        var $node = $('<option value="'+data[i].testId+'">'+data[i].TestName+'</option>');
+                        selectStr+=$node;
+                    }
+                    return selectStr;
+                }
+            })
+        }
         table.on('toolbar(paperfilter)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var  data = checkStatus.data; //获取选中的数据
@@ -167,7 +182,7 @@
                             '    <label class="layui-form-label">考试名称：</label>\n' +
                             '    <div class="layui-input-block">\n' +
                             '      <select name="testId" >\n' +
-                            '        <option value=""></option>\n' +
+                            '        <option value="">请选择考试名称</option>\n' +
                             '        <option value="1">数学考试</option>\n' +
                             '        <option value="2">语文考试</option>\n' +
                             '        <option value="3">英语考试</option>\n' +
@@ -177,13 +192,13 @@
                             '            <div class="layui-form-item">\n' +
                             '                <label class="layui-form-label" style="padding-left:-50px;">选择题数量:</label>' +
                             '                <div class="layui-input-block">' +
-                            '                    <input type="text" placeholder="请输入考试名称"  name="selectNum" id="selectNum" class="layui-input">\n' +
+                            '                    <input type="text" placeholder="请输入选择题数量"  name="selectNum" id="selectNum" class="layui-input">\n' +
                             '                </div>' +
                             '            </div>' +
                             '            <div class="layui-form-item">\n' +
                             '                <label class="layui-form-label" style="padding-left:-50px;">填空题数量:</label>' +
                             '                <div class="layui-input-block">' +
-                            '                    <input type="text" placeholder="请输入考试名称"  name="completionNum" id="completionNum" class="layui-input">\n' +
+                            '                    <input type="text" placeholder="请输入填空题数量"  name="completionNum" id="completionNum" class="layui-input">\n' +
                             '                </div>' +
                             '            </div>' +
                             '        </form>\n' +

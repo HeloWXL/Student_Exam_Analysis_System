@@ -45,7 +45,6 @@ public interface PaperMapper extends BaseMapper<Paper> {
      * @param paperTestAdminVo
      * @return
      */
-
     List<PaperTestAdminVo> getPaper(PaperTestAdminVo paperTestAdminVo);
 
     int getPaperCount();
