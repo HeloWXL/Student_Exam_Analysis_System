@@ -14,7 +14,9 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
     <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
-
+    <script>
+        var ctx = '${ctx}'
+    </script>
     <style type="text/css">
         body,
         .mui-content {
