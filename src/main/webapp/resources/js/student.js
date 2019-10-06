@@ -34,7 +34,6 @@ layui.use('table', function(){
                     , {field: 'number', title: '序号', type: 'numbers'}
                     , {field: 'studentName', title: '学生姓名', width: 200}
                     , {field: 'studentPhone', title: '手机号码', width: 200}
-                    , {field: 'studentPassword', title: '学生密码', width: 177}
                     , {field: 'createTime', title: '创建时间', width: 200}
                 ]]
                 , skin: 'line,row' //表格风格

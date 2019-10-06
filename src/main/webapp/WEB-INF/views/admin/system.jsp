@@ -13,7 +13,6 @@
     <title>系统配置相关</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
-
     <script>
         var ctx = '${ctx}'
     </script>
@@ -41,24 +40,17 @@
                         <input type="password" name="password" autocomplete="off" class="layui-input" style="width: 100px">
                         </div>
                         <button type="button" class="layui-btn layui-btn-primary" id="changePassWord" >修改</button>
-
                     </td>
                 </tr>
-
-
-
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
-
 <script>
-
     $(function(){
        if('${admin.adminName}'=='admin'){
            //先保存div中原来的html
@@ -82,9 +74,7 @@
                "\n" +
                "                    </td>\n" +
                "                </tr>\n";
-
            $("#addAdmin").click(function () {
-
                var addAdmin = {
                   adminName:$("input[name='addAdminName']").val(),
                   adminPassword:$("input[name='addPassword']").val()
@@ -100,7 +90,6 @@
                        parent.location.href="/demo/admin/toIndex";
                    }
                })
-
            })
         }
         $("#changePassWord").click(function (){
@@ -116,13 +105,6 @@
 
             })
         })
-
     });
-
-
-
-
-
-
 </script>
 </html>

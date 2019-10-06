@@ -34,8 +34,6 @@ public interface TestMapper extends BaseMapper<Test> {
 
     /**
      * 获取考试列表
-     * @param page
-     * @param limit
      * @return
      */
     @Select("select t.test_id ,t.test_name , t.time , t.create_time ,a.admin_name from test t , admin a where t.admin_id = a.admin_id limit #{page},#{limit}")

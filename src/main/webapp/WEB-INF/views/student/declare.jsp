@@ -68,6 +68,5 @@
             location.href=ctx+"/paper/selectPaperInfo/"+paperId;
         })
     })
-
 </script>
 </html>

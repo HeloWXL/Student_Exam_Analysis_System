@@ -36,13 +36,13 @@
 <script type="text/html" id="toolbars">
     <div class="layui-btn-container">
         <div class="layui-btn-group">
-            <button type="button" lay-event="add" class="layui-btn layui-btn-primary layui-btn-sm">
+            <button type="button" lay-event="add" class="layui-btn layui-btn-primary">
                 <i class="layui-icon">&#xe654;</i>增加
             </button>
-            <button type="button" lay-event="update" class="layui-btn layui-btn-normal layui-btn-sm"><i
+            <button type="button" lay-event="update" class="layui-btn layui-btn-normal"><i
                     class="layui-icon">&#xe60a;</i>修改
             </button>
-            <button type="button" lay-event="delete" class="layui-btn layui-btn-danger layui-btn-sm"><i
+            <button type="button" lay-event="delete" class="layui-btn layui-btn-danger"><i
                     class="layui-icon">&#xe640;</i>删除
             </button>
         </div>

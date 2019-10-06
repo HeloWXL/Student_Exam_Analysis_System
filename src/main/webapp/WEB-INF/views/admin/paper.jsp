@@ -56,13 +56,13 @@
 <script type="text/html" id="toolbars">
     <div class="layui-btn-container">
         <div class="layui-btn-group">
-            <button type="button" lay-event="add" class="layui-btn layui-btn-primary layui-btn-sm">
+            <button type="button" lay-event="add" class="layui-btn layui-btn-primary">
                 <i class="layui-icon">&#xe654;</i>增加
             </button>
-            <button type="button" lay-event="update" class="layui-btn layui-btn-normal layui-btn-sm"><i
+            <button type="button" lay-event="update" class="layui-btn layui-btn-normal"><i
                     class="layui-icon">&#xe60a;</i>修改
             </button>
-            <button type="button" lay-event="delete" class="layui-btn layui-btn-danger layui-btn-sm"><i
+            <button type="button" lay-event="delete" class="layui-btn layui-btn-danger"><i
                     class="layui-icon">&#xe640;</i>删除
             </button>
         </div>
@@ -97,8 +97,6 @@
             };
             loadData(table,paperTestAdminVo);
         });
-
-
         function loadData(table,paperTestAdminVo) {
             table.render({
                 id: 'paperTable',
@@ -143,20 +141,22 @@
         }
         //加载考试名称
         function loadSTest(){
-            var selectStr = "";
+            var selectStr = "<select name=\"testId\" >";
             $.ajax({
-                url:ctx+'/test/',
+                url:ctx+'/test/getTestAdmin',
                 dataType:'json',
                 type:'get',
+                async:false,
                 success:function (data) {
                     for(var i = 0 ;i<data.length;i++){
-                        var $node = $('<option value="'+data[i].testId+'">'+data[i].TestName+'</option>');
-                        selectStr+=$node;
+                        var node = ('<option value="'+data[i].testId+'">'+data[i].testName+'</option>');
+                        selectStr+=node;
                     }
-                    return selectStr;
                 }
             })
+            return selectStr+"</select>";
         }
+
         table.on('toolbar(paperfilter)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var  data = checkStatus.data; //获取选中的数据
@@ -180,13 +180,8 @@
                             '            </div>' +
                             '<div class="layui-form-item">\n' +
                             '    <label class="layui-form-label">考试名称：</label>\n' +
-                            '    <div class="layui-input-block">\n' +
-                            '      <select name="testId" >\n' +
-                            '        <option value="">请选择考试名称</option>\n' +
-                            '        <option value="1">数学考试</option>\n' +
-                            '        <option value="2">语文考试</option>\n' +
-                            '        <option value="3">英语考试</option>\n' +
-                            '      </select>\n' +
+                            '    <div class="layui-input-block" id="testName">\n' +
+
                             '    </div>\n' +
                             '  </div>'+
                             '            <div class="layui-form-item">\n' +
@@ -208,7 +203,9 @@
                         , success: function(layero) {
                             var forms = layui.form;
                             forms.render();
+                            $("#testName").append(loadSTest())
                             layero.find('.layui-layer-btn').css('text-align', 'center');
+                            forms.render('select');
                         },
                         btn1: function(index) {
                             // 提交

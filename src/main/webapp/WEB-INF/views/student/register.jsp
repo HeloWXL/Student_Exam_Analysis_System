@@ -45,7 +45,7 @@
             <input type="password" name="passwordConfirm" placeholder="请输入密码" required />
         </div>
         <div class="choose_box">
-            <a href="/student/toLogin">已有账号？登录</a>
+            <a href="/demo/student/toLogin">已有账号？登录</a>
         </div>
         <button class="login_btn" type="button" style="margin-top: 10px;" id="register">注&nbsp;&nbsp;册</button>
     </form>

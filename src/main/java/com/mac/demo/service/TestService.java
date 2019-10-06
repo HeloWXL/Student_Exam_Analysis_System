@@ -38,8 +38,6 @@ public interface TestService {
 
     /**
      * 获取考试列表  -分页
-     * @param page
-     * @param limit
      * @return
      */
     Map<String,Object> getTest(TestAdminVo testAdminVo);

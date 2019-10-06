@@ -70,7 +70,7 @@
 </div>
 </body>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看报告</a>
+    <a class="layui-btn layui-btn-normal" lay-event="detail">查看报告</a>
 </script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
