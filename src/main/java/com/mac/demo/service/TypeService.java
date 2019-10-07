@@ -2,6 +2,7 @@ package com.mac.demo.service;
 
 import com.mac.demo.model.Type;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,5 +41,9 @@ public interface TypeService {
      */
     int updateByPrimaryKeySelective(Type record);
 
-
+    /**
+     * 加载能力类型列表
+     * @return
+     */
+    List<Type> getTypeList();
 }

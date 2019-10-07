@@ -81,14 +81,8 @@ layui.use('table', function(){
                         '            </div>\n' +
                         '<div class="layui-form-item">\n' +
                         '    <label class="layui-form-label">课程名：</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <select name="courseId" >\n' +
-                        '        <option value="">请选择课程名</option>\n' +
-                        '        <option value="1">数学</option>\n' +
-                        '        <option value="2">语文</option>\n' +
-                        '        <option value="3">英语</option>\n' +
-                        '        <option value="4">高等数学</option>\n' +
-                        '      </select>\n' +
+                        '    <div class="layui-input-block" id="course">\n' +
+
                         '    </div>\n' +
                         '  </div>'+
                         '            <div class="layui-form-item">\n' +
@@ -99,15 +93,8 @@ layui.use('table', function(){
                         '            </div>\n' +
                         '<div class="layui-form-item">\n' +
                         '    <label class="layui-form-label">请选择题目类型:</label>\n' +
-                        '    <div class="layui-input-block">\n' +
-                        '      <select name="typeId">\n' +
-                        '        <option value="">请选择题目类型</option>\n' +
-                        '        <option value="1">客观分析能力</option>\n' +
-                        '        <option value="2">推理能力</option>\n' +
-                        '        <option value="3">动手能力</option>\n' +
-                        '        <option value="4">计算能力</option>\n' +
-                        '        <option value="5">应用能力</option>\n' +
-                        '      </select>\n' +
+                        '    <div class="layui-input-block" id="type">\n' +
+
                         '    </div>\n' +
                         '  </div>'+
                         '            <div class="layui-form-item">\n' +
@@ -122,7 +109,9 @@ layui.use('table', function(){
                     btn: ['提交', '取消']
                     , success: function(layero) {
                         var forms = layui.form;
-                        forms.render();
+                        $("#course").append(loadCourseList())
+                        $("#type").append(loadType())
+                        forms.render('select');
                         layero.find('.layui-layer-btn').css('text-align', 'center');
                     },
                     btn1: function(index) {
@@ -221,14 +210,7 @@ layui.use('table', function(){
                             '            </div>\n' +
                             '<div class="layui-form-item">\n' +
                             '    <label class="layui-form-label">课程名：</label>\n' +
-                            '    <div class="layui-input-block">\n' +
-                            '      <select name="courseId" >\n' +
-                            '        <option value="">请选择课程名</option>\n' +
-                            '        <option value="1">数学</option>\n' +
-                            '        <option value="2">语文</option>\n' +
-                            '        <option value="3">英语</option>\n' +
-                            '        <option value="4">高等数学</option>\n' +
-                            '      </select>\n' +
+                            '    <div class="layui-input-block" id="course">\n' +
                             '    </div>\n' +
                             '  </div>'+
                             '            <div class="layui-form-item">\n' +
@@ -239,15 +221,7 @@ layui.use('table', function(){
                             '            </div>\n' +
                             '<div class="layui-form-item">\n' +
                             '    <label class="layui-form-label">请选择题目类型:</label>\n' +
-                            '    <div class="layui-input-block">\n' +
-                            '      <select name="typeId">\n' +
-                            '        <option value="">请选择题目类型</option>\n' +
-                            '        <option value="1">客观分析能力</option>\n' +
-                            '        <option value="2">推理能力</option>\n' +
-                            '        <option value="3">动手能力</option>\n' +
-                            '        <option value="4">计算能力</option>\n' +
-                            '        <option value="5">应用能力</option>\n' +
-                            '      </select>\n' +
+                            '    <div class="layui-input-block" id="type">\n' +
                             '    </div>\n' +
                             '  </div>'+
                             '            <div class="layui-form-item">\n' +
@@ -261,6 +235,8 @@ layui.use('table', function(){
                             '</div>\n',
                         btn: ['提交', '取消']
                         , success: function(layero) {
+                            $("#course").append(loadCourseList())
+                            $("#type").append(loadType())
                             layero.find('.layui-layer-btn').css('text-align', 'center');
                             // 展示在弹出层里面
                             $('#text').val(data[0].text);
@@ -310,5 +286,38 @@ layui.use('table', function(){
                 }
         }
     });
-
+    //加载课程列表
+    function loadCourseList(){
+        var selectStr = "<select name=\"courseId\" >";
+        $.ajax({
+            url:ctx+'/course/getCourseList',
+            dataType:'json',
+            type:'get',
+            async:false,
+            success:function (data) {
+                for(var i = 0 ;i<data.length;i++){
+                    var node = ('<option value="'+data[i].courseId+'">'+data[i].courseName+'</option>');
+                    selectStr+=node;
+                }
+            }
+        })
+        return selectStr+"</select>";
+    }
+    //加载能力类型列表
+    function loadType() {
+        var typeStr = "<select name=\"typeId\" >";
+        $.ajax({
+            url:ctx+'/type/getTypeList',
+            dataType:'json',
+            type:'get',
+            async:false,
+            success:function (data) {
+                for(var i = 0 ;i<data.length;i++){
+                    var node = ('<option value="'+data[i].typeId+'">'+data[i].typeName+'</option>');
+                    typeStr+=node;
+                }
+            }
+        })
+        return typeStr+"</select>";
+    }
 });

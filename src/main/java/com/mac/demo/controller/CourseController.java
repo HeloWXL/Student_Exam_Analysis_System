@@ -55,4 +55,11 @@ public class CourseController {
     public int deleteCourseById(@RequestParam("courseId") Integer courseId) {
         return courseService.deleteByPrimaryKey(courseId);
     }
+
+    @ApiOperation("动态加载课程列表")
+    @GetMapping("/getCourseList")
+    @ResponseBody
+    public List<Course> getCourseList(){
+        return courseService.getCourseList();
+    }
 }

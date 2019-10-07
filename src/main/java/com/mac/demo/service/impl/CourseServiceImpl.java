@@ -1,5 +1,6 @@
 package com.mac.demo.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mac.demo.mapper.CourseMapper;
 import com.mac.demo.model.Course;
 import com.mac.demo.service.CourseService;
@@ -65,5 +66,11 @@ public class CourseServiceImpl implements CourseService {
         int count = courseMapper.getCourseCount();
         map.put("count",count);
         return map;
+    }
+
+    @Override
+    public List<Course> getCourseList() {
+        EntityWrapper  entityWrapper = new EntityWrapper();
+        return courseMapper.selectList(entityWrapper);
     }
 }

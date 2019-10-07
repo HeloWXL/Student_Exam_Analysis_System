@@ -77,4 +77,11 @@ public class TypeController {
     public int updateBType(@RequestBody Type record) {
         return typeService.updateByPrimaryKeySelective(record);
     }
+
+    @ApiOperation("加载能力类型列表")
+    @GetMapping("/getTypeList")
+    @ResponseBody
+    public List<Type> getTypeList(){
+        return  typeService.getTypeList();
+    }
 }

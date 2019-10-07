@@ -2,6 +2,7 @@ package com.mac.demo.service;
 
 import com.mac.demo.model.Course;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,4 +41,10 @@ public interface CourseService {
      * @return
      */
     Map<String,Object> getCourse(Integer page, Integer limit);
+
+    /**
+     * 动态获取课程
+     * @return
+     */
+    List<Course> getCourseList();
 }

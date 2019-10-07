@@ -1,5 +1,6 @@
 package com.mac.demo.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mac.demo.mapper.TypeMapper;
 import com.mac.demo.model.Type;
 import com.mac.demo.service.TypeService;
@@ -77,5 +78,12 @@ public class TypeServiceImpl implements TypeService {
     public int updateByPrimaryKeySelective(Type record) {
         return typeMapper.updateByPrimaryKeySelective(record);
     }
+
+    @Override
+    public List<Type> getTypeList() {
+        EntityWrapper en  = new EntityWrapper();
+        return typeMapper.selectList(en);
+    }
+
 
 }
