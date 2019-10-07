@@ -132,7 +132,14 @@
         table.on('tool(reporftilter)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.studentId + ' 的查看操作'+data.paperId);
+                layer.open({
+                    title: data.reportName,
+                    type: 2,
+                    shade: 0.3,
+                    anim: 1,
+                    area:'auto',
+                    content: [ctx+'/student/toReport/'+data.paperId+'/'+data.studentId , 'no'] //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                });
             }
         });
     })

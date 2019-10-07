@@ -16,10 +16,10 @@
     <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <style>
         .table {
+            margin-left: 1%;
             border: 1px solid #cad9ea;
             color: #666;
         }
-
         .table th {
             background-repeat: repeat-x;
             height: 30px;
@@ -43,7 +43,10 @@
 </head>
 <body>
 <div>
-    <h2 style="margin: 0 auto">测评结果</h2>
+    <div style="text-align: center">
+        <h2>测评结果</h2>
+    </div>
+
     <div id="info">
         <div>平均得分<span style="color: green;font-weight: bold">${report.avgScore}分</span></div>
         <div>您的得分<span style="color: green;font-weight: bold">${report.score}分</span></div>
@@ -55,7 +58,6 @@
             <th width=10%>你的答案</th>
             <th width=10%>正确答案</th>
             <th width=10%>能力</th>
-            <th width=10%>难易程度</th>
             <th width=10%>知识点</th>
         </tr>
         <c:forEach var="re" items="${report.selectList}" varStatus="i">
@@ -64,7 +66,6 @@
                 <td style="color: green;font-weight: bold">${re}</td>
                 <td>${report.selectQuestionList[i.index]}</td>
                 <td>${report.abilityList[i.index]}</td>
-                <td><div id="test"></div></td>
                 <td>${report.knowledgeList[i.index]}</td>
             </tr>
         </c:forEach>
@@ -78,9 +79,7 @@
 <script>
     // 考试平均分
     var avgScore = '${report.avgScore}';
-
     var myScore =' ${report.score}';
-
     layui.use(['rate'], function() {
         var rate = layui.rate;
         //只读
@@ -89,19 +88,8 @@
             ,value: 3
             ,readonly: true
         });
-        rate.render({
-            elem: '#test1'
-            ,value: 2
-            ,readonly: true
-        });
-        rate.render({
-            elem: '#test2'
-            ,value: 4
-            ,readonly: true
-        });
     })
 </script>
-
 <script type="text/javascript">
     var dom = document.getElementById("container");
     var myChart = echarts.init(dom,'light');
@@ -177,18 +165,14 @@
             source: [
                 ['score', '平均成绩','我的考试成绩'],
                 ['平均成绩', avgScore,0],
-                ['我的考试成绩', 0,myScore],
-
+                ['我的考试成绩', 0,myScore]
             ]
         },
         xAxis: {type: 'category'},
         yAxis: {},
-        // Declare several bar series, each will be mapped
-        // to a column of dataset.source by default.
         series: [
             {type: 'bar'},
             {type: 'bar'}
-
         ]
     };
     if (option2 && typeof option2 === "object") {

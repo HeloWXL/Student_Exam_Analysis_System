@@ -1,10 +1,12 @@
 package com.mac.demo.service.impl;
 
+import com.mac.demo.config.RedisUtil;
 import com.mac.demo.mapper.ReportMapper;
 import com.mac.demo.service.ReportService;
 import com.mac.demo.utils.PaperUtils;
 import com.mac.demo.vo.QuerySelectQuestionVo;
 import com.mac.demo.vo.ReportVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +24,8 @@ import java.util.Map;
 public class ReportServiceImpl implements ReportService {
     @Resource
     private ReportMapper reportMapper;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public Map<String, Object> getReport(ReportVo reportVo) {
