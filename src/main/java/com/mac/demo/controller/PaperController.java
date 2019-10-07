@@ -95,9 +95,9 @@ public class PaperController {
      * @return
      */
     @ApiOperation("试卷状态修改-设置启用状态")
-    @GetMapping("/setPaperStateOpen/{paperId}")
+    @GetMapping("/setPaperStateOpen")
     @ResponseBody
-    public Integer setPaperStateOpen(@PathVariable("paperId") Integer paperId){
+    public Integer setPaperStateOpen(@RequestParam("paperId") Integer paperId){
         return paperService.setPaperStateOpen(paperId);
     }
 
@@ -108,9 +108,9 @@ public class PaperController {
      * @return
      */
     @ApiOperation("试卷状态修改-设置关闭状态")
-    @GetMapping("/setPaperStateClose/{paperId}")
+    @GetMapping("/setPaperStateClose")
     @ResponseBody
-    public Integer setPaperStateClose(@PathVariable("paperId") Integer paperId){
+    public Integer setPaperStateClose(@RequestParam("paperId") Integer paperId){
         return paperService.setPaperStateClose(paperId);
     }
 }

@@ -12,7 +12,6 @@
 <head>
     <title>试卷管理</title>
     <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
-
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <script>
         var ctx = '${ctx}'
@@ -72,91 +71,41 @@
 
 <script type="text/html" id="barDemo">
     <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="sex"  value="{{d.state}}" lay-skin="switch" lay-text="启用|未启用" lay-filter="sexDemo" {{ d.state == 1 ? 'checked' : '' }}>
+    <input type="checkbox" name="{{d.paperName}}"  value="{{d.paperId}}" lay-skin="switch" lay-text="启用|未启用" lay-filter="sexDemo" {{ d.state == 1 ? 'checked' : '' }}>
 </script>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
+<%--<script src="${ctx}/resources/js/admin_paper.js" type="application/javascript"></script>--%>
 <script>
     layui.use(['table','form'], function(){
         var table = layui.table;
-        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        var form = layui.form;
         form.render();
         var paperTestAdminVo = {
             paperName:''
         };
-
         // 加载表格数据
         loadData(table,paperTestAdminVo);
         // 查询
         $('#query').click(function() {
-
             var paperTestAdminVo = {
                 paperName:$("input[name='paperName']").val()
-
             };
-            loadData(table,paperTestAdminVo);
+            loadData(table,paperTestAdminVo,form);
         });
-        function loadData(table,paperTestAdminVo) {
-            table.render({
-                id: 'paperTable',
-                elem: '#demo'
-                , toolbar: '#toolbars'
-                , defaultToolbar: []
-                , url: ctx + '/paper/getPaper' //数据接口
-                , page: true //开启分页
-                , method:'post'
-                ,contentType: 'application/json; charset=utf-8'
-                ,where:paperTestAdminVo
-                , cols: [[ //表头
-                    {field: 'checkbox', type: 'checkbox'}
-                    , {field: 'number', title: '序号', type: 'numbers', align: 'center'}
-                    , {field: 'paperName', title: '试卷名称', width: 200, align: 'center'}
-                    , {field: 'testName', title: '考试名称', width: 200, align: 'center'}
-                    , {field: 'time', title: '考试时间', width: 120, align: 'center'}
-                    , {field: 'adminName', title: '发布人', width: 150, align: 'center'}
-                    , {field: 'createTime', title: '创建时间', width: 200, align: 'center'}
-                    , {
-                        field: 'state', title: '试卷状态', width: 120, templet: function (d) {
-                            if (d.state == 1) {
-                                return '<span style="color: green;">已启用</span>'
-                            } else {
-                                return '<span style="color: red;">未启用</span>'
-                            }
-                        }
-                    }
-                    , {title: '是否启用', width: 120, align: 'center', toolbar: '#barDemo'}
-                ]]
-                , skin: 'line,row' //表格风格
-                , even: true
-                , limits: [5, 10, 15]
-                , limit: 10 //每页默认显示的数量
-            });
-
-            //监听锁定操作
-            form.on('switch(sexDemo)', function(data){
-                layer.tips(this.value + ' ' + this.name + '：'+ data.elem.checked, data.othis);
-                console.log(this.value + ' ' + this.name + '：'+ data.elem.checked, data.othis)
-            });
-        }
-        //加载考试名称
-        function loadSTest(){
-            var selectStr = "<select name=\"testId\" >";
-            $.ajax({
-                url:ctx+'/test/getTestAdmin',
-                dataType:'json',
-                type:'get',
-                async:false,
-                success:function (data) {
-                    for(var i = 0 ;i<data.length;i++){
-                        var node = ('<option value="'+data[i].testId+'">'+data[i].testName+'</option>');
-                        selectStr+=node;
-                    }
-                }
-            })
-            return selectStr+"</select>";
-        }
-
+        //监听试卷状态操作
+        form.on('switch(sexDemo)', function(obj){
+            var paperId = this.value;
+            var paperName = this.name;
+            if(obj.elem.checked == false){
+                setPaperStateClose(paperId,paperName,table);
+                table.reload('paperTable');
+            }else{
+                setPaperStateOpen(paperId,paperName,table)
+                table.reload('paperTable');
+            }
+        });
         table.on('toolbar(paperfilter)', function(obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var  data = checkStatus.data; //获取选中的数据
@@ -181,7 +130,6 @@
                             '<div class="layui-form-item">\n' +
                             '    <label class="layui-form-label">考试名称：</label>\n' +
                             '    <div class="layui-input-block" id="testName">\n' +
-
                             '    </div>\n' +
                             '  </div>'+
                             '            <div class="layui-form-item">\n' +
@@ -209,7 +157,6 @@
                         },
                         btn1: function(index) {
                             // 提交
-
                             $.ajax({
                                 url: ctx+'/paper/getPaperByAuto',
                                 data:{
@@ -318,11 +265,11 @@
                                 '</div>\n',
                             btn: ['提交', '取消']
                             , success: function(layero) {
+                                var form  = layui.form;
                                 layero.find('.layui-layer-btn').css('text-align', 'center');
                                 // 展示在弹出层里面
                                 $('#paperName').val(data[0].paperName);
                                 $('select[name="testId"]').val(data[0].testId);
-                                var form  = layui.form;
                                 form.render('select');
                             },
                             btn1: function(index) {
@@ -349,7 +296,6 @@
                                         }else{
                                             layer.alert("修改失败")
                                         }
-
                                     }
                                 });
                             },
@@ -360,10 +306,97 @@
                     }
             }
         });
-
+        //加载试卷
+        function loadData(table,paperTestAdminVo,form) {
+            table.render({
+                id: 'paperTable',
+                elem: '#demo'
+                , toolbar: '#toolbars'
+                , defaultToolbar: []
+                , url: ctx + '/paper/getPaper' //数据接口
+                , page: true //开启分页
+                , method:'post'
+                ,contentType: 'application/json; charset=utf-8'
+                ,where:paperTestAdminVo
+                , cols: [[ //表头
+                    {field: 'checkbox', type: 'checkbox'}
+                    , {field: 'number', title: '序号', type: 'numbers', align: 'center'}
+                    , {field: 'paperName', title: '试卷名称', width: 200, align: 'center'}
+                    , {field: 'testName', title: '考试名称', width: 200, align: 'center'}
+                    , {field: 'time', title: '考试时间', width: 120, align: 'center'}
+                    , {field: 'adminName', title: '发布人', width: 150, align: 'center'}
+                    , {field: 'createTime', title: '创建时间', width: 200, align: 'center'}
+                    , {
+                        field: 'state', title: '试卷状态', width: 120, templet: function (d) {
+                            if (d.state == 1) {
+                                return '<span style="color: green;">已启用</span>'
+                            } else {
+                                return '<span style="color: red;">未启用</span>'
+                            }
+                        }
+                    }
+                    , {title: '是否启用', width: 120, align: 'center', toolbar: '#barDemo'}
+                ]]
+                , skin: 'line,row' //表格风格
+                , even: true
+                , limits: [10, 15, 20]
+                , limit: 10 //每页默认显示的数量
+            });
+            //监听锁定操作
+            // form.on('switch(sexDemo)', function(data){
+            //     layer.tips(this.value + ' ' + this.name + '：'+ data.elem.checked, data.othis);
+            // });
+        }
+        //动态加载考试名称
+        function loadSTest(){
+            var selectStr = "<select name=\"testId\" >";
+            $.ajax({
+                url:ctx+'/test/getTestAdmin',
+                dataType:'json',
+                type:'get',
+                async:false,
+                success:function (data) {
+                    for(var i = 0 ;i<data.length;i++){
+                        var node = ('<option value="'+data[i].testId+'">'+data[i].testName+'</option>');
+                        selectStr+=node;
+                    }
+                }
+            })
+            return selectStr+"</select>";
+        }
+        //启用试卷
+        function setPaperStateOpen(paperId,paperName) {
+            $.ajax({
+                url:ctx+'/paper/setPaperStateOpen',
+                dataType:'json',
+                data:{paperId:paperId},
+                type:'get',
+                success:function (data) {
+                    if(data==1){
+                        layer.msg(paperName+"已启用")
+                    }else{
+                        layer.msg("参数错误")
+                    }
+                }
+            })
+        }
+        //关闭试卷
+        function setPaperStateClose(paperId,paperName) {
+            $.ajax({
+                url:ctx+'/paper/setPaperStateClose',
+                dataType:'json',
+                data:{paperId:paperId},
+                type:'get',
+                success:function (data) {
+                    if(data==1){
+                        layer.msg(paperName+"已关闭")
+                    }else{
+                        layer.msg("参数错误")
+                    }
+                }
+            })
+        }
     });
-
-
 
 </script>
 </html>

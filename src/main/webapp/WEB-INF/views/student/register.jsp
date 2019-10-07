@@ -78,7 +78,7 @@
     //登录函数
     function register(student) {
         $.ajax({
-            url:'/student/insertStudent',
+            url:ctx+'/student/insertStudent',
             data:JSON.stringify(student),
             dataType:'json',
             type:'post',

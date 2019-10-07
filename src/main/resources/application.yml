@@ -10,8 +10,8 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
   datasource:
-    url: jdbc:mysql://localhost:3306/student_analysis?useUnicode=true&characterEncoding=UTF-8
-#    url: jdbc:mysql://106.54.3.97:3306/student_analysis?useUnicode=true&characterEncoding=UTF-8
+#    url: jdbc:mysql://localhost:3306/student_analysis?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://106.54.3.97:3306/student_analysis?useUnicode=true&characterEncoding=UTF-8
     username: root
 #    password: hello@
     password: 123456

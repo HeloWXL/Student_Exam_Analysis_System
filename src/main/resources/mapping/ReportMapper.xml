@@ -123,6 +123,8 @@
 
       SELECT r.report_name as reportName
       ,s.student_name as studentName
+    ,s.student_id as studentId
+    ,p.paper_id as paperId
       ,p.paper_name as paperName
       ,r.score as score
       ,r.create_time as createTime

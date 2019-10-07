@@ -132,7 +132,7 @@
         table.on('tool(reporftilter)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.studentId + ' 的查看操作');
+                layer.msg('ID：'+ data.studentId + ' 的查看操作'+data.paperId);
             }
         });
     })
