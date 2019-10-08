@@ -75,8 +75,8 @@
 
             <c:forEach var="completion" items="${paper.completionQuestionList}" varStatus="status">
                 <div class="cnt">
-                    <h3>${status.count}、${completion.text}</h3>
-                    <label><input type="text" class="mui-input-clear" name="c${completion.completionId}"></label>
+                    <h3 class="completionTitle">${status.count}、${completion.text}</h3>
+                    <label ><input type="text" class="mui-input-clear" name="c${completion.completionId}"></label>
                 </div>
             </c:forEach>
             <div style="position: relative;top: 10px">
@@ -89,68 +89,5 @@
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/mui.min.js" type="application/javascript"></script>
-<script>
-    $(function () {
-
-        if('${student}'!=""){
-            var studentId  ='${student.studentId}';
-            $("#submit").click(function () {
-                //获取试卷ID
-                var paperId =$("#paperId").val();
-                var completionString = "";
-                var selectString = "";
-
-                //获取填空题的值 已经填入的值
-                var $input = $("input[type='text']");//这里遍历input不为button和hidden的以外的其他input内容
-                $.each($input, function (i, item) {
-                    var val = $(item).val();
-                    if (val == "" || val == null || val == undefined) {
-                        mui.alert("填空未完成")
-                        // $(item).siblings(".hint").css("visibility", "visible");
-                    } else {
-                        completionString+=val+",";
-                    }
-                });
-
-                //获取选择的总数量
-                var $selectTitle = $(".selectTitle");
-                //获取选择题 已经选择列表
-                var $li = $(".mui-table-view-cell.mui-selected");
-                if($selectTitle.length==$li.length){
-                    $.each($li, function (i, item) {
-                        var val = $(item).attr("value");
-                        selectString+=val+",";
-                    });
-                }else{
-                    mui.alert("选择未完成")
-                }
-
-                var answer = {
-                    selectAnswer:selectString,
-                    completionAnswer:completionString,
-                    studentId:studentId,
-                    paperId:paperId
-                }
-                $.ajax({
-                    url:ctx+'/answer/insertAnswer',
-                    data:JSON.stringify(answer),
-                    dataType:'json',
-                    type:'post',
-                    contentType: 'application/json; charset=utf-8',
-                    success:function (data) {
-                        if(data==1){
-                            mui.alert("提交成功",function () {
-                                location.href=ctx+"/student/toReport/"+paperId+"/"+studentId;
-                            })
-                        }else{
-                            mui.alert("提交失败")
-                        }
-                    }
-                })
-            })
-        }else{
-            location.href=ctx+"/student/toLogin";
-        }
-    })
-</script>
+<script src="${ctx}/resources/js/student_test.js" type="application/javascript"></script>
 </html>

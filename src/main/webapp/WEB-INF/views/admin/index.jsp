@@ -203,11 +203,5 @@
     <script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/admin.js"></script>
-
-<script>
-    if('${admin}'==""){
-        location.href="/demo/admin/toLogin";
-    }
-</script>
 </body>
 </html>
