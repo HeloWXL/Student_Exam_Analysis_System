@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -55,5 +56,17 @@ public class CompletionQuestionController {
     public int deleteCompletionQuestion(@RequestParam("completionId") Integer completionId) {
         return completionQuestionService.deleteByPrimaryKey(completionId);
     }
+
+    @ApiOperation("批量导入填空题")
+    @PostMapping("/uploadCompletionQuestion")
+    @ResponseBody
+    public String importCompletionQuestion(@RequestParam("file") MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        System.out.println(fileName);
+        String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
+        System.out.println(pattern);
+        return pattern;
+    }
+
 
 }

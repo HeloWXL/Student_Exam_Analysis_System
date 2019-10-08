@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -53,6 +54,17 @@ public class SelectQuestionController {
     @ResponseBody
     public int deleteSelectQuestion(@RequestParam("selectId") Integer selectId) {
         return selectQuestionService.deleteByPrimaryKey(selectId);
+    }
+
+    @ApiOperation("批量导入选择题")
+    @PostMapping("/uploadSelect")
+    @ResponseBody
+    public String importSelect(@RequestParam("file") MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        System.out.println(fileName);
+        String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
+        System.out.println(pattern);
+        return pattern;
     }
 
 }

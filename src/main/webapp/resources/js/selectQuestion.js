@@ -1,5 +1,5 @@
 $(function () {
-    layui.use(['form','table'], function(){
+    layui.use(['form','table','upload'], function(){
         var table = layui.table;
         var form =layui.form;
         var querySelectQuestionVo = {
@@ -329,11 +329,49 @@ $(function () {
                         });
                     }
                     break;
-                default:
+                case 'addmore':
+                    layer.open({
+                        id: 'addmore',
+                        type: 1,
+                        title: ['选择题批量导入'],
+                        skin: 'layui-layer-molv',
+                        area: '350px',
+                        offset: 'auto',
+                        content: '<div class="layui-row"  style="margin-top:10px;">' +
+                            '    <div class="layui-col-md12" style="text-align: center">' +
+                            '<div class="layui-upload" style="margin-bottom: 10px;">\n' +
+                            '  <button type="button" class="layui-btn layui-btn-normal" id="uploadSelect">选择文件</button>\n' +
+                            '  <button type="button" class="layui-btn" id="upload">开始上传</button>\n' +
+                            '</div>'+
+                            '    </div>\n' +
+                            '</div>\n'
+                        , success: function(layero) {
+                            var upload  = layui.upload;
+                            //选完文件后不自动上传
+                            upload.render({
+                                elem: '#uploadSelect'
+                                ,url: ctx+'/selectquestion/uploadSelect/'
+                                ,auto: false
+                                ,bindAction: '#upload'
+                                ,done: function(res){
+                                    console.log(res)
+                                }
+                                ,accept: 'file'
+                            });
+                        }
+                    });
                     break;
             }
         });
     });
+
+    /***
+     * @Author wangxl
+     * @Description //加载选择题列表
+     * @Date 1:16 上午 2019/10/9
+     * @Param
+     * @return
+     **/
     function loadData(table,querySelectQuestionVo) {
         table.render({
             id: 'selectQuestionTable',
@@ -366,7 +404,14 @@ $(function () {
             , limit: 10 //每页默认显示的数量
         });
     }
-    //加载课程列表
+
+    /***
+     * @Author wangxl
+     * @Description //加载课程列表
+     * @Date 1:15 上午 2019/10/9
+     * @Param
+     * @return
+     **/
     function loadCourseList(){
         var selectStr = "<select name=\"courseId\" >";
         $.ajax({
@@ -383,8 +428,13 @@ $(function () {
         })
         return selectStr+"</select>";
     }
-
-
+    /***
+     * @Author wangxl
+     * @Description //加载类型列表
+     * @Date 1:16 上午 2019/10/9
+     * @Param
+     * @return
+     **/
     function loadType() {
         var typeStr = "<select name=\"typeId\" >";
         $.ajax({

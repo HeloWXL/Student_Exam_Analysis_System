@@ -1,6 +1,7 @@
-layui.use('table', function(){
+layui.use(['table','upload'], function(){
     var table = layui.table;
     var form =layui.form;
+
     var queryCompletionQuestionVo = {
         courseName:'',
         level:''
@@ -16,13 +17,13 @@ layui.use('table', function(){
         };
         loadData(table,queryCompletionQuestionVo);
     });
-
+    //重置
     $("#reset").click(function () {
         $("select").val("");
         $("input").val("");
         table.reload('completionQuestionTable');
     })
-
+    //加载列表数据
     function loadData(table,queryCompletionQuestionVo) {
         table.render({
             id: 'completionQuestionTable',
@@ -51,7 +52,6 @@ layui.use('table', function(){
             , limit: 10 //每页默认显示的数量
         });
     }
-
     table.on('toolbar(competionfilter)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id);
         var  data = checkStatus.data; //获取选中的数据
@@ -284,6 +284,38 @@ layui.use('table', function(){
                         }
                     });
                 }
+            case 'addmore':
+                layer.open({
+                    id: 'addmore',
+                    type: 1,
+                    title: ['填空题批量导入'],
+                    skin: 'layui-layer-molv',
+                    area: '350px',
+                    offset: 'auto',
+                    content: '<div class="layui-row"  style="margin-top:10px;">' +
+                        '    <div class="layui-col-md12" style="text-align: center">' +
+                        '<div class="layui-upload" style="margin-bottom: 10px;">\n' +
+                        '  <button type="button" class="layui-btn layui-btn-normal" id="uploadCompletion">选择文件</button>\n' +
+                        '  <button type="button" class="layui-btn" id="upload">开始上传</button>\n' +
+                        '</div>'+
+                        '    </div>\n' +
+                        '</div>\n'
+                    , success: function(layero) {
+                        var upload  = layui.upload;
+                        //选完文件后不自动上传
+                        upload.render({
+                            elem: '#uploadCompletion'
+                            ,url: ctx+'/completionquestion/uploadCompletionQuestion/'
+                            ,auto: false
+                            ,bindAction: '#upload'
+                            ,done: function(res){
+                                console.log(res)
+                            }
+                            ,accept: 'file'
+                        });
+                    }
+                });
+                break;
         }
     });
     //加载课程列表
