@@ -3,6 +3,7 @@ package com.mac.demo.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mac.demo.model.Type;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public interface TypeMapper extends BaseMapper<Type> {
      * @return
      */
     @Select("select * from type limit #{page},#{limit}")
-    List<Type> getTypeList(Integer page,Integer limit);
+    List<Type> getTypeList(@Param("page") Integer page, @Param("limit") Integer limit);
 
     /**
      * 获取题目类型数量
