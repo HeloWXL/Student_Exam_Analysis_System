@@ -133,10 +133,13 @@
             var data = obj.data;
             if(obj.event === 'detail'){
                 layer.open({
-                    title: data.reportName,
+                    id:'report',
+                    title: [data.reportName],
                     type: 2,
                     shade: 0.3,
                     anim: 1,
+                    skin: 'layui-layer-molv',
+                    area: '500px',
                     area:'auto',
                     content: [ctx+'/student/toReport/'+data.paperId+'/'+data.studentId , 'no'] //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
                 });

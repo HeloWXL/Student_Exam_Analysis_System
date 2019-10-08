@@ -51,7 +51,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="a-item" id="test"><i class="fa fa-users nav-icon"></i><span>考试管理</span></a>
+                <a class="a-item" id="test"><i class="fa fa-camera-retro nav-icon"></i><span>考试管理</span></a>
             </li>
             <li class="nav-item">
                 <a class="a-item" id="course"><i class="fa fa-users nav-icon"></i><span>课程管理</span></a>
@@ -63,7 +63,7 @@
                 <a class="a-item" id="type"><i class="fa fa-users nav-icon"></i><span>题目类型管理</span></a>
             </li>
             <li class="nav-item">
-                <a  class="a-item" id="report"><i class="fa fa-users nav-icon"></i><span>学生报告管理</span></a>
+                <a  class="a-item" id="report"><i class="fa  fa-bar-chart nav-icon"></i><span>学生报告管理</span></a>
             </li>
             <div class="sidebar-footer">
                 <ul class="clearfix">
