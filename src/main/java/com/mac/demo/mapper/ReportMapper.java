@@ -29,7 +29,7 @@ public interface ReportMapper  extends BaseMapper<Report> {
     @Select("   SELECT r.*,s.*,p.*\n" +
         "    from report r,student s, paper p\n" +
         "    where r.student_id=s.student_id and r.paper_id=p.paper_id\n" +
-        "      and r.student_id=#{studentId} and r.paper_id=#{paperId}")
+        "      and r.student_id=#{studentId} and r.paper_id=#{paperId} ")
     ReportVo getReportIndex(@Param("studentId") Integer studentId, @Param("paperId")Integer paperId);
 
     @Select("select avg(score)\n" +

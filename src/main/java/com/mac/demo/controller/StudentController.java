@@ -209,9 +209,6 @@ public class StudentController {
         return studentService.deleteByPrimaryKey(studentId);
     }
 
-
-
-
     /**
      * 内容待定
      * @param file

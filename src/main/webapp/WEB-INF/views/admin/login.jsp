@@ -29,15 +29,12 @@
         <input type='password' placeholder='请输入密码' name='password'>
         <input type="hidden" value="${msg}" id="msg">
         <input type='submit' value='登录' id="submit">
-
     </form>
 </div>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="${ctx}/resources/plugins/layui/layui.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/jquery.cookie.js"></script>
-
-
 <script>
     if($('#msg').val()!=""){
 

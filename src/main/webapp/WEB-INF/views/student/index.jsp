@@ -41,45 +41,19 @@
     <h1 class="mui-title">学生考试首页</h1>
 </header>
 <div class="mui-content">
-    <div id="content">
-
-    </div>
+    <div id="content"></div>
+    <nav class="mui-bar mui-bar-tab">
+        <a class="mui-tab-item mui-active">
+            <span class="mui-icon mui-icon-home"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a class="mui-tab-item">
+            <span class="mui-icon mui-icon-gear"></span>
+            <span class="mui-tab-label">我的报告</span>
+        </a>
+    </nav>
 </div>
 </body>
-<script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
-<script>
-    $(function () {
-        if('${student}'!=""){
-            $.ajax({
-                url:ctx+'/test/getTestAdmin',
-                dataType:'json',
-                type:'get',
-                success:function (data) {
-                    for(var i = 0 ;i<data.length;i++){
-                        <%--$node = $('<div class="test">\n' +--%>
-                        <%--    '                <a href="/student/getPaperByList/'+data[i].testId+'">\n' +--%>
-                        <%--    '                    <img src="${ctx}/resources/images/logo.png" />\n' +--%>
-                        <%--    '                    <p>考试名称：<span style="color: #000000;">'+data[i].testName+'</span></p>\n' +--%>
-                        <%--    '                    <p>发布时间：<span>'+data[i].createTime+'</span></p>\n' +--%>
-                        <%--    '                </a>\n' +--%>
-                        <%--    '            </div>');--%>
-                        $node = $('<a href="/demo/student/getPaperByList/'+data[i].testId+'">\n' +
-                            '<div class="mui-card">\n' +
-                            '\t<!--页眉，放置标题-->\n' +
-                            '\t<div class="mui-card-header"><p>考试名称：<span style="color: #000000;">'+data[i].testName+'</span></p></div>\n' +
-                            '\t<!--内容区-->\n' +
-                            '\t<div class="mui-card-content"><img src="${ctx}/resources/images/logo.png" /></div>\n' +
-                            '\t<!--页脚，放置补充信息或支持的操作-->\n' +
-                            '\t<div class="mui-card-footer"><p>发布时间：<span>'+data[i].createTime+'</span></p></div>\n' +
-                            '</a>\n' +
-                            '</div>')
-                        $("#content").append($node);
-                    }
-                }
-            })
-        }else{
-            location.href=ctx+"/student/toLogin";
-        }
-    })
-</script>
+<script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/student/index.js" type="application/javascript"></script>
 </html>

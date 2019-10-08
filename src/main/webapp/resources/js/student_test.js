@@ -1,9 +1,7 @@
 $(function () {
-  if('${student}'!=''){
-    var studentId  ='${student.studentId}';
     $('#submit').click(function () {
       var btn = ['否', '是'];
-      mui.confirm('确认交卷？','提示',btn,function() {
+      mui.confirm('确认交卷？','提示',btn,function(e) {
         if (e.index == 1) {
           //获取试卷ID
           var paperId =$('#paperId').val();
@@ -26,10 +24,6 @@ $(function () {
             mui.alert('填空未完成');
             return ;
           }
-
-
-
-
           //获取选择的总数量
           var $selectTitle = $('.selectTitle');
           //获取选择题 已经选择列表
@@ -42,16 +36,12 @@ $(function () {
           }else{
             mui.alert('选择未完成');
           }
-
-
           var answer = {
             selectAnswer:selectString,
             completionAnswer:completionString,
             studentId:studentId,
             paperId:paperId
           };
-
-
           $.ajax({
             url:ctx+'/answer/insertAnswer',
             data:JSON.stringify(answer),
@@ -72,11 +62,5 @@ $(function () {
           mui.closeAll();
         }
       });
-
-
-
     });
-  }else{
-    location.href=ctx+'/student/toLogin';
-  }
 });

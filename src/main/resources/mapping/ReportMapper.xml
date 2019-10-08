@@ -120,17 +120,16 @@
 
   <select id="getReport" parameterType="com.mac.demo.vo.ReportVo"
           resultType="com.mac.demo.vo.ReportVo">
-
       SELECT r.report_name as reportName
-      ,s.student_name as studentName
-    ,s.student_id as studentId
-    ,p.paper_id as paperId
-      ,p.paper_name as paperName
-      ,r.score as score
-      ,r.create_time as createTime
-      ,r.class_name as className
-      from report r,student s, paper p
-      where r.student_id=s.student_id and r.paper_id=p.paper_id
+        ,s.student_name as studentName
+        ,s.student_id as studentId
+        ,p.paper_id as paperId
+        ,p.paper_name as paperName
+         ,r.score as score
+         ,r.create_time as createTime
+         ,r.class_name as className
+         from report r,student s, paper p
+         where r.student_id=s.student_id and r.paper_id=p.paper_id
       <if test="reportName != null and reportName != ''">
       and r.report_name like concat('%',#{reportName}, '%')
     </if>
@@ -143,6 +142,7 @@
       <if test="className != null and className != ''">
           and r.class_name like concat('%',#{className}, '%')
       </if>
+      order by r.create_time DESC
     LIMIT #{page},#{limit}
   </select>
 
