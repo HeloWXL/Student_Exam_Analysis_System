@@ -221,4 +221,84 @@
     </if>
 
   </select>
+
+  <insert id="importSelect" parameterType="com.mac.demo.vo.SelectCourseTypeVo" >
+    insert into selectquestion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="selectId != null" >
+        select_id,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="optionA != null" >
+        option_a,
+      </if>
+      <if test="optionB != null" >
+        option_b,
+      </if>
+      <if test="optionC != null" >
+        option_c,
+      </if>
+      <if test="optionD != null" >
+        option_d,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="knowledge != null" >
+        knowledge,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="selectId != null" >
+        #{selectId,jdbcType=INTEGER},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="optionA != null" >
+        #{optionA,jdbcType=VARCHAR},
+      </if>
+      <if test="optionB != null" >
+        #{optionB,jdbcType=VARCHAR},
+      </if>
+      <if test="optionC != null" >
+        #{optionC,jdbcType=VARCHAR},
+      </if>
+      <if test="optionD != null" >
+        #{optionD,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="knowledge != null" >
+        #{knowledge,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
 </mapper>

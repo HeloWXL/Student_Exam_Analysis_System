@@ -50,4 +50,6 @@ public interface SelectQuestionService {
     int insertSelectQuestionList(List<List<String>> list);
 
     void batchImportSelectquestion(List<List<String>> listContent);
+
+    void importSelect(List<List<String>> listContent);
 }
