@@ -12,10 +12,10 @@
 <head>
     <title>选择题管理</title>
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
-    <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
+    <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico" type=”image/x-icon”>
 
     <script>
-        var ctx = '${ctx}'
+      var ctx = '${ctx}'
     </script>
 </head>
 <body>
@@ -84,16 +84,15 @@
             <button type="button" lay-event="delete" class="layui-btn layui-btn-danger "><i
                     class="layui-icon">&#xe640;</i>删除
             </button>
-           <%-- <button type="button"  class="layui-btn" style="float: right" id="batchImport"><i
-                    class="layui-icon" >&#xe654;</i>批量导入
-            </button>--%>
-
+            <%-- <button type="button"  class="layui-btn" style="float: right" id="batchImport"><i
+                     class="layui-icon" >&#xe654;</i>批量导入
+             </button>--%>
         </div>
     </div>
 </script>
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
-<script src="${ctx}/resources/js/selectQuestion.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/admin/admin_selectQuestion.js" type="application/javascript"></script>
 </html>
 

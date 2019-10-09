@@ -89,12 +89,13 @@
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/mui.min.js" type="application/javascript"></script>
-<script src="${ctx}/resources/js/student_test.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/student/test.js" type="application/javascript"></script>
 <script>
     if('${student}'!=''){
         var studentId  ='${student.studentId}';
     }else{
         location.href=ctx+'/student/toLogin';
+        return;
     }
 </script>
 </html>

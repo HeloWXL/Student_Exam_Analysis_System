@@ -29,6 +29,9 @@ public class Paper {
      * 试卷状态 1为启用 ， 0 为未启用
      */
     private Integer state;
+    private Integer selectScore;
+    private Integer completionScore;
+
     /**
      * 选择题集合
      */

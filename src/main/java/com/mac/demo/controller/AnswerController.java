@@ -1,7 +1,6 @@
 package com.mac.demo.controller;
 
 import com.mac.demo.model.Answer;
-import com.mac.demo.model.Paper;
 import com.mac.demo.model.Student;
 import com.mac.demo.service.AnswerService;
 import com.mac.demo.service.PaperService;
@@ -27,28 +26,31 @@ import java.util.Map;
 @RequestMapping("answer")
 @Controller
 public class AnswerController {
-    @Resource
-    private AnswerService answerService;
 
-    @Resource
-    private PaperService paperService;
+  @Resource
+  private AnswerService answerService;
+  @Resource
+  private PaperService paperService;
 
-    @ApiOperation("获取答案列表")
-    @PostMapping("/getAnswerStudentPaperVo")
-    @ResponseBody
-    public Map<String,Object> getAnswerStudentPaperVo(Integer page, Integer limit) {
-        Map<String,Object> map = answerService.getAnswerStudentPaperVo(page,limit);
-        map.put("code",0);
-        map.put("msg","");
-        return map;
-    }
+  @ApiOperation("获取答案列表")
+  @PostMapping("/getAnswerStudentPaperVo")
+  @ResponseBody
+  public Map<String, Object> getAnswerStudentPaperVo(Integer page, Integer limit) {
+    Map<String, Object> map = answerService.getAnswerStudentPaperVo(page, limit);
+    map.put("code", 0);
+    map.put("msg", "");
+    return map;
+  }
 
-    @ApiOperation("提交答案")
-    @PostMapping("/insertAnswer")
-    @ResponseBody
-    public int insertAnswer(@RequestBody Answer answer,HttpServletRequest request){
-        Student student = (Student) request.getSession().getAttribute("student");
-        answer.setStudentName(student.getStudentName());
-        return answerService.insertAnswer(answer);
-    }
+
+  @ApiOperation("提交答案")
+  @PostMapping("/insertAnswer")
+  @ResponseBody
+  public int insertAnswer(@RequestBody Answer answer, HttpServletRequest request) {
+    Student student = (Student) request.getSession().getAttribute("student");
+    answer.setStudentName(student.getStudentName());
+    return answerService.insertAnswer(answer);
+  }
+
+
 }

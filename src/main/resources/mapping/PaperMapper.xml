@@ -10,9 +10,11 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="select_score" property="selectScore" jdbcType="INTEGER" />
+    <result column="completion_score" property="completionScore" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    paper_id, test_id, admin_id, select_list, completion_list, create_time, paper_name,state
+    paper_id, test_id, admin_id, select_list, completion_list, create_time, paper_name,state,select_score,completion_score
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -42,6 +44,12 @@
       <if test="paperName != null" >
         paper_name,
       </if>
+      <if test="selectScore != null" >
+        select_score,
+      </if>
+      <if test="completionScore != null" >
+        completion_score,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
 
@@ -59,6 +67,12 @@
       </if>
       <if test="paperName != null" >
         #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="selectScore != null" >
+        #{selectScore,jdbcType=INTEGER},
+      </if>
+      <if test="completionScore != null" >
+        #{completionScore,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -96,7 +110,6 @@
       paper_name = #{paperName,jdbcType=VARCHAR}
     where paper_id = #{paperId,jdbcType=INTEGER}
   </update>
-
   <select id="getPaper" parameterType="com.mac.demo.vo.PaperTestAdminVo"
           resultType="com.mac.demo.vo.PaperTestAdminVo">
 
@@ -114,7 +127,6 @@
     </if>
     LIMIT #{page},#{limit}
   </select>
-
   <select id="getPaperCount" resultType="java.lang.Integer">
     select
     count(1)
@@ -125,6 +137,4 @@
     </if>
 
   </select>
-
-
 </mapper>

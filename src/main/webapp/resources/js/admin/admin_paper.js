@@ -27,7 +27,7 @@ layui.use(['table','form'], function(){
     }
   });
   table.on('toolbar(paperfilter)', function(obj) {
-    var checkStatus = table.checkStatus(obj.config.id);
+    var checkStatus = table.checkStatus(obj.config.id);5
     var  data = checkStatus.data; //获取选中的数据
     switch (obj.event) {
       case 'add':
@@ -55,13 +55,31 @@ layui.use(['table','form'], function(){
           '            <div class="layui-form-item">\n' +
           '                <label class="layui-form-label" style="padding-left:-50px;">选择题数量:</label>' +
           '                <div class="layui-input-block">' +
-          '                    <input type="text" placeholder="请输入选择题数量"  name="selectNum" id="selectNum" class="layui-input">\n' +
+          '                    <input type="text" placeholder="请输入选择题数量" lay-verify="required|number"  name="selectNum" id="selectNum" class="layui-input">\n' +
+          '                </div>' +
+          '            </div>' +
+          '            <div class="layui-form-item">\n' +
+          '                <label class="layui-form-label" style="padding-left:-50px;">选择题分数:</label>' +
+          '                <div class="layui-input-block">' +
+          '                    <input type="text" placeholder="请输入选择题分数" lay-verify="required|number" name="selectScore" id="selectScore" class="layui-input">\n' +
           '                </div>' +
           '            </div>' +
           '            <div class="layui-form-item">\n' +
           '                <label class="layui-form-label" style="padding-left:-50px;">填空题数量:</label>' +
           '                <div class="layui-input-block">' +
-          '                    <input type="text" placeholder="请输入填空题数量"  name="completionNum" id="completionNum" class="layui-input">\n' +
+          '                    <input type="text" placeholder="请输入填空题数量" lay-verify="required|number"  name="completionNum" id="completionNum" class="layui-input">\n' +
+          '                </div>' +
+          '            </div>' +
+          '            <div class="layui-form-item">\n' +
+          '                <label class="layui-form-label" style="padding-left:-50px;">填空题分数:</label>' +
+          '                <div class="layui-input-block">' +
+          '                    <input type="text" placeholder="请输入填空题分数" lay-verify="required|number" name="completionScore" id="completionScore" class="layui-input">\n' +
+          '                </div>' +
+          '            </div>' +
+          '            <div class="layui-form-item">\n' +
+          '                <label class="layui-form-label" style="padding-left:-50px;">总分:</label>' +
+          '                <div class="layui-input-block">' +
+          '                    <input type="text" name="scoreSum" id="scoreSum" class="layui-input">\n' +
           '                </div>' +
           '            </div>' +
           '        </form>\n' +
@@ -70,37 +88,57 @@ layui.use(['table','form'], function(){
           btn: ['随机组卷', '取消']
           , success: function(layero) {
             var forms = layui.form;
-            forms.render();
+            //加载考试列表
             $("#testName").append(loadSTest())
             layero.find('.layui-layer-btn').css('text-align', 'center');
             forms.render('select');
+
           },
           btn1: function(index) {
-            // 提交
-            $.ajax({
-              url: ctx+'/paper/getPaperByAuto',
-              data:{
-                testId:  $.trim($("select[name='testId']").val()),
-                paperName : $.trim($("#paperName").val()),
-                completionNum : $.trim($("#completionNum").val()),
-                selectNum : $.trim($("#completionNum").val())
-              },
-              dataType:'json',
-              type:'get',
-              contentType: 'application/json; charset=utf-8',
-              success: function(data) {
-                if(data==1){
-                  layer.alert('添加成功',function () {
-                    //关闭弹窗
-                    layer.closeAll();
-                    // 重新刷新表格
-                    table.reload('paperTable');
-                  });
-                }else{
-                  layer.alert("添加失败")
+            //选择题数量
+            var selectNum =parseInt($("#selectNum").val());
+            //选择题分数
+            var selectScore = parseInt($("#selectScore").val());
+            //填空题数量
+            var completionNum =parseInt($("#completionNum").val());
+            //填空题分数
+            var completionScore = parseInt($("#completionScore").val());
+            $("#scoreSum").val(selectNum*selectScore + completionNum*completionScore);
+            var scoreSum = $("#scoreSum").val();
+
+
+            if(scoreSum!='100'){
+              layer.msg("试卷总分数错误")
+              return ;
+            }else{
+              // 提交
+              $.ajax({
+                url: ctx+'/paper/getPaperByAuto',
+                data:{
+                  testId:  $.trim($("select[name='testId']").val()),
+                  paperName : $.trim($("#paperName").val()),
+                  completionNum : completionNum,
+                  selectNum : selectNum,
+                  selectScore:selectScore,
+                  completionScore:completionScore
+                },
+                dataType:'json',
+                type:'get',
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+                  if(data==1){
+                    layer.alert('添加成功',function () {
+                      //关闭弹窗
+                      layer.closeAll();
+                      // 重新刷新表格
+                      table.reload('paperTable');
+                    });
+                  }else{
+                    layer.alert("添加失败")
+                  }
                 }
-              }
-            });
+              });
+            }
           },
           // 取消
           btn2: function(index, layero) {
