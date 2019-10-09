@@ -95,7 +95,6 @@
         var studentId  ='${student.studentId}';
     }else{
         location.href=ctx+'/student/toLogin';
-        return;
     }
 </script>
 </html>

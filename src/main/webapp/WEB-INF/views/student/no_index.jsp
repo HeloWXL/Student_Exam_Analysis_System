@@ -37,8 +37,8 @@
             <a class="login_btn" href="/demo/student/toRegister">注&nbsp;&nbsp;册</a>
         </div>
     </div>
-    <div>
-        <h6>学而不思则罔，思而不学则怠</h6>
+    <div style="margin: 0 auto">
+        <h4>学而不思则罔，思而不学则怠</h4>
     </div>
 </body>
 <script src="${ctx}/resources/js/mui.min.js"></script>

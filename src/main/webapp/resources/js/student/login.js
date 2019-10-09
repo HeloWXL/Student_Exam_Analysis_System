@@ -1,5 +1,6 @@
 $(function() {
-  $('#submit').click(function() {
+  $('#submit').click(function(e) {
+    e.preventDefault();
     var phone = $.trim($('input[name=\'phone\']').val());
     var password = $.trim($('input[name=\'password\']').val());
     //登陆的时候先判断 该手机号码是否已经注册过

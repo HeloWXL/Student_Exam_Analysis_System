@@ -50,8 +50,6 @@
         </p>
     </div>
 </div>
-
-
 </body>
 <script src="${ctx}/resources/js/mui.min.js"></script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>

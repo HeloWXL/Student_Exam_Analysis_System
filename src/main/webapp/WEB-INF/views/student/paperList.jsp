@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
     <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
-
     <script>
         var ctx = '${ctx}'
     </script>
@@ -23,8 +22,6 @@
         .mui-card{
             border-radius: 5px;
         }
-
-
         #content{
             width: 100%;
             height: 100%;
@@ -48,15 +45,6 @@
 <div class="mui-content">
     <div id="content">
         <c:forEach var="paper" items="${paperList}">
-<%--            <div class="paper">--%>
-<%--                <a href="/student/toDeclaer/${paper.paperId}">--%>
-<%--                    <img src="${ctx}/resources/images/logo.png" />--%>
-<%--                    <p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p>--%>
-<%--                    <p>考试名称：<span>${paper.testName}</span></p>--%>
-<%--                    <p>发布人：<span>${paper.adminName}</span></p>--%>
-<%--                </a>--%>
-<%--            </div>--%>
-
             <a href="/demo/student/toDeclaer/${paper.paperId}">
                 <div class="mui-card">
                     <!--页眉，放置标题-->

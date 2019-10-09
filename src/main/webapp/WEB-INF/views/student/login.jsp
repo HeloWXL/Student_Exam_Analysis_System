@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="${ctx}/resources/css/common.css" />
     <link rel="stylesheet" href="${ctx}/resources/css/login.css" />
     <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet">
     <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <script>
         var ctx = '${ctx}'
@@ -28,10 +29,10 @@
         <div id="logo">
             <img src="${ctx}/resources/images/logo.png" alt="logo" />
         </div>
-        <form>
+        <form class="layui-form">
             <div class="userName">
                 <lable>手机号码：</lable>
-                <input type="text" name="phone"  placeholder="请输入手机号码" required />
+                <input  type="tel" name="phone" lay-verify="required|phone" placeholder="请输入手机号码" required />
             </div>
             <div class="passWord">
                 <lable>密&nbsp;&nbsp;&nbsp;码：</lable>
@@ -40,12 +41,13 @@
             <div class="choose_box">
                 <a href="/demo/student/toRegister">没有账号？注册</a>
             </div>
-            <button class="login_btn" type="button" id="submit">登&nbsp;&nbsp;录</button>
+            <button class="login_btn" type="submit" id="submit">登&nbsp;&nbsp;录</button>
         </form>
     </div>
 </div>
 </body>
 <script src="${ctx}/resources/js/mui.min.js" type="text/javascript"></script>
+<script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/resources/js/student/login.js"></script>
 </html>

@@ -13,7 +13,7 @@
     <title>学生成绩报告</title>
     <meta charset="utf-8">
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet"/>
-    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico" type=”image/x-icon”>
     <style>
         .table {
             margin-left: 1%;
@@ -24,17 +24,15 @@
             background-repeat: repeat-x;
             height: 30px;
         }
-
         .table td,
         .table th {
             border: 1px solid #cad9ea;
             padding: 0 1em 0;
         }
-
         .table tr.alter {
             background-color: #f5fafe;
         }
-        #info div{
+        #info div {
             width: 30%;
             float: left;
             margin-left: 10px;
@@ -77,107 +75,107 @@
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/echarts.min.js" type="application/javascript"></script>
 <script>
-    // 考试平均分
-    var avgScore = '${report.avgScore}';
-    var myScore =' ${report.score}';
-    layui.use(['rate'], function() {
-        var rate = layui.rate;
-        //只读
-        rate.render({
-            elem: '#test'
-            ,value: 3
-            ,readonly: true
-        });
-    })
+  // 考试平均分
+  var avgScore = '${report.avgScore}';
+  var myScore = ' ${report.score}';
+  layui.use(['rate'], function() {
+    var rate = layui.rate;
+    //只读
+    rate.render({
+      elem: '#test'
+      , value: 3
+      , readonly: true
+    });
+  })
 </script>
 <script type="text/javascript">
-    var dom = document.getElementById("container");
-    var myChart = echarts.init(dom,'light');
-    option1 = null;
-    option1 = {
-        title: {
-            text: '能力分析'
+  var dom = document.getElementById("container");
+  var myChart = echarts.init(dom, 'light');
+  option1 = null;
+  option1 = {
+    title: {
+      text: '能力分析'
+    },
+    tooltip: {},
+    radar: {
+      // shape: 'circle',
+      name: {
+        textStyle: {
+          color: '#fff',
+          backgroundColor: '#999',
+          borderRadius: 3,
+          padding: [3, 5]
+        }
+      },
+      indicator: [{
+        name: '客观分析能力',
+        max: 10
+      },
+        {
+          name: '观察能力',
+          max: 10
         },
-        tooltip: {},
-        radar: {
-            // shape: 'circle',
-            name: {
-                textStyle: {
-                    color: '#fff',
-                    backgroundColor: '#999',
-                    borderRadius: 3,
-                    padding: [3, 5]
-                }
-            },
-            indicator: [{
-                name: '客观分析能力',
-                max: 10
-            },
-                {
-                    name: '观察能力',
-                    max: 10
-                },
-                {
-                    name: '应用能力',
-                    max: 10
-                },
-                {
-                    name: '计算能力',
-                    max: 10
-                },
-                {
-                    name: '动手能力',
-                    max: 10
-                },
-                {
-                    name: '推理能力',
-                    max: 10
-                }
-            ]
+        {
+          name: '应用能力',
+          max: 10
         },
-        series: [{
-            name: '能力分析',
-            type: 'radar',
-            // areaStyle: {normal: {}},
-            data: [
-                {
-                    value: [3, 2, 4, 5, 6, 3],
-                    name: '我的能力'
-                }
-            ]
-        }]
-    };
-    if (option1 && typeof option1 === "object") {
-        myChart.setOption(option1, true);
-    }
+        {
+          name: '计算能力',
+          max: 10
+        },
+        {
+          name: '动手能力',
+          max: 10
+        },
+        {
+          name: '推理能力',
+          max: 10
+        }
+      ]
+    },
+    series: [{
+      name: '能力分析',
+      type: 'radar',
+      // areaStyle: {normal: {}},
+      data: [
+        {
+          value: [3, 2, 4, 5, 6, 3],
+          name: '我的能力'
+        }
+      ]
+    }]
+  };
+  if (option1 && typeof option1 === "object") {
+    myChart.setOption(option1, true);
+  }
 </script>
 <script type="text/javascript">
-    var dom = document.getElementById("container2");
-    var myChart2 = echarts.init(dom,'light');
-    option2 = null;
-    option2 = {
-        title: {
-            text: '成绩比较'
-        },
-        legend: {},
-        tooltip: {},
-        dataset: {
-            source: [
-                ['score', '平均成绩','我的考试成绩'],
-                ['平均成绩', avgScore,0],
-                ['我的考试成绩', 0,myScore]
-            ]
-        },
-        xAxis: {type: 'category'},
-        yAxis: {},
-        series: [
-            {type: 'bar'},
-            {type: 'bar'}
-        ]
-    };
-    if (option2 && typeof option2 === "object") {
-        myChart2.setOption(option2,true);
-    }
+  var dom = document.getElementById("container2");
+  var myChart2 = echarts.init(dom, 'light');
+  option2 = null;
+  option2 = {
+    title: {
+      text: '成绩比较'
+    },
+    legend: {},
+    tooltip: {},
+    dataset: {
+      source: [
+        ['score', '平均成绩', '我的考试成绩'],
+        ['平均成绩', avgScore, 0],
+        ['我的考试成绩', 0, myScore]
+      ]
+    },
+    xAxis: {type: 'category'},
+    yAxis: {},
+    series: [
+      {type: 'bar'},
+      {type: 'bar'}
+    ]
+  };
+  if (option2 && typeof option2 === "object") {
+    myChart2.setOption(option2, true);
+  }
 </script>
 </body>
 </html>
