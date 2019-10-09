@@ -84,9 +84,9 @@
             <button type="button" lay-event="delete" class="layui-btn layui-btn-danger "><i
                     class="layui-icon">&#xe640;</i>删除
             </button>
-            <button type="button" lay-event="addmore" class="layui-btn" style="float: right"><i
-                    class="layui-icon">&#xe654;</i>批量导入
-            </button>
+           <%-- <button type="button"  class="layui-btn" style="float: right" id="batchImport"><i
+                    class="layui-icon" >&#xe654;</i>批量导入
+            </button>--%>
 
         </div>
     </div>
@@ -96,3 +96,4 @@
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/selectQuestion.js" type="application/javascript"></script>
 </html>
+

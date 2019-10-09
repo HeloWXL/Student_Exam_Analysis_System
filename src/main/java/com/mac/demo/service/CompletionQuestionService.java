@@ -3,6 +3,7 @@ package com.mac.demo.service;
 import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.vo.QueryCompletionQuestionVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,4 +41,5 @@ public interface CompletionQuestionService {
      */
     int deleteByPrimaryKey(Integer completionId);
 
+    void importCompletionQuestion(List<List<String>> listContent);
 }

@@ -98,4 +98,9 @@ public class SelectQuestionServiceImpl implements SelectQuestionService {
         return i;
     }
 
+    @Override
+    public void batchImportSelectquestion(List<List<String>> listContent) {
+
+    }
+
 }

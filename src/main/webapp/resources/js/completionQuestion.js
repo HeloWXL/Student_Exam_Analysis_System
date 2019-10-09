@@ -305,7 +305,7 @@ layui.use(['table','upload'], function(){
                         //选完文件后不自动上传
                         upload.render({
                             elem: '#uploadCompletion'
-                            ,url: ctx+'/completionquestion/uploadCompletionQuestion/'
+                            ,url: ctx+'/completionquestion/uploadCompletionQuestion'
                             ,auto: false
                             ,bindAction: '#upload'
                             ,done: function(res){

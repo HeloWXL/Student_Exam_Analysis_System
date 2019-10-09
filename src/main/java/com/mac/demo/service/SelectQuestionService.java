@@ -48,4 +48,6 @@ public interface SelectQuestionService {
      * @return
      */
     int insertSelectQuestionList(List<List<String>> list);
+
+    void batchImportSelectquestion(List<List<String>> listContent);
 }

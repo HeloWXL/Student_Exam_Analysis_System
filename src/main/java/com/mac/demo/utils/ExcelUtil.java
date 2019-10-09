@@ -146,7 +146,7 @@ public class ExcelUtil {
 
 //              ------------------------这边需要修改------------------------
                 //遍历列    --- ---   7列数据
-                for (int j = 0; j < 7; j++){
+                for (int j = 0; j < 6; j++){
                     cellData = row.getCell(j).toString();
                     listCell.add(cellData);
                 }

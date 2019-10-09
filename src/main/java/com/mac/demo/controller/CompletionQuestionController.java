@@ -2,6 +2,7 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.service.CompletionQuestionService;
+import com.mac.demo.utils.ExcelUtil;
 import com.mac.demo.vo.QueryCompletionQuestionVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -60,13 +64,38 @@ public class CompletionQuestionController {
     @ApiOperation("批量导入填空题")
     @PostMapping("/uploadCompletionQuestion")
     @ResponseBody
-    public String importCompletionQuestion(@RequestParam("file") MultipartFile file) {
+    public  Map<String,Object>  importCompletionQuestion(@RequestParam("file") MultipartFile file) {
         String fileName = file.getOriginalFilename();
-        System.out.println(fileName);
         String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
-        System.out.println(pattern);
-        return pattern;
+        //System.out.println(fileName+"  "+pattern);
+        List<List<String>> listContent = new ArrayList<>();
+        String message = "导入成功";
+
+        try {
+            if (file != null) {
+                //文件类型判断
+                if (!ExcelUtil.isEXCEL(file)) {
+                    message="文件为空";
+                }
+                listContent = ExcelUtil.readExcelContents(file, pattern);
+                //文件内容判断
+                if (listContent.isEmpty()) {
+
+                    message="表格内容为空";
+                }
+                completionQuestionService.importCompletionQuestion(listContent);
+            } else {
+
+                message="未选择文件";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("code",0);
+        map.put("msg",message);
+        map.put("data",fileName);
+        return map;
+    }
     }
 
-
-}

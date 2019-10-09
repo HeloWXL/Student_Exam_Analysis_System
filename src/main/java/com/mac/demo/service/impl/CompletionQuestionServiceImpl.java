@@ -64,4 +64,24 @@ public class CompletionQuestionServiceImpl implements CompletionQuestionService 
         return completionQuestionMapper.deleteByPrimaryKey(completionId);
     }
 
+    @Override
+    public void importCompletionQuestion(List<List<String>> listContent) {
+
+        for ( int i = 0 ; i <listContent.size();i++){
+            CompletionCourseTypeVo completionQuestionVo = new CompletionCourseTypeVo ();
+
+            String text = listContent.get(i).get(0);
+
+            completionQuestionVo.setText(text);
+            completionQuestionVo.setAnswer(listContent.get(i).get(1));
+            completionQuestionVo.setCourseName(listContent.get(i).get(2));
+            completionQuestionVo.setLevel(Integer.parseInt((listContent.get(i).get(3).substring(0,1))));
+            completionQuestionVo.setTypeName(listContent.get(i).get(4));
+            completionQuestionVo.setKnowledge(listContent.get(i).get(5));
+
+            System.out.println(completionQuestionVo.toString());
+          //    completionQuestionMapper.importCompletionQuestion(completionQuestionVo);
+        }
+    }
+
 }
