@@ -37,7 +37,6 @@ public class CompletionQuestionController {
     return completionQuestionService.deleteByPrimaryKey(completionId);
   }
 
-
   @ApiOperation("获取填空题列表-分页")
   @PostMapping("/getCompletionQuestion")
   @ResponseBody

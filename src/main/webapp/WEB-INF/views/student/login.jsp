@@ -47,5 +47,5 @@
 </body>
 <script src="${ctx}/resources/js/mui.min.js" type="text/javascript"></script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="text/javascript"></script>
-<script type="text/javascript" src="${ctx}/resources/js/stu_login.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/student/login.js"></script>
 </html>

@@ -199,9 +199,9 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript" src="${ctx}/resources/plugins/layui/layui.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="${ctx}/resources/js/admin.js"></script>
+<script type="text/javascript" src="${ctx}/resources/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/admin/admin_index.js"></script>
 </body>
 </html>

@@ -54,6 +54,6 @@
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
-<script src="${ctx}/resources/js/course.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/admin/admin_course.js" type="application/javascript"></script>
 
 </html>
