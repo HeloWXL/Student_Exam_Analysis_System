@@ -3,5 +3,5 @@
 
 
 ##地址测试
-学生地址测试：106.54.3.97:8080/demo/student/toNoIndex
-管理员地址测试：106.54.3.97:8080/demo/admin/toLogin
+学生地址测试：127.0.0.1:8080/demo/student/toNoIndex
+管理员地址测试：127.0.0.1:8080/demo/admin/toLogin
