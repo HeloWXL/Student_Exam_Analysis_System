@@ -64,6 +64,10 @@ public class CompletionQuestionServiceImpl implements CompletionQuestionService 
         return completionQuestionMapper.deleteByPrimaryKey(completionId);
     }
 
+    /**
+     * 批量导入填空题
+     * @param listContent
+     */
     @Override
     public void importCompletionQuestion(List<List<String>> listContent) {
 
@@ -71,17 +75,39 @@ public class CompletionQuestionServiceImpl implements CompletionQuestionService 
             CompletionCourseTypeVo completionQuestionVo = new CompletionCourseTypeVo ();
 
             String text = listContent.get(i).get(0);
+            String courseName=listContent.get(i).get(2);
+            Integer courseId=completionQuestionMapper.findCourseIdByName(courseName);
+            if(courseId!=null){
+                completionQuestionVo.setCourseId(courseId);
+            }else{
+                completionQuestionMapper.insertNOCourse(courseName);
+                completionQuestionVo.setCourseId(completionQuestionMapper.findCourseIdByName(courseName));
+            }
+
+            String typeName=listContent.get(i).get(4);
+            Integer typeId=completionQuestionMapper.findTypeIdByName(typeName);
+
+            if(typeId!=null){
+                completionQuestionVo.setTypeId(typeId);
+            }else{
+                completionQuestionMapper.insertNoType(typeName);
+                completionQuestionVo.setTypeId(completionQuestionMapper.findTypeIdByName(typeName));
+            }
 
             completionQuestionVo.setText(text);
             completionQuestionVo.setAnswer(listContent.get(i).get(1));
-            completionQuestionVo.setCourseName(listContent.get(i).get(2));
+
             completionQuestionVo.setLevel(Integer.parseInt((listContent.get(i).get(3).substring(0,1))));
-            completionQuestionVo.setTypeName(listContent.get(i).get(4));
+
             completionQuestionVo.setKnowledge(listContent.get(i).get(5));
 
             System.out.println(completionQuestionVo.toString());
-          //    completionQuestionMapper.importCompletionQuestion(completionQuestionVo);
+
+            completionQuestionMapper.importCompletionQuestion(completionQuestionVo);
         }
     }
+
+
+
 
 }

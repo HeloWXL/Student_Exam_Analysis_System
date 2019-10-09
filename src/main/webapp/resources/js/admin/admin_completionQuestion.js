@@ -309,7 +309,7 @@ layui.use(['table','upload'], function(){
                             ,auto: false
                             ,bindAction: '#upload'
                             ,done: function(res){
-                                console.log(res)
+                                layer.msg(res.msg);
                             }
                             ,accept: 'file'
                         });
