@@ -66,16 +66,23 @@ public class PaperController {
     @GetMapping("/getPaperByAuto")
     @ResponseBody
     public Integer getPaperByAuto(@RequestParam("selectNum") Integer selectNum,
-                                      @RequestParam("completionNum") Integer completionNum,
-                                      @RequestParam("paperName") String paperName,
+                                        @RequestParam("completionNum") Integer completionNum,
+                                         @RequestParam("paperName") String paperName,
                                         @RequestParam("testId") Integer testId,
+                                         @RequestParam("selectScore") Integer selectScore,
+                                        @RequestParam("completionScore") Integer completionScore,
                                       HttpServletRequest request){
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         Paper paper =new Paper();
         //添加管理员ID
         paper.setAdminId(admin.getAdminId());
+        //试卷名称
         paper.setPaperName(paperName);
+        //考试id
         paper.setTestId(testId);
+        //分数
+        paper.setSelectScore(selectScore);
+        paper.setCompletionScore(completionScore);
         return  paperService.getPaperByAuto(paper,selectNum,completionNum);
     }
 

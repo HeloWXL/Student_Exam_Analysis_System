@@ -103,7 +103,6 @@ public class PaperServiceImpl implements PaperService {
             for(SelectQuestion selectQuestion:selectQuestionMapper.getSelectByTypeId(typeArray[i])){
                 sqids.add(selectQuestion.getSelectId());
             }
-
             List<Integer> cqids=new ArrayList<>();
             for(CompletionQuestion completionQuestion:completionQuestionMapper.getSelectByTypeId(typeArray[i])){
                 cqids.add(completionQuestion.getTypeId());
@@ -134,11 +133,21 @@ public class PaperServiceImpl implements PaperService {
         return p;
     }
 
+    /**
+     * 启用试卷
+     * @param paperId
+     * @return
+     */
     @Override
     public Integer setPaperStateOpen(Integer paperId) {
         return paperMapper.setPaperStateOpen(paperId);
     }
 
+    /**
+     * 关闭试卷
+     * @param paperId
+     * @return
+     */
     @Override
     public Integer setPaperStateClose(Integer paperId) {
         return paperMapper.setPaperStateClose(paperId);

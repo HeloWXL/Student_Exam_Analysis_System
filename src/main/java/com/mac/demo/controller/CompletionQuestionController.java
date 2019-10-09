@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @Classname CompletionQuestionController
  * @Description TODO
@@ -27,75 +26,80 @@ import java.util.Map;
 @RequestMapping("completionquestion")
 @Controller
 public class CompletionQuestionController {
-    @Resource
-    private CompletionQuestionService completionQuestionService;
 
-    @ApiOperation("获取填空题列表-分页")
-    @PostMapping("/getCompletionQuestion")
-    @ResponseBody
-    public Map<String,Object> getCompletionQuestion(@RequestBody QueryCompletionQuestionVo queryCompletionQuestionVo){
-        Map<String,Object> map = completionQuestionService.getCompletionQuestion(queryCompletionQuestionVo);
-        map.put("msg","");
-        map.put("code","0");
-        return map;
-    }
+  @Resource
+  private CompletionQuestionService completionQuestionService;
 
-    @ApiOperation("添加填空题")
-    @PostMapping("/insertCompletionQuestion")
-    @ResponseBody
-    public int insertSelective(@RequestBody CompletionQuestion completionQuestion){
-        return completionQuestionService.insertSelective(completionQuestion);
-    }
+  @ApiOperation("删除填空题")
+  @GetMapping("/deleteCompletionQuestion")
+  @ResponseBody
+  public int deleteCompletionQuestion(@RequestParam("completionId") Integer completionId) {
+    return completionQuestionService.deleteByPrimaryKey(completionId);
+  }
 
-    @ApiOperation("修改填空题")
-    @PostMapping("/updateCompletionQuestion")
-    @ResponseBody
-    public int updateCompletionQuestion(@RequestBody CompletionQuestion completionQuestion) {
-        return completionQuestionService.updateByPrimaryKeySelective(completionQuestion);
-    }
 
-    @ApiOperation("删除填空题")
-    @GetMapping("/deleteCompletionQuestion")
-    @ResponseBody
-    public int deleteCompletionQuestion(@RequestParam("completionId") Integer completionId) {
-        return completionQuestionService.deleteByPrimaryKey(completionId);
-    }
+  @ApiOperation("获取填空题列表-分页")
+  @PostMapping("/getCompletionQuestion")
+  @ResponseBody
+  public Map<String, Object> getCompletionQuestion(@RequestBody QueryCompletionQuestionVo queryCompletionQuestionVo) {
+    Map<String, Object> map = completionQuestionService.getCompletionQuestion(queryCompletionQuestionVo);
+    map.put("msg", "");
+    map.put("code", "0");
+    return map;
+  }
 
-    @ApiOperation("批量导入填空题")
-    @PostMapping("/uploadCompletionQuestion")
-    @ResponseBody
-    public  Map<String,Object>  importCompletionQuestion(@RequestParam("file") MultipartFile file) {
-        String fileName = file.getOriginalFilename();
-        String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
-        //System.out.println(fileName+"  "+pattern);
-        List<List<String>> listContent = new ArrayList<>();
-        String message = "导入成功";
+  @ApiOperation("批量导入填空题")
+  @PostMapping("/uploadCompletionQuestion")
+  @ResponseBody
+  public Map<String, Object> importCompletionQuestion(@RequestParam("file") MultipartFile file) {
+    String fileName = file.getOriginalFilename();
+    String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
+    //System.out.println(fileName+"  "+pattern);
+    List<List<String>> listContent = new ArrayList<>();
+    String message = "导入成功";
 
-        try {
-            if (file != null) {
-                //文件类型判断
-                if (!ExcelUtil.isEXCEL(file)) {
-                    message="文件为空";
-                }
-                listContent = ExcelUtil.readExcelContents(file, pattern);
-                //文件内容判断
-                if (listContent.isEmpty()) {
-
-                    message="表格内容为空";
-                }
-                completionQuestionService.importCompletionQuestion(listContent);
-            } else {
-
-                message="未选择文件";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    try {
+      if (file != null) {
+        //文件类型判断
+        if (!ExcelUtil.isEXCEL(file)) {
+          message = "文件为空";
         }
-        Map<String,Object> map = new HashMap<>();
-        map.put("code",0);
-        map.put("msg",message);
-        map.put("data",fileName);
-        return map;
-    }
-    }
+        listContent = ExcelUtil.readExcelContents(file, pattern);
+        //文件内容判断
+        if (listContent.isEmpty()) {
 
+          message = "表格内容为空";
+        }
+        completionQuestionService.importCompletionQuestion(listContent);
+      } else {
+
+        message = "未选择文件";
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    Map<String, Object> map = new HashMap<>();
+    map.put("code", 0);
+    map.put("msg", message);
+    map.put("data", fileName);
+    return map;
+  }
+
+
+  @ApiOperation("添加填空题")
+  @PostMapping("/insertCompletionQuestion")
+  @ResponseBody
+  public int insertSelective(@RequestBody CompletionQuestion completionQuestion) {
+    return completionQuestionService.insertSelective(completionQuestion);
+  }
+
+
+  @ApiOperation("修改填空题")
+  @PostMapping("/updateCompletionQuestion")
+  @ResponseBody
+  public int updateCompletionQuestion(@RequestBody CompletionQuestion completionQuestion) {
+    return completionQuestionService.updateByPrimaryKeySelective(completionQuestion);
+  }
+
+
+}
