@@ -13,6 +13,7 @@
     <title>学生成绩报告</title>
     <meta charset="utf-8">
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet"/>
+    <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
     <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <style>
         .table {
@@ -39,15 +40,17 @@
             float: left;
             margin-left: 10px;
         }
+        .mui-bar{
+            background-color: #1B8BF5;
+        }
     </style>
 </head>
 <body>
-<div>
+<div class="mui-content">
     <div style="text-align: center">
         <h2>测评结果</h2>
     </div>
-
-    <div id="info">
+    <div id="info" style="margin-bottom: 10px">
         <div>平均得分<span style="color: green;font-weight: bold">${report.avgScore}分</span></div>
         <div>您的得分<span style="color: green;font-weight: bold">${report.score}分</span></div>
         <div>推荐班型<span style="color: green;font-weight: bold">${report.className}</span></div>
@@ -62,7 +65,7 @@
         </tr>
         <c:forEach var="re" items="${report.selectList}" varStatus="i">
             <tr>
-                <td>第一题</td>
+                <td>第${i.index+1}题</td>
                 <td style="color: green;font-weight: bold">${re}</td>
                 <td>${report.selectQuestionList[i.index]}</td>
                 <td>${report.abilityList[i.index]}</td>
@@ -70,10 +73,14 @@
             </tr>
         </c:forEach>
     </table>
+
+<%--    //饼图  --能力分析--%>
+    <div id="container" style="height:600px;margin-top: 50px;margin-left: 1%;margin-right: 1%"></div>
+<%--    //折线图 --学生成绩分析--%>
+    <div id="container2" style="height:600px;margin-top: 50px;margin-left: 1%;margin-right: 1%"></div>
 </div>
-<div id="container" style="height:600px"></div>
-<div id="container2" style="height:600px"></div>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+<script src="${ctx}/resources/js/mui.min.js"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/echarts.min.js" type="application/javascript"></script>
 <script>
@@ -95,60 +102,46 @@
     var myChart = echarts.init(dom,'light');
     option1 = null;
     option1 = {
-        title: {
-            text: '能力分析'
+        title : {
+            text: '能力类型分析',
+            subtext: '我的能力分析',
+            x:'center'
         },
-        tooltip: {},
-        radar: {
-            // shape: 'circle',
-            name: {
-                textStyle: {
-                    color: '#fff',
-                    backgroundColor: '#999',
-                    borderRadius: 3,
-                    padding: [3, 5]
-                }
-            },
-            indicator: [{
-                name: '客观分析能力',
-                max: 10
-            },
-                {
-                    name: '观察能力',
-                    max: 10
-                },
-                {
-                    name: '应用能力',
-                    max: 10
-                },
-                {
-                    name: '计算能力',
-                    max: 10
-                },
-                {
-                    name: '动手能力',
-                    max: 10
-                },
-                {
-                    name: '推理能力',
-                    max: 10
-                }
-            ]
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
-        series: [{
-            name: '能力分析',
-            type: 'radar',
-            // areaStyle: {normal: {}},
-            data: [
-                {
-                    value: [3, 2, 4, 5, 6, 3],
-                    name: '我的能力'
+        legend: {
+            bottom: 10,
+            left: 'center',
+            data: ['客观分析能力','观察能力','应用能力','计算能力','动手能力','推理能力']
+        },
+        series : [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'客观分析能力'},
+                    {value:310, name:'观察能力'},
+                    {value:234, name:'应用能力'},
+                    {value:135, name:'计算能力'},
+                    {value:135, name:'推理能力'},
+                    {value:1548, name:'动手能力'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
                 }
-            ]
-        }]
+            }
+        ]
     };
     if (option1 && typeof option1 === "object") {
-        myChart.setOption(option1, true);
+        myChart.setOption(option1,true);
     }
 </script>
 <script type="text/javascript">
@@ -157,9 +150,13 @@
     option2 = null;
     option2 = {
         title: {
-            text: '成绩比较'
+            text: '成绩比较',
+            x:'center'
         },
-        legend: {},
+        legend: {
+            bottom: 10,
+            left: 'center',
+        },
         tooltip: {},
         dataset: {
             source: [

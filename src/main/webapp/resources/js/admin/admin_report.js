@@ -62,9 +62,9 @@ layui.use('table', function() {
         type: 2,
         anim: 1,
         skin: 'layui-layer-molv',
-        area: '500px',
-        area: 'auto',
-        content: [ctx + '/student/toReport/' + data.paperId + '/' + data.studentId, 'no'] //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+        area: ['800px','600px'],
+        offset: 'auto',
+        content: ctx + '/student/toReport/' + data.paperId + '/' + data.studentId//这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
       });
     }
   });
