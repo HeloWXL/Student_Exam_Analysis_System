@@ -67,7 +67,6 @@ public class CompletionQuestionController {
     public  Map<String,Object>  importCompletionQuestion(@RequestParam("file") MultipartFile file) {
         String fileName = file.getOriginalFilename();
         String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
-        //System.out.println(fileName+"  "+pattern);
         List<List<String>> listContent = new ArrayList<>();
         String message = "导入成功";
 

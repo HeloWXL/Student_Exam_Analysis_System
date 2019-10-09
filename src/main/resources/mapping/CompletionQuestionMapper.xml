@@ -168,4 +168,60 @@
 
   </select>
 
+  <insert id="importCompletionQuestion" parameterType="com.mac.demo.vo.CompletionCourseTypeVo" >
+    insert into completionquestion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="completionId != null" >
+        completion_id,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="knowledge != null" >
+        knowledge,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="completionId != null" >
+        #{completionId,jdbcType=INTEGER},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="knowledge != null" >
+        #{knowledge,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
 </mapper>
