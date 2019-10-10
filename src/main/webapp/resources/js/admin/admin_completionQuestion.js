@@ -284,6 +284,8 @@ layui.use(['table','upload'], function(){
                         }
                     });
                 }
+                break;
+
             case 'addmore':
                 layer.open({
                     id: 'addmore',
