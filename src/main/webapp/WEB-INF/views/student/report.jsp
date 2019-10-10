@@ -96,8 +96,14 @@
 <script>
     // 考试平均分
     var avgScore = '${report.avgScore}';
-    var myScore =' ${report.score}';
+    //我的分数
+    var myScore ='${report.score}';
+    //能力类型统计
+    var abilityListMap =  "${report.abilityListMap}";
 
+    //能力类型列表
+    var list = "${report.list}";
+    console.log(list)
     //饼图
     var dom = document.getElementById("container");
     var myChart = echarts.init(dom,'light');
@@ -115,7 +121,7 @@
       legend: {
         bottom: 10,
         left: 'center',
-        data: ['客观分析能力','观察能力','应用能力','计算能力','动手能力','推理能力']
+        data: list
       },
       series : [
         {
@@ -123,14 +129,7 @@
           type: 'pie',
           radius : '55%',
           center: ['50%', '60%'],
-          data:[
-            {value:1, name:'客观分析能力'},
-            {value:2, name:'观察能力'},
-            {value:3, name:'应用能力'},
-            {value:4, name:'计算能力'},
-            {value:5, name:'推理能力'},
-            {value:6, name:'动手能力'}
-          ],
+          data:abilityListMap,
           itemStyle: {
             emphasis: {
               shadowBlur: 10,

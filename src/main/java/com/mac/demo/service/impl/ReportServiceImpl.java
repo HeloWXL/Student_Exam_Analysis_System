@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Classname ReportServiceImpl
@@ -58,6 +56,36 @@ public class ReportServiceImpl implements ReportService {
         reportVo.setSelectQuestionList(PaperUtils.String2List(reportVo.getCorrectSelect()));
         //能力列表
         reportVo.setAbilityList(PaperUtils.String2List(reportVo.getAbility()));
+
+        List<String> abilityList = reportVo.getAbilityList();
+        List<String> list = new ArrayList<>();
+
+        for (String s:abilityList
+             ) {
+            list.add("'"+s+"'");
+        }
+        reportVo.setList(list);
+
+        //存放能力类型 统计
+        List<Map<String,Object>> abilityListMap = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        for(String item: abilityList){
+            if(map.containsKey(item)){
+                map.put(item, map.get(item).intValue() + 1);
+            }else{
+                map.put(item, new Integer(1));
+            }
+        }
+        Iterator<String> keys = map.keySet().iterator();
+        Map<String,Object> sb=new HashMap<>();
+        while(keys.hasNext()){
+            String key = keys.next();
+            sb.put("name","'"+key+"'");
+            sb.put("value", map.get(key).intValue());
+            abilityListMap.add(sb);
+        }
+        reportVo.setAbilityListMap(abilityListMap);
+
         //知识点列表
         reportVo.setKnowledgeList(PaperUtils.String2List(reportVo.getKnowledge()));
         //学生姓名
