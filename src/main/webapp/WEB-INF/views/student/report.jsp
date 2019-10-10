@@ -49,6 +49,21 @@
     <div style="text-align: center">
         <h2>测评结果</h2>
     </div>
+
+    <div class="aui-chang-list">
+        <div class="aui-user-img">
+            <img src="${ctx}/resources/images/user.png" alt="">
+        </div>
+        <div class="aui-user-text">
+            <h1>李嘉桦</h1>
+            <span><i class="icon icon-vip"></i>您还未开通VIP会员</span>
+            <button>开通会员</button>
+        </div>
+        <div class="aui-jf">积分50</div>
+    </div>
+
+
+
     <div id="info" style="margin-bottom: 10px">
         <div>平均得分<span style="color: green;font-weight: bold">${report.avgScore}分</span></div>
         <div>您的得分<span style="color: green;font-weight: bold">${report.score}分</span></div>
@@ -75,7 +90,7 @@
 
 <%--    //饼图  --能力分析--%>
     <div id="container" style="height:600px;margin-top: 50px;margin-left: 1%;margin-right: 1%"></div>
-<%--    //折线图 --学生成绩分析--%>
+<%--    //统计直方图 --学生成绩分析--%>
     <div id="container2" style="height:600px;margin-top: 50px;margin-left: 1%;margin-right: 1%"></div>
 </div>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
@@ -86,94 +101,7 @@
     // 考试平均分
     var avgScore = '${report.avgScore}';
     var myScore =' ${report.score}';
-    layui.use(['rate'], function() {
-        var rate = layui.rate;
-        //只读
-        rate.render({
-            elem: '#test'
-            ,value: 3
-            ,readonly: true
-        });
-    })
 </script>
-<script type="text/javascript">
-    var dom = document.getElementById("container");
-    var myChart = echarts.init(dom,'light');
-    option1 = null;
-    option1 = {
-        title : {
-            text: '能力类型分析',
-            subtext: '我的能力分析',
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            bottom: 10,
-            left: 'center',
-            data: ['客观分析能力','观察能力','应用能力','计算能力','动手能力','推理能力']
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'客观分析能力'},
-                    {value:310, name:'观察能力'},
-                    {value:234, name:'应用能力'},
-                    {value:135, name:'计算能力'},
-                    {value:135, name:'推理能力'},
-                    {value:1548, name:'动手能力'}
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-    if (option1 && typeof option1 === "object") {
-        myChart.setOption(option1,true);
-    }
-</script>
-<script type="text/javascript">
-    var dom = document.getElementById("container2");
-    var myChart2 = echarts.init(dom,'light');
-    option2 = null;
-    option2 = {
-        title: {
-            text: '成绩比较',
-            x:'center'
-        },
-        legend: {
-            bottom: 10,
-            left: 'center',
-        },
-        tooltip: {},
-        dataset: {
-            source: [
-                ['score', '平均成绩','我的考试成绩'],
-                ['平均成绩', avgScore,0],
-                ['我的考试成绩', 0,myScore]
-            ]
-        },
-        xAxis: {type: 'category'},
-        yAxis: {},
-        series: [
-            {type: 'bar'},
-            {type: 'bar'}
-        ]
-    };
-    if (option2 && typeof option2 === "object") {
-        myChart2.setOption(option2,true);
-    }
-</script>
+
 </body>
 </html>
