@@ -52,10 +52,10 @@
                     </div>
                     <div class="layui-inline" id="btn">
                         <div class="layui-inline">
-                            <button type="button" class="layui-btn layui-btn-primary" id="query">查询</button>
+                            <button type="button" class="layui-btn layui-btn-normal" id="query">查询</button>
                         </div>
                         <div class="layui-inline">
-                            <button type="button" class="layui-btn layui-btn-primary" id="reset">重置</button>
+                            <button type="button" class="layui-btn layui-btn-normal" id="reset">重置</button>
                         </div>
                     </div>
                 </form>
@@ -69,7 +69,7 @@
 </div>
 </body>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-normal" lay-event="detail">查看报告</a>
+    <button class="layui-btn layui-btn-normal" lay-event="detail">查看报告</button>
 </script>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>

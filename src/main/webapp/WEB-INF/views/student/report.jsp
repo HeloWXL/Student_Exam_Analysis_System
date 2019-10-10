@@ -98,17 +98,6 @@
     var avgScore = '${report.avgScore}';
     var myScore =' ${report.score}';
 
-    layui.use(['rate'], function() {
-      var rate = layui.rate;
-      //只读
-      rate.render({
-        elem: '#test'
-        ,value: 3
-        ,readonly: true
-      });
-    })
-
-
     //饼图
     var dom = document.getElementById("container");
     var myChart = echarts.init(dom,'light');
@@ -130,17 +119,17 @@
       },
       series : [
         {
-          name: '访问来源',
+          name: '能力分析',
           type: 'pie',
           radius : '55%',
           center: ['50%', '60%'],
           data:[
-            {value:335, name:'客观分析能力'},
-            {value:310, name:'观察能力'},
-            {value:234, name:'应用能力'},
-            {value:135, name:'计算能力'},
-            {value:135, name:'推理能力'},
-            {value:1548, name:'动手能力'}
+            {value:1, name:'客观分析能力'},
+            {value:2, name:'观察能力'},
+            {value:3, name:'应用能力'},
+            {value:4, name:'计算能力'},
+            {value:5, name:'推理能力'},
+            {value:6, name:'动手能力'}
           ],
           itemStyle: {
             emphasis: {
@@ -161,6 +150,10 @@
     var myChart2 = echarts.init(dom,'light');
     option2 = null;
     option2 = {
+        title : {
+            text: '成绩分析',
+            x:'center'
+        },
       color: ['#3398DB'],
       tooltip : {
         trigger: 'axis',
@@ -192,8 +185,8 @@
         {
           name:['分数'],
           type:'bar',
-          barWidth: '60%',
-          data:[10, 52]
+          barWidth: '40%',
+          data:[avgScore, myScore]
         }
       ]
     };

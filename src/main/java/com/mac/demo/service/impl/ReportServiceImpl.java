@@ -47,6 +47,10 @@ public class ReportServiceImpl implements ReportService {
         double avgScore = reportMapper.getAvgScoreByPaperId(paperId);
         //从数据库中获取到数据
         ReportVo reportVo =reportMapper.getReportIndex(studentId,paperId);
+
+
+
+
         //赋值操作
         reportVo.setAvgScore(avgScore);
         //获取选择题 ---放入list集合中 ---我的答案

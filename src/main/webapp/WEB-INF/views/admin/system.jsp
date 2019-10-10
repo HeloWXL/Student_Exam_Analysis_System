@@ -39,7 +39,7 @@
                         <div class="layui-input-inline">
                         <input type="password" name="password" autocomplete="off" class="layui-input" style="width: 100px">
                         </div>
-                        <button type="button" class="layui-btn layui-btn-primary" id="changePassWord" >修改</button>
+                        <button type="button" class="layui-btn layui-btn-normal" id="changePassWord" >修改</button>
                     </td>
                 </tr>
                 </tbody>
