@@ -2,6 +2,7 @@ package com.mac.demo.service.impl;
 
 import com.mac.demo.config.RedisUtil;
 import com.mac.demo.mapper.ReportMapper;
+import com.mac.demo.mapper.StudentMapper;
 import com.mac.demo.service.ReportService;
 import com.mac.demo.utils.PaperUtils;
 import com.mac.demo.vo.QuerySelectQuestionVo;
@@ -24,6 +25,8 @@ import java.util.Map;
 public class ReportServiceImpl implements ReportService {
     @Resource
     private ReportMapper reportMapper;
+    @Resource
+    private StudentMapper studentMapper;
     @Autowired
     private RedisUtil redisUtil;
 
@@ -42,13 +45,19 @@ public class ReportServiceImpl implements ReportService {
     public ReportVo getReportIndex(Integer studentId, Integer paperId) {
         //得到该门试卷的平均分数
         double avgScore = reportMapper.getAvgScoreByPaperId(paperId);
+        //从数据库中获取到数据
         ReportVo reportVo =reportMapper.getReportIndex(studentId,paperId);
+        //赋值操作
         reportVo.setAvgScore(avgScore);
         //获取选择题 ---放入list集合中 ---我的答案
         reportVo.setSelectList(PaperUtils.String2List(reportVo.getAnswerSelect()));
         reportVo.setSelectQuestionList(PaperUtils.String2List(reportVo.getCorrectSelect()));
+        //能力列表
         reportVo.setAbilityList(PaperUtils.String2List(reportVo.getAbility()));
+        //知识点列表
         reportVo.setKnowledgeList(PaperUtils.String2List(reportVo.getKnowledge()));
+        //学生姓名
+        reportVo.setStudentName(studentMapper.getStudentNameById(studentId));
         return reportVo;
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * 测试地址：http://127.0.0.1:8080/demo/admin/toLogin
+ * 测试地址：http://127.0.0.1:8086/demo/admin/toLogin
  *
  */
 @MapperScan("com.mac.demo.mapper")

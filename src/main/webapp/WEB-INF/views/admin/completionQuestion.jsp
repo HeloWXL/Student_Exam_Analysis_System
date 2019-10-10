@@ -16,6 +16,11 @@
     <script>
         var ctx = '${ctx}'
     </script>
+    <style>
+        .layui-btn-group .layui-btn{
+            margin-left: 5!important;
+        }
+    </style>
 </head>
 <body>
 <div class="layui-row">
@@ -53,10 +58,10 @@
                      </div>
                     <div class="layui-inline" id="btn">
                         <div class="layui-inline">
-                            <button type="button" class="layui-btn layui-btn-primary" id="query">查询</button>
+                            <button type="button" class="layui-btn layui-btn-normal" id="query">查询</button>
                         </div>
                         <div class="layui-inline">
-                            <button type="button" class="layui-btn layui-btn-primary" id="reset">重置</button>
+                            <button type="button" class="layui-btn layui-btn-normal" id="reset">重置</button>
                         </div>
 
                     </div>
@@ -73,22 +78,22 @@
 <script type="text/html" id="toolbars">
     <div class="layui-btn-container">
         <div class="layui-btn-group">
-            <button type="button" lay-event="add" class="layui-btn layui-btn-primary">
+            <button type="button" lay-event="add" class="layui-btn layui-btn-normal">
                 <i class="layui-icon">&#xe654;</i>增加
             </button>
             <button type="button" lay-event="update" class="layui-btn layui-btn-normal"><i
                     class="layui-icon">&#xe60a;</i>修改
             </button>
-            <button type="button" lay-event="delete" class="layui-btn layui-btn-danger"><i
+            <button type="button" lay-event="delete" class="layui-btn layui-btn-normal"><i
                     class="layui-icon">&#xe640;</i>删除
             </button>
-           <button type="button" lay-event="addmore" class="layui-btn" style="float: right"><i
+           <button type="button" lay-event="addmore" class="layui-btn layui-btn-normal" style="float: right"><i
                     class="layui-icon">&#xe654;</i>批量导入
             </button>
             <a style="color: blue;float: right" target="_blank" id="impLink" href="${ctx}/resources/model/CompletionQuestionTemplete.xlsx">
 
-            <button type="button" lay-event="downloadTemplate" class="layui-btn layui-btn-warm" style="float: right"><i
-                    class="layui-icon">&#xe640;</i>批量导入模板下载
+            <button type="button" lay-event="downloadTemplate" class="layui-btn layui-btn-normal" style="float: right"><i
+                    class="layui-icon">&#xe601;</i>批量导入模板下载
             </button>
             </a>
         </div>

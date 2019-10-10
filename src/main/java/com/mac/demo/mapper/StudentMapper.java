@@ -57,6 +57,13 @@ public interface StudentMapper extends BaseMapper<Student> {
     @Select("select count(1) from student")
     int getStudentCount();
 
+    /**
+     * 根据id 得到学生的姓名
+     * @param studentId
+     * @return
+     */
+    @Select("select student_name from student where student_id = #{studentId}")
+    String getStudentNameById(Integer studentId);
 
     List<Student> getStudentByCondition(QueryStudentVo queryStudentVo);
 
