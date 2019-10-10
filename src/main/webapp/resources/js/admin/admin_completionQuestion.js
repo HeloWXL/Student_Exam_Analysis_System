@@ -284,6 +284,8 @@ layui.use(['table','upload'], function(){
                         }
                     });
                 }
+                break;
+
             case 'addmore':
                 layer.open({
                     id: 'addmore',
@@ -316,6 +318,39 @@ layui.use(['table','upload'], function(){
                     }
                 });
                 break;
+
+           /* case 'downloadTemplate':
+                layer.open({
+                    id: 'downloadTemplate',
+                    type: 1,
+                    title: ['填空题批量导入模板下载'],
+                    skin: 'layui-layer-molv',
+                    area: '550px',
+                    offset: 'auto',
+                    content: '<div class="layui-row"  style="margin-top:10px;">' +
+                        '    <div class="layui-col-md12" style="text-align: center">' +
+                        '<div class="layui-upload" style="margin-bottom: 10px;">\n' +
+                        '  <p><font color="red">*请按照模板格式进行批量导入!</font></p>\n' +
+
+                        '<a style="color: blue" target="_blank" id="impLink" href="${ctx}/resources/model/CompletionQuestionTemplete.xlsx">' +
+                        '<button type="button" class="layui-btn" id="download">下载</button></a>\n' +
+                        '</div>'+
+                        '    </div>\n' +
+                        '</div>\n'
+                    , success: function(layero) {
+
+                /!*        $.ajax({
+                            url:ctx+'/completionquestion/downloadTemplate',
+                            dataType:'json',
+                            type:'post',
+                            success:function (data) {
+
+                            }
+                        })*!/
+
+                    }
+                });
+                break;*/
         }
     });
     //加载课程列表

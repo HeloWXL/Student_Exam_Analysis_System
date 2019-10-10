@@ -87,6 +87,13 @@
             <button type="button" lay-event="addmore" class="layui-btn" style="float: right"><i
                     class="layui-icon">&#xe654;</i>批量导入
             </button>
+
+            <a style="color: blue;float: right" target="_blank" id="impLink" href="${ctx}/resources/model/SelectQuestionTemplete.xlsx">
+
+                <button type="button" lay-event="downloadTemplate" class="layui-btn layui-btn-warm" style="float: right"><i
+                        class="layui-icon">&#xe640;</i>批量导入模板下载
+                </button>
+            </a>
         </div>
     </div>
 </script>
