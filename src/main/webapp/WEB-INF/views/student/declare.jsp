@@ -28,6 +28,12 @@
         .content div{
             margin-left: 10px;
         }
+        .mui-bar{
+            background-color: #1B8BF5;
+        }
+        .mui-title{
+            color: #FFFFFF;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +41,6 @@
     <h1 class="mui-title">考试声明</h1>
 </header>
 <div class="mui-content">
-
     <div class="content">
         <div>
             <p>本次考试是在线考试，学生请自觉遵守考试纪律，不许抄袭,如有违反，将取消本次考试资格。</p>

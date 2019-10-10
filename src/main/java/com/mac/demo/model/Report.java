@@ -1,6 +1,7 @@
 package com.mac.demo.model;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -25,6 +26,7 @@ public class Report {
 
     private String correctCompletion;
 
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private Integer score;

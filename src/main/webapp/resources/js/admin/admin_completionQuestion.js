@@ -290,7 +290,7 @@ layui.use(['table','upload'], function(){
                     type: 1,
                     title: ['填空题批量导入'],
                     skin: 'layui-layer-molv',
-                    area: '350px',
+                    area: '550px',
                     offset: 'auto',
                     content: '<div class="layui-row"  style="margin-top:10px;">' +
                         '    <div class="layui-col-md12" style="text-align: center">' +

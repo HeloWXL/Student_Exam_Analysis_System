@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mac.demo.mapper.SelectQuestionMapper;
 import com.mac.demo.model.SelectQuestion;
 import com.mac.demo.service.SelectQuestionService;
+import com.mac.demo.vo.CompletionCourseTypeVo;
 import com.mac.demo.vo.QuerySelectQuestionVo;
 import com.mac.demo.vo.SelectCourseTypeVo;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,11 @@ public class SelectQuestionServiceImpl implements SelectQuestionService {
     @Override
     public Map<String, Object> getSelectQuestion(QuerySelectQuestionVo querySelectQuestionVo) {
         Map<String, Object> map = new HashMap<>();
-        querySelectQuestionVo.setPage((querySelectQuestionVo.getPage()-1)*(querySelectQuestionVo.getLimit()));
+        querySelectQuestionVo.setPage((querySelectQuestionVo.getPage() - 1) * (querySelectQuestionVo.getLimit()));
         List<QuerySelectQuestionVo> list = selectQuestionMapper.getSelectQuestion(querySelectQuestionVo);
-        map.put("data",list);
+        map.put("data", list);
         int count = selectQuestionMapper.getSelectQuestionCount();
-        map.put("count",count);
+        map.put("count", count);
         return map;
     }
 
@@ -53,7 +54,7 @@ public class SelectQuestionServiceImpl implements SelectQuestionService {
     @Override
     public int insertSelectQuestionList(List<List<String>> list) {
         SelectQuestion selectQuestion = new SelectQuestion();
-        for(int i = 0 ;i < list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             //选择题题目
             selectQuestion.setText(list.get(i).get(0));
             //选项A
@@ -69,7 +70,7 @@ public class SelectQuestionServiceImpl implements SelectQuestionService {
             //知识点
             selectQuestion.setKnowledge(list.get(i).get(6));
             //能力类型
-            switch (list.get(i).get(7)){
+            switch (list.get(i).get(7)) {
                 case "客观分析能力":
                     selectQuestion.setTypeId(1);
                     break;
@@ -103,4 +104,48 @@ public class SelectQuestionServiceImpl implements SelectQuestionService {
 
     }
 
+    @Override
+    public void importSelect(List<List<String>> listContent) {
+
+        for (int i = 0; i < listContent.size(); i++) {
+            SelectCourseTypeVo selectCourseTypeVo = new SelectCourseTypeVo();
+
+            String text = listContent.get(i).get(0);
+
+            String courseName = listContent.get(i).get(6);
+            Integer courseId = selectQuestionMapper.findCourseIdByName(courseName);
+            if (courseId != null) {
+                selectCourseTypeVo.setCourseId(courseId);
+            } else {
+                selectQuestionMapper.insertNOCourse(courseName);
+                selectCourseTypeVo.setCourseId(selectQuestionMapper.findCourseIdByName(courseName));
+            }
+
+            String typeName = listContent.get(i).get(8);
+            Integer typeId = selectQuestionMapper.findTypeIdByName(typeName);
+
+            if (typeId != null) {
+                selectCourseTypeVo.setTypeId(typeId);
+            } else {
+                selectQuestionMapper.insertNoType(typeName);
+                selectCourseTypeVo.setTypeId(selectQuestionMapper.findTypeIdByName(typeName));
+            }
+
+            selectCourseTypeVo.setText(text);
+            selectCourseTypeVo.setOptionA(listContent.get(i).get(1));
+            selectCourseTypeVo.setOptionB(listContent.get(i).get(2));
+            selectCourseTypeVo.setOptionC(listContent.get(i).get(3));
+            selectCourseTypeVo.setOptionD(listContent.get(i).get(4));
+            selectCourseTypeVo.setAnswer(listContent.get(i).get(5));
+            selectCourseTypeVo.setLevel(Integer.parseInt((listContent.get(i).get(7).substring(0, 1))));
+
+            selectCourseTypeVo.setKnowledge(listContent.get(i).get(9));
+
+            System.out.println(selectCourseTypeVo.toString());
+
+            selectQuestionMapper.importSelect(selectCourseTypeVo);
+
+        }
+
+    }
 }

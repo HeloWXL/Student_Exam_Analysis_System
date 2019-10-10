@@ -34,6 +34,10 @@ public class SelectCourseTypeVo {
 
     private Integer level;
 
+    private Integer typeId;
+
+    private Integer courseId;
+
     private String typeName;
 
     private String courseName;

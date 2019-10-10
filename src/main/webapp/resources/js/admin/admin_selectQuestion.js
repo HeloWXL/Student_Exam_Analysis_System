@@ -38,9 +38,9 @@ $(function () {
                             '    <div class="layui-col-md10">' +
                             '        <form class="layui-form">' +
                             '            <div class="layui-form-item">\n' +
-                            '                <label class="layui-form-label" style="padding-left:-50px;">填空题题目:</label>\n' +
+                            '                <label class="layui-form-label" style="padding-left:-50px;">选择题题目:</label>\n' +
                             '                <div class="layui-input-block">\n' +
-                            '                    <input type="text" placeholder="请输入填空题名称" name="text" id="text" class="layui-input">\n' +
+                            '                    <input type="text" placeholder="请输入选择题名称" name="text" id="text" class="layui-input">\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="layui-form-item">\n' +
@@ -350,11 +350,11 @@ $(function () {
                             //选完文件后不自动上传
                             upload.render({
                                 elem: '#uploadSelect'
-                                ,url: ctx+'/selectquestion/uploadSelect/'
+                                ,url: ctx+'/selectquestion/uploadSelect'
                                 ,auto: false
                                 ,bindAction: '#upload'
                                 ,done: function(res){
-                                    console.log(res)
+                                    layer.msg(res.msg)
                                 }
                                 ,accept: 'file'
                             });

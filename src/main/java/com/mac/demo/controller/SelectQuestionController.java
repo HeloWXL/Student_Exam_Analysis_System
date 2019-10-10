@@ -2,6 +2,8 @@ package com.mac.demo.controller;
 
 import com.mac.demo.model.SelectQuestion;
 import com.mac.demo.service.SelectQuestionService;
+import com.mac.demo.utils.ExcelUtil;
+import com.mac.demo.utils.ExcelUtilSelectQuestion;
 import com.mac.demo.vo.QuerySelectQuestionVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,12 +64,37 @@ public class SelectQuestionController {
     @ApiOperation("批量导入选择题")
     @PostMapping("/uploadSelect")
     @ResponseBody
-    public String importSelect(@RequestParam("file") MultipartFile file) {
+    public Map<String,Object>  importSelect(@RequestParam("file") MultipartFile file) {
         String fileName = file.getOriginalFilename();
-        System.out.println(fileName);
         String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
-        System.out.println(pattern);
-        return pattern;
+        List<List<String>> listContent = new ArrayList<>();
+        String message = "导入成功";
+
+        try {
+            if (file != null) {
+                //文件类型判断
+                if (!ExcelUtilSelectQuestion.isEXCEL(file)) {
+                    message="文件为空";
+                }
+                listContent = ExcelUtilSelectQuestion.readExcelContents(file, pattern);
+                //文件内容判断
+                if (listContent.isEmpty()) {
+
+                    message="表格内容为空";
+                }
+                selectQuestionService.importSelect(listContent);
+            } else {
+
+                message="未选择文件";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("code",0);
+        map.put("msg",message);
+        map.put("data",fileName);
+        return map;
     }
 
 }
