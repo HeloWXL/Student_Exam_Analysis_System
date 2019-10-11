@@ -29,26 +29,33 @@ public class AdminController {
     @ApiOperation("管理员首页")
     @GetMapping("/toIndex")
     public String toIndex(HttpServletRequest request, HttpServletResponse response){
-        Cookie[] cookies=request.getCookies();
 
-            Cookie adminCookie=new Cookie("message","欢迎登陆");
-            adminCookie.setMaxAge(30*24*60*60);//存活期一个月
-            adminCookie.setPath("/");
-            response.addCookie(adminCookie);
+            Object user=request.getSession().getAttribute("admin");
+            if(user!=null && user!=""){
+                Cookie[] cookies=request.getCookies();
 
-            for(Cookie cookie:cookies){
-                if(cookie.getName().equals("messageid")){
-                    if(cookie.getValue().equals("2")){
-                        Cookie changerCookie=new Cookie("message","增加用户成功");
-                        changerCookie.setMaxAge(30*24*60*60);//存活期一个月
-                        changerCookie.setPath("/");
-                        response.addCookie(changerCookie);
+                Cookie adminCookie=new Cookie("message","欢迎登陆");
+                adminCookie.setMaxAge(30*24*60*60);//存活期一个月
+                adminCookie.setPath("/");
+                response.addCookie(adminCookie);
+
+                for(Cookie cookie:cookies){
+                    if(cookie.getName().equals("messageid")){
+                        if(cookie.getValue().equals("2")){
+                            Cookie changerCookie=new Cookie("message","增加用户成功");
+                            changerCookie.setMaxAge(30*24*60*60);//存活期一个月
+                            changerCookie.setPath("/");
+                            response.addCookie(changerCookie);
+                        }
                     }
                 }
+
+
+                return "admin/index";
+            }else{
+                return "admin/login";
             }
 
-
-        return "admin/index";
     }
 
     /**
