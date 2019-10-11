@@ -37,8 +37,19 @@
                     <td>修改密码</td>
                     <td>
                         <div class="layui-input-inline">
+                            输入新密码：
+                        </div>
+                        <div class="layui-input-inline">
                         <input type="password" name="password" autocomplete="off" class="layui-input" style="width: 100px">
                         </div>
+                        &nbsp; &nbsp; &nbsp;
+                        <div class="layui-input-inline">
+                            确认新密码：
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="password" name="checkPassword" autocomplete="off" class="layui-input" style="width: 100px">
+                        </div>
+                        &nbsp; &nbsp;
                         <button type="button" class="layui-btn layui-btn-normal" id="changePassWord" >修改</button>
                     </td>
                 </tr>
@@ -60,7 +71,7 @@
                "                    <td>添加用户</td>\n" +
                "                    <td>\n" +
                "\n" +
-               "                        <div class=\"layui-input-inline\">\n" +
+               "                        &nbsp; &nbsp; &nbsp; <div class=\"layui-input-inline\">\n" +
                "                            <label class=\"layui-form-label\" style='margin-left: -50px'>用户名：</label>\n" +
                "                            <input type=\"text\" name=\"addAdminName\" autocomplete=\"off\" class=\"layui-input\" style=\"width: 100px\">\n" +
                "                        </div>\n" +
@@ -93,17 +104,36 @@
            })
         }
         $("#changePassWord").click(function (){
+
             var password=$("input[name='password']").val();
-            $.ajax({
-                url:'/demo/admin/changePassWord',
-                data:{passWord:password},
-                dataType:'json',
-                type:'post',
-                success: function(data) {
-                    parent.location.href="/demo/admin/toLogin";
+            var checkPassword=$("input[name='checkPassword']").val();
+            if(password==checkPassword && password!="" && checkPassword!=""  ){
+                $.ajax({
+                    url:'/demo/admin/changePassWord',
+                    data:{passWord:password},
+                    dataType:'json',
+                    type:'post',
+                    success: function(data) {
+                        parent.location.href="/demo/admin/toLogin";
+                    }
+
+                })
+            }else{
+                if(password =="" || checkPassword==""){
+                    layui.use('layer',function () {
+                        layer.msg("密码不得为空！");
+                    });
+                }else{
+                    layui.use('layer',function () {
+                        layer.msg("前后两次密码输入不一致！");
+                    });
                 }
 
-            })
+
+
+
+            }
+
         })
     });
 </script>
