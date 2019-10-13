@@ -85,34 +85,37 @@ public class PaperServiceImpl implements PaperService {
 
 
     @Override
-    public Integer getPaperByAuto(Paper paper ,Integer selectNum, Integer completionNum) {
-        //类型集合
-        int[] typeArray = new int[]{1,2,3,4,5};
-
+    public Integer getPaperByAuto(Paper paper ,Integer selectNum, Integer completionNum,Integer courseId) {
+        int sNum = selectQuestionMapper.getSelectCountByCourseId(courseId);
+        int cNum = completionQuestionMapper.getCompletionoCountBycourseId(courseId);
+        //比较选择题数量和填空题数量 ----
+        if(sNum<selectNum&&cNum<completionNum){
+            return -1;
+        }
         //该map用于存放随机的各类型题号
         Map<Object,Object> map=new HashMap();
-
         //存放选择题 ID
         StringBuilder selectString = new StringBuilder();
         //存放填空题ID
         StringBuilder completionString = new StringBuilder();
-        //遍历题目类型ID 获取随机选择题和填空题数量
-        for(int i = 0 ;i<typeArray.length;i++){
-            //获取随机选择题id的集合
-            List<Integer> sqids=new ArrayList<>();
-            for(SelectQuestion selectQuestion:selectQuestionMapper.getSelectByTypeId(typeArray[i])){
-                sqids.add(selectQuestion.getSelectId());
-            }
-            List<Integer> cqids=new ArrayList<>();
-            for(CompletionQuestion completionQuestion:completionQuestionMapper.getSelectByTypeId(typeArray[i])){
-                cqids.add(completionQuestion.getTypeId());
-            }
-            selectString.append(getIds(sqids,selectNum));
-            completionString.append(getIds(cqids,completionNum));
+        //获取随机选择题id的集合
+        List<Integer> sqids=new ArrayList<>();
+        //随机选择填空题
+        for(SelectQuestion selectQuestion:selectQuestionMapper.getSelectByCourseId(courseId)){
+            //获取选择题的ID
+            sqids.add(selectQuestion.getSelectId());
         }
+        selectString.append(getIds(sqids,selectNum));
+        List<Integer> cqids=new ArrayList<>();
+        //随机选择填空题
+        for(CompletionQuestion completionQuestion:completionQuestionMapper.getComppletionBycourseId(courseId)){
+            //获取填空题的ID
+            cqids.add(completionQuestion.getTypeId());
+        }
+        completionString.append(getIds(cqids,completionNum));
         map.put("sds",selectString.substring(0,selectString.length()-1));
         map.put("cds",completionString.substring(0,completionString.length()-1));
-
+        System.out.println(map);
         //添加到数据库中
         paper.setCompletionList(completionString.toString());
         paper.setSelectList(selectString.toString());

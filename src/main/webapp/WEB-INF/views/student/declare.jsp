@@ -66,7 +66,7 @@
         }
     });
     $(function () {
-        if('${student}'!=""){
+        if('${student}'==""){
              location.href=ctx+"/student/toLogin";
              return;
         }

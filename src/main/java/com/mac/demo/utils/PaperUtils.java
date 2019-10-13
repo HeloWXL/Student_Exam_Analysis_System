@@ -52,7 +52,6 @@ public class PaperUtils {
                     str+=ids.get(random)+",";
                 }
             }
-//            message=str.substring(0,str.length()-1);
             message = str;
         }
             return message;

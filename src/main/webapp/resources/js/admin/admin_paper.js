@@ -52,6 +52,11 @@ layui.use(['table','form'], function(){
           '    <div class="layui-input-block" id="testName">\n' +
           '    </div>\n' +
           '  </div>'+
+              '<div class="layui-form-item">\n' +
+              '    <label class="layui-form-label">课程名称：</label>\n' +
+              '    <div class="layui-input-block" id="courseName">\n' +
+              '    </div>\n' +
+              '  </div>'+
           '            <div class="layui-form-item">\n' +
           '                <label class="layui-form-label" style="padding-left:-50px;">选择题数量:</label>' +
           '                <div class="layui-input-block">' +
@@ -90,11 +95,13 @@ layui.use(['table','form'], function(){
             var forms = layui.form;
             //加载考试列表
             $("#testName").append(loadSTest())
+            $("#courseName").append(loadCourseList())
             layero.find('.layui-layer-btn').css('text-align', 'center');
             forms.render('select');
 
           },
           btn1: function(index) {
+
             //选择题数量
             var selectNum =parseInt($("#selectNum").val());
             //选择题分数
@@ -120,7 +127,8 @@ layui.use(['table','form'], function(){
                   completionNum : completionNum,
                   selectNum : selectNum,
                   selectScore:selectScore,
-                  completionScore:completionScore
+                  completionScore:completionScore,
+                  courseId:$.trim($("select[name='courseId']").val())
                 },
                 dataType:'json',
                 type:'get',
@@ -134,7 +142,7 @@ layui.use(['table','form'], function(){
                       table.reload('paperTable');
                     });
                   }else{
-                    layer.alert("添加失败")
+                    layer.alert("添加失败，题库数量不足")
                   }
                 }
               });
@@ -316,6 +324,23 @@ layui.use(['table','form'], function(){
       success:function (data) {
         for(var i = 0 ;i<data.length;i++){
           var node = ('<option value="'+data[i].testId+'">'+data[i].testName+'</option>');
+          selectStr+=node;
+        }
+      }
+    })
+    return selectStr+"</select>";
+  }
+  // 动态加载课程
+  function loadCourseList(){
+    var selectStr = "<select name=\"courseId\" >";
+    $.ajax({
+      url:ctx+'/course/getCourseList',
+      dataType:'json',
+      type:'get',
+      async:false,
+      success:function (data) {
+        for(var i = 0 ;i<data.length;i++){
+          var node = ('<option value="'+data[i].courseId+'">'+data[i].courseName+'</option>');
           selectStr+=node;
         }
       }

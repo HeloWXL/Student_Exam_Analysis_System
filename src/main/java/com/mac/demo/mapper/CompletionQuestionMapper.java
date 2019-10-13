@@ -7,6 +7,7 @@ import com.mac.demo.vo.QueryCompletionQuestionVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.omg.CORBA.INTERNAL;
 
 import java.util.List;
 
@@ -50,9 +51,22 @@ public interface CompletionQuestionMapper extends BaseMapper<CompletionQuestion>
 
     int getCompletionQuestionCount();
 
+    /**
+     * 根据课程的ID获取选择题
+     * @param courseId
+     * @return
+     */
+    @Select("select * from completionquestion where  course_id =#{courseId}")
+    List<CompletionQuestion> getComppletionBycourseId( Integer courseId);
 
-    @Select("select * from completionquestion where type_id = #{typeId}")
-    List<CompletionQuestion> getSelectByTypeId(Integer typeId);
+
+    /**
+     * 根据课程的ID获取选择题的数量
+     * @param courseId
+     * @return
+     */
+    @Select("select count(*) from completionquestion where  course_id =#{courseId}")
+    int getCompletionoCountBycourseId( Integer courseId);
 
     void importCompletionQuestion(CompletionCourseTypeVo completionQuestionVo);
 

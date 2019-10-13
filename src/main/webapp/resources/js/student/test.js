@@ -1,4 +1,9 @@
 $(function () {
+  if('${student}'==''){
+    location.href=ctx+'/student/toLogin';
+    return;
+  }else{
+    var studentId  ='${student.studentId}';
     $('#submit').click(function () {
       var btn = ['否', '是'];
       mui.confirm('确认交卷？','提示',btn,function(e) {
@@ -63,4 +68,6 @@ $(function () {
         }
       });
     });
+  }
+
 });

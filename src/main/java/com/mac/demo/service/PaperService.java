@@ -61,7 +61,7 @@ public interface PaperService {
      * @param completionNum
      * @return
      */
-    Integer getPaperByAuto(Paper paper ,Integer selectNum, Integer completionNum);
+    Integer getPaperByAuto(Paper paper ,Integer selectNum, Integer completionNum,Integer courseId);
 
     /**
      * 根据试卷的ID 得到 选择题和填空题信息

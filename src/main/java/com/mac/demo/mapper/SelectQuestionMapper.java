@@ -7,6 +7,7 @@ import com.mac.demo.vo.SelectCourseTypeVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.omg.CORBA.INTERNAL;
 
 import java.util.List;
 
@@ -54,8 +55,21 @@ public interface SelectQuestionMapper extends BaseMapper<SelectQuestion> {
 
     int getSelectQuestionCount();
 
-    @Select("select * from selectquestion where type_id=#{typeId}")
-    List<SelectQuestion> getSelectByTypeId(Integer typeId);
+    /**
+     * 根据课程的ID获取选择题的数量
+     * @param courseId
+     * @return
+     */
+    @Select("select * from selectquestion where course_Id = #{courseId}")
+    List<SelectQuestion> getSelectByCourseId(Integer courseId);
+
+    /**
+     * 根据课程ID获取选择题的数量
+     * @param courseId
+     * @return
+     */
+    @Select("select count(*) from selectquestion where course_Id = #{courseId}")
+    int getSelectCountByCourseId(Integer courseId);
 
     @Select("SELECT course_id FROM course where course_name= #{courseName}")
     Integer findCourseIdByName(String courseName);

@@ -71,7 +71,9 @@ public class PaperController {
                                         @RequestParam("testId") Integer testId,
                                          @RequestParam("selectScore") Integer selectScore,
                                         @RequestParam("completionScore") Integer completionScore,
-                                      HttpServletRequest request){
+                                        @RequestParam("courseId") Integer courseId,
+
+                                  HttpServletRequest request){
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         Paper paper =new Paper();
         //添加管理员ID
@@ -83,7 +85,7 @@ public class PaperController {
         //分数
         paper.setSelectScore(selectScore);
         paper.setCompletionScore(completionScore);
-        return  paperService.getPaperByAuto(paper,selectNum,completionNum);
+        return  paperService.getPaperByAuto(paper,selectNum,completionNum,courseId);
     }
 
     @ApiOperation("试卷详细信息")
