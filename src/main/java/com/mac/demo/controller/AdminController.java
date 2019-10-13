@@ -5,6 +5,7 @@ import com.mac.demo.model.Student;
 import com.mac.demo.service.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * @Classname AdminController
@@ -199,6 +201,22 @@ public class AdminController {
         response.addCookie(adminCookie);
         return adminService.insertSelective(admin);
     }
+
+
+   /***
+    * @Author wangxl
+    * @Description //获取管理员列表
+    * @Date 1:07 上午 2019/10/14
+    * @Param [page, limit]
+    * @return java.util.Map<java.lang.String,java.lang.Object>
+    **/
+    @ApiOperation("获取管理员列表")
+    @GetMapping("/getAdmin")
+    @ResponseBody
+    Map<String,Object> getAdmin(@Param("page") Integer page, @Param("limit") Integer limit){
+        return adminService.getAdmin(page,limit);
+    }
+
 
 
 }

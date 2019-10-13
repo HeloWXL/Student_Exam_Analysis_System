@@ -56,6 +56,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="center">
+            <table id="adminDemo" lay-filter="adminTable"></table>
+        </div>
     </div>
 </div>
 </body>
@@ -102,6 +105,29 @@
                    }
                })
            })
+
+           layui.use('table', function(){
+               var table = layui.table;
+               //第一个实例
+               table.render({
+                   id:'adminTable',
+                   elem: '#adminDemo'
+                   , defaultToolbar: []
+                   ,url: ctx+'/admin/getAdmin' //数据接口
+                   ,page: true //开启分页
+                   ,cols: [[ //表头
+                       {field: 'number', title: '序号', type: 'numbers', align: 'center'}
+                       ,{field: 'adminName', title: '管理员名称', width:200}
+                       ,{field: 'createTime', title: '创建时间', width:200}
+                   ]]
+                   ,skin: 'line,row' //表格风格
+                   ,even: true
+                   ,limits: [5, 10, 15]
+                   ,limit: 10 //每页默认显示的数量
+               });
+           });
+
+
         }
         $("#changePassWord").click(function (){
 
@@ -135,6 +161,9 @@
             }
 
         })
+
+
+
     });
 </script>
 </html>

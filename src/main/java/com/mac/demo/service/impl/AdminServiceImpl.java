@@ -6,6 +6,9 @@ import com.mac.demo.service.AdminService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname AdminServiceImpl
@@ -47,5 +50,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int insertSelective(Admin admin) {
         return adminMapper.insertSelective(admin);
+    }
+
+    @Override
+    public Map<String,Object> getAdmin(Integer page, Integer limit) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("data",adminMapper.getAdmin((page-1)*limit,limit));
+        map.put("count",adminMapper.getAdminCount());
+        map.put("code",0);
+        map.put("msg","获取管理员列表成功");
+        return map;
     }
 }

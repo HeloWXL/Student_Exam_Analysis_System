@@ -1,6 +1,10 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.Admin;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname AdminService
@@ -31,5 +35,9 @@ public interface AdminService {
      * @return
      */
     int insertSelective(Admin record);
+
+
+    Map<String,Object> getAdmin(@Param("page") Integer page, @Param("limit") Integer limit);
+
 
 }
