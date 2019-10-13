@@ -65,10 +65,16 @@
             backbutton: false //关闭back按键监听
         }
     });
-    $("#comfirm").click(function(){
-        var paperId = $("#paperId").val();
-        mui.alert("我已阅读考试声明，如有违反，后果自负",function(){
-            location.href=ctx+"/paper/selectPaperInfo/"+paperId;
+    $(function () {
+        if('${student}'!=""){
+             location.href=ctx+"/student/toLogin";
+             return;
+        }
+        $("#comfirm").click(function(){
+            var paperId = $("#paperId").val();
+            mui.alert("我已阅读考试声明，如有违反，后果自负",function(){
+                location.href=ctx+"/paper/selectPaperInfo/"+paperId;
+            })
         })
     })
 </script>

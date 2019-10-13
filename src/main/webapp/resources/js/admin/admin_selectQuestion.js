@@ -377,7 +377,7 @@ $(function () {
             id: 'selectQuestionTable',
             elem: '#demo'
             , toolbar: '#toolbars'
-            , defaultToolbar: []
+            // , defaultToolbar: []
             , url: ctx + '/selectquestion/getSelectQuestion' //数据接口
             , method:'post'
             ,contentType: 'application/json; charset=utf-8'

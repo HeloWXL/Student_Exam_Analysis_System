@@ -64,8 +64,12 @@
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
 <script>
-    if('${student}'==""){
-        location.href=ctx+"/student/toLogin";
-    }
+    $(function () {
+        if('${student}'==""){
+            location.href=ctx+"/student/toLogin";
+            return;
+        }
+    })
+
 </script>
 </html>

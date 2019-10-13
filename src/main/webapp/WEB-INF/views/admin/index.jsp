@@ -65,6 +65,9 @@
             <li class="nav-item">
                 <a  class="a-item" id="report"><i class="fa  fa-bar-chart nav-icon"></i><span>学生报告管理</span></a>
             </li>
+            <li class="nav-item">
+                <a  class="a-item" id="log"><i class="fa  fa-bar-chart nav-icon"></i><span>登录日志</span></a>
+            </li>
             <div class="sidebar-footer">
                 <ul class="clearfix">
                     <!-- 		<a href="javascript:;" data-title="消息"><i class="fa fa-bell-o"></i><span class="badge">99+</span></a> -->

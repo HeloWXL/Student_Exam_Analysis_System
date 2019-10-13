@@ -1,11 +1,14 @@
 package com.mac.demo.controller;
 
+import com.mac.demo.model.LoginLog;
 import com.mac.demo.model.Paper;
 import com.mac.demo.model.Student;
+import com.mac.demo.service.LoginLogService;
 import com.mac.demo.service.PaperService;
 import com.mac.demo.service.ReportService;
 import com.mac.demo.service.StudentService;
 import com.mac.demo.utils.ExcelUtil;
+import com.mac.demo.utils.IpUtils;
 import com.mac.demo.utils.Md5Utils;
 import com.mac.demo.vo.PaperTestAdminVo;
 import com.mac.demo.vo.QueryStudentVo;
@@ -38,15 +41,15 @@ import java.util.Map;
 @RequestMapping("student")
 @Controller
 public class StudentController {
-
     protected Logger logger = LoggerFactory.getLogger(StudentController.class);
-
     @Resource
     private StudentService studentService;
     @Resource
     private PaperService paperService;
     @Resource
     private ReportService reportService;
+    @Resource
+    private LoginLogService loginLogService;
 
     @ApiOperation("学生未登录首页页面")
     @GetMapping("/toNoIndex")
@@ -119,7 +122,6 @@ public class StudentController {
     @PostMapping("/selectStudentByPhone")
     @ResponseBody
     public Boolean selectStudentByPhone(@RequestParam("phone") String phone) {
-
         Student student  = studentService.selectStudentByPhone(phone);
         if(student==null){
             return false;
@@ -144,6 +146,11 @@ public class StudentController {
         if(Md5Utils.getSaltverifyMD5(password,studentService.selectStudentByPhone(phone).getStudentPassword())){
             Student student = studentService.selectStudentByPhone(phone);
             request.getSession().setAttribute("student",student);
+            //登录日志
+            LoginLog loginLog = new LoginLog();
+            loginLog.setSutdentId(student.getStudentId());
+            loginLog.setIp(IpUtils.getIpAddr(request));
+            loginLogService.insertLoginLog(loginLog);
             map.put("data","true");
             return map;
         }else{
@@ -151,6 +158,8 @@ public class StudentController {
             return map;
         }
     }
+
+
 
     /**
      * 从session中获取学生对象
@@ -208,43 +217,4 @@ public class StudentController {
     public int deleteStudent(@RequestParam("studentId")  Integer studentId) {
         return studentService.deleteByPrimaryKey(studentId);
     }
-
-    /**
-     * 内容待定
-     * @param file
-     * @return
-     */
-    @ApiOperation("管理员导入学生实习名单")  //success
-    @PostMapping("importStudent")
-    public String importStudent(@RequestParam("file") MultipartFile file) {
-        String fileName = file.getOriginalFilename();
-        String pattern = fileName.substring(fileName.lastIndexOf(".") + 1);
-        List<List<String>> listContent = new ArrayList<>();
-        String message = "导入成功";
-//        try {
-//            if (file != null) {
-//                //文件类型判断
-//                if (!ExcelUtil.isEXCEL(file)) {
-//                    logger.info("文件为空");
-//                    message="文件为空";
-//                }
-//                listContent = ExcelUtil.readExcelContents(file, pattern);
-//                //文件内容判断
-//                if (listContent.isEmpty()) {
-//                    logger.info("表格内容为空");
-//                    message="表格内容为空";
-//                }
-//                studentService.importStudentList(listContent);
-//            } else {
-//                logger.info("未选择文件");
-//                message="未选择文件";
-//            }
-//        } catch (Exception e) {
-//            logger.info("文件上传出现异常", e.getMessage(), e);
-//        }
-//        logger.info("导入成功");
-        return message;
-    }
-
-
 }

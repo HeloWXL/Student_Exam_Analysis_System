@@ -70,7 +70,7 @@ public class ReportVo {
     private Integer limit;
 
     //存放能力类型 统计
-    private List<Map<String,Object>> abilityListMap;
+    private List<Object> abilityListMap;
 
     private List<String> list;
 }

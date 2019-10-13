@@ -67,7 +67,6 @@ public class ReportServiceImpl implements ReportService {
         reportVo.setList(list);
 
         //存放能力类型 统计
-        List<Map<String,Object>> abilityListMap = new ArrayList<>();
         Map<String, Integer> map = new HashMap<String, Integer>();
         for(String item: abilityList){
             if(map.containsKey(item)){
@@ -77,15 +76,13 @@ public class ReportServiceImpl implements ReportService {
             }
         }
         Iterator<String> keys = map.keySet().iterator();
-        Map<String,Object> sb=new HashMap<>();
+        List<Object> listObject = new ArrayList<>();
         while(keys.hasNext()){
             String key = keys.next();
-            sb.put("name","'"+key+"'");
-            sb.put("value", map.get(key).intValue());
-            abilityListMap.add(sb);
+            listObject.add(key);
+            listObject.add(map.get(key).intValue());
         }
-        reportVo.setAbilityListMap(abilityListMap);
-
+        reportVo.setAbilityListMap(listObject);
         //知识点列表
         reportVo.setKnowledgeList(PaperUtils.String2List(reportVo.getKnowledge()));
         //学生姓名

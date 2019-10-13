@@ -35,6 +35,11 @@ $(function(){
 			$("iframe").attr("src","/demo/admin/toReport")
 		})
 
+		//
+		$("#log").click(function(){
+			$("iframe").attr("src","/demo/loginLogApi/toLog")
+		})
+
 		layui.use(['layer','jquery','form','carousel','element','upload'],function(){
 			var layer = layui.layer;//弹出层组件
 			var form = layui.form;//表单组件
