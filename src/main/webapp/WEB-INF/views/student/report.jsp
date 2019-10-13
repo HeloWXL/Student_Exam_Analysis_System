@@ -100,29 +100,25 @@
         //我的分数
         var myScore ='${report.score}';
         //能力类型统计
-        var abilityListMap =  "${report.abilityListMap}";
-        var abilistList = abilityListMap.substring(1,abilityListMap.length-1).split(',');
+        var abilitySeries =  "${report.abilitySeries}";
+        var ablilityList = abilitySeries.substring(1,abilitySeries.length-1).split(',');
         var name = new Array();
-        var value = new Array();
-        var data = new Array();
-        for(var i = 0;i<abilistList.length;i++){
-            if(i % 2 == 0){
-                name.push(abilistList[i]);
+        var value =new Array();
+        var data = [];
+        for(var i = 0 ;i<ablilityList.length;i++){
+            if(i%2==0){
+                name.push(ablilityList[i])
             }else{
-                value.push(abilistList[i]);
+                value.push(ablilityList[i])
             }
         }
-        var map = {name:"",value:0}
-        for(var j = 0 ;j<name.length;j++){
-            map.name = name[j];
-            map.value = value[j];
-            data.push(map);
+        for(var j = 0 ; j<name.length;j++){
+            var items={
+                name:name[j],
+                value:value[j]
+            };
+            data.push(items)
         }
-
-        console.log(data)
-
-        //能力类型列表
-        var list = "${report.list}";
         //饼图
         var dom = document.getElementById("container");
         var myChart = echarts.init(dom,'light');
@@ -140,7 +136,7 @@
             legend: {
                 bottom: 10,
                 left: 'center',
-                data: list
+                data: name
             },
             series : [
                 {

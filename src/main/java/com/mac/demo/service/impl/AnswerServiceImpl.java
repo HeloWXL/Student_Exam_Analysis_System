@@ -88,7 +88,6 @@ public class AnswerServiceImpl implements AnswerService {
     //定义考试分数
     int score = 0;
 
-    StringBuilder selectStr = new StringBuilder();
     //循环遍历选择题  ---- 计算考试分数
     for (int i = 0; i < selectList.size(); i++) {
       /**

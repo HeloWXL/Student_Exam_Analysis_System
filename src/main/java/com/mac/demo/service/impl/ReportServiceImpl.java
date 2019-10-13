@@ -5,7 +5,6 @@ import com.mac.demo.mapper.ReportMapper;
 import com.mac.demo.mapper.StudentMapper;
 import com.mac.demo.service.ReportService;
 import com.mac.demo.utils.PaperUtils;
-import com.mac.demo.vo.QuerySelectQuestionVo;
 import com.mac.demo.vo.ReportVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,30 +44,16 @@ public class ReportServiceImpl implements ReportService {
         double avgScore = reportMapper.getAvgScoreByPaperId(paperId);
         //从数据库中获取到数据
         ReportVo reportVo =reportMapper.getReportIndex(studentId,paperId);
-
-
-
-
         //赋值操作
         reportVo.setAvgScore(avgScore);
         //获取选择题 ---放入list集合中 ---我的答案
         reportVo.setSelectList(PaperUtils.String2List(reportVo.getAnswerSelect()));
         reportVo.setSelectQuestionList(PaperUtils.String2List(reportVo.getCorrectSelect()));
         //能力列表
-        reportVo.setAbilityList(PaperUtils.String2List(reportVo.getAbility()));
-
-        List<String> abilityList = reportVo.getAbilityList();
-        List<String> list = new ArrayList<>();
-
-        for (String s:abilityList
-             ) {
-            list.add("'"+s+"'");
-        }
-        reportVo.setList(list);
-
+        reportVo.setAbilityList(PaperUtils.String2List(reportVo.getKnowledge()));
         //存放能力类型 统计
         Map<String, Integer> map = new HashMap<String, Integer>();
-        for(String item: abilityList){
+        for(String item: reportVo.getAbilityList()){
             if(map.containsKey(item)){
                 map.put(item, map.get(item).intValue() + 1);
             }else{
@@ -82,9 +67,9 @@ public class ReportServiceImpl implements ReportService {
             listObject.add(key);
             listObject.add(map.get(key).intValue());
         }
-        reportVo.setAbilityListMap(listObject);
+        reportVo.setAbilitySeries(listObject);
         //知识点列表
-        reportVo.setKnowledgeList(PaperUtils.String2List(reportVo.getKnowledge()));
+        reportVo.setKnowledgeList(PaperUtils.String2List(reportVo.getAbility()));
         //学生姓名
         reportVo.setStudentName(studentMapper.getStudentNameById(studentId));
         return reportVo;
