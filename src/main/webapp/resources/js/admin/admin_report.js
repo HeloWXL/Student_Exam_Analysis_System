@@ -36,14 +36,14 @@ layui.use('table', function() {
       , url: ctx + '/report/getReport' //数据接口
       , page: true //开启分页
       , cols: [[ //表头
-        {field: 'number', title: '序号', type: 'numbers'}
-        , {field: 'reportName', title: '报告名称', width: 150}
-        , {field: 'studentName', title: '学生姓名', width: 150}
-        , {field: 'paperName', title: '试卷名称', width: 303}
-        , {field: 'score', title: '考试分数', width: 150}
-        , {field: 'className', title: '推荐班级', width: 150}
-        , {field: 'createTime', title: '交卷时间', width: 200}
-        , {fixed: 'right', width: 178, align: 'center', toolbar: '#barDemo'}
+        {field: 'number', title: '序号', align: 'center',type: 'numbers'}
+        , {field: 'reportName', title: '报告名称',align: 'center', width: 150}
+        , {field: 'studentName', title: '学生姓名',align: 'center', width: 150}
+        , {field: 'paperName', title: '试卷名称', align: 'center',width: 303}
+        , {field: 'score', title: '考试分数',align: 'center', width: 150}
+        , {field: 'className', title: '推荐班级',align: 'center', width: 150}
+        , {field: 'createTime', title: '交卷时间',align: 'center', width: 200}
+        , {width: 178, align: 'center', toolbar: '#barDemo'}
       ]]
       , skin: 'line,row' //表格风格
       , even: true

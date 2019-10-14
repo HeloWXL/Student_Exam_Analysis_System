@@ -41,7 +41,6 @@ public class ReportVo {
 
     private String ability;
 
-
     //正确答案 --选择题
     @TableField(exist = false)
     List<String> selectQuestionList;
@@ -62,7 +61,7 @@ public class ReportVo {
     //能力列表
     List<String> abilityList;
 
-
+    //平均分数
     double avgScore;
 
     private Integer page;

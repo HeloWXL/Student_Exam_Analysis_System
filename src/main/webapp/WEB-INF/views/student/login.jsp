@@ -41,7 +41,7 @@
             <div class="choose_box">
                 <a href="/demo/student/toRegister">没有账号？注册</a>
             </div>
-            <button class="login_btn" type="submit" id="submit">登&nbsp;&nbsp;录</button>
+            <button class="login_btn" data-loading-icon="mui-spinner mui-spinner-custom" type="submit" id="submit">登&nbsp;&nbsp;录</button>
         </form>
     </div>
 </div>

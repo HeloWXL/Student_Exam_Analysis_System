@@ -5,6 +5,7 @@ import com.mac.demo.mapper.ReportMapper;
 import com.mac.demo.mapper.StudentMapper;
 import com.mac.demo.service.ReportService;
 import com.mac.demo.utils.PaperUtils;
+import com.mac.demo.vo.QuerySelectQuestionVo;
 import com.mac.demo.vo.ReportVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class ReportServiceImpl implements ReportService {
         double avgScore = reportMapper.getAvgScoreByPaperId(paperId);
         //从数据库中获取到数据
         ReportVo reportVo =reportMapper.getReportIndex(studentId,paperId);
-        //赋值操作
+        //平均分
         reportVo.setAvgScore(avgScore);
         //获取选择题 ---放入list集合中 ---我的答案
         reportVo.setSelectList(PaperUtils.String2List(reportVo.getAnswerSelect()));

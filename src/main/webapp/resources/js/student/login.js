@@ -3,11 +3,18 @@ $(function() {
     e.preventDefault();
     var phone = $.trim($('input[name=\'phone\']').val());
     var password = $.trim($('input[name=\'password\']').val());
+    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+    // 判断手机号码是否合法
+    if (!myreg.test(pone)) {
+      mui.alert("手机号码不合法，请输入正确的手机号码")
+      return;
+    }
     //登陆的时候先判断 该手机号码是否已经注册过
     hasPhone(phone, password);
   });
 });
 
+//判断手机号吗是否已注册
 function hasPhone(phone, password) {
   $.ajax({
     url: '/demo/student/selectStudentByPhone',
@@ -25,6 +32,7 @@ function hasPhone(phone, password) {
     }
   });
 }
+//登录
 function checkLogin(phone, password) {
   $.ajax({
     url: '/demo/student/checkLogin',

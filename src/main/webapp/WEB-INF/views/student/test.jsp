@@ -109,7 +109,6 @@
                         var selectString = '';
                         //获取填空题的值 已经填入的值
                         var $input = $('input[type=\'text\']');//这里遍历input不为button和hidden的以外的其他input内容
-
                         //获取选择的总数量
                         var $completionTitle = $('.completionTitle');
                         //比较填空题数量和答案数量比较
@@ -133,6 +132,7 @@
                             });
                         }else{
                             mui.alert('选择未完成');
+                            retrun;
                         }
                         var answer = {
                             selectAnswer:selectString,
@@ -140,22 +140,7 @@
                             studentId:studentId,
                             paperId:paperId
                         };
-                        $.ajax({
-                            url:ctx+'/answer/insertAnswer',
-                            data:JSON.stringify(answer),
-                            dataType:'json',
-                            type:'post',
-                            contentType: 'application/json; charset=utf-8',
-                            success:function (data) {
-                                if(data==1){
-                                    mui.alert('提交成功',function () {
-                                        location.href=ctx+'/student/toReport/'+paperId+'/'+studentId;
-                                    });
-                                }else{
-                                    mui.alert('提交失败');
-                                }
-                            }
-                        });
+                        submitPaper(answer);
                     } else {
                         mui.closeAll();
                     }
@@ -164,6 +149,25 @@
         }
 
     });
+
+    function submitPaper(answer) {
+      $.ajax({
+        url:ctx+'/answer/insertAnswer',
+        data:JSON.stringify(answer),
+        dataType:'json',
+        type:'post',
+        contentType: 'application/json; charset=utf-8',
+        success:function (data) {
+          if(data==1){
+            mui.alert('提交成功',function () {
+              location.href=ctx+'/student/toReport/'+paperId+'/'+studentId;
+            });
+          }else{
+            mui.alert('提交失败');
+          }
+        }
+      });
+    }
 
 
 </script>

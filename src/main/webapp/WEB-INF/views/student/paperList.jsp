@@ -64,8 +64,13 @@
 </body>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
 <script>
+    /***
+     * @Author wangxl
+     * @Description  判断学生是否登录
+     * @Date 2019/10/14 10:27
+     **/
     $(function () {
-        if('${student}'==""){
+        if('${student}'==''){
             location.href=ctx+"/student/toLogin";
             return;
         }
