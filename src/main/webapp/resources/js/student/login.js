@@ -5,7 +5,7 @@ $(function() {
     var password = $.trim($('input[name=\'password\']').val());
     var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
     // 判断手机号码是否合法
-    if (!myreg.test(pone)) {
+    if (!myreg.test(phone)) {
       mui.alert("手机号码不合法，请输入正确的手机号码")
       return;
     }

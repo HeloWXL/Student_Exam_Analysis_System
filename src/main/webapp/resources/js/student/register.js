@@ -6,13 +6,17 @@ $(function () {
     e.stopPropagation();
   },false);
 
-
   $("#register").click(function () {
     var name = $.trim($("input[name='name']").val());
     var phone = $.trim($("input[name='phone']").val());
     var password = $.trim($("input[name='password']").val());
     var passwordConfirm = $.trim($("input[name='passwordConfirm']").val());
-
+    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+    // 判断手机号码是否合法
+    if (!myreg.test(phone)) {
+      mui.alert("手机号码不合法，请输入正确的手机号码")
+      return;
+    }
     if(password!=passwordConfirm){
       mui.alert("密码不一致")
     }else{
