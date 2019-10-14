@@ -90,5 +90,13 @@
 <script src="${ctx}/resources/plugins/layui/layui.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/echarts.min.js" type="application/javascript"></script>
 <script src="${ctx}/resources/js/student/report.js" type="application/javascript"></script>
+<script>
+    // 考试平均分
+    var avgScore = '${report.avgScore}';
+    //我的分数
+    var myScore ='${report.score}';
+    //能力类型统计
+    var abilitySeries =  "${report.abilitySeries}";
+</script>
 </body>
 </html>
