@@ -4,7 +4,6 @@ import com.mac.demo.model.CompletionQuestion;
 import com.mac.demo.service.CompletionQuestionService;
 import com.mac.demo.utils.ExcelUtil;
 import com.mac.demo.vo.QueryCompletionQuestionVo;
-import com.sun.deploy.net.URLEncoder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;

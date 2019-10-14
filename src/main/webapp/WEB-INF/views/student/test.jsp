@@ -140,7 +140,7 @@
                             studentId:studentId,
                             paperId:paperId
                         };
-                        submitPaper(answer);
+                        submitPaper(answer,paperId,studentId);
                     } else {
                         mui.closeAll();
                     }
@@ -150,7 +150,7 @@
 
     });
 
-    function submitPaper(answer) {
+    function submitPaper(answer,paperId,studentId) {
       $.ajax({
         url:ctx+'/answer/insertAnswer',
         data:JSON.stringify(answer),
