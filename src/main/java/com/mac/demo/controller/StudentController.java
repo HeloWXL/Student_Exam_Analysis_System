@@ -53,61 +53,62 @@ public class StudentController {
 
     @ApiOperation("学生未登录首页页面")
     @GetMapping("/toNoIndex")
-    public String toNoIndex(){
+    public String toNoIndex() {
         return "student/no_index";
     }
 
     @ApiOperation("学生首页页面")
     @GetMapping("/toIndex")
-    public String toIndex(){
+    public String toIndex() {
         return "student/index";
     }
 
     @ApiOperation("学生登录页面")
     @GetMapping("/toLogin")
-    public String toLogin(){
+    public String toLogin() {
         return "student/login";
     }
 
     @ApiOperation("学生成绩报告页面")
     @GetMapping("/toReport/{paperId}/{studentId}")
     public String toReport(@PathVariable("studentId") Integer studentId,
-                           @PathVariable("paperId") Integer paperId,Model model){
-        ReportVo reportVo =  reportService.getReportIndex(studentId,paperId);
-        model.addAttribute("report",reportVo);
+                           @PathVariable("paperId") Integer paperId, Model model) {
+        ReportVo reportVo = reportService.getReportIndex(studentId, paperId);
+        model.addAttribute("report", reportVo);
         return "student/report";
     }
 
     @ApiOperation("学生")
     @GetMapping("/toRegister")
-    public String toRegister(){
+    public String toRegister() {
         return "student/register";
     }
 
     @ApiOperation("考试声明页面")
     @GetMapping("/toDeclaer/{paperId}")
-    public String toDeclaer(@PathVariable("paperId") Integer paperId ,Model model){
+    public String toDeclaer(@PathVariable("paperId") Integer paperId, Model model) {
         Paper p = paperService.selectByPrimaryKey(paperId);
-        model.addAttribute("paper",p);
+        model.addAttribute("paper", p);
         return "student/declare";
     }
 
     @ApiOperation("考试页面")
     @GetMapping("/toTest")
-    public String toTest(){
+    public String toTest() {
         return "student/test";
     }
 
     @ApiOperation("跳转到学生试卷列表页面")
     @GetMapping("/getPaperByList/{testId}")
-    public String getPaperByList(@PathVariable("testId") Integer testId, Model model){
-        List<PaperTestAdminVo> list =paperService.getPaperByTestId(testId);
-        model.addAttribute("paperList",list);
+    public String getPaperByList(@PathVariable("testId") Integer testId, Model model) {
+        List<PaperTestAdminVo> list = paperService.getPaperByTestId(testId);
+        model.addAttribute("paperList", list);
         return "student/paperList";
     }
 
     /**
      * 学生注册
+     *
      * @param student
      * @return
      */
@@ -122,16 +123,17 @@ public class StudentController {
     @PostMapping("/selectStudentByPhone")
     @ResponseBody
     public Boolean selectStudentByPhone(@RequestParam("phone") String phone) {
-        Student student  = studentService.selectStudentByPhone(phone);
-        if(student==null){
+        Student student = studentService.selectStudentByPhone(phone);
+        if (student == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
     /**
      * 学生登录校验
+     *
      * @param phone
      * @param password
      * @param request
@@ -140,29 +142,29 @@ public class StudentController {
     @ApiOperation("学生登录")
     @PostMapping("/checkLogin")
     @ResponseBody
-    public Map<String,Object> checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
-            HttpServletRequest request) {
-        Map<String,Object> map = new HashMap<>();
-        if(Md5Utils.getSaltverifyMD5(password,studentService.selectStudentByPhone(phone).getStudentPassword())){
+    public Map<String, Object> checkLogin(@RequestParam("phone") String phone, @RequestParam("password") String password,
+                                          HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        if (Md5Utils.getSaltverifyMD5(password, studentService.selectStudentByPhone(phone).getStudentPassword())) {
             Student student = studentService.selectStudentByPhone(phone);
-            request.getSession().setAttribute("student",student);
+            request.getSession().setAttribute("student", student);
             //登录日志
             LoginLog loginLog = new LoginLog();
             loginLog.setSutdentId(student.getStudentId());
             loginLog.setIp(IpUtils.getIpAddr(request));
             loginLogService.insertLoginLog(loginLog);
-            map.put("data","true");
+            map.put("data", "true");
             return map;
-        }else{
-            map.put("data","false");
+        } else {
+            map.put("data", "false");
             return map;
         }
     }
 
 
-
     /**
      * 从session中获取学生对象
+     *
      * @param request
      * @param studentBean
      * @return
@@ -170,7 +172,7 @@ public class StudentController {
     @ApiOperation(value = "获取学生的session对象")
     @PostMapping("/getStudentSession")
     @ResponseBody
-    public Student getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean){
+    public Student getStudentSession(HttpServletRequest request, @RequestParam("studentBean") String studentBean) {
         Student student = (Student) request.getSession().getAttribute(studentBean);
         if (student == null) {
             return null;
@@ -181,13 +183,14 @@ public class StudentController {
 
     /**
      * 修改学生密码
+     *
      * @param passWord
      * @return
      */
     @ApiOperation(value = "学生修改密码")
     @PostMapping("/updateStudentPasswordByStudent")
     @ResponseBody
-    public int updateStudentPasswordByStudent(@RequestParam("password") String passWord,HttpServletRequest request) {
+    public int updateStudentPasswordByStudent(@RequestParam("password") String passWord, HttpServletRequest request) {
         Student student = (Student) request.getSession().getAttribute("student");
         student.setStudentPassword(passWord);
         return studentService.updateByPrimaryKeySelective(student);
@@ -204,17 +207,24 @@ public class StudentController {
     @ApiOperation(value = "获取学生列表")
     @PostMapping("/getStudent")
     @ResponseBody
-    public Map<String, Object> getStudent(@RequestBody QueryStudentVo queryStudentVo){
-        Map<String,Object> map = studentService.getStudent(queryStudentVo);
-        map.put("code",0);
-        map.put("msg","");
+    public Map<String, Object> getStudent(@RequestBody QueryStudentVo queryStudentVo) {
+        Map<String, Object> map = studentService.getStudent(queryStudentVo);
+        map.put("code", 0);
+        map.put("msg", "");
         return map;
     }
 
     @ApiOperation(value = "删除学生")
     @GetMapping("/deleteStudent")
     @ResponseBody
-    public int deleteStudent(@RequestParam("studentId")  Integer studentId) {
+    public int deleteStudent(@RequestParam("studentId") Integer studentId) {
         return studentService.deleteByPrimaryKey(studentId);
+    }
+
+    @ApiOperation(value = "获取注册学生记录数量")
+    @GetMapping("/getRigisteeStudentCount")
+    @ResponseBody
+    public Map<String, Object> getRigisteeStudentCount() {
+        return studentService.getRigisteeStudentCount();
     }
 }

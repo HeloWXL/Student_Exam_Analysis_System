@@ -134,10 +134,16 @@
             <version>2.5.0</version>
         </dependency>
         <!-- swagger-ui -->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>swagger-swagger-ui</artifactId>-->
+<!--            <version>2.5.0</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.5.0</version>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.9.3</version>
         </dependency>
 
         <!--MD5Utils-->

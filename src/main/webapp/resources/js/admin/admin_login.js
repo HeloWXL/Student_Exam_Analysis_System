@@ -1,5 +1,4 @@
 if($('#msg').val()!=""){
-
     tankuan();
 }
 

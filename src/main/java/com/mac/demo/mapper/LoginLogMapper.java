@@ -15,16 +15,24 @@ public interface LoginLogMapper extends BaseMapper<LoginLog> {
 
     int insertSelective(LoginLog record);
 
-    @Select("select * from login_log log ,student stu where stu.student_id = log.sutdent_id  limit #{page},#{limit}")
+
+    /***
+     * @Author wangxl
+     * @Description //获取登录日志数据
+     * @Date 12:22 上午 2019/10/15
+     * @Param [page, limit]
+     * @return java.util.List<com.mac.demo.vo.LoginLogStudentVo>
+     **/
+    @Select("select * from login_log log ,student stu where stu.student_id = log.sutdent_id order by create_time desc limit #{page},#{limit}")
     List<LoginLogStudentVo> getLoginLog(@Param("page") Integer page, @Param("limit") Integer limit);
 
     /***
      * @Author wangxl
-     * @Description //获取登录日志
+     * @Description //获取登录日志数量
      * @Date 4:25 下午 2019/10/13
      * @Param []
      * @return int
      **/
-    @Select("select count(*) from login_log log ,student stu where stu.student_id = log.sutdent_id")
+    @Select("select count(*) from login_log log ,student stu where stu.student_id = log.sutdent_id ")
     int getLoginLogCount();
 }

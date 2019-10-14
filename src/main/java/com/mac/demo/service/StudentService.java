@@ -49,5 +49,13 @@ public interface StudentService {
 
     Map<String, Object> getStudentByCondition(QueryStudentVo queryStudentVo);
 
-    public void importStudentList(List<List<String>> list);
+    /***
+     * @Author wangxl
+     * @Description //获取近期注册学生人数
+     * @Date 12:53 上午 2019/10/15
+     * @Param []
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     **/
+    Map<String, Object> getRigisteeStudentCount();
+
 }

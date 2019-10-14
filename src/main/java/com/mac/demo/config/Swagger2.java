@@ -11,7 +11,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * Swagger2
- * 该项目访问地址：http://127.0.0.1:8080/swagger-ui.html#/
+ * 该项目访问地址：http://127.0.0.1:8086/demo/swagger-ui.html#/
+ * 新版访问地址：http://127.0.0.1:8086/demo/doc.html
  * @author wangxl
  * @date 2019/8/16 20:19
  */

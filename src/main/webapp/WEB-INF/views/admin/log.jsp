@@ -23,7 +23,7 @@
     <div class="layui-col-xs12">
         <div class="grid-demo grid-demo-bg1">
             <!-- 模块名 -->
-            <blockquote class="layui-elem-quote">课程管理</blockquote>
+            <blockquote class="layui-elem-quote">登录日志</blockquote>
             <%--            操作--%>
             <div class="top">
             </div>
