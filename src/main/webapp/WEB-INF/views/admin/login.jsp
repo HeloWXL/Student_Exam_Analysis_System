@@ -11,8 +11,8 @@
 
 <html>
 <head>
-    <title>教师登录</title>
-    <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
+    <title>北纬中小学后台登录</title>
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/plugins/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/admin.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/admin_login.css">

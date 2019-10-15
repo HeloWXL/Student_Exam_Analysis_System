@@ -11,8 +11,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>教师首页</title>
-    <link rel="icon" href="${ctx}/resources/ico/admin_logo.ico"  type=”image/x-icon”>
+    <title>北纬中小学教育后台首页</title>
+    <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/admin.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/plugins/layui/css/layui.css">
@@ -27,7 +27,7 @@
     <div class="tpl-left-sidebar">
         <ul>
             <li class="logo">
-                <img class="user-upload" src="${ctx}/resources/images/4a251abe82900c79733daa753664f701.jpg" alt="admin" title="admin">
+                <img class="user-upload" src="${ctx}/resources/images/logo.png" alt="admin" title="admin">
                 <span>${admin.adminName}</span>
             </li>
             <!--<li class="nav-item active">
@@ -178,7 +178,7 @@
                         <div class="tpl-card">
                             <div class="card-pannel">
                                 <div class="user-item">
-                                    <img class="user-upload" src="${ctx}/resources/images/4a251abe82900c79733daa753664f701.jpg">
+                                    <img class="user-upload" src="${ctx}/resources/images/logo.png">
                                     <h4 class="user-name">admin</h4>
                                     <p>时间模糊了很多东西，我依然爱你</p>
                                     <div class="user-tips">
