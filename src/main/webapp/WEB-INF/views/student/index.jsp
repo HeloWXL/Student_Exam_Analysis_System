@@ -53,6 +53,8 @@
     </nav>
 </div>
 </body>
+<%--引入js文件--%>
 <script src="${ctx}/resources/js/jquery-2.1.4.js" type="application/javascript"></script>
+<%--自定义js文件--%>
 <script src="${ctx}/resources/js/student/index.js" type="application/javascript"></script>
 </html>

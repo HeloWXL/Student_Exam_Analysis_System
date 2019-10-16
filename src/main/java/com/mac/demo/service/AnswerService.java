@@ -1,6 +1,7 @@
 package com.mac.demo.service;
 
 import com.mac.demo.model.Answer;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
@@ -30,5 +31,12 @@ public interface AnswerService {
    */
   int insertAnswer(Answer answer);
 
-
+  /***
+   * @Author wangxl
+   * @Description //根据学生ID和试卷ID查询答案数量
+   * @Date 12:42 上午 2019/10/17
+   * @Param [studentId, paperId]
+   * @return java.lang.Integer
+   **/
+  Integer getAnswerByStudentIdAndPaperId(Integer studentId, Integer paperId);
 }

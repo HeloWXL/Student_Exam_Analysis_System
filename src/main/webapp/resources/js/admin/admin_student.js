@@ -85,6 +85,8 @@ layui.use('table', function() {
             layero.find('.layui-layer-btn').css('text-align', 'center');
           },
           btn1: function(index) {
+
+
             // 提交
             var student = {
               studentPhone: $.trim($('#studentPhone').val()),
@@ -225,7 +227,7 @@ layui.use('table', function() {
                       table.reload('studentTable');
                     });
                   } else {
-                    layer.alert('修改失败');
+                    layer.msg('修改失败',{icon:5,time:1500});
                   }
 
                 }

@@ -45,14 +45,12 @@ public interface SelectQuestionMapper extends BaseMapper<SelectQuestion> {
      * 获取选择题列表
      *
      */
-
     List<QuerySelectQuestionVo> getSelectQuestion(QuerySelectQuestionVo querySelectQuestionVo);
 
     /**
      * 获取选择题数量
      * @return
      */
-
     int getSelectQuestionCount();
 
     /**

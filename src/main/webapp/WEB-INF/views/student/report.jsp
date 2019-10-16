@@ -14,6 +14,7 @@
     <meta charset="utf-8">
     <link href="${ctx}/resources/plugins/layui/css/layui.css" rel="stylesheet"/>
     <link href="${ctx}/resources/css/report.css" rel="stylesheet"/>
+    <link href="${ctx}/resources/css/mui.min.css" rel="stylesheet" />
     <link rel="icon" href="${ctx}/resources/ico/logo.ico"  type=”image/x-icon”>
     <style>
         .table {
@@ -43,9 +44,15 @@
         .mui-bar{
             background-color: #1B8BF5;
         }
+        .mui-title{
+            color: #FFFFFF;
+        }
     </style>
 </head>
 <body>
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">${report.studentName}的成绩报告</h1>
+</header>
 <div class="mui-content">
     <div style="text-align: center">
         <h2 style="font-family: 楷体">测评结果</h2>

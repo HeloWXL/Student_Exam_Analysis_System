@@ -158,5 +158,10 @@ public class AnswerServiceImpl implements AnswerService {
     return answerMapper.insertSelective(answer);
   }
 
+  @Override
+  public Integer getAnswerByStudentIdAndPaperId(Integer studentId, Integer paperId) {
+    return answerMapper.getAnswerByStudentIdAndPaperId(studentId,paperId);
+  }
+
 
 }

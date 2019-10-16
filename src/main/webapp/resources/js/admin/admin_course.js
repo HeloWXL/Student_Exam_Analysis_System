@@ -48,9 +48,15 @@ layui.use('table', function(){
                         layero.find('.layui-layer-btn').css('text-align', 'center');
                     },
                     btn1: function(index) {
+                        var courseName =$.trim($('#courseName').val());
+                        if(courseName==null&&courseName==''){
+                            layer.msg("课程名不能为空",{icon:1,time:1500});
+                            return ;
+                        }
+
                         // 提交
                         var course={
-                            courseName:  $.trim($('#courseName').val())
+                            courseName:  courseName
                         };
                         $.ajax({
                             url: ctx+'/course/insertCourse',
@@ -60,14 +66,14 @@ layui.use('table', function(){
                             contentType: 'application/json; charset=utf-8',
                             success: function(data) {
                                 if(data==1){
-                                    layer.alert('添加成功',function () {
+                                    layer.msg('添加成功',{icon:1,time:1500},function () {
                                         //关闭弹窗
                                         layer.closeAll();
                                         // 重新刷新表格
                                         table.reload('courseTable');
                                     });
                                 }else{
-                                    layer.alert("添加失败")
+                                    layer.msg("添加失败",{icon:5,time:1500})
                                 }
                             },error:function (e) {
                                 layer.msg("服务器内部错误")
@@ -82,10 +88,11 @@ layui.use('table', function(){
                 break;
             case 'delete':
                 if (data.length == 0) {
-                    layer.alert('请选择一行');
+                    layer.msg('请选择一行',{icon:1,time:1500});
                 } else {
                     var courseId = data[0].courseId;
                     layer.confirm('是否删除？',{title:'提示'},function(index) {
+
                         $.ajax({
                             url: ctx+'/course/deleteCourseById',
                             data:{courseId:courseId},
@@ -94,14 +101,14 @@ layui.use('table', function(){
                             contentType: 'application/json; charset=utf-8',
                             success: function(data) {
                                 if(data=="1"){
-                                    layer.alert("删除成功",function () {
+                                    layer.msg("删除成功",{icon:1,time:1500},function () {
                                         //关闭弹窗
                                         layer.closeAll();
                                         // 重新刷新表格
                                         table.reload('courseTable');
                                     })
                                 }else{
-                                    layer.alert("删除失败")
+                                    layer.msg("删除失败",{icon:5,time:1500})
                                 }
                             }
                         });

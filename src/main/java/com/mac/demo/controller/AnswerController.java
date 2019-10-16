@@ -7,10 +7,7 @@ import com.mac.demo.service.PaperService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +47,13 @@ public class AnswerController {
     Student student = (Student) request.getSession().getAttribute("student");
     answer.setStudentName(student.getStudentName());
     return answerService.insertAnswer(answer);
+  }
+
+  @ApiOperation("判断学生是否已经参加了该门考试")
+  @GetMapping("/getAnswerByStudentIdAndPaperId")
+  @ResponseBody
+  public Integer getAnswerByStudentIdAndPaperId(@RequestParam("studentId") Integer studentId, @RequestParam("paperId") Integer paperId) {
+    return answerService.getAnswerByStudentIdAndPaperId(studentId,paperId);
   }
 
 

@@ -36,6 +36,12 @@
             margin-bottom: -2px;
             font-size: 13px;
         }
+        .mui-bar{
+              background-color: #1B8BF5;
+          }
+        .mui-title{
+            color: #FFFFFF;
+        }
     </style>
 </head>
 <body>
@@ -45,9 +51,10 @@
 <div class="mui-content">
     <div id="content">
         <c:forEach var="paper" items="${paperList}">
-            <a href="/demo/student/toDeclaer/${paper.paperId}">
+            <a class="paper">
                 <div class="mui-card">
                     <!--页眉，放置标题-->
+                    <input class="paperId" value="${paper.paperId}" type="hidden">
                     <div class="mui-card-header"><p>试卷名称：<span style="color: #000000;">${paper.paperName}</span></p></div>
                     <!--内容区-->
                     <div class="mui-card-content"><img src="${ctx}/resources/images/logo.png" /></div>
@@ -62,7 +69,10 @@
     </div>
 </div>
 </body>
+<%--引入js文件--%>
 <script src="${ctx}/resources/js/jquery-2.1.4.js"></script>
+<script src="${ctx}/resources/js/mui.min.js"></script>
+
 <script>
     /***
      * @Author wangxl
@@ -74,7 +84,35 @@
             location.href=ctx+"/student/toLogin";
             return;
         }
+        var studentId = '${student.studentId}'
+        $(".mui-card").click(function () {
+           var paperId = $(this).children('input').val();
+            HasAttence(studentId,paperId);
+        })
     })
+    /***
+     * @Author wangxl
+     * @Description //判断学生是否已经参加过该场考试
+     * @Date 12:34 上午 2019/10/17
+     * @Param
+     * @return
+     **/
+    function HasAttence(studentId,paperid) {
+        $.ajax({
+            url:ctx+'/answer/getAnswerByStudentIdAndPaperId',
+            type:'get',
+            dataType:'json',
+            data:{studentId:studentId,paperId:paperid},
+            success:function (data) {
+                if(data==0){
+                    location.href=ctx+"/student/toDeclaer/"+paperid;
+                }else{
+                    mui.alert("你已参加过本门考试，请勿重复参加考试！！！")
+                    return;
+                }
+            }
+        })
+    }
 
 </script>
 </html>

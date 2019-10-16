@@ -5,6 +5,7 @@ import com.mac.demo.model.Admin;
 import com.mac.demo.model.Answer;
 import com.mac.demo.vo.AnswerStudentPaperVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -44,10 +45,8 @@ public interface AnswerMapper extends BaseMapper<Answer> {
     @Select("select count(1) from answer")
     int getAnswerCount ();
 
-
-
-
-
+    @Select("select count(*) from answer where student_id = #{studentId} and paper_id = #{paperId}")
+    Integer getAnswerByStudentIdAndPaperId(@Param("studentId") Integer studentId, @Param("paperId") Integer paperId);
 
 
 }
