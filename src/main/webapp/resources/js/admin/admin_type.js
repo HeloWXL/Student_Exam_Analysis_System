@@ -51,7 +51,7 @@ layui.use('table', function() {
           },
           btn1: function(index) {
             var typeName = $.trim($('#typeName').val());
-            if (typeName == null && typeName = '') {
+            if (typeName == null && typeName == '') {
               layer.msg('类型名不能为空', {icon: 5, time: 1500});
               return;
             }
@@ -164,7 +164,7 @@ layui.use('table', function() {
             btn1: function(index) {
 
               var typeName = $.trim($('#typeName').val());
-              if (typeName == null && typeName = '') {
+              if (typeName == null && typeName == '') {
                 layer.msg('类型名不能为空', {icon: 5, time: 1500});
                 return;
               }

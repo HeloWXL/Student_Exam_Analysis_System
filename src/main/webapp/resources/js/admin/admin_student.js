@@ -87,17 +87,17 @@ layui.use('table', function() {
           btn1: function(index) {
             //数据校验
             var studentPhone = $.trim($('#studentPhone').val());
-            if(studentPhone==null&&studentPhone=''){
+            if(studentPhone==null&&studentPhone==''){
               layer.msg("手机号码不能为空",{icon:5,time:1500});
               return;
             }
             var studentName = $.trim($('#studentName').val());
-            if(studentName==null&&studentName=''){
+            if(studentName==null&&studentName==''){
               layer.msg("姓名不能为空",{icon:5,time:1500});
               return;
             }
             var studentPassword = $.trim($('#studentPassword').val());
-            if(studentPassword==null&&studentPassword=''){
+            if(studentPassword==null&&studentPassword==''){
               layer.msg("密码不能为空",{icon:5,time:1500});
               return;
             }
@@ -218,7 +218,7 @@ layui.use('table', function() {
             btn1: function(index) {
               //数据校验
               var studentPassword = $.trim($('#studentPassword').val());
-              if(studentPassword==null&&studentPassword=''){
+              if(studentPassword==null&&studentPassword==''){
                 layer.msg("密码不能为空",{icon:5,time:1500});
                 return;
               }

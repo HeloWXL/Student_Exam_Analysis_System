@@ -195,8 +195,8 @@
                 <!--尾部-->
                 <div class="tpl-footer">
                     <div class="tpl-footer-fluid">
-                        <a class="f-item-text">学生考试成绩分析系统</a>
-                        <a class="f-item-text">Author By wangxianlin@.icloud.com</a>
+                        <a class="f-item-text">Student_Exam_Analysis_System</a>
+                        <a class="f-item-text">Author By yechengchao@.icloud.com</a>
                         <a class="fitem-texy">2019 version:1.0 ©</a>
                     </div>
                 </div>
