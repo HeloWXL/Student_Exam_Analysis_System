@@ -98,7 +98,6 @@ layui.use(['table','form'], function(){
             $("#courseName").append(loadCourseList())
             layero.find('.layui-layer-btn').css('text-align', 'center');
             forms.render('select');
-
           },
           btn1: function(index) {
 

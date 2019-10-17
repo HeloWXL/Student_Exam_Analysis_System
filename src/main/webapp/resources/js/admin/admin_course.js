@@ -48,12 +48,12 @@ layui.use('table', function(){
                         layero.find('.layui-layer-btn').css('text-align', 'center');
                     },
                     btn1: function(index) {
+                        // 数据校验
                         var courseName =$.trim($('#courseName').val());
                         if(courseName==null&&courseName==''){
                             layer.msg("课程名不能为空",{icon:1,time:1500});
                             return ;
                         }
-
                         // 提交
                         var course={
                             courseName:  courseName
@@ -92,7 +92,6 @@ layui.use('table', function(){
                 } else {
                     var courseId = data[0].courseId;
                     layer.confirm('是否删除？',{title:'提示'},function(index) {
-
                         $.ajax({
                             url: ctx+'/course/deleteCourseById',
                             data:{courseId:courseId},
@@ -161,6 +160,12 @@ layui.use('table', function(){
                             $('#createTime').val(data[0].createTime);
                         },
                         btn1: function(index) {
+                          //数据校验
+                          var courseName =$.trim($('#courseName').val());
+                          if(courseName==null&&courseName==''){
+                            layer.msg("课程名不能为空",{icon:1,time:1500});
+                            return ;
+                          }
                             // 提交
                             var course={
                                 courseId:data[0].courseId,
@@ -174,12 +179,12 @@ layui.use('table', function(){
                                 contentType: 'application/json; charset=utf-8',
                                 success: function(data) {
                                     if(data==1){
-                                        layer.alert('修改成功',function () {
+                                        layer.alert('修改成功',{icon:1,time:1500},function () {
                                             layer.closeAll();
                                             table.reload('courseTable');
                                         });
                                     }else{
-                                        layer.alert("修改失败")
+                                        layer.alert("修改失败",{icon:5,time:1500})
                                     }
 
                                 }

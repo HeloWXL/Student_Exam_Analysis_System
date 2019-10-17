@@ -85,13 +85,27 @@ layui.use('table', function() {
             layero.find('.layui-layer-btn').css('text-align', 'center');
           },
           btn1: function(index) {
-
-
+            //数据校验
+            var studentPhone = $.trim($('#studentPhone').val());
+            if(studentPhone==null&&studentPhone=''){
+              layer.msg("手机号码不能为空",{icon:5,time:1500});
+              return;
+            }
+            var studentName = $.trim($('#studentName').val());
+            if(studentName==null&&studentName=''){
+              layer.msg("姓名不能为空",{icon:5,time:1500});
+              return;
+            }
+            var studentPassword = $.trim($('#studentPassword').val());
+            if(studentPassword==null&&studentPassword=''){
+              layer.msg("密码不能为空",{icon:5,time:1500});
+              return;
+            }
             // 提交
             var student = {
-              studentPhone: $.trim($('#studentPhone').val()),
-              studentName: $.trim($('#studentName').val()),
-              studentPassword: $.trim($('#studentPassword').val())
+              studentPhone: studentPhone,
+              studentName: studentName,
+              studentPassword: studentPassword
             };
             $.ajax({
               url: ctx + '/student/insertStudent',
@@ -101,14 +115,14 @@ layui.use('table', function() {
               contentType: 'application/json; charset=utf-8',
               success: function(data) {
                 if (data == 1) {
-                  layer.alert('添加成功', function() {
+                  layer.alert('添加成功',{icon:1,time:1500}, function() {
                     //关闭弹窗
                     layer.closeAll();
                     // 重新刷新表格
                     table.reload('studentTable');
                   });
                 } else {
-                  layer.alert('添加失败');
+                  layer.msg('添加失败',{icon:5,time:1500});
                 }
               }, error: function(e) {
                 layer.msg('服务器内部错误');
@@ -135,14 +149,14 @@ layui.use('table', function() {
               contentType: 'application/json; charset=utf-8',
               success: function(data) {
                 if (data == 1) {
-                  layer.alert('删除成功', function() {
+                  layer.msg('删除成功',{icon:1,time:1500}, function() {
                     //关闭弹窗
                     layer.closeAll();
                     // 重新刷新表格
                     table.reload('studentTable');
                   });
                 } else {
-                  layer.alert('删除失败');
+                  layer.msg('删除失败',{icon:5,time:1500});
                 }
               }
             });
@@ -165,12 +179,6 @@ layui.use('table', function() {
             content: '<div class="layui-row" id="test" style="margin-top:10px;">' +
             '    <div class="layui-col-md10">' +
             '        <form class="layui-form">' +
-            '            <div class="layui-form-item">\n' +
-            '                <label class="layui-form-label" style="padding-left:-50px;">学生ID:</label>' +
-            '                <div class="layui-input-block">' +
-            '                    <input type="text"  name="studentId" id="studentId" class="layui-input" disabled="disabled">\n' +
-            '                </div>' +
-            '            </div>' +
             '            <div class="layui-form-item">\n' +
             '                <label class="layui-form-label" style="padding-left:-50px;">学生姓名:</label>\n' +
             '                <div class="layui-input-block">\n' +
@@ -202,17 +210,22 @@ layui.use('table', function() {
             , success: function(layero) {
               layero.find('.layui-layer-btn').css('text-align', 'center');
               // 展示在弹出层里面
-              $('#studentId').val(data[0].studentId);
               $('#studentName').val(data[0].studentName);
               $('#studentPhone').val(data[0].studentPhone);
-              $('#studentPassword').val(data[0].studentPassword);
+              $('#studentPassword').val();
               $('#createTime').val(data[0].createTime);
             },
             btn1: function(index) {
+              //数据校验
+              var studentPassword = $.trim($('#studentPassword').val());
+              if(studentPassword==null&&studentPassword=''){
+                layer.msg("密码不能为空",{icon:5,time:1500});
+                return;
+              }
               // 提交
               var student = {
-                studentId: $('#studentId').val(),
-                studentPassword: $('#studentPassword').val()
+                studentId: data[0].studentId,
+                studentPassword: studentPassword
               };
               $.ajax({
                 url: ctx + '/student/updateStudentPasswordByAdmin',
